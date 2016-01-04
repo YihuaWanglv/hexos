@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[iyihua]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2016-01-04T02:49:35.200Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name><![CDATA[Wanglv Yihua]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[[git]git常用-把本地项目提交到github]]></title>
+    <link href="http://yoursite.com/2015/12/31/git-git%E5%B8%B8%E7%94%A8-%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/"/>
+    <id>http://yoursite.com/2015/12/31/git-git常用-把本地项目提交到github/</id>
+    <published>2015-12-31T10:04:12.000Z</published>
+    <updated>2016-01-04T02:49:35.200Z</updated>
+    <content type="html"><![CDATA[<h3 id="1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github"><a href="#1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github" class="headerlink" title="1.把本地项目提交到github"></a>1.把本地项目提交到github</h3><p>touch README.md //新建说明文件<br>git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录<br>git add . //添加当前目录中的所有文件到索引<br>git commit -m “first commit” //提交到本地源码库，并附加提交注释<br>git remote add origin <a href="https://github.com/chape/test.git" target="_blank" rel="external">https://github.com/chape/test.git</a> //添加到远程项目，别名为origin<br>git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交</p>
+<h3 id="2-_u5982_u679C_u6709error_3A_failed_to_push_some_refs_to__u2018https_3A//github-com/YihuaWanglv/myhexo-git_u2018"><a href="#2-_u5982_u679C_u6709error_3A_failed_to_push_some_refs_to__u2018https_3A//github-com/YihuaWanglv/myhexo-git_u2018" class="headerlink" title="2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘"></a>2.如果有error: failed to push some refs to ‘<a href="https://github.com/YihuaWanglv/myhexo.git" target="_blank" rel="external">https://github.com/YihuaWanglv/myhexo.git</a>‘</h3><p>有如下几种解决方法：</p>
+<p>1.使用强制push的方法：<br>$ git push -u origin master -f<br>这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。<br>2.push前先将远程repository修改pull下来<br>$ git pull origin master<br>$ git push -u origin master<br>3.若不想merge远程和本地修改，可以先创建新的分支：<br>$ git branch [name]<br>然后push<br>$ git push -u origin [name]</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github"><a href="#1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github" class=]]>
+    </summary>
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[使用hexo-deploy直接发布到github]]></title>
+    <link href="http://yoursite.com/2015/12/31/%E4%BD%BF%E7%94%A8hexo-deploy%E7%9B%B4%E6%8E%A5%E5%8F%91%E5%B8%83%E5%88%B0github/"/>
+    <id>http://yoursite.com/2015/12/31/使用hexo-deploy直接发布到github/</id>
+    <published>2015-12-31T09:08:52.000Z</published>
+    <updated>2016-01-04T07:29:03.686Z</updated>
+    <content type="html"><![CDATA[<p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
+<h3 id="1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F"><a href="#1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F" class="headerlink" title="1.npm安装需要的东西"></a>1.npm安装需要的东西</h3><p>$ npm install hexo-deployer-git –save<br>$ npm install hexo-deployer-heroku –save<br>$ npm install hexo-deployer-rsync –save<br>$ npm install hexo-deployer-openshift –save<br>$ npm install hexo-deployer-ftpsync –save</p>
+<h3 id="2-_u4FEE_u6539_u914D_u7F6E_u6587_u4EF6_config-yml"><a href="#2-_u4FEE_u6539_u914D_u7F6E_u6587_u4EF6_config-yml" class="headerlink" title="2.修改配置文件_config.yml"></a>2.修改配置文件_config.yml</h3><p>deploy:<br>  type: git<br>  repository: <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git</a><br>  branch: master</p>
+<h3 id="3-_u6267_u884C_u547D_u4EE4_u63D0_u4EA4_u53D1_u5E03"><a href="#3-_u6267_u884C_u547D_u4EE4_u63D0_u4EA4_u53D1_u5E03" class="headerlink" title="3.执行命令提交发布"></a>3.执行命令提交发布</h3><p>$ hexo clean<br>$ hexo generate<br>$ hexo deploy</p>
+<p>over.</p>
+<h3 id="u53C2_u8003_uFF1Ahttps_3A//hexo-io/zh-cn/docs/deployment-html"><a href="#u53C2_u8003_uFF1Ahttps_3A//hexo-io/zh-cn/docs/deployment-html" class="headerlink" title="参考：https://hexo.io/zh-cn/docs/deployment.html"></a>参考：<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></h3>]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
+<h3 id="1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F"><a href="#1-npm_u5B89_u88C5_u9700_u8981_]]>
+    </summary>
+    
+      <category term="deploy" scheme="http://yoursite.com/tags/deploy/"/>
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[如何使用github-pages和hexo搭建简单blog]]></title>
+    <link href="http://yoursite.com/2015/12/31/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-pages%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95blog/"/>
+    <id>http://yoursite.com/2015/12/31/如何使用github-pages和hexo搭建简单blog/</id>
+    <published>2015-12-31T07:41:30.000Z</published>
+    <updated>2016-01-04T07:30:49.471Z</updated>
+    <content type="html"><![CDATA[<p>前言</p>
+<ul>
+<li>github，写代码必备</li>
+<li>hexo，一个很方便的静态blog生成系统</li>
+<li>还不太熟悉，暂时不放图片</li>
+</ul>
+<p>步骤</p>
+<h3 id="1-_u9996_u5148_u5F97_u6709_u4E00_u4E2Agithub_u8D26_u53F7"><a href="#1-_u9996_u5148_u5F97_u6709_u4E00_u4E2Agithub_u8D26_u53F7" class="headerlink" title="1.首先得有一个github账号"></a>1.首先得有一个github账号</h3><p>没有的得先上github创建一个</p>
+<h3 id="2-_u521B_u5EFA_u4E00_u4E2Arepositories"><a href="#2-_u521B_u5EFA_u4E00_u4E2Arepositories" class="headerlink" title="2.创建一个repositories"></a>2.创建一个repositories</h3><ul>
+<li>Repository name的填写格式是xxx.github.io</li>
+<li>xxx要与你github的用户名一致（这样创建好后，可以直接通过xxx.github.io访问）</li>
+<li>创建Repository后，接着是对它进行设置，点击Repository的“setting”进行设置</li>
+<li>使用默认设置即可，最后点击“Launch automatic page generator”启动自动生成blog</li>
+<li>接下来是编辑用户界面，点击绿色的“continue to layouts”按钮配置布局和样式</li>
+<li>最后，点击“Publish page”，你的页面就公布出来了。</li>
+</ul>
+<h3 id="3-_u5B89_u88C5hexo"><a href="#3-_u5B89_u88C5hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><ul>
+<li>首先安装git</li>
+<li>安装node</li>
+<li>安装npm</li>
+<li><p>安装hexo<br>npm install hexo-cli -g<br>npm install hexo –save</p>
+</li>
+<li><p>hexo初始化<br>**根据自己需要创建一个hexo文件夹<br>$ hexo init <folder><br>$ cd <folder><br>$ npm install<br>新建完成后，指定文件夹的目录如下<br>.<br>├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── scripts<br>├── source<br>|      ├── _drafts<br>|      └── _posts<br>└── themes</folder></folder></p>
+</li>
+<li><p>安装Hexo插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save&#10;npm install hexo-generator-archive --save&#10;npm install hexo-generator-category --save&#10;npm install hexo-generator-tag --save&#10;npm install hexo-server --save&#10;npm install hexo-deployer-git --save&#10;npm install hexo-deployer-heroku --save&#10;npm install hexo-deployer-rsync --save&#10;npm install hexo-deployer-openshift --save&#10;npm install hexo-renderer-marked@0.2 --save&#10;npm install hexo-renderer-stylus@0.2 --save&#10;npm install hexo-generator-feed@1 --save&#10;npm install hexo-generator-sitemap@1 --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本地查看效果<br>执行hexo server命令启动，然后访问localhost:4000查看效果</p>
+</li>
+</ul>
+<h3 id="4-_u521B_u5EFA_u4E00_u7BC7_u6587_u7AE0"><a href="#4-_u521B_u5EFA_u4E00_u7BC7_u6587_u7AE0" class="headerlink" title="4.创建一篇文章"></a>4.创建一篇文章</h3><ul>
+<li>git shell进入之前创建的hexo文件夹，hexo new “hello world”创建一篇新的文章</li>
+</ul>
+<h3 id="5-_u540C_u6B65_u5E76_u53D1_u5E03"><a href="#5-_u540C_u6B65_u5E76_u53D1_u5E03" class="headerlink" title="5.同步并发布"></a>5.同步并发布</h3><ul>
+<li>hexo g 生成静态文件</li>
+<li>git clone <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地</a></li>
+<li>复制生成的public文件夹内所有文件到clone到本地的yihuawanglv.github.io文件夹内</li>
+</ul>
+<h3 id="6-_u63D0_u4EA4_u66F4_u6539_u5230github"><a href="#6-_u63D0_u4EA4_u66F4_u6539_u5230github" class="headerlink" title="6.提交更改到github"></a>6.提交更改到github</h3><ul>
+<li>git add *</li>
+<li>git commit -m “代码提交信息”</li>
+<li>git push origin master</li>
+<li>输入用户名密码</li>
+</ul>
+<p>这样再次访问你github上的blog地址，即可发现内容已更新</p>
+<h3 id="7-_u4F7F_u7528hexo_u522B_u7684_u4E3B_u9898_u7F8E_u5316blog_u6837_u5F0F"><a href="#7-_u4F7F_u7528hexo_u522B_u7684_u4E3B_u9898_u7F8E_u5316blog_u6837_u5F0F" class="headerlink" title="7.使用hexo别的主题美化blog样式"></a>7.使用hexo别的主题美化blog样式</h3><ul>
+<li>我这里选用的是简介美观的next主题</li>
+<li>在终端窗口下，定位到 Hexo 站点目录下<br>$ cd your-hexo-site<br>$ git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a> themes/next</li>
+<li>启用 NexT 主题<br>克隆/下载 完成后，打开 站点配置文件，找到 theme 字段，并将其值更改为 next。</li>
+<li>验证主题是否启用<br>运行 hexo s –debug，并访问 <a href="http://localhost:4000，确保站点正确运行" target="_blank" rel="external">http://localhost:4000，确保站点正确运行</a></li>
+</ul>
+<h3 id="8-_u540C_u6B65_u65B0_u7684_u66F4_u6539"><a href="#8-_u540C_u6B65_u65B0_u7684_u66F4_u6539" class="headerlink" title="8.同步新的更改"></a>8.同步新的更改</h3><p>现在要把新的更改同步上github，重新执行步骤5和6即可。<br>当然把更新从hexo public文件夹同步到本地的Repository xxx.github.io文件夹内可以使用beyongcompare此类同步软件执行</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>前言</p>
+<ul>
+<li>github，写代码必备</li>
+<li>hexo，一个很方便的静态blog生成系统</li>
+<li>还不太熟悉，暂时不放图片</li>
+</ul>
+<p>步骤</p>
+<h3 id="1-_u9996_u5148_u5F97_u6709]]>
+    </summary>
+    
+      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+      <category term="github pages" scheme="http://yoursite.com/tags/github-pages/"/>
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://yoursite.com/2015/12/31/hello-world/"/>
+    <id>http://yoursite.com/2015/12/31/hello-world/</id>
+    <published>2015-12-31T07:25:50.504Z</published>
+    <updated>2015-12-31T07:25:50.504Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    </summary>
+    
+  </entry>
+  
+</feed>
