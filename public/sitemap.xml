@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/02/01/springboot-items-%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5-springboot-get-started/</loc>
+    <lastmod>2016-02-01T09:35:44.585Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/01/04/jquery-validate%E5%B8%B8%E7%94%A8%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2016-01-04T09:26:28.054Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2015/12/31/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-pages%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95blog/</loc>
     <lastmod>2016-01-04T07:30:49.471Z</lastmod>
   </url>

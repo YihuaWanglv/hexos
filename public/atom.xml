@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-01-04T02:49:35.200Z</updated>
+  <updated>2016-02-01T09:35:44.585Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[[springboot][items][项目使用实践]springboot get started]]></title>
+    <link href="http://yoursite.com/2016/02/01/springboot-items-%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5-springboot-get-started/"/>
+    <id>http://yoursite.com/2016/02/01/springboot-items-项目使用实践-springboot-get-started/</id>
+    <published>2016-02-01T09:10:18.000Z</published>
+    <updated>2016-02-01T09:35:44.585Z</updated>
+    <content type="html"><![CDATA[<p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
+<h3 id="1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56"><a href="#1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java"><a href="#2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
+<h3 id="u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc"><a href="#u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
+<h3 id="1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u]]>
+    </summary>
+    
+      <category term="itime" scheme="http://yoursite.com/tags/itime/"/>
+    
+      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[jquery-validate常用用法总结]]></title>
+    <link href="http://yoursite.com/2016/01/04/jquery-validate%E5%B8%B8%E7%94%A8%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2016/01/04/jquery-validate常用用法总结/</id>
+    <published>2016-01-04T09:05:28.000Z</published>
+    <updated>2016-01-04T09:26:28.054Z</updated>
+    <content type="html"><![CDATA[<ol>
+<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。<br> 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#36890;&#36807;&#30417;&#21548;form&#30340;submit&#20107;&#20214;&#65292;&#23545;form&#36827;&#34892;ajax&#25552;&#20132;&#12290;&#10; $(&#39;#formId&#39;).submit(function() &#123;&#10;     if (!$(&#34;#formId&#34;).valid()) &#10;         return false;&#10;     $(this).omAjaxSubmit(&#123;&#125;);&#10;     return false; //&#27492;&#22788;&#24517;&#39035;&#36820;&#22238;false&#65292;&#38459;&#27490;&#24120;&#35268;&#30340;form&#25552;&#20132;&#10; &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>juqry validate中，如何对校验错误的提示信息位置和样式进行更改？<br> 1）js代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;  &#10;    $(&#34;#form1&#34;).validate(&#123;  &#10;        errorPlacement: function (error, element) &#123;  &#10;            error.appendTo(element.parent(&#34;td&#34;));  &#10;        &#125;,  &#10;        rules:&#123;              &#10;        &#125;  &#10;    &#125;);  &#10;    $(&#34;[name$=&#39;.sign&#39;]&#34;).each(function()&#123;  &#10;        $(this).rules(&#34;add&#34;,&#123;required:true,messages:&#123;required:&#34;&#33267;&#23569;&#36873;&#25321;&#19968;&#20010;&#36873;&#39033;&#34;&#125;&#125;);  &#10;    &#125;);  &#10;&#125;);</span><br></pre></td></tr></table></figure>
+<p> 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;style&#62;  &#10;label.error &#123;   &#10;    color:Red;   &#10;    font-size:13px;   &#10;    margin-left:5px;   &#10;    padding-left:16px;   &#10;&#125;   &#10;&#60;/style&#62;</span><br></pre></td></tr></table></figure>
+<p> 3) 校验时机，可以自定义在js中想要的时候去校验</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;.selector&#39;).click(function() &#123;&#10;    if ($(&#34;selector of you form&#34;).valid()) &#123;&#10;        alert(&#39;in&#39;);&#10;    &#125; else &#123;&#10;        alert(&#39;out&#39;);&#10;    &#125;&#10;&#125;);&#10;$(&#34;selector of you form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        receiveDayFrom: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<p> 4) 例子：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;,&#10;    errorPlacement: function ($error, $element) &#123;&#10;        var name = $element.attr(&#34;name&#34;);&#10;        $(&#34;#error&#34; + name).append($error);&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code>or:
+</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    errorLabelContainer: &#34;#errors&#34;,&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何添加自定义的校验？</p>
+</li>
+</ol>
+<ul>
+<li><p>添加一个方法</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#23383;&#31526;&#39564;&#35777;&#65292;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#12290;    &#10;jQuery.validator.addMethod(&#34;nameStringCheck&#34;, function(value, element) &#123;   &#10;     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); &#10;&#125;, &#34;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#34;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在validate配置中使用新加的方法</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            required: true,&#10;            nameStringCheck: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>如何使用ajax请求进行远程校验</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jQuery.validator.addMethod(&#34;checkUnique&#34;, function(value, element) &#123;&#10;    return validateUsernameByAjax(value, element.name, &#39;ajax&#35831;&#27714;&#22320;&#22336;&#39;);&#10;&#125;, &#34;&#27492;&#36755;&#20837;&#30340;&#20540;&#19981;&#21487;&#29992;&#34;);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#21516;&#27493;&#20570;&#29992;&#25143;&#21517;&#25110;&#37038;&#31665;&#30340;&#35831;&#27714;&#65292;&#26816;&#26597;&#21040;&#19981;&#21487;&#29992;&#65292;&#21017;&#36820;&#22238;false&#65292;&#21542;&#21017;&#36820;&#22238;true&#10; */&#10;function validateUsernameByAjax(value, fieldname, url) &#123;&#10;    var _request = url + &#34;?&#34;+fieldname+&#34;=&#34;+value;&#10;    var deferred = $.Deferred();//&#21019;&#24314;&#19968;&#20010;&#24310;&#36831;&#23545;&#35937;&#10;    $.ajax(&#123;&#10;        url:_request,&#10;        async:false,//&#35201;&#25351;&#23450;&#19981;&#33021;&#24322;&#27493;,&#24517;&#39035;&#31561;&#24453;&#21518;&#21488;&#26381;&#21153;&#26657;&#39564;&#23436;&#25104;&#20877;&#25191;&#34892;&#21518;&#32493;&#20195;&#30721;&#10;        dataType:&#34;json&#34;,&#10;        success:function(data) &#123;&#10;            if (data.status === &#34;error&#34; || data.status === &#34;fail&#34;) &#123;&#10;                deferred.reject();&#10;            &#125; else&#123;&#10;                deferred.resolve();  &#10;            &#125;&#10;        &#125;&#10;    &#125;);&#10;    //deferred.state()&#26377;3&#20010;&#29366;&#24577;:pending:&#36824;&#26410;&#32467;&#26463;,rejected:&#22833;&#36133;,resolved:&#25104;&#21151;&#10;    return deferred.state() == &#34;resolved&#34; ? true : false;&#10;&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            checkUnique: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ol>
+<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用aja]]>
+    </summary>
+    
+      <category term="jquery" scheme="http://yoursite.com/tags/jquery/"/>
+    
+      <category term="validate" scheme="http://yoursite.com/tags/validate/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[[git]git常用-把本地项目提交到github]]></title>
