@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git," />
+  <meta name="keywords" content="aop,java,spring,思维导图," />
 
 
 
@@ -53,16 +53,17 @@
 
 
 
-<meta name="description" content="1.把本地项目提交到githubtouch README.md //新建说明文件git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录git add . //添加当前目录中的所有文件到索引git commit -m “first commit” //提交到本地源码库，并附加提交注释git remote add origin https://github.com/cha">
+<meta name="description" content="spring aop 整理参考：     1.https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/     2.http://blog.csdn.net/dreamrealised/article/details/12885739思维导图：     http://naotu.baidu.com/file/b3c0f4b10b">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[git]git常用-把本地项目提交到github">
-<meta property="og:url" content="http://yoursite.com/2015/12/31/git-git常用-把本地项目提交到github/index.html">
+<meta property="og:title" content="spring aop 知识体系整理">
+<meta property="og:url" content="http://yoursite.com/2016/02/20/spring-aop-知识体系整理/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="1.把本地项目提交到githubtouch README.md //新建说明文件git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录git add . //添加当前目录中的所有文件到索引git commit -m “first commit” //提交到本地源码库，并附加提交注释git remote add origin https://github.com/cha">
-<meta property="og:updated_time" content="2016-02-20T04:02:04.710Z">
+<meta property="og:description" content="spring aop 整理参考：     1.https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/     2.http://blog.csdn.net/dreamrealised/article/details/12885739思维导图：     http://naotu.baidu.com/file/b3c0f4b10b">
+<meta property="og:image" content="http://yoursite.com/images/java-spring-aop.png">
+<meta property="og:updated_time" content="2016-02-20T04:51:36.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[git]git常用-把本地项目提交到github">
-<meta name="twitter:description" content="1.把本地项目提交到githubtouch README.md //新建说明文件git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录git add . //添加当前目录中的所有文件到索引git commit -m “first commit” //提交到本地源码库，并附加提交注释git remote add origin https://github.com/cha">
+<meta name="twitter:title" content="spring aop 知识体系整理">
+<meta name="twitter:description" content="spring aop 整理参考：     1.https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/     2.http://blog.csdn.net/dreamrealised/article/details/12885739思维导图：     http://naotu.baidu.com/file/b3c0f4b10b">
 
 
 
@@ -74,7 +75,7 @@
   };
 </script>
 
-  <title> [git]git常用-把本地项目提交到github | iyihua </title>
+  <title> spring aop 知识体系整理 | iyihua </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -194,7 +195,7 @@
             
             
               
-                [git]git常用-把本地项目提交到github
+                spring aop 知识体系整理
               
             
           </h1>
@@ -203,8 +204,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-12-31T18:04:12+08:00" content="2015-12-31">
-              2015-12-31
+            <time itemprop="dateCreated" datetime="2016-02-20T12:48:30+08:00" content="2016-02-20">
+              2016-02-20
             </time>
           </span>
 
@@ -227,9 +228,8 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="1-把本地项目提交到github"><a href="#1-把本地项目提交到github" class="headerlink" title="1.把本地项目提交到github"></a>1.把本地项目提交到github</h3><p>touch README.md //新建说明文件<br>git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录<br>git add . //添加当前目录中的所有文件到索引<br>git commit -m “first commit” //提交到本地源码库，并附加提交注释<br>git remote add origin <a href="https://github.com/chape/test.git" target="_blank" rel="external">https://github.com/chape/test.git</a> //添加到远程项目，别名为origin<br>git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交</p>
-<h3 id="2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘"><a href="#2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘" class="headerlink" title="2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘"></a>2.如果有error: failed to push some refs to ‘<a href="https://github.com/YihuaWanglv/myhexo.git" target="_blank" rel="external">https://github.com/YihuaWanglv/myhexo.git</a>‘</h3><p>有如下几种解决方法：</p>
-<p>1.使用强制push的方法：<br>$ git push -u origin master -f<br>这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。<br>2.push前先将远程repository修改pull下来<br>$ git pull origin master<br>$ git push -u origin master<br>3.若不想merge远程和本地修改，可以先创建新的分支：<br>$ git branch [name]<br>然后push<br>$ git push -u origin [name]</p>
+        <span itemprop="articleBody"><p>spring aop 整理<br>参考：<br>     1.<a href="https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/</a><br>     2.<a href="http://blog.csdn.net/dreamrealised/article/details/12885739" target="_blank" rel="external">http://blog.csdn.net/dreamrealised/article/details/12885739</a><br>思维导图：<br>     <a href="http://naotu.baidu.com/file/b3c0f4b10b0af258be629adb3b3259a2" target="_blank" rel="external">http://naotu.baidu.com/file/b3c0f4b10b0af258be629adb3b3259a2</a></p>
+<p><img src="/images/java-spring-aop.png" alt=""></p>
 </span>
       
     </div>
@@ -238,7 +238,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag">#git</a>
+            <a href="/tags/aop/" rel="tag">#aop</a>
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+            <a href="/tags/思维导图/" rel="tag">#思维导图</a>
           
         </div>
       
@@ -247,17 +253,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/31/使用hexo-deploy直接发布到github/" rel="next" title="使用hexo-deploy直接发布到github">
-                <i class="fa fa-chevron-left"></i> 使用hexo-deploy直接发布到github
+              <a href="/2016/02/20/java-io体系整理/" rel="next" title="java-io体系整理">
+                <i class="fa fa-chevron-left"></i> java-io体系整理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/04/jquery-validate常用用法总结/" rel="prev" title="jquery-validate常用用法总结">
-                jquery-validate常用用法总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -378,7 +380,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-把本地项目提交到github"><span class="nav-number">1.</span> <span class="nav-text">1.把本地项目提交到github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘"><span class="nav-number">2.</span> <span class="nav-text">2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目錄</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-02-20T04:39:58.973Z</updated>
+  <updated>2016-02-20T04:51:36.224Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring aop 知识体系整理</title>
+    <link href="http://yoursite.com/2016/02/20/spring-aop-%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E6%95%B4%E7%90%86/"/>
+    <id>http://yoursite.com/2016/02/20/spring-aop-知识体系整理/</id>
+    <published>2016-02-20T04:48:30.000Z</published>
+    <updated>2016-02-20T04:51:36.224Z</updated>
+    
+    <content type="html">&lt;p&gt;spring aop 整理&lt;br&gt;参考：&lt;br&gt;     1.&lt;a href=&quot;https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/&lt;/a&gt;&lt;br&gt;     2.&lt;a href=&quot;http://blog.csdn.net/dreamrealised/article/details/12885739&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/dreamrealised/article/details/12885739&lt;/a&gt;&lt;br&gt;思维导图：&lt;br&gt;     &lt;a href=&quot;http://naotu.baidu.com/file/b3c0f4b10b0af258be629adb3b3259a2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://naotu.baidu.com/file/b3c0f4b10b0af258be629adb3b3259a2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/java-spring-aop.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;spring aop 整理&lt;br&gt;参考：&lt;br&gt;     1.&lt;a href=&quot;https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;h
+    
+    </summary>
+    
+    
+      <category term="aop" scheme="http://yoursite.com/tags/aop/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+      <category term="思维导图" scheme="http://yoursite.com/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>java-io体系整理</title>
