@@ -1,50 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[iyihua]]></title>
+  <title>iyihua</title>
   
   <link href="/atom.xml" rel="self"/>
+  
   <link href="http://yoursite.com/"/>
-  <updated>2016-02-02T09:36:46.259Z</updated>
+  <updated>2016-02-20T04:39:58.973Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name><![CDATA[Wanglv Yihua]]></name>
+    <name>Wanglv Yihua</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[[java]从代码中去除if-else]]></title>
+    <title>java-io体系整理</title>
+    <link href="http://yoursite.com/2016/02/20/java-io%E4%BD%93%E7%B3%BB%E6%95%B4%E7%90%86/"/>
+    <id>http://yoursite.com/2016/02/20/java-io体系整理/</id>
+    <published>2016-02-20T04:20:38.000Z</published>
+    <updated>2016-02-20T04:39:58.973Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;java-io体系使用整理&quot;&gt;&lt;a href=&quot;#java-io体系使用整理&quot; class=&quot;headerlink&quot; title=&quot;java io体系使用整理&quot;&gt;&lt;/a&gt;java io体系使用整理&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;来源：&lt;a href=&quot;http://www.importnew.com/17714.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.importnew.com/17714.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;思维导图：&lt;a href=&quot;http://naotu.baidu.com/file/ef892698672800bd4e2a8306f946f91f&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://naotu.baidu.com/file/ef892698672800bd4e2a8306f946f91f&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;/images/java+io.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;java-io体系使用整理&quot;&gt;&lt;a href=&quot;#java-io体系使用整理&quot; class=&quot;headerlink&quot; title=&quot;java io体系使用整理&quot;&gt;&lt;/a&gt;java io体系使用整理&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;来源：&lt;a href=&quot;http://w
+    
+    </summary>
+    
+    
+      <category term="io" scheme="http://yoursite.com/tags/io/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="思维导图" scheme="http://yoursite.com/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
+    
+      <category term="整理" scheme="http://yoursite.com/tags/%E6%95%B4%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2016/02/20/hello-world/"/>
+    <id>http://yoursite.com/2016/02/20/hello-world/</id>
+    <published>2016-02-20T04:02:04.711Z</published>
+    <updated>2016-02-20T04:02:04.711Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;http://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;http://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;http://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;http://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;http://hexo.io
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[java]从代码中去除if-else</title>
     <link href="http://yoursite.com/2016/02/02/java-%E4%BB%8E%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%8E%BB%E9%99%A4if-else/"/>
     <id>http://yoursite.com/2016/02/02/java-从代码中去除if-else/</id>
     <published>2016-02-02T08:09:30.000Z</published>
-    <updated>2016-02-02T09:36:46.259Z</updated>
-    <content type="html"><![CDATA[<p>有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？</p>
-<p>首先要明确的是，实践而言，并不是只要有大段的if else语句就一定需要优化，在开始的时候，如果这里的逻辑比较清楚简单，而且也没有预期到一些业务逻辑会产生变动，那么其实就并不需要，起码是并不急着需要去优化这个if else语句。</p>
-<p>当判断到确实需要优化if else，方法有很多，总结如下。</p>
-<ol>
-<li>使用map.</li>
-<li>使用枚举.</li>
-<li>多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。<br>当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。</li>
-</ol>
-<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int code;&#10;if(&#34;Name&#34;.equals(str))&#10;    code = 0;&#10;else if(&#34;Age&#34;.equals(str))&#10;    code = 1;&#10;else if(&#34;Address&#34;.equals(str))&#10;    code = 2;</span><br></pre></td></tr></table></figure></p>
-<h2 id="u4F7F_u7528map_u4F18_u5316"><a href="#u4F7F_u7528map_u4F18_u5316" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  &#10;static &#123;  &#10;    map.put(&#34;Name&#34;, 0);  &#10;    map.put(&#34;Age&#34;, 1);&#10;    map.put(&#34;Address&#34;, 2);  &#10;&#125;&#10;&#10;int code = map.get(type);</span><br></pre></td></tr></table></figure>
-<h2 id="u4F7F_u7528_u679A_u4E3E_u4F18_u5316"><a href="#u4F7F_u7528_u679A_u4E3E_u4F18_u5316" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;&#10;    Name(0), Age(1), Address(2);&#10;    public int code;&#10;    Codes(int code)&#123;&#10;        this.code = code;&#10;    &#125;&#10;&#125;&#10;&#10;int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
-<h2 id="u4F7F_u7528_u591A_u6001_u4F18_u5316"><a href="#u4F7F_u7528_u591A_u6001_u4F18_u5316" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&#34;com.xxx.&#34; + str).newInstance();&#10;&#10;int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
-<h2 id="u201C_u8D23_u4EFB_u94FE_u201D_u5982_u4F55_u4F18_u5316if_else_uFF1F"><a href="#u201C_u8D23_u4EFB_u94FE_u201D_u5982_u4F55_u4F18_u5316if_else_uFF1F" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
-<p>好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。</p>
-<p>现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。</p>
-<p>好，现在你有一个主控方法，这个方法创建一个上下文对象，再根据分支条件分别调用不同Handler子类上的handle方法，传入这个上下文。你注意到一个问题，分支条件本身和对应的处理逻辑是内聚的。如果条件发生变化，处理往往也要发生变化。反之依然。而且你读代码时，读到一个复杂的条件，往往不能轻易看出它要判断什么，这时最好的方法就是直接看看对应Handler的命名和文档，从处理方式反推这个条件对应的业务需求。既然这样，何不干脆把条件都搬到Handler里去，让每个Handler根据传入的上下文，看看在当前状态下自己是否应该执行处理。</p>
-<p>现在你得到了一个主控类，这个类持有一堆Handler实例，主控类创建一个上下文，然后把上下文依次传给各个Handler，Handler自行判断是否应该执行自己的处理。</p>
-<p>到了这一步，其实已经差不多了。不过对于某些人，他在进行前一步的重构时，就会醒悟：主控类现在已经变成了一个单纯的任务转发人（分配者）。它根本没有必要持有一个Handler的列表再分别逐个调用，还要管理该继续还是该中断等等逻辑（这些逻辑是依赖每个Handler返回的标志来决定的）。何不让Handler自己负责把控制向后分发，主控类只需要知道领头的那个Handler最终会把事情处理好就行了。这种结构还有一个好处，就是每个Handler可以自行决定是否该往下传递控制，还可以根据需要替换上下文实例的实现来影响后续的处理。（这一步与上一步是二选一，有些人喜欢在主控类中持有Handler队列，有些人喜欢链式Handler。我个人认为问题不大，两者的实现难度也没有差别，实现需求就行）</p>
-<p>最后，我们为了交流方便，把这种组合方式称为“责任链”。</p>
-<h2 id="u4F7F_u7528_u72B6_u6001_u6A21_u5F0F_u4F18_u5316if_else"><a href="#u4F7F_u7528_u72B6_u6001_u6A21_u5F0F_u4F18_u5316if_else" class="headerlink" title="使用状态模式优化if else"></a>使用状态模式优化if else</h2><p>参考：<a href="http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html" target="_blank" rel="external">http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html</a></p>
-]]></content>
+    <updated>2016-02-20T04:02:04.715Z</updated>
+    
+    <content type="html">&lt;p&gt;有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？&lt;/p&gt;
+&lt;p&gt;首先要明确的是，实践而言，并不是只要有大段的if else语句就一定需要优化，在开始的时候，如果这里的逻辑比较清楚简单，而且也没有预期到一些业务逻辑会产生变动，那么其实就并不需要，起码是并不急着需要去优化这个if else语句。&lt;/p&gt;
+&lt;p&gt;当判断到确实需要优化if else，方法有很多，总结如下。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用map.&lt;/li&gt;
+&lt;li&gt;使用枚举.&lt;/li&gt;
+&lt;li&gt;多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。&lt;br&gt;当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;下面举例。&lt;br&gt;要优化的原if else语句：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;int code;&amp;#10;if(&amp;#34;Name&amp;#34;.equals(str))&amp;#10;    code = 0;&amp;#10;else if(&amp;#34;Age&amp;#34;.equals(str))&amp;#10;    code = 1;&amp;#10;else if(&amp;#34;Address&amp;#34;.equals(str))&amp;#10;    code = 2;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;使用map优化&quot;&gt;&lt;a href=&quot;#使用map优化&quot; class=&quot;headerlink&quot; title=&quot;使用map优化&quot;&gt;&lt;/a&gt;使用map优化&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public final static Map map = new HashMap();  &amp;#10;static &amp;#123;  &amp;#10;    map.put(&amp;#34;Name&amp;#34;, 0);  &amp;#10;    map.put(&amp;#34;Age&amp;#34;, 1);&amp;#10;    map.put(&amp;#34;Address&amp;#34;, 2);  &amp;#10;&amp;#125;&amp;#10;&amp;#10;int code = map.get(type);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;使用枚举优化&quot;&gt;&lt;a href=&quot;#使用枚举优化&quot; class=&quot;headerlink&quot; title=&quot;使用枚举优化&quot;&gt;&lt;/a&gt;使用枚举优化&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public enum Codes &amp;#123;&amp;#10;    Name(0), Age(1), Address(2);&amp;#10;    public int code;&amp;#10;    Codes(int code)&amp;#123;&amp;#10;        this.code = code;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&amp;#10;&amp;#10;int code = Codes.valueOf(str).code;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;使用多态优化&quot;&gt;&lt;a href=&quot;#使用多态优化&quot; class=&quot;headerlink&quot; title=&quot;使用多态优化&quot;&gt;&lt;/a&gt;使用多态优化&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ICode iCode = (ICode)Class.forName(&amp;#34;com.xxx.&amp;#34; + str).newInstance();&amp;#10;&amp;#10;int code = iCode.getCode();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;“责任链”如何优化if-else？&quot;&gt;&lt;a href=&quot;#“责任链”如何优化if-else？&quot; class=&quot;headerlink&quot; title=&quot;“责任链”如何优化if else？&quot;&gt;&lt;/a&gt;“责任链”如何优化if else？&lt;/h2&gt;&lt;p&gt;首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。&lt;/p&gt;
+&lt;p&gt;好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。&lt;/p&gt;
+&lt;p&gt;现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。&lt;/p&gt;
+&lt;p&gt;好，现在你有一个主控方法，这个方法创建一个上下文对象，再根据分支条件分别调用不同Handler子类上的handle方法，传入这个上下文。你注意到一个问题，分支条件本身和对应的处理逻辑是内聚的。如果条件发生变化，处理往往也要发生变化。反之依然。而且你读代码时，读到一个复杂的条件，往往不能轻易看出它要判断什么，这时最好的方法就是直接看看对应Handler的命名和文档，从处理方式反推这个条件对应的业务需求。既然这样，何不干脆把条件都搬到Handler里去，让每个Handler根据传入的上下文，看看在当前状态下自己是否应该执行处理。&lt;/p&gt;
+&lt;p&gt;现在你得到了一个主控类，这个类持有一堆Handler实例，主控类创建一个上下文，然后把上下文依次传给各个Handler，Handler自行判断是否应该执行自己的处理。&lt;/p&gt;
+&lt;p&gt;到了这一步，其实已经差不多了。不过对于某些人，他在进行前一步的重构时，就会醒悟：主控类现在已经变成了一个单纯的任务转发人（分配者）。它根本没有必要持有一个Handler的列表再分别逐个调用，还要管理该继续还是该中断等等逻辑（这些逻辑是依赖每个Handler返回的标志来决定的）。何不让Handler自己负责把控制向后分发，主控类只需要知道领头的那个Handler最终会把事情处理好就行了。这种结构还有一个好处，就是每个Handler可以自行决定是否该往下传递控制，还可以根据需要替换上下文实例的实现来影响后续的处理。（这一步与上一步是二选一，有些人喜欢在主控类中持有Handler队列，有些人喜欢链式Handler。我个人认为问题不大，两者的实现难度也没有差别，实现需求就行）&lt;/p&gt;
+&lt;p&gt;最后，我们为了交流方便，把这种组合方式称为“责任链”。&lt;/p&gt;
+&lt;h2 id=&quot;使用状态模式优化if-else&quot;&gt;&lt;a href=&quot;#使用状态模式优化if-else&quot; class=&quot;headerlink&quot; title=&quot;使用状态模式优化if else&quot;&gt;&lt;/a&gt;使用状态模式优化if else&lt;/h2&gt;&lt;p&gt;参考：&lt;a href=&quot;http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
     <summary type="html">
-    <![CDATA[<p>有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？</p>
-<p>首先要明确的是，实践而言，并不是只要有大段的if else语句就一定需要优化，在开始的时候，如果这里的逻辑比]]>
+    
+      &lt;p&gt;有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？&lt;/p&gt;
+&lt;p&gt;首先要明确的是，实践而言，并不是只要有大段的if else语句就一定需要优化，在开始的时候，如果这里的逻辑比
+    
     </summary>
+    
     
       <category term="coding" scheme="http://yoursite.com/tags/coding/"/>
     
@@ -55,22 +120,27 @@
   </entry>
   
   <entry>
-    <title><![CDATA[[springboot][items][项目使用实践]springboot get started]]></title>
+    <title>[springboot][items][项目使用实践]springboot get started</title>
     <link href="http://yoursite.com/2016/02/01/springboot-items-%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5-springboot-get-started/"/>
     <id>http://yoursite.com/2016/02/01/springboot-items-项目使用实践-springboot-get-started/</id>
     <published>2016-02-01T09:10:18.000Z</published>
-    <updated>2016-02-01T09:35:44.585Z</updated>
-    <content type="html"><![CDATA[<p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56"><a href="#1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
-<h3 id="2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java"><a href="#2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc"><a href="#u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
-]]></content>
+    <updated>2016-02-20T04:02:04.723Z</updated>
+    
+    <content type="html">&lt;p&gt;往后将通过一个时间记录web app项目，实践并记录spring boot的使用&lt;br&gt;为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。&lt;/p&gt;
+&lt;h3 id=&quot;1-pom-xml中添加maven依赖&quot;&gt;&lt;a href=&quot;#1-pom-xml中添加maven依赖&quot; class=&quot;headerlink&quot; title=&quot;1.pom.xml中添加maven依赖&quot;&gt;&lt;/a&gt;1.pom.xml中添加maven依赖&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframework.boot&amp;#60;/groupId&amp;#62;&amp;#10;        &amp;#60;artifactId&amp;#62;spring-boot-starter&amp;#60;/artifactId&amp;#62;&amp;#10;    &amp;#60;/dependency&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframework.boot&amp;#60;/groupId&amp;#62;&amp;#10;        &amp;#60;artifactId&amp;#62;spring-boot-starter-web&amp;#60;/artifactId&amp;#62;&amp;#10;    &amp;#60;/dependency&amp;#62;&amp;#10;&amp;#60;/dependencies&amp;#62;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;2-编写项目启动入口App-java&quot;&gt;&lt;a href=&quot;#2-编写项目启动入口App-java&quot; class=&quot;headerlink&quot; title=&quot;2.编写项目启动入口App.java&quot;&gt;&lt;/a&gt;2.编写项目启动入口App.java&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@SpringBootApplication&amp;#10;public class App &amp;#10;&amp;#123;&amp;#10;    public static void main(String[] args) throws Exception &amp;#123;&amp;#10;        SpringApplication.run(App.class, args);&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;ok! done!&lt;br&gt;这样就已经能直接使用spring boot了.&lt;br&gt;启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。&lt;/p&gt;
+&lt;h3 id=&quot;再进一步，为应用引入spring-mvc&quot;&gt;&lt;a href=&quot;#再进一步，为应用引入spring-mvc&quot; class=&quot;headerlink&quot; title=&quot;再进一步，为应用引入spring mvc&quot;&gt;&lt;/a&gt;再进一步，为应用引入spring mvc&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Controller&amp;#10;public class SampleController &amp;#123;&amp;#10;&amp;#10;    &amp;#10;    @RequestMapping(&amp;#34;/&amp;#34;)&amp;#10;    @ResponseBody&amp;#10;    String home() &amp;#123;&amp;#10;        String data = &amp;#34;&amp;#34;;&amp;#10;        return &amp;#34;Hello World!&amp;#34;;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;启动App.java，访问localhost:8080, 即可遇见“Hello World!”&lt;/p&gt;
+</content>
+    
     <summary type="html">
-    <![CDATA[<p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u]]>
+    
+      &lt;p&gt;往后将通过一个时间记录web app项目，实践并记录spring boot的使用&lt;br&gt;为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。&lt;/p&gt;
+&lt;h3 id=&quot;1-pom-xml中添加maven依赖&quot;&gt;&lt;a href=&quot;#1-pom-xml
+    
     </summary>
+    
     
       <category term="itime" scheme="http://yoursite.com/tags/itime/"/>
     
@@ -79,49 +149,54 @@
   </entry>
   
   <entry>
-    <title><![CDATA[jquery-validate常用用法总结]]></title>
+    <title>jquery-validate常用用法总结</title>
     <link href="http://yoursite.com/2016/01/04/jquery-validate%E5%B8%B8%E7%94%A8%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2016/01/04/jquery-validate常用用法总结/</id>
     <published>2016-01-04T09:05:28.000Z</published>
-    <updated>2016-01-04T09:26:28.054Z</updated>
-    <content type="html"><![CDATA[<ol>
-<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。<br> 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#36890;&#36807;&#30417;&#21548;form&#30340;submit&#20107;&#20214;&#65292;&#23545;form&#36827;&#34892;ajax&#25552;&#20132;&#12290;&#10; $(&#39;#formId&#39;).submit(function() &#123;&#10;     if (!$(&#34;#formId&#34;).valid()) &#10;         return false;&#10;     $(this).omAjaxSubmit(&#123;&#125;);&#10;     return false; //&#27492;&#22788;&#24517;&#39035;&#36820;&#22238;false&#65292;&#38459;&#27490;&#24120;&#35268;&#30340;form&#25552;&#20132;&#10; &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>juqry validate中，如何对校验错误的提示信息位置和样式进行更改？<br> 1）js代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;  &#10;    $(&#34;#form1&#34;).validate(&#123;  &#10;        errorPlacement: function (error, element) &#123;  &#10;            error.appendTo(element.parent(&#34;td&#34;));  &#10;        &#125;,  &#10;        rules:&#123;              &#10;        &#125;  &#10;    &#125;);  &#10;    $(&#34;[name$=&#39;.sign&#39;]&#34;).each(function()&#123;  &#10;        $(this).rules(&#34;add&#34;,&#123;required:true,messages:&#123;required:&#34;&#33267;&#23569;&#36873;&#25321;&#19968;&#20010;&#36873;&#39033;&#34;&#125;&#125;);  &#10;    &#125;);  &#10;&#125;);</span><br></pre></td></tr></table></figure>
-<p> 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;style&#62;  &#10;label.error &#123;   &#10;    color:Red;   &#10;    font-size:13px;   &#10;    margin-left:5px;   &#10;    padding-left:16px;   &#10;&#125;   &#10;&#60;/style&#62;</span><br></pre></td></tr></table></figure>
-<p> 3) 校验时机，可以自定义在js中想要的时候去校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;.selector&#39;).click(function() &#123;&#10;    if ($(&#34;selector of you form&#34;).valid()) &#123;&#10;        alert(&#39;in&#39;);&#10;    &#125; else &#123;&#10;        alert(&#39;out&#39;);&#10;    &#125;&#10;&#125;);&#10;$(&#34;selector of you form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        receiveDayFrom: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-<p> 4) 例子：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;,&#10;    errorPlacement: function ($error, $element) &#123;&#10;        var name = $element.attr(&#34;name&#34;);&#10;        $(&#34;#error&#34; + name).append($error);&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-<pre><code>or:
-</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    errorLabelContainer: &#34;#errors&#34;,&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如何添加自定义的校验？</p>
-</li>
-</ol>
-<ul>
-<li><p>添加一个方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#23383;&#31526;&#39564;&#35777;&#65292;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#12290;    &#10;jQuery.validator.addMethod(&#34;nameStringCheck&#34;, function(value, element) &#123;   &#10;     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); &#10;&#125;, &#34;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#34;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在validate配置中使用新加的方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            required: true,&#10;            nameStringCheck: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li><p>如何使用ajax请求进行远程校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jQuery.validator.addMethod(&#34;checkUnique&#34;, function(value, element) &#123;&#10;    return validateUsernameByAjax(value, element.name, &#39;ajax&#35831;&#27714;&#22320;&#22336;&#39;);&#10;&#125;, &#34;&#27492;&#36755;&#20837;&#30340;&#20540;&#19981;&#21487;&#29992;&#34;);</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#21516;&#27493;&#20570;&#29992;&#25143;&#21517;&#25110;&#37038;&#31665;&#30340;&#35831;&#27714;&#65292;&#26816;&#26597;&#21040;&#19981;&#21487;&#29992;&#65292;&#21017;&#36820;&#22238;false&#65292;&#21542;&#21017;&#36820;&#22238;true&#10; */&#10;function validateUsernameByAjax(value, fieldname, url) &#123;&#10;    var _request = url + &#34;?&#34;+fieldname+&#34;=&#34;+value;&#10;    var deferred = $.Deferred();//&#21019;&#24314;&#19968;&#20010;&#24310;&#36831;&#23545;&#35937;&#10;    $.ajax(&#123;&#10;        url:_request,&#10;        async:false,//&#35201;&#25351;&#23450;&#19981;&#33021;&#24322;&#27493;,&#24517;&#39035;&#31561;&#24453;&#21518;&#21488;&#26381;&#21153;&#26657;&#39564;&#23436;&#25104;&#20877;&#25191;&#34892;&#21518;&#32493;&#20195;&#30721;&#10;        dataType:&#34;json&#34;,&#10;        success:function(data) &#123;&#10;            if (data.status === &#34;error&#34; || data.status === &#34;fail&#34;) &#123;&#10;                deferred.reject();&#10;            &#125; else&#123;&#10;                deferred.resolve();  &#10;            &#125;&#10;        &#125;&#10;    &#125;);&#10;    //deferred.state()&#26377;3&#20010;&#29366;&#24577;:pending:&#36824;&#26410;&#32467;&#26463;,rejected:&#22833;&#36133;,resolved:&#25104;&#21151;&#10;    return deferred.state() == &#34;resolved&#34; ? true : false;&#10;&#125;</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            checkUnique: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
+    <updated>2016-02-20T04:02:04.719Z</updated>
+    
+    <content type="html">&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;juqry validate中，如何对使用ajax提交的方式进行校验？&lt;br&gt;有两种方式&lt;br&gt; 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。&lt;br&gt; 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。&lt;/p&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;//&amp;#36890;&amp;#36807;&amp;#30417;&amp;#21548;form&amp;#30340;submit&amp;#20107;&amp;#20214;&amp;#65292;&amp;#23545;form&amp;#36827;&amp;#34892;ajax&amp;#25552;&amp;#20132;&amp;#12290;&amp;#10; $(&amp;#39;#formId&amp;#39;).submit(function() &amp;#123;&amp;#10;     if (!$(&amp;#34;#formId&amp;#34;).valid()) &amp;#10;         return false;&amp;#10;     $(this).omAjaxSubmit(&amp;#123;&amp;#125;);&amp;#10;     return false; //&amp;#27492;&amp;#22788;&amp;#24517;&amp;#39035;&amp;#36820;&amp;#22238;false&amp;#65292;&amp;#38459;&amp;#27490;&amp;#24120;&amp;#35268;&amp;#30340;form&amp;#25552;&amp;#20132;&amp;#10; &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;juqry validate中，如何对校验错误的提示信息位置和样式进行更改？&lt;br&gt; 1）js代码：&lt;/p&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(function()&amp;#123;  &amp;#10;    $(&amp;#34;#form1&amp;#34;).validate(&amp;#123;  &amp;#10;        errorPlacement: function (error, element) &amp;#123;  &amp;#10;            error.appendTo(element.parent(&amp;#34;td&amp;#34;));  &amp;#10;        &amp;#125;,  &amp;#10;        rules:&amp;#123;              &amp;#10;        &amp;#125;  &amp;#10;    &amp;#125;);  &amp;#10;    $(&amp;#34;[name$=&amp;#39;.sign&amp;#39;]&amp;#34;).each(function()&amp;#123;  &amp;#10;        $(this).rules(&amp;#34;add&amp;#34;,&amp;#123;required:true,messages:&amp;#123;required:&amp;#34;&amp;#33267;&amp;#23569;&amp;#36873;&amp;#25321;&amp;#19968;&amp;#20010;&amp;#36873;&amp;#39033;&amp;#34;&amp;#125;&amp;#125;);  &amp;#10;    &amp;#125;);  &amp;#10;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了&lt;/p&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#60;style&amp;#62;  &amp;#10;label.error &amp;#123;   &amp;#10;    color:Red;   &amp;#10;    font-size:13px;   &amp;#10;    margin-left:5px;   &amp;#10;    padding-left:16px;   &amp;#10;&amp;#125;   &amp;#10;&amp;#60;/style&amp;#62;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 3) 校验时机，可以自定义在js中想要的时候去校验&lt;/p&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&amp;#39;.selector&amp;#39;).click(function() &amp;#123;&amp;#10;    if ($(&amp;#34;selector of you form&amp;#34;).valid()) &amp;#123;&amp;#10;        alert(&amp;#39;in&amp;#39;);&amp;#10;    &amp;#125; else &amp;#123;&amp;#10;        alert(&amp;#39;out&amp;#39;);&amp;#10;    &amp;#125;&amp;#10;&amp;#125;);&amp;#10;$(&amp;#34;selector of you form&amp;#34;).validate(&amp;#123;&amp;#10;    rules: &amp;#123;&amp;#10;        receiveDayFrom: &amp;#123;&amp;#10;            required: true&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 4) 例子：&lt;/p&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&amp;#34;#form&amp;#34;).validate(&amp;#123;&amp;#10;    rules: &amp;#123;&amp;#10;        name: &amp;#123;&amp;#10;            required: true&amp;#10;        &amp;#125;,&amp;#10;        firstname: &amp;#123;&amp;#10;            required: true&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;,&amp;#10;    messages: &amp;#123;&amp;#10;        name: &amp;#123;&amp;#10;            required: &amp;#34;Enter name&amp;#34;&amp;#10;        &amp;#125;,&amp;#10;        firstname: &amp;#123;&amp;#10;            required: &amp;#34;Enter firstname&amp;#34;&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;,&amp;#10;    errorPlacement: function ($error, $element) &amp;#123;&amp;#10;        var name = $element.attr(&amp;#34;name&amp;#34;);&amp;#10;        $(&amp;#34;#error&amp;#34; + name).append($error);&amp;#10;    &amp;#125;&amp;#10;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt;or:
+&lt;/code&gt;&lt;/pre&gt; &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&amp;#34;#form&amp;#34;).validate(&amp;#123;&amp;#10;    errorLabelContainer: &amp;#34;#errors&amp;#34;,&amp;#10;    rules: &amp;#123;&amp;#10;        name: &amp;#123;&amp;#10;            required: true&amp;#10;        &amp;#125;,&amp;#10;        firstname: &amp;#123;&amp;#10;            required: true&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;,&amp;#10;    messages: &amp;#123;&amp;#10;        name: &amp;#123;&amp;#10;            required: &amp;#34;Enter name&amp;#34;&amp;#10;        &amp;#125;,&amp;#10;        firstname: &amp;#123;&amp;#10;            required: &amp;#34;Enter firstname&amp;#34;&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如何添加自定义的校验？&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;添加一个方法&lt;/p&gt;
+  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;// &amp;#23383;&amp;#31526;&amp;#39564;&amp;#35777;&amp;#65292;&amp;#21482;&amp;#33021;&amp;#21253;&amp;#21547;&amp;#33521;&amp;#25991;&amp;#12289;&amp;#25968;&amp;#23383;&amp;#12289;&amp;#19979;&amp;#21010;&amp;#32447;&amp;#31561;&amp;#23383;&amp;#31526;&amp;#12290;    &amp;#10;jQuery.validator.addMethod(&amp;#34;nameStringCheck&amp;#34;, function(value, element) &amp;#123;   &amp;#10;     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); &amp;#10;&amp;#125;, &amp;#34;&amp;#21482;&amp;#33021;&amp;#21253;&amp;#21547;&amp;#33521;&amp;#25991;&amp;#12289;&amp;#25968;&amp;#23383;&amp;#12289;&amp;#19979;&amp;#21010;&amp;#32447;&amp;#31561;&amp;#23383;&amp;#31526;&amp;#34;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在validate配置中使用新加的方法&lt;/p&gt;
+  &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&amp;#39;#form selector&amp;#39;).validate(&amp;#123;&amp;#10;    rules: &amp;#123;&amp;#10;        username: &amp;#123;&amp;#10;            required: true,&amp;#10;            nameStringCheck: true&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;如何使用ajax请求进行远程校验&lt;/p&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;jQuery.validator.addMethod(&amp;#34;checkUnique&amp;#34;, function(value, element) &amp;#123;&amp;#10;    return validateUsernameByAjax(value, element.name, &amp;#39;ajax&amp;#35831;&amp;#27714;&amp;#22320;&amp;#22336;&amp;#39;);&amp;#10;&amp;#125;, &amp;#34;&amp;#27492;&amp;#36755;&amp;#20837;&amp;#30340;&amp;#20540;&amp;#19981;&amp;#21487;&amp;#29992;&amp;#34;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;/**&amp;#10; * &amp;#21516;&amp;#27493;&amp;#20570;&amp;#29992;&amp;#25143;&amp;#21517;&amp;#25110;&amp;#37038;&amp;#31665;&amp;#30340;&amp;#35831;&amp;#27714;&amp;#65292;&amp;#26816;&amp;#26597;&amp;#21040;&amp;#19981;&amp;#21487;&amp;#29992;&amp;#65292;&amp;#21017;&amp;#36820;&amp;#22238;false&amp;#65292;&amp;#21542;&amp;#21017;&amp;#36820;&amp;#22238;true&amp;#10; */&amp;#10;function validateUsernameByAjax(value, fieldname, url) &amp;#123;&amp;#10;    var _request = url + &amp;#34;?&amp;#34;+fieldname+&amp;#34;=&amp;#34;+value;&amp;#10;    var deferred = $.Deferred();//&amp;#21019;&amp;#24314;&amp;#19968;&amp;#20010;&amp;#24310;&amp;#36831;&amp;#23545;&amp;#35937;&amp;#10;    $.ajax(&amp;#123;&amp;#10;        url:_request,&amp;#10;        async:false,//&amp;#35201;&amp;#25351;&amp;#23450;&amp;#19981;&amp;#33021;&amp;#24322;&amp;#27493;,&amp;#24517;&amp;#39035;&amp;#31561;&amp;#24453;&amp;#21518;&amp;#21488;&amp;#26381;&amp;#21153;&amp;#26657;&amp;#39564;&amp;#23436;&amp;#25104;&amp;#20877;&amp;#25191;&amp;#34892;&amp;#21518;&amp;#32493;&amp;#20195;&amp;#30721;&amp;#10;        dataType:&amp;#34;json&amp;#34;,&amp;#10;        success:function(data) &amp;#123;&amp;#10;            if (data.status === &amp;#34;error&amp;#34; || data.status === &amp;#34;fail&amp;#34;) &amp;#123;&amp;#10;                deferred.reject();&amp;#10;            &amp;#125; else&amp;#123;&amp;#10;                deferred.resolve();  &amp;#10;            &amp;#125;&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;);&amp;#10;    //deferred.state()&amp;#26377;3&amp;#20010;&amp;#29366;&amp;#24577;:pending:&amp;#36824;&amp;#26410;&amp;#32467;&amp;#26463;,rejected:&amp;#22833;&amp;#36133;,resolved:&amp;#25104;&amp;#21151;&amp;#10;    return deferred.state() == &amp;#34;resolved&amp;#34; ? true : false;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+ &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&amp;#39;#form selector&amp;#39;).validate(&amp;#123;&amp;#10;    rules: &amp;#123;&amp;#10;        username: &amp;#123;&amp;#10;            checkUnique: true&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
     <summary type="html">
-    <![CDATA[<ol>
-<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用aja]]>
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;juqry validate中，如何对使用ajax提交的方式进行校验？&lt;br&gt;有两种方式&lt;br&gt; 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用aja
+    
     </summary>
+    
     
       <category term="jquery" scheme="http://yoursite.com/tags/jquery/"/>
     
@@ -130,39 +205,49 @@
   </entry>
   
   <entry>
-    <title><![CDATA[[git]git常用-把本地项目提交到github]]></title>
+    <title>[git]git常用-把本地项目提交到github</title>
     <link href="http://yoursite.com/2015/12/31/git-git%E5%B8%B8%E7%94%A8-%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/"/>
     <id>http://yoursite.com/2015/12/31/git-git常用-把本地项目提交到github/</id>
     <published>2015-12-31T10:04:12.000Z</published>
-    <updated>2016-01-04T02:49:35.200Z</updated>
-    <content type="html"><![CDATA[<h3 id="1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github"><a href="#1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github" class="headerlink" title="1.把本地项目提交到github"></a>1.把本地项目提交到github</h3><p>touch README.md //新建说明文件<br>git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录<br>git add . //添加当前目录中的所有文件到索引<br>git commit -m “first commit” //提交到本地源码库，并附加提交注释<br>git remote add origin <a href="https://github.com/chape/test.git" target="_blank" rel="external">https://github.com/chape/test.git</a> //添加到远程项目，别名为origin<br>git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交</p>
-<h3 id="2-_u5982_u679C_u6709error_3A_failed_to_push_some_refs_to__u2018https_3A//github-com/YihuaWanglv/myhexo-git_u2018"><a href="#2-_u5982_u679C_u6709error_3A_failed_to_push_some_refs_to__u2018https_3A//github-com/YihuaWanglv/myhexo-git_u2018" class="headerlink" title="2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘"></a>2.如果有error: failed to push some refs to ‘<a href="https://github.com/YihuaWanglv/myhexo.git" target="_blank" rel="external">https://github.com/YihuaWanglv/myhexo.git</a>‘</h3><p>有如下几种解决方法：</p>
-<p>1.使用强制push的方法：<br>$ git push -u origin master -f<br>这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。<br>2.push前先将远程repository修改pull下来<br>$ git pull origin master<br>$ git push -u origin master<br>3.若不想merge远程和本地修改，可以先创建新的分支：<br>$ git branch [name]<br>然后push<br>$ git push -u origin [name]</p>
-]]></content>
+    <updated>2016-02-20T04:02:04.710Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-把本地项目提交到github&quot;&gt;&lt;a href=&quot;#1-把本地项目提交到github&quot; class=&quot;headerlink&quot; title=&quot;1.把本地项目提交到github&quot;&gt;&lt;/a&gt;1.把本地项目提交到github&lt;/h3&gt;&lt;p&gt;touch README.md //新建说明文件&lt;br&gt;git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录&lt;br&gt;git add . //添加当前目录中的所有文件到索引&lt;br&gt;git commit -m “first commit” //提交到本地源码库，并附加提交注释&lt;br&gt;git remote add origin &lt;a href=&quot;https://github.com/chape/test.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/chape/test.git&lt;/a&gt; //添加到远程项目，别名为origin&lt;br&gt;git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交&lt;/p&gt;
+&lt;h3 id=&quot;2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘&quot;&gt;&lt;a href=&quot;#2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘&quot; class=&quot;headerlink&quot; title=&quot;2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘&quot;&gt;&lt;/a&gt;2.如果有error: failed to push some refs to ‘&lt;a href=&quot;https://github.com/YihuaWanglv/myhexo.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/myhexo.git&lt;/a&gt;‘&lt;/h3&gt;&lt;p&gt;有如下几种解决方法：&lt;/p&gt;
+&lt;p&gt;1.使用强制push的方法：&lt;br&gt;$ git push -u origin master -f&lt;br&gt;这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。&lt;br&gt;2.push前先将远程repository修改pull下来&lt;br&gt;$ git pull origin master&lt;br&gt;$ git push -u origin master&lt;br&gt;3.若不想merge远程和本地修改，可以先创建新的分支：&lt;br&gt;$ git branch [name]&lt;br&gt;然后push&lt;br&gt;$ git push -u origin [name]&lt;/p&gt;
+</content>
+    
     <summary type="html">
-    <![CDATA[<h3 id="1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github"><a href="#1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github" class=]]>
+    
+      &lt;h3 id=&quot;1-把本地项目提交到github&quot;&gt;&lt;a href=&quot;#1-把本地项目提交到github&quot; class=&quot;headerlink&quot; title=&quot;1.把本地项目提交到github&quot;&gt;&lt;/a&gt;1.把本地项目提交到github&lt;/h3&gt;&lt;p&gt;touch README.m
+    
     </summary>
+    
     
       <category term="git" scheme="http://yoursite.com/tags/git/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[使用hexo-deploy直接发布到github]]></title>
+    <title>使用hexo-deploy直接发布到github</title>
     <link href="http://yoursite.com/2015/12/31/%E4%BD%BF%E7%94%A8hexo-deploy%E7%9B%B4%E6%8E%A5%E5%8F%91%E5%B8%83%E5%88%B0github/"/>
     <id>http://yoursite.com/2015/12/31/使用hexo-deploy直接发布到github/</id>
     <published>2015-12-31T09:08:52.000Z</published>
-    <updated>2016-01-04T07:29:03.686Z</updated>
-    <content type="html"><![CDATA[<p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
-<h3 id="1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F"><a href="#1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F" class="headerlink" title="1.npm安装需要的东西"></a>1.npm安装需要的东西</h3><p>$ npm install hexo-deployer-git –save<br>$ npm install hexo-deployer-heroku –save<br>$ npm install hexo-deployer-rsync –save<br>$ npm install hexo-deployer-openshift –save<br>$ npm install hexo-deployer-ftpsync –save</p>
-<h3 id="2-_u4FEE_u6539_u914D_u7F6E_u6587_u4EF6_config-yml"><a href="#2-_u4FEE_u6539_u914D_u7F6E_u6587_u4EF6_config-yml" class="headerlink" title="2.修改配置文件_config.yml"></a>2.修改配置文件_config.yml</h3><p>deploy:<br>  type: git<br>  repository: <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git</a><br>  branch: master</p>
-<h3 id="3-_u6267_u884C_u547D_u4EE4_u63D0_u4EA4_u53D1_u5E03"><a href="#3-_u6267_u884C_u547D_u4EE4_u63D0_u4EA4_u53D1_u5E03" class="headerlink" title="3.执行命令提交发布"></a>3.执行命令提交发布</h3><p>$ hexo clean<br>$ hexo generate<br>$ hexo deploy</p>
-<p>over.</p>
-<h3 id="u53C2_u8003_uFF1Ahttps_3A//hexo-io/zh-cn/docs/deployment-html"><a href="#u53C2_u8003_uFF1Ahttps_3A//hexo-io/zh-cn/docs/deployment-html" class="headerlink" title="参考：https://hexo.io/zh-cn/docs/deployment.html"></a>参考：<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></h3>]]></content>
+    <updated>2016-02-20T04:02:04.726Z</updated>
+    
+    <content type="html">&lt;p&gt;本文说明如何使用hexo deploy直接提交到github发布文章。&lt;/p&gt;
+&lt;h3 id=&quot;1-npm安装需要的东西&quot;&gt;&lt;a href=&quot;#1-npm安装需要的东西&quot; class=&quot;headerlink&quot; title=&quot;1.npm安装需要的东西&quot;&gt;&lt;/a&gt;1.npm安装需要的东西&lt;/h3&gt;&lt;p&gt;$ npm install hexo-deployer-git –save&lt;br&gt;$ npm install hexo-deployer-heroku –save&lt;br&gt;$ npm install hexo-deployer-rsync –save&lt;br&gt;$ npm install hexo-deployer-openshift –save&lt;br&gt;$ npm install hexo-deployer-ftpsync –save&lt;/p&gt;
+&lt;h3 id=&quot;2-修改配置文件-config-yml&quot;&gt;&lt;a href=&quot;#2-修改配置文件-config-yml&quot; class=&quot;headerlink&quot; title=&quot;2.修改配置文件_config.yml&quot;&gt;&lt;/a&gt;2.修改配置文件_config.yml&lt;/h3&gt;&lt;p&gt;deploy:&lt;br&gt;  type: git&lt;br&gt;  repository: &lt;a href=&quot;https://github.com/YihuaWanglv/yihuawanglv.github.io.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/yihuawanglv.github.io.git&lt;/a&gt;&lt;br&gt;  branch: master&lt;/p&gt;
+&lt;h3 id=&quot;3-执行命令提交发布&quot;&gt;&lt;a href=&quot;#3-执行命令提交发布&quot; class=&quot;headerlink&quot; title=&quot;3.执行命令提交发布&quot;&gt;&lt;/a&gt;3.执行命令提交发布&lt;/h3&gt;&lt;p&gt;$ hexo clean&lt;br&gt;$ hexo generate&lt;br&gt;$ hexo deploy&lt;/p&gt;
+&lt;p&gt;over.&lt;/p&gt;
+&lt;h3 id=&quot;参考：https-hexo-io-zh-cn-docs-deployment-html&quot;&gt;&lt;a href=&quot;#参考：https-hexo-io-zh-cn-docs-deployment-html&quot; class=&quot;headerlink&quot; title=&quot;参考：https://hexo.io/zh-cn/docs/deployment.html&quot;&gt;&lt;/a&gt;参考：&lt;a href=&quot;https://hexo.io/zh-cn/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hexo.io/zh-cn/docs/deployment.html&lt;/a&gt;&lt;/h3&gt;</content>
+    
     <summary type="html">
-    <![CDATA[<p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
-<h3 id="1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F"><a href="#1-npm_u5B89_u88C5_u9700_u8981_]]>
+    
+      &lt;p&gt;本文说明如何使用hexo deploy直接提交到github发布文章。&lt;/p&gt;
+&lt;h3 id=&quot;1-npm安装需要的东西&quot;&gt;&lt;a href=&quot;#1-npm安装需要的东西&quot; class=&quot;headerlink&quot; title=&quot;1.npm安装需要的东西&quot;&gt;&lt;/a&gt;1.npm安装
+    
     </summary>
+    
     
       <category term="deploy" scheme="http://yoursite.com/tags/deploy/"/>
     
@@ -171,74 +256,79 @@
   </entry>
   
   <entry>
-    <title><![CDATA[如何使用github-pages和hexo搭建简单blog]]></title>
+    <title>如何使用github-pages和hexo搭建简单blog</title>
     <link href="http://yoursite.com/2015/12/31/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-pages%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95blog/"/>
     <id>http://yoursite.com/2015/12/31/如何使用github-pages和hexo搭建简单blog/</id>
     <published>2015-12-31T07:41:30.000Z</published>
-    <updated>2016-01-04T07:30:49.471Z</updated>
-    <content type="html"><![CDATA[<p>前言</p>
-<ul>
-<li>github，写代码必备</li>
-<li>hexo，一个很方便的静态blog生成系统</li>
-<li>还不太熟悉，暂时不放图片</li>
-</ul>
-<p>步骤</p>
-<h3 id="1-_u9996_u5148_u5F97_u6709_u4E00_u4E2Agithub_u8D26_u53F7"><a href="#1-_u9996_u5148_u5F97_u6709_u4E00_u4E2Agithub_u8D26_u53F7" class="headerlink" title="1.首先得有一个github账号"></a>1.首先得有一个github账号</h3><p>没有的得先上github创建一个</p>
-<h3 id="2-_u521B_u5EFA_u4E00_u4E2Arepositories"><a href="#2-_u521B_u5EFA_u4E00_u4E2Arepositories" class="headerlink" title="2.创建一个repositories"></a>2.创建一个repositories</h3><ul>
-<li>Repository name的填写格式是xxx.github.io</li>
-<li>xxx要与你github的用户名一致（这样创建好后，可以直接通过xxx.github.io访问）</li>
-<li>创建Repository后，接着是对它进行设置，点击Repository的“setting”进行设置</li>
-<li>使用默认设置即可，最后点击“Launch automatic page generator”启动自动生成blog</li>
-<li>接下来是编辑用户界面，点击绿色的“continue to layouts”按钮配置布局和样式</li>
-<li>最后，点击“Publish page”，你的页面就公布出来了。</li>
-</ul>
-<h3 id="3-_u5B89_u88C5hexo"><a href="#3-_u5B89_u88C5hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><ul>
-<li>首先安装git</li>
-<li>安装node</li>
-<li>安装npm</li>
-<li><p>安装hexo<br>npm install hexo-cli -g<br>npm install hexo –save</p>
-</li>
-<li><p>hexo初始化<br>**根据自己需要创建一个hexo文件夹<br>$ hexo init <folder><br>$ cd <folder><br>$ npm install<br>新建完成后，指定文件夹的目录如下<br>.<br>├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── scripts<br>├── source<br>|      ├── _drafts<br>|      └── _posts<br>└── themes</folder></folder></p>
-</li>
-<li><p>安装Hexo插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save&#10;npm install hexo-generator-archive --save&#10;npm install hexo-generator-category --save&#10;npm install hexo-generator-tag --save&#10;npm install hexo-server --save&#10;npm install hexo-deployer-git --save&#10;npm install hexo-deployer-heroku --save&#10;npm install hexo-deployer-rsync --save&#10;npm install hexo-deployer-openshift --save&#10;npm install hexo-renderer-marked@0.2 --save&#10;npm install hexo-renderer-stylus@0.2 --save&#10;npm install hexo-generator-feed@1 --save&#10;npm install hexo-generator-sitemap@1 --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>本地查看效果<br>执行hexo server命令启动，然后访问localhost:4000查看效果</p>
-</li>
-</ul>
-<h3 id="4-_u521B_u5EFA_u4E00_u7BC7_u6587_u7AE0"><a href="#4-_u521B_u5EFA_u4E00_u7BC7_u6587_u7AE0" class="headerlink" title="4.创建一篇文章"></a>4.创建一篇文章</h3><ul>
-<li>git shell进入之前创建的hexo文件夹，hexo new “hello world”创建一篇新的文章</li>
-</ul>
-<h3 id="5-_u540C_u6B65_u5E76_u53D1_u5E03"><a href="#5-_u540C_u6B65_u5E76_u53D1_u5E03" class="headerlink" title="5.同步并发布"></a>5.同步并发布</h3><ul>
-<li>hexo g 生成静态文件</li>
-<li>git clone <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地</a></li>
-<li>复制生成的public文件夹内所有文件到clone到本地的yihuawanglv.github.io文件夹内</li>
-</ul>
-<h3 id="6-_u63D0_u4EA4_u66F4_u6539_u5230github"><a href="#6-_u63D0_u4EA4_u66F4_u6539_u5230github" class="headerlink" title="6.提交更改到github"></a>6.提交更改到github</h3><ul>
-<li>git add *</li>
-<li>git commit -m “代码提交信息”</li>
-<li>git push origin master</li>
-<li>输入用户名密码</li>
-</ul>
-<p>这样再次访问你github上的blog地址，即可发现内容已更新</p>
-<h3 id="7-_u4F7F_u7528hexo_u522B_u7684_u4E3B_u9898_u7F8E_u5316blog_u6837_u5F0F"><a href="#7-_u4F7F_u7528hexo_u522B_u7684_u4E3B_u9898_u7F8E_u5316blog_u6837_u5F0F" class="headerlink" title="7.使用hexo别的主题美化blog样式"></a>7.使用hexo别的主题美化blog样式</h3><ul>
-<li>我这里选用的是简介美观的next主题</li>
-<li>在终端窗口下，定位到 Hexo 站点目录下<br>$ cd your-hexo-site<br>$ git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a> themes/next</li>
-<li>启用 NexT 主题<br>克隆/下载 完成后，打开 站点配置文件，找到 theme 字段，并将其值更改为 next。</li>
-<li>验证主题是否启用<br>运行 hexo s –debug，并访问 <a href="http://localhost:4000，确保站点正确运行" target="_blank" rel="external">http://localhost:4000，确保站点正确运行</a></li>
-</ul>
-<h3 id="8-_u540C_u6B65_u65B0_u7684_u66F4_u6539"><a href="#8-_u540C_u6B65_u65B0_u7684_u66F4_u6539" class="headerlink" title="8.同步新的更改"></a>8.同步新的更改</h3><p>现在要把新的更改同步上github，重新执行步骤5和6即可。<br>当然把更新从hexo public文件夹同步到本地的Repository xxx.github.io文件夹内可以使用beyongcompare此类同步软件执行</p>
-]]></content>
+    <updated>2016-02-20T04:02:04.729Z</updated>
+    
+    <content type="html">&lt;p&gt;前言&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;github，写代码必备&lt;/li&gt;
+&lt;li&gt;hexo，一个很方便的静态blog生成系统&lt;/li&gt;
+&lt;li&gt;还不太熟悉，暂时不放图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;步骤&lt;/p&gt;
+&lt;h3 id=&quot;1-首先得有一个github账号&quot;&gt;&lt;a href=&quot;#1-首先得有一个github账号&quot; class=&quot;headerlink&quot; title=&quot;1.首先得有一个github账号&quot;&gt;&lt;/a&gt;1.首先得有一个github账号&lt;/h3&gt;&lt;p&gt;没有的得先上github创建一个&lt;/p&gt;
+&lt;h3 id=&quot;2-创建一个repositories&quot;&gt;&lt;a href=&quot;#2-创建一个repositories&quot; class=&quot;headerlink&quot; title=&quot;2.创建一个repositories&quot;&gt;&lt;/a&gt;2.创建一个repositories&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Repository name的填写格式是xxx.github.io&lt;/li&gt;
+&lt;li&gt;xxx要与你github的用户名一致（这样创建好后，可以直接通过xxx.github.io访问）&lt;/li&gt;
+&lt;li&gt;创建Repository后，接着是对它进行设置，点击Repository的“setting”进行设置&lt;/li&gt;
+&lt;li&gt;使用默认设置即可，最后点击“Launch automatic page generator”启动自动生成blog&lt;/li&gt;
+&lt;li&gt;接下来是编辑用户界面，点击绿色的“continue to layouts”按钮配置布局和样式&lt;/li&gt;
+&lt;li&gt;最后，点击“Publish page”，你的页面就公布出来了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;3-安装hexo&quot;&gt;&lt;a href=&quot;#3-安装hexo&quot; class=&quot;headerlink&quot; title=&quot;3.安装hexo&quot;&gt;&lt;/a&gt;3.安装hexo&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;首先安装git&lt;/li&gt;
+&lt;li&gt;安装node&lt;/li&gt;
+&lt;li&gt;安装npm&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装hexo&lt;br&gt;npm install hexo-cli -g&lt;br&gt;npm install hexo –save&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;hexo初始化&lt;br&gt;**根据自己需要创建一个hexo文件夹&lt;br&gt;$ hexo init &lt;folder&gt;&lt;br&gt;$ cd &lt;folder&gt;&lt;br&gt;$ npm install&lt;br&gt;新建完成后，指定文件夹的目录如下&lt;br&gt;.&lt;br&gt;├── _config.yml&lt;br&gt;├── package.json&lt;br&gt;├── scaffolds&lt;br&gt;├── scripts&lt;br&gt;├── source&lt;br&gt;|      ├── _drafts&lt;br&gt;|      └── _posts&lt;br&gt;└── themes&lt;/folder&gt;&lt;/folder&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装Hexo插件&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install hexo-generator-index --save&amp;#10;npm install hexo-generator-archive --save&amp;#10;npm install hexo-generator-category --save&amp;#10;npm install hexo-generator-tag --save&amp;#10;npm install hexo-server --save&amp;#10;npm install hexo-deployer-git --save&amp;#10;npm install hexo-deployer-heroku --save&amp;#10;npm install hexo-deployer-rsync --save&amp;#10;npm install hexo-deployer-openshift --save&amp;#10;npm install hexo-renderer-marked@0.2 --save&amp;#10;npm install hexo-renderer-stylus@0.2 --save&amp;#10;npm install hexo-generator-feed@1 --save&amp;#10;npm install hexo-generator-sitemap@1 --save&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;本地查看效果&lt;br&gt;执行hexo server命令启动，然后访问localhost:4000查看效果&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;4-创建一篇文章&quot;&gt;&lt;a href=&quot;#4-创建一篇文章&quot; class=&quot;headerlink&quot; title=&quot;4.创建一篇文章&quot;&gt;&lt;/a&gt;4.创建一篇文章&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;git shell进入之前创建的hexo文件夹，hexo new “hello world”创建一篇新的文章&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;5-同步并发布&quot;&gt;&lt;a href=&quot;#5-同步并发布&quot; class=&quot;headerlink&quot; title=&quot;5.同步并发布&quot;&gt;&lt;/a&gt;5.同步并发布&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;hexo g 生成静态文件&lt;/li&gt;
+&lt;li&gt;git clone &lt;a href=&quot;https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;复制生成的public文件夹内所有文件到clone到本地的yihuawanglv.github.io文件夹内&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;6-提交更改到github&quot;&gt;&lt;a href=&quot;#6-提交更改到github&quot; class=&quot;headerlink&quot; title=&quot;6.提交更改到github&quot;&gt;&lt;/a&gt;6.提交更改到github&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;git add *&lt;/li&gt;
+&lt;li&gt;git commit -m “代码提交信息”&lt;/li&gt;
+&lt;li&gt;git push origin master&lt;/li&gt;
+&lt;li&gt;输入用户名密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这样再次访问你github上的blog地址，即可发现内容已更新&lt;/p&gt;
+&lt;h3 id=&quot;7-使用hexo别的主题美化blog样式&quot;&gt;&lt;a href=&quot;#7-使用hexo别的主题美化blog样式&quot; class=&quot;headerlink&quot; title=&quot;7.使用hexo别的主题美化blog样式&quot;&gt;&lt;/a&gt;7.使用hexo别的主题美化blog样式&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;我这里选用的是简介美观的next主题&lt;/li&gt;
+&lt;li&gt;在终端窗口下，定位到 Hexo 站点目录下&lt;br&gt;$ cd your-hexo-site&lt;br&gt;$ git clone &lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/iissnan/hexo-theme-next&lt;/a&gt; themes/next&lt;/li&gt;
+&lt;li&gt;启用 NexT 主题&lt;br&gt;克隆/下载 完成后，打开 站点配置文件，找到 theme 字段，并将其值更改为 next。&lt;/li&gt;
+&lt;li&gt;验证主题是否启用&lt;br&gt;运行 hexo s –debug，并访问 &lt;a href=&quot;http://localhost:4000，确保站点正确运行&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:4000，确保站点正确运行&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;8-同步新的更改&quot;&gt;&lt;a href=&quot;#8-同步新的更改&quot; class=&quot;headerlink&quot; title=&quot;8.同步新的更改&quot;&gt;&lt;/a&gt;8.同步新的更改&lt;/h3&gt;&lt;p&gt;现在要把新的更改同步上github，重新执行步骤5和6即可。&lt;br&gt;当然把更新从hexo public文件夹同步到本地的Repository xxx.github.io文件夹内可以使用beyongcompare此类同步软件执行&lt;/p&gt;
+</content>
+    
     <summary type="html">
-    <![CDATA[<p>前言</p>
-<ul>
-<li>github，写代码必备</li>
-<li>hexo，一个很方便的静态blog生成系统</li>
-<li>还不太熟悉，暂时不放图片</li>
-</ul>
-<p>步骤</p>
-<h3 id="1-_u9996_u5148_u5F97_u6709]]>
+    
+      &lt;p&gt;前言&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;github，写代码必备&lt;/li&gt;
+&lt;li&gt;hexo，一个很方便的静态blog生成系统&lt;/li&gt;
+&lt;li&gt;还不太熟悉，暂时不放图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;步骤&lt;/p&gt;
+&lt;h3 id=&quot;1-首先得有一个github账号&quot;&gt;&lt;a href=
+    
     </summary>
+    
     
       <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
     
@@ -247,28 +337,6 @@
       <category term="github pages" scheme="http://yoursite.com/tags/github-pages/"/>
     
       <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <link href="http://yoursite.com/2015/12/31/hello-world/"/>
-    <id>http://yoursite.com/2015/12/31/hello-world/</id>
-    <published>2015-12-31T07:25:50.504Z</published>
-    <updated>2015-12-31T07:25:50.504Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
-    </summary>
     
   </entry>
   

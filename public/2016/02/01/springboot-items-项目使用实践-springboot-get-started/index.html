@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="iyihua">
 <meta property="og:description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
 1.pom.xml中添加maven依赖1&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframewor">
-<meta property="og:updated_time" content="2016-02-01T09:35:44.585Z">
+<meta property="og:updated_time" content="2016-02-20T04:02:04.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[springboot][items][项目使用实践]springboot get started">
 <meta name="twitter:description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
@@ -231,10 +231,10 @@
 
       
         <span itemprop="articleBody"><p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56"><a href="#1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
-<h3 id="2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java"><a href="#2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc"><a href="#u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
 </span>
       
@@ -333,7 +333,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -347,7 +347,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
@@ -386,7 +386,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56"><span class="nav-number">1.</span> <span class="nav-text">1.pom.xml中添加maven依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java"><span class="nav-number">2.</span> <span class="nav-text">2.编写项目启动入口App.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc"><span class="nav-number">3.</span> <span class="nav-text">再进一步，为应用引入spring mvc</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pom-xml中添加maven依赖"><span class="nav-number">1.</span> <span class="nav-text">1.pom.xml中添加maven依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-编写项目启动入口App-java"><span class="nav-number">2.</span> <span class="nav-text">2.编写项目启动入口App.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再进一步，为应用引入spring-mvc"><span class="nav-number">3.</span> <span class="nav-text">再进一步，为应用引入spring mvc</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
