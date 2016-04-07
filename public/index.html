@@ -202,6 +202,94 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/07/为你的项目做合理的版本控制管理/" itemprop="url">
+                  为你的项目做合理的版本控制管理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-04-07T23:32:15+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h3 id="一款经典的分支管理规范"><a href="#一款经典的分支管理规范" class="headerlink" title="一款经典的分支管理规范"></a>一款经典的分支管理规范</h3><p><img src="/images/version.png" alt=""></p>
+<p>###<br>我们需要善用代码版本控制系统。上图就是一款经典的分支管理规范，实践如下。</p>
+<p>1.<br>最稳定的代码放在 master 分支上（相当于 SVN 的 trunk 分支），我们不要直接在 master 分支上提交代码，只能在该分支上进行代码合并操作，例如将其它分支的代码合并到 master 分支上。</p>
+<p>2.<br>我们日常开发中的代码需要从 master 分支拉一条 develop 分支出来，该分支所有人都能访问，但一般情况下，我们也不会直接在该分支上提交代码，代码同样是从其它分支合并到 develop 分支上去。</p>
+<p>3.<br>当我们需要开发某个特性时，需要从 develop 分支拉出一条 feature 分支，例如 feature-1 与 feature-2，在这些分支上并行地开发具体特性。</p>
+<p>4.<br>当特性开发完毕后，我们决定需要发布某个版本了，此时需要从 develop 分支上拉出一条 release 分支，例如 release-1.0.0，并将需要发布的特性从相关 feature 分支一同合并到 release 分支上，随后将针对 release 分支部署测试环境，测试工程师在该分支上做功能测试，开发工程师在该分支上修改 bug。待测试工程师无法找到任何 bug 时，我们可将该 release 分支部署到预发环境，再次验证以后，均无任何 bug，此时可将 release 分支部署到生产环境。待上线完成后，将 release 分支上的代码同时合并到 develop 分支与 master 分支，并在 master 分支上打一个 tag，例如 v1.0.0。</p>
+<p>5.<br>当生产环境发现 bug 时，我们需要从对应的 tag 上（例如 v1.0.0）拉出一条 hotfix 分支（例如 hotfix-1.0.1），并在该分支上做 bug 修复。待 bug 完全修复后，需将 hotfix 分支上的代码同时合并到 develop 分支与 master 分支。</p>
+<p>6.<br>对于版本号我们也有要求，格式为：x.y.z，其中，x 用于有重大重构时才会升级，y 用于有新的特性发布时才会升级，z 用于修改了某个 bug 后才会升级。针对每个微服务，我们都需要严格按照以上开发模式来执行。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/21/在linux下部署spring-boot项目过程记录/" itemprop="url">
                   在linux下部署spring boot项目过程记录
                 </a>
@@ -240,30 +328,30 @@
         
           <span itemprop="articleBody">
             
-              <h1 id="u5728linux_u4E0B_u90E8_u7F72spring_boot_u9879_u76EE_u8FC7_u7A0B_u8BB0_u5F55"><a href="#u5728linux_u4E0B_u90E8_u7F72spring_boot_u9879_u76EE_u8FC7_u7A0B_u8BB0_u5F55" class="headerlink" title="在linux下部署spring boot项目过程记录"></a>在linux下部署spring boot项目过程记录</h1><h2 id="u8BF4_u660E"><a href="#u8BF4_u660E" class="headerlink" title="说明"></a>说明</h2><p>本文章是在centos7下部署spring boot架构的java web项目的过程中的一些记录，记录了linux服务器中需要用到的软件服务的安装和使用</p>
-<h2 id="u73AF_u5883_u8BF4_u660E"><a href="#u73AF_u5883_u8BF4_u660E" class="headerlink" title="环境说明"></a>环境说明</h2><p>linux版本：CentOs7<br>配备的开发环境软件服务：</p>
+              <h1 id="在linux下部署spring-boot项目过程记录"><a href="#在linux下部署spring-boot项目过程记录" class="headerlink" title="在linux下部署spring boot项目过程记录"></a>在linux下部署spring boot项目过程记录</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本文章是在centos7下部署spring boot架构的java web项目的过程中的一些记录，记录了linux服务器中需要用到的软件服务的安装和使用</p>
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>linux版本：CentOs7<br>配备的开发环境软件服务：</p>
 <pre><code>- mysql（centos下默认使用mariadb，也可以，两者兼容）
 - jdk
 - ftp
 - redis
-</code></pre><h3 id="1-_linux_u4E0B_u5F00_u653E_u7AEF_u53E3"><a href="#1-_linux_u4E0B_u5F00_u653E_u7AEF_u53E3" class="headerlink" title="1. linux下开放端口"></a>1. linux下开放端口</h3><p>先把一些已知要用到的端口放开了，省的后面要用到的时候连不上<br>由于centos7默认没有iptables服务，所以需要先安装<br>首先暂停防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld&#10;systemctl mask firewalld</span><br></pre></td></tr></table></figure></p>
+</code></pre><h3 id="1-linux下开放端口"><a href="#1-linux下开放端口" class="headerlink" title="1. linux下开放端口"></a>1. linux下开放端口</h3><p>先把一些已知要用到的端口放开了，省的后面要用到的时候连不上<br>由于centos7默认没有iptables服务，所以需要先安装<br>首先暂停防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld&#10;systemctl mask firewalld</span><br></pre></td></tr></table></figure></p>
 <p>Then, install the iptables-services package:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install iptables-services</span><br></pre></td></tr></table></figure></p>
 <p>Enable the service at boot-time:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable iptables</span><br></pre></td></tr></table></figure></p>
 <p>配置要放开的端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 22 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 3306 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8080 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 21 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8081 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
 <p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save&#10;or&#10;/usr/libexec/iptables/iptables.init save</span><br></pre></td></tr></table></figure></p>
 <p>Managing the service开启停止防火墙服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl [stop|start|restart] iptables</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-_linux_u4E0B_u5B89_u88C5_u4F7F_u7528mysql"><a href="#2-_linux_u4E0B_u5B89_u88C5_u4F7F_u7528mysql" class="headerlink" title="2. linux下安装使用mysql"></a>2. linux下安装使用mysql</h3><p>一般的linux安装mysql，会使用yum install mysql mysql-server mysql-devel<br>然而，在centos7下这样安装的时候，却发现mysql-server安装不上。<br>原来，由于Oracle收购mysql后，开源社区担心mysql有闭源的风险，于是使用mysql的一个分支mariadb替代mysql。mariadb完全兼容mysql。 而centos7就是默认推荐使用mariadb代替mysql。<br>那么，centos7下安装mysql就有两种方式<br>1）使用mariadb；<br>2）卸载mariadb，安装mysql</p>
-<h4 id="u65B9_u6CD51_3A_u4F7F_u7528mariadb"><a href="#u65B9_u6CD51_3A_u4F7F_u7528mariadb" class="headerlink" title="方法1:使用mariadb"></a>方法1:使用mariadb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb&#10;systemctl start mariadb&#10;mysql -u root -p</span><br></pre></td></tr></table></figure>
-<h4 id="u65B9_u6CD52_3A_u5B89_u88C5mysql_uFF1A"><a href="#u65B9_u6CD52_3A_u5B89_u88C5mysql_uFF1A" class="headerlink" title="方法2:安装mysql："></a>方法2:安装mysql：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm&#10;# rpm -ivh mysql-community-release-el7-5.noarch.rpm&#10;# yum install mysql-community-server</span><br></pre></td></tr></table></figure>
+<h3 id="2-linux下安装使用mysql"><a href="#2-linux下安装使用mysql" class="headerlink" title="2. linux下安装使用mysql"></a>2. linux下安装使用mysql</h3><p>一般的linux安装mysql，会使用yum install mysql mysql-server mysql-devel<br>然而，在centos7下这样安装的时候，却发现mysql-server安装不上。<br>原来，由于Oracle收购mysql后，开源社区担心mysql有闭源的风险，于是使用mysql的一个分支mariadb替代mysql。mariadb完全兼容mysql。 而centos7就是默认推荐使用mariadb代替mysql。<br>那么，centos7下安装mysql就有两种方式<br>1）使用mariadb；<br>2）卸载mariadb，安装mysql</p>
+<h4 id="方法1-使用mariadb"><a href="#方法1-使用mariadb" class="headerlink" title="方法1:使用mariadb"></a>方法1:使用mariadb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb&#10;systemctl start mariadb&#10;mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h4 id="方法2-安装mysql："><a href="#方法2-安装mysql：" class="headerlink" title="方法2:安装mysql："></a>方法2:安装mysql：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm&#10;# rpm -ivh mysql-community-release-el7-5.noarch.rpm&#10;# yum install mysql-community-server</span><br></pre></td></tr></table></figure>
 <p>安装成功后重启mysql服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># service mysqld restart</span><br></pre></td></tr></table></figure></p>
 <p>初次安装mysql，root账户没有密码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yl-web yl]# mysql -u root</span><br></pre></td></tr></table></figure></p>
 <p>设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; set password for &#39;root&#39;@&#39;localhost&#39; =password(&#39;password&#39;);</span><br></pre></td></tr></table></figure></p>
-<h4 id="u5B9E_u8DF5_u7ED3_u8BBA_uFF1A_u5982_u679C_u4E0D_u4ECB_u610F_u4F7F_u7528mariadb_u7684_u8BDD_uFF0C_u5C31_u4E0D_u7528_u6298_u817E_u5B89_u88C5mysql_u4E86_uFF0C_u56E0_u4E3A_u6211_u5728_u5B9E_u9645_u4F7F_u7528_u65B9_u6CD52_u5B89_u88C5MySQL_u7684_u8FC7_u7A0B_u4E2D_uFF0C_u9047_u5230_u4E0D_u5C11_u9700_u8981_u6298_u817E_u7684_u95EE_u9898_u3002"><a href="#u5B9E_u8DF5_u7ED3_u8BBA_uFF1A_u5982_u679C_u4E0D_u4ECB_u610F_u4F7F_u7528mariadb_u7684_u8BDD_uFF0C_u5C31_u4E0D_u7528_u6298_u817E_u5B89_u88C5mysql_u4E86_uFF0C_u56E0_u4E3A_u6211_u5728_u5B9E_u9645_u4F7F_u7528_u65B9_u6CD52_u5B89_u88C5MySQL_u7684_u8FC7_u7A0B_u4E2D_uFF0C_u9047_u5230_u4E0D_u5C11_u9700_u8981_u6298_u817E_u7684_u95EE_u9898_u3002" class="headerlink" title="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"></a>实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。</h4><p>记录如下：<br>1）在进入mysql工具时，总是有错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mysql -u root -p&#10;Enter password:&#10;ERROR 1045 (28000): Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: NO)</span><br></pre></td></tr></table></figure></p>
+<h4 id="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"><a href="#实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。" class="headerlink" title="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"></a>实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。</h4><p>记录如下：<br>1）在进入mysql工具时，总是有错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mysql -u root -p&#10;Enter password:&#10;ERROR 1045 (28000): Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: NO)</span><br></pre></td></tr></table></figure></p>
 <p>解决：方法操作很简单，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysql stop&#10;# mysqld_safe --user=mysql --skip-grant-tables --skip-networking &#38;&#10;# mysql -u root mysql&#10;mysql&#62; UPDATE user SET Password=PASSWORD(&#39;newpassword&#39;) where USER=&#39;root&#39; and host=&#39;root&#39; or host=&#39;localhost&#39;;//&#25226;&#31354;&#30340;&#29992;&#25143;&#23494;&#30721;&#37117;&#20462;&#25913;&#25104;&#38750;&#31354;&#30340;&#23494;&#30721;&#23601;&#34892;&#20102;&#12290;&#10;mysql&#62; FLUSH PRIVILEGES;&#10;mysql&#62; quit&#10;# /etc/init.d/mysqld restart&#10;# mysql -uroot -p&#10;Enter password: &#60;&#36755;&#20837;&#26032;&#35774;&#30340;&#23494;&#30721;newpassword&#62;</span><br></pre></td></tr></table></figure></p>
 <p>2）MySQL服务在启动的时候，不能创建pid文件。</p>
 <p>在终端看一下该目录是否存在，果然，不存在。<br>于是，创建了/var/run/mysqld/目录，重启MySQL服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# mkdir -p /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
 <p>如果依旧不能成功启动，那有可能是/var/run/mysqld/的属主和属组还是root，mysql并不能在其中创建文件，那么修改该目录的属主和属组，应该就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# ls -ld /var/run/mysqld/&#10;drwxr-xr-x 2 root root 40 Jan 20 18:28 /var/run/mysqld/&#10;[root@spark01 ~]# chown mysql.mysql /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-_linux_u4E0B_u5B89_u88C5jdk"><a href="#3-_linux_u4E0B_u5B89_u88C5jdk" class="headerlink" title="3. linux下安装jdk"></a>3. linux下安装jdk</h3><p>一、卸载系统自带的openjdk<br>1、查询系统内置的jdk，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-linux下安装jdk"><a href="#3-linux下安装jdk" class="headerlink" title="3. linux下安装jdk"></a>3. linux下安装jdk</h3><p>一、卸载系统自带的openjdk<br>1、查询系统内置的jdk，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java</span><br></pre></td></tr></table></figure></p>
 <p>此时会列出系统中存在的jdk，如果存在就进行卸载，不存在就直接进行安装。<br>如下：<br>python-javapackages-3.4.1-11.el7.noarch<br>java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64<br>java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64<br>java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64<br>tzdata-java-2015g-1.el7.noarch<br>javapackages-tools-3.4.1-11.el7.noarch<br>java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</p>
 <p>2、进行卸载，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps jdk&#30456;&#20851;&#21517;&#31216;</span><br></pre></td></tr></table></figure></p>
 <p>依次卸载如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps python-javapackages-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64&#10;rpm -e --nodeps java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps tzdata-java-2015g-1.el7.noarch&#10;rpm -e --nodeps javapackages-tools-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</span><br></pre></td></tr></table></figure></p>
@@ -274,7 +362,7 @@
 <p>/usr/java/jdk1.7.0_79 指的是jdk的路径</p>
 <p>保存之后，运行如下命令使配置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
 <p>检查jdk是否安装成功，运行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-_linux_u4E0B_u5B89_u88C5redis"><a href="#4-_linux_u4E0B_u5B89_u88C5redis" class="headerlink" title="4. linux下安装redis"></a>4. linux下安装redis</h3><p>1）方法1：使用命令安装<br>安装redis:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install redis</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-linux下安装redis"><a href="#4-linux下安装redis" class="headerlink" title="4. linux下安装redis"></a>4. linux下安装redis</h3><p>1）方法1：使用命令安装<br>安装redis:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install redis</span><br></pre></td></tr></table></figure></p>
 <p>启动/停止/重启 Redis<br>启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start redis.service</span><br></pre></td></tr></table></figure></p>
 <p>停止服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop redis.service</span><br></pre></td></tr></table></figure></p>
 <p>重启服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart redis.service</span><br></pre></td></tr></table></figure></p>
@@ -284,7 +372,7 @@
 <p>设置配置文件路径:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/redis &#38;&#38; cp redis.conf /etc/redis</span><br></pre></td></tr></table></figure></p>
 <p>修改配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
 <p>修改为： daemonize yes<br>启动Redis:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-_linux_u914D_u7F6Eftp_u670D_u52A1"><a href="#5-_linux_u914D_u7F6Eftp_u670D_u52A1" class="headerlink" title="5. linux配置ftp服务"></a>5. linux配置ftp服务</h3><p>在安装前查看是否已安装vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -q vsftpd&#10;vsftpd-3.0.2-9.el7.x86_64</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-linux配置ftp服务"><a href="#5-linux配置ftp服务" class="headerlink" title="5. linux配置ftp服务"></a>5. linux配置ftp服务</h3><p>在安装前查看是否已安装vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -q vsftpd&#10;vsftpd-3.0.2-9.el7.x86_64</span><br></pre></td></tr></table></figure></p>
 <p>如果有显示类似以上的信息，说明已经安装vsftpd，如果没有，用yum安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install vsftpd</span><br></pre></td></tr></table></figure></p>
 <p>查看一下vsftpd安装在哪：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis vsftpd&#10;vsftpd: /usr/sbin/vsftpd /etc/vsftpd /usr/share/man/man8/vsftpd.8.gz</span><br></pre></td></tr></table></figure></p>
 <p>启动vsftpd服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start vsftpd.service</span><br></pre></td></tr></table></figure></p>
@@ -294,13 +382,13 @@
 <p>设置开机启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig vsftpd on</span><br></pre></td></tr></table></figure></p>
 <p>配置用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# useradd -g root -M -d /var/www/html -s /sbin/nologin ftpuser&#10;[root@localhost ~]# passwd ftpuser&#10;[root@localhost ~]# &#36755;&#20837;&#23494;&#30721;</span><br></pre></td></tr></table></figure></p>
 <p>把 /var/www/html 的所有权给ftpuser.root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# chown -R ftpuser.root /var/www/html</span><br></pre></td></tr></table></figure></p>
-<h3 id="6-__u9644_uFF1A_u4F7F_u7528maven_u628Ajava_project_u6253_u6210_u5305_u542B_u4F9D_u8D56_u5305_u7684jar_u5305_uFF0C_u4E0A_u4F20_u5230_u670D_u52A1_u5668_uFF0C_u5E76_u542F_u52A8"><a href="#6-__u9644_uFF1A_u4F7F_u7528maven_u628Ajava_project_u6253_u6210_u5305_u542B_u4F9D_u8D56_u5305_u7684jar_u5305_uFF0C_u4E0A_u4F20_u5230_u670D_u52A1_u5668_uFF0C_u5E76_u542F_u52A8" class="headerlink" title="6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动"></a>6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动</h3><h4 id="u7F16_u8BD1_u6253_u5305_uFF1A"><a href="#u7F16_u8BD1_u6253_u5305_uFF1A" class="headerlink" title="编译打包："></a>编译打包：</h4><p>方法1：使用maven-assembly-plugin插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;artifactId&#62;maven-assembly-plugin&#60;/artifactId&#62; &#10;    &#60;configuration&#62; &#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#60;/manifest&#62; &#10;            &#60;/archive&#62;&#10;        &#60;descriptorRefs&#62;&#10;            &#60;descriptorRef&#62; jar-with-dependencies &#60;/descriptorRef&#62; &#10;        &#60;/descriptorRefs&#62;&#10;    &#60;/configuration&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;id&#62;make-assembly&#60;/id&#62; &#10;            &#60;phase&#62;package&#60;/phase&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;single&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62; &#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动"><a href="#6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动" class="headerlink" title="6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动"></a>6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动</h3><h4 id="编译打包："><a href="#编译打包：" class="headerlink" title="编译打包："></a>编译打包：</h4><p>方法1：使用maven-assembly-plugin插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;artifactId&#62;maven-assembly-plugin&#60;/artifactId&#62; &#10;    &#60;configuration&#62; &#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#60;/manifest&#62; &#10;            &#60;/archive&#62;&#10;        &#60;descriptorRefs&#62;&#10;            &#60;descriptorRef&#62; jar-with-dependencies &#60;/descriptorRef&#62; &#10;        &#60;/descriptorRefs&#62;&#10;    &#60;/configuration&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;id&#62;make-assembly&#60;/id&#62; &#10;            &#60;phase&#62;package&#60;/phase&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;single&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62; &#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
 <p>运行命令：mvn assembly:assembly<br>或者命令：mvn package</p>
 <p>由于我使用这个方式，打出来的jar包里，依赖的jar和模块的class都正常，但是自己项目内的所有class都是空的class，用反编译看class文件，发现都是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class &#123;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>解压出来取单个class查看又是正常的，这个问题一直百撕不得骑姐，所以我最后使用了方法2的方式解决了问题。</p>
 <p>方法2：使用spring-boot-maven-plugin插件<br>由于我的project是spring boot项目，所以可以使用此方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-boot-maven-plugin&#60;/artifactId&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;repackage&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62;&#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;&#10;&#60;plugin&#62;&#10;    &#60;groupId&#62;org.apache.maven.plugins&#60;/groupId&#62;&#10;    &#60;artifactId&#62;maven-jar-plugin&#60;/artifactId&#62;&#10;    &#60;configuration&#62;&#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;addClasspath&#62;true&#60;/addClasspath&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#10;            &#60;/manifest&#62;&#10;        &#60;/archive&#62;&#10;    &#60;/configuration&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
 <p>运行mvn package打jar包，done！</p>
-<h4 id="u4E0A_u4F20_u5E76_u542F_u52A8"><a href="#u4E0A_u4F20_u5E76_u542F_u52A8" class="headerlink" title="上传并启动"></a>上传并启动</h4><p>连接sftp<br>lcd 打开本地路径<br>cd 进入服务器目标路径<br>put xxx.jar 把目标jar包上传到服务器对应路径<br>java -jar xxx.jar 启动java程序</p>
+<h4 id="上传并启动"><a href="#上传并启动" class="headerlink" title="上传并启动"></a>上传并启动</h4><p>连接sftp<br>lcd 打开本地路径<br>cd 进入服务器目标路径<br>put xxx.jar 把目标jar包上传到服务器对应路径<br>java -jar xxx.jar 启动java程序</p>
 
             
           </span>
@@ -381,7 +469,7 @@
         
           <span itemprop="articleBody">
             
-              <h3 id="u96C6_u7FA4_u76D1_u63A7_u521D_u6B65_u6574_u7406"><a href="#u96C6_u7FA4_u76D1_u63A7_u521D_u6B65_u6574_u7406" class="headerlink" title="集群监控初步整理"></a>集群监控初步整理</h3><p><img src="/images/java-monitor.png" alt=""></p>
+              <h3 id="集群监控初步整理"><a href="#集群监控初步整理" class="headerlink" title="集群监控初步整理"></a>集群监控初步整理</h3><p><img src="/images/java-monitor.png" alt=""></p>
 
             
           </span>
@@ -544,11 +632,100 @@
         
           <span itemprop="articleBody">
             
-              <h3 id="java_io_u4F53_u7CFB_u4F7F_u7528_u6574_u7406"><a href="#java_io_u4F53_u7CFB_u4F7F_u7528_u6574_u7406" class="headerlink" title="java io体系使用整理"></a>java io体系使用整理</h3><ul>
+              <h3 id="java-io体系使用整理"><a href="#java-io体系使用整理" class="headerlink" title="java io体系使用整理"></a>java io体系使用整理</h3><ul>
 <li>来源：<a href="http://www.importnew.com/17714.html" target="_blank" rel="external">http://www.importnew.com/17714.html</a></li>
 <li>思维导图：<a href="http://naotu.baidu.com/file/ef892698672800bd4e2a8306f946f91f" target="_blank" rel="external">http://naotu.baidu.com/file/ef892698672800bd4e2a8306f946f91f</a></li>
 </ul>
 <p><img src="/images/java+io.png" alt=""></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/20/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-02-20T12:02:04+08:00" content="2016-02-20">
+              2016-02-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
             
           </span>
@@ -638,17 +815,17 @@
 <li>多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。<br>当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。</li>
 </ol>
 <p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int code;&#10;if(&#34;Name&#34;.equals(str))&#10;    code = 0;&#10;else if(&#34;Age&#34;.equals(str))&#10;    code = 1;&#10;else if(&#34;Address&#34;.equals(str))&#10;    code = 2;</span><br></pre></td></tr></table></figure></p>
-<h2 id="u4F7F_u7528map_u4F18_u5316"><a href="#u4F7F_u7528map_u4F18_u5316" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  &#10;static &#123;  &#10;    map.put(&#34;Name&#34;, 0);  &#10;    map.put(&#34;Age&#34;, 1);&#10;    map.put(&#34;Address&#34;, 2);  &#10;&#125;&#10;&#10;int code = map.get(type);</span><br></pre></td></tr></table></figure>
-<h2 id="u4F7F_u7528_u679A_u4E3E_u4F18_u5316"><a href="#u4F7F_u7528_u679A_u4E3E_u4F18_u5316" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;&#10;    Name(0), Age(1), Address(2);&#10;    public int code;&#10;    Codes(int code)&#123;&#10;        this.code = code;&#10;    &#125;&#10;&#125;&#10;&#10;int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
-<h2 id="u4F7F_u7528_u591A_u6001_u4F18_u5316"><a href="#u4F7F_u7528_u591A_u6001_u4F18_u5316" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&#34;com.xxx.&#34; + str).newInstance();&#10;&#10;int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
-<h2 id="u201C_u8D23_u4EFB_u94FE_u201D_u5982_u4F55_u4F18_u5316if_else_uFF1F"><a href="#u201C_u8D23_u4EFB_u94FE_u201D_u5982_u4F55_u4F18_u5316if_else_uFF1F" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
+<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  &#10;static &#123;  &#10;    map.put(&#34;Name&#34;, 0);  &#10;    map.put(&#34;Age&#34;, 1);&#10;    map.put(&#34;Address&#34;, 2);  &#10;&#125;&#10;&#10;int code = map.get(type);</span><br></pre></td></tr></table></figure>
+<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;&#10;    Name(0), Age(1), Address(2);&#10;    public int code;&#10;    Codes(int code)&#123;&#10;        this.code = code;&#10;    &#125;&#10;&#125;&#10;&#10;int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
+<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&#34;com.xxx.&#34; + str).newInstance();&#10;&#10;int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
+<h2 id="“责任链”如何优化if-else？"><a href="#“责任链”如何优化if-else？" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
 <p>好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。</p>
 <p>现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。</p>
 <p>好，现在你有一个主控方法，这个方法创建一个上下文对象，再根据分支条件分别调用不同Handler子类上的handle方法，传入这个上下文。你注意到一个问题，分支条件本身和对应的处理逻辑是内聚的。如果条件发生变化，处理往往也要发生变化。反之依然。而且你读代码时，读到一个复杂的条件，往往不能轻易看出它要判断什么，这时最好的方法就是直接看看对应Handler的命名和文档，从处理方式反推这个条件对应的业务需求。既然这样，何不干脆把条件都搬到Handler里去，让每个Handler根据传入的上下文，看看在当前状态下自己是否应该执行处理。</p>
 <p>现在你得到了一个主控类，这个类持有一堆Handler实例，主控类创建一个上下文，然后把上下文依次传给各个Handler，Handler自行判断是否应该执行自己的处理。</p>
 <p>到了这一步，其实已经差不多了。不过对于某些人，他在进行前一步的重构时，就会醒悟：主控类现在已经变成了一个单纯的任务转发人（分配者）。它根本没有必要持有一个Handler的列表再分别逐个调用，还要管理该继续还是该中断等等逻辑（这些逻辑是依赖每个Handler返回的标志来决定的）。何不让Handler自己负责把控制向后分发，主控类只需要知道领头的那个Handler最终会把事情处理好就行了。这种结构还有一个好处，就是每个Handler可以自行决定是否该往下传递控制，还可以根据需要替换上下文实例的实现来影响后续的处理。（这一步与上一步是二选一，有些人喜欢在主控类中持有Handler队列，有些人喜欢链式Handler。我个人认为问题不大，两者的实现难度也没有差别，实现需求就行）</p>
 <p>最后，我们为了交流方便，把这种组合方式称为“责任链”。</p>
-<h2 id="u4F7F_u7528_u72B6_u6001_u6A21_u5F0F_u4F18_u5316if_else"><a href="#u4F7F_u7528_u72B6_u6001_u6A21_u5F0F_u4F18_u5316if_else" class="headerlink" title="使用状态模式优化if else"></a>使用状态模式优化if else</h2><p>参考：<a href="http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html" target="_blank" rel="external">http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html</a></p>
+<h2 id="使用状态模式优化if-else"><a href="#使用状态模式优化if-else" class="headerlink" title="使用状态模式优化if else"></a>使用状态模式优化if else</h2><p>参考：<a href="http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html" target="_blank" rel="external">http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html</a></p>
 
             
           </span>
@@ -730,10 +907,10 @@
           <span itemprop="articleBody">
             
               <p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56"><a href="#1-pom-xml_u4E2D_u6DFB_u52A0maven_u4F9D_u8D56" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
-<h3 id="2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java"><a href="#2-_u7F16_u5199_u9879_u76EE_u542F_u52A8_u5165_u53E3App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc"><a href="#u518D_u8FDB_u4E00_u6B65_uFF0C_u4E3A_u5E94_u7528_u5F15_u5165spring_mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
 <p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
 
             
@@ -928,226 +1105,9 @@
         
           <span itemprop="articleBody">
             
-              <h3 id="1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github"><a href="#1-_u628A_u672C_u5730_u9879_u76EE_u63D0_u4EA4_u5230github" class="headerlink" title="1.把本地项目提交到github"></a>1.把本地项目提交到github</h3><p>touch README.md //新建说明文件<br>git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录<br>git add . //添加当前目录中的所有文件到索引<br>git commit -m “first commit” //提交到本地源码库，并附加提交注释<br>git remote add origin <a href="https://github.com/chape/test.git" target="_blank" rel="external">https://github.com/chape/test.git</a> //添加到远程项目，别名为origin<br>git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交</p>
-<h3 id="2-_u5982_u679C_u6709error_3A_failed_to_push_some_refs_to__u2018https_3A//github-com/YihuaWanglv/myhexo-git_u2018"><a href="#2-_u5982_u679C_u6709error_3A_failed_to_push_some_refs_to__u2018https_3A//github-com/YihuaWanglv/myhexo-git_u2018" class="headerlink" title="2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘"></a>2.如果有error: failed to push some refs to ‘<a href="https://github.com/YihuaWanglv/myhexo.git" target="_blank" rel="external">https://github.com/YihuaWanglv/myhexo.git</a>‘</h3><p>有如下几种解决方法：</p>
+              <h3 id="1-把本地项目提交到github"><a href="#1-把本地项目提交到github" class="headerlink" title="1.把本地项目提交到github"></a>1.把本地项目提交到github</h3><p>touch README.md //新建说明文件<br>git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录<br>git add . //添加当前目录中的所有文件到索引<br>git commit -m “first commit” //提交到本地源码库，并附加提交注释<br>git remote add origin <a href="https://github.com/chape/test.git" target="_blank" rel="external">https://github.com/chape/test.git</a> //添加到远程项目，别名为origin<br>git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交</p>
+<h3 id="2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘"><a href="#2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘" class="headerlink" title="2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘"></a>2.如果有error: failed to push some refs to ‘<a href="https://github.com/YihuaWanglv/myhexo.git" target="_blank" rel="external">https://github.com/YihuaWanglv/myhexo.git</a>‘</h3><p>有如下几种解决方法：</p>
 <p>1.使用强制push的方法：<br>$ git push -u origin master -f<br>这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。<br>2.push前先将远程repository修改pull下来<br>$ git pull origin master<br>$ git push -u origin master<br>3.若不想merge远程和本地修改，可以先创建新的分支：<br>$ git branch [name]<br>然后push<br>$ git push -u origin [name]</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/31/使用hexo-deploy直接发布到github/" itemprop="url">
-                  使用hexo-deploy直接发布到github
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-12-31T17:08:52+08:00" content="2015-12-31">
-              2015-12-31
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
-<h3 id="1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F"><a href="#1-npm_u5B89_u88C5_u9700_u8981_u7684_u4E1C_u897F" class="headerlink" title="1.npm安装需要的东西"></a>1.npm安装需要的东西</h3><p>$ npm install hexo-deployer-git –save<br>$ npm install hexo-deployer-heroku –save<br>$ npm install hexo-deployer-rsync –save<br>$ npm install hexo-deployer-openshift –save<br>$ npm install hexo-deployer-ftpsync –save</p>
-<h3 id="2-_u4FEE_u6539_u914D_u7F6E_u6587_u4EF6_config-yml"><a href="#2-_u4FEE_u6539_u914D_u7F6E_u6587_u4EF6_config-yml" class="headerlink" title="2.修改配置文件_config.yml"></a>2.修改配置文件_config.yml</h3><p>deploy:<br>  type: git<br>  repository: <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git</a><br>  branch: master</p>
-<h3 id="3-_u6267_u884C_u547D_u4EE4_u63D0_u4EA4_u53D1_u5E03"><a href="#3-_u6267_u884C_u547D_u4EE4_u63D0_u4EA4_u53D1_u5E03" class="headerlink" title="3.执行命令提交发布"></a>3.执行命令提交发布</h3><p>$ hexo clean<br>$ hexo generate<br>$ hexo deploy</p>
-<p>over.</p>
-<h3 id="u53C2_u8003_uFF1Ahttps_3A//hexo-io/zh-cn/docs/deployment-html"><a href="#u53C2_u8003_uFF1Ahttps_3A//hexo-io/zh-cn/docs/deployment-html" class="headerlink" title="参考：https://hexo.io/zh-cn/docs/deployment.html"></a>参考：<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></h3>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/31/如何使用github-pages和hexo搭建简单blog/" itemprop="url">
-                  如何使用github-pages和hexo搭建简单blog
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-12-31T15:41:30+08:00" content="2015-12-31">
-              2015-12-31
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>前言</p>
-<ul>
-<li>github，写代码必备</li>
-<li>hexo，一个很方便的静态blog生成系统</li>
-<li>还不太熟悉，暂时不放图片</li>
-</ul>
-<p>步骤</p>
-<h3 id="1-_u9996_u5148_u5F97_u6709_u4E00_u4E2Agithub_u8D26_u53F7"><a href="#1-_u9996_u5148_u5F97_u6709_u4E00_u4E2Agithub_u8D26_u53F7" class="headerlink" title="1.首先得有一个github账号"></a>1.首先得有一个github账号</h3><p>没有的得先上github创建一个</p>
-<h3 id="2-_u521B_u5EFA_u4E00_u4E2Arepositories"><a href="#2-_u521B_u5EFA_u4E00_u4E2Arepositories" class="headerlink" title="2.创建一个repositories"></a>2.创建一个repositories</h3><ul>
-<li>Repository name的填写格式是xxx.github.io</li>
-<li>xxx要与你github的用户名一致（这样创建好后，可以直接通过xxx.github.io访问）</li>
-<li>创建Repository后，接着是对它进行设置，点击Repository的“setting”进行设置</li>
-<li>使用默认设置即可，最后点击“Launch automatic page generator”启动自动生成blog</li>
-<li>接下来是编辑用户界面，点击绿色的“continue to layouts”按钮配置布局和样式</li>
-<li>最后，点击“Publish page”，你的页面就公布出来了。</li>
-</ul>
-<h3 id="3-_u5B89_u88C5hexo"><a href="#3-_u5B89_u88C5hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><ul>
-<li>首先安装git</li>
-<li>安装node</li>
-<li>安装npm</li>
-<li><p>安装hexo<br>npm install hexo-cli -g<br>npm install hexo –save</p>
-</li>
-<li><p>hexo初始化<br>**根据自己需要创建一个hexo文件夹<br>$ hexo init <folder><br>$ cd <folder><br>$ npm install<br>新建完成后，指定文件夹的目录如下<br>.<br>├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── scripts<br>├── source<br>|      ├── _drafts<br>|      └── _posts<br>└── themes</folder></folder></p>
-</li>
-<li><p>安装Hexo插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save&#10;npm install hexo-generator-archive --save&#10;npm install hexo-generator-category --save&#10;npm install hexo-generator-tag --save&#10;npm install hexo-server --save&#10;npm install hexo-deployer-git --save&#10;npm install hexo-deployer-heroku --save&#10;npm install hexo-deployer-rsync --save&#10;npm install hexo-deployer-openshift --save&#10;npm install hexo-renderer-marked@0.2 --save&#10;npm install hexo-renderer-stylus@0.2 --save&#10;npm install hexo-generator-feed@1 --save&#10;npm install hexo-generator-sitemap@1 --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>本地查看效果<br>执行hexo server命令启动，然后访问localhost:4000查看效果</p>
-</li>
-</ul>
-<h3 id="4-_u521B_u5EFA_u4E00_u7BC7_u6587_u7AE0"><a href="#4-_u521B_u5EFA_u4E00_u7BC7_u6587_u7AE0" class="headerlink" title="4.创建一篇文章"></a>4.创建一篇文章</h3><ul>
-<li>git shell进入之前创建的hexo文件夹，hexo new “hello world”创建一篇新的文章</li>
-</ul>
-<h3 id="5-_u540C_u6B65_u5E76_u53D1_u5E03"><a href="#5-_u540C_u6B65_u5E76_u53D1_u5E03" class="headerlink" title="5.同步并发布"></a>5.同步并发布</h3><ul>
-<li>hexo g 生成静态文件</li>
-<li>git clone <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地</a></li>
-<li>复制生成的public文件夹内所有文件到clone到本地的yihuawanglv.github.io文件夹内</li>
-</ul>
-<h3 id="6-_u63D0_u4EA4_u66F4_u6539_u5230github"><a href="#6-_u63D0_u4EA4_u66F4_u6539_u5230github" class="headerlink" title="6.提交更改到github"></a>6.提交更改到github</h3><ul>
-<li>git add *</li>
-<li>git commit -m “代码提交信息”</li>
-<li>git push origin master</li>
-<li>输入用户名密码</li>
-</ul>
-<p>这样再次访问你github上的blog地址，即可发现内容已更新</p>
-<h3 id="7-_u4F7F_u7528hexo_u522B_u7684_u4E3B_u9898_u7F8E_u5316blog_u6837_u5F0F"><a href="#7-_u4F7F_u7528hexo_u522B_u7684_u4E3B_u9898_u7F8E_u5316blog_u6837_u5F0F" class="headerlink" title="7.使用hexo别的主题美化blog样式"></a>7.使用hexo别的主题美化blog样式</h3><ul>
-<li>我这里选用的是简介美观的next主题</li>
-<li>在终端窗口下，定位到 Hexo 站点目录下<br>$ cd your-hexo-site<br>$ git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a> themes/next</li>
-<li>启用 NexT 主题<br>克隆/下载 完成后，打开 站点配置文件，找到 theme 字段，并将其值更改为 next。</li>
-<li>验证主题是否启用<br>运行 hexo s –debug，并访问 <a href="http://localhost:4000，确保站点正确运行" target="_blank" rel="external">http://localhost:4000，确保站点正确运行</a></li>
-</ul>
-<h3 id="8-_u540C_u6B65_u65B0_u7684_u66F4_u6539"><a href="#8-_u540C_u6B65_u65B0_u7684_u66F4_u6539" class="headerlink" title="8.同步新的更改"></a>8.同步新的更改</h3><p>现在要把新的更改同步上github，重新执行步骤5和6即可。<br>当然把更新从hexo public文件夹同步到本地的Repository xxx.github.io文件夹内可以使用beyongcompare此类同步软件执行</p>
 
             
           </span>
@@ -1215,7 +1175,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1229,7 +1189,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,monitor,监控,集群," />
+  <meta name="keywords" content="git,svn,分支管理,版本控制," />
 
 
 
@@ -53,17 +53,26 @@
 
 
 
-<meta name="description" content="集群监控初步整理">
+<meta name="description" content="一款经典的分支管理规范
+###我们需要善用代码版本控制系统。上图就是一款经典的分支管理规范，实践如下。
+1.最稳定的代码放在 master 分支上（相当于 SVN 的 trunk 分支），我们不要直接在 master 分支上提交代码，只能在该分支上进行代码合并操作，例如将其它分支的代码合并到 master 分支上。
+2.我们日常开发中的代码需要从 master 分支拉一条 develop 分支出来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="集群监控初步整理">
-<meta property="og:url" content="http://yoursite.com/2016/03/11/集群监控初步整理/index.html">
+<meta property="og:title" content="为你的项目做合理的版本控制管理">
+<meta property="og:url" content="http://yoursite.com/2016/04/07/为你的项目做合理的版本控制管理/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="集群监控初步整理">
-<meta property="og:image" content="http://yoursite.com/images/java-monitor.png">
-<meta property="og:updated_time" content="2016-03-12T04:09:16.055Z">
+<meta property="og:description" content="一款经典的分支管理规范
+###我们需要善用代码版本控制系统。上图就是一款经典的分支管理规范，实践如下。
+1.最稳定的代码放在 master 分支上（相当于 SVN 的 trunk 分支），我们不要直接在 master 分支上提交代码，只能在该分支上进行代码合并操作，例如将其它分支的代码合并到 master 分支上。
+2.我们日常开发中的代码需要从 master 分支拉一条 develop 分支出来">
+<meta property="og:image" content="http://yoursite.com/images/version.png">
+<meta property="og:updated_time" content="2016-04-07T15:43:41.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="集群监控初步整理">
-<meta name="twitter:description" content="集群监控初步整理">
+<meta name="twitter:title" content="为你的项目做合理的版本控制管理">
+<meta name="twitter:description" content="一款经典的分支管理规范
+###我们需要善用代码版本控制系统。上图就是一款经典的分支管理规范，实践如下。
+1.最稳定的代码放在 master 分支上（相当于 SVN 的 trunk 分支），我们不要直接在 master 分支上提交代码，只能在该分支上进行代码合并操作，例如将其它分支的代码合并到 master 分支上。
+2.我们日常开发中的代码需要从 master 分支拉一条 develop 分支出来">
 
 
 
@@ -75,7 +84,7 @@
   };
 </script>
 
-  <title> 集群监控初步整理 | iyihua </title>
+  <title> 为你的项目做合理的版本控制管理 | iyihua </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -195,7 +204,7 @@
             
             
               
-                集群监控初步整理
+                为你的项目做合理的版本控制管理
               
             
           </h1>
@@ -204,8 +213,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2016-03-11T09:53:20+08:00" content="2016-03-11">
-              2016-03-11
+            <time itemprop="dateCreated" datetime="2016-04-07T23:32:15+08:00" content="2016-04-07">
+              2016-04-07
             </time>
           </span>
 
@@ -228,7 +237,14 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="集群监控初步整理"><a href="#集群监控初步整理" class="headerlink" title="集群监控初步整理"></a>集群监控初步整理</h3><p><img src="/images/java-monitor.png" alt=""></p>
+        <span itemprop="articleBody"><h3 id="一款经典的分支管理规范"><a href="#一款经典的分支管理规范" class="headerlink" title="一款经典的分支管理规范"></a>一款经典的分支管理规范</h3><p><img src="/images/version.png" alt=""></p>
+<p>###<br>我们需要善用代码版本控制系统。上图就是一款经典的分支管理规范，实践如下。</p>
+<p>1.<br>最稳定的代码放在 master 分支上（相当于 SVN 的 trunk 分支），我们不要直接在 master 分支上提交代码，只能在该分支上进行代码合并操作，例如将其它分支的代码合并到 master 分支上。</p>
+<p>2.<br>我们日常开发中的代码需要从 master 分支拉一条 develop 分支出来，该分支所有人都能访问，但一般情况下，我们也不会直接在该分支上提交代码，代码同样是从其它分支合并到 develop 分支上去。</p>
+<p>3.<br>当我们需要开发某个特性时，需要从 develop 分支拉出一条 feature 分支，例如 feature-1 与 feature-2，在这些分支上并行地开发具体特性。</p>
+<p>4.<br>当特性开发完毕后，我们决定需要发布某个版本了，此时需要从 develop 分支上拉出一条 release 分支，例如 release-1.0.0，并将需要发布的特性从相关 feature 分支一同合并到 release 分支上，随后将针对 release 分支部署测试环境，测试工程师在该分支上做功能测试，开发工程师在该分支上修改 bug。待测试工程师无法找到任何 bug 时，我们可将该 release 分支部署到预发环境，再次验证以后，均无任何 bug，此时可将 release 分支部署到生产环境。待上线完成后，将 release 分支上的代码同时合并到 develop 分支与 master 分支，并在 master 分支上打一个 tag，例如 v1.0.0。</p>
+<p>5.<br>当生产环境发现 bug 时，我们需要从对应的 tag 上（例如 v1.0.0）拉出一条 hotfix 分支（例如 hotfix-1.0.1），并在该分支上做 bug 修复。待 bug 完全修复后，需将 hotfix 分支上的代码同时合并到 develop 分支与 master 分支。</p>
+<p>6.<br>对于版本号我们也有要求，格式为：x.y.z，其中，x 用于有重大重构时才会升级，y 用于有新的特性发布时才会升级，z 用于修改了某个 bug 后才会升级。针对每个微服务，我们都需要严格按照以上开发模式来执行。</p>
 </span>
       
     </div>
@@ -237,13 +253,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag">#java</a>
+            <a href="/tags/git/" rel="tag">#git</a>
           
-            <a href="/tags/monitor/" rel="tag">#monitor</a>
+            <a href="/tags/svn/" rel="tag">#svn</a>
           
-            <a href="/tags/监控/" rel="tag">#监控</a>
+            <a href="/tags/分支管理/" rel="tag">#分支管理</a>
           
-            <a href="/tags/集群/" rel="tag">#集群</a>
+            <a href="/tags/版本控制/" rel="tag">#版本控制</a>
           
         </div>
       
@@ -252,17 +268,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/20/spring-aop-知识体系整理/" rel="next" title="spring aop 知识体系整理">
-                <i class="fa fa-chevron-left"></i> spring aop 知识体系整理
+              <a href="/2016/03/21/在linux下部署spring-boot项目过程记录/" rel="next" title="在linux下部署spring boot项目过程记录">
+                <i class="fa fa-chevron-left"></i> 在linux下部署spring boot项目过程记录
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/21/在linux下部署spring-boot项目过程记录/" rel="prev" title="在linux下部署spring boot项目过程记录">
-                在linux下部署spring boot项目过程记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -383,7 +395,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#集群监控初步整理"><span class="nav-number">1.</span> <span class="nav-text">集群监控初步整理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一款经典的分支管理规范"><span class="nav-number">1.</span> <span class="nav-text">一款经典的分支管理规范</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
