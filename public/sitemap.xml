@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/04/09/springboot-shiro-redis-rediscluster-sso-%E5%9C%A8springboot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%8E%A5%E5%85%A5shiro/</loc>
+    
+    <lastmod>2016-04-09T22:44:27.345Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/04/09/springboot-%E5%9C%A8spring%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%A5%E5%8F%8Aspring-datajpa%E5%92%8Cmybatis%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2016-04-09T04:30:03.524Z</lastmod>

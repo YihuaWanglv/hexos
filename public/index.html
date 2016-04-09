@@ -179,15 +179,104 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/" itemprop="url">
+                  [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-04-09T12:52:53+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+              <p>在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。</p>
+<p>现在开始是第一篇：在springboot项目中接入shiro</p>
+<h2 id="引入shiro的maven依赖"><a href="#引入shiro的maven依赖" class="headerlink" title="引入shiro的maven依赖"></a>引入shiro的maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-core&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-spring&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-web&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-ehcache&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;</span><br></pre></td></tr></table></figure>
+<h2 id="程序具体实现"><a href="#程序具体实现" class="headerlink" title="程序具体实现"></a>程序具体实现</h2><h3 id="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml"><a href="#首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml" class="headerlink" title="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml"></a>首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shiro:&#10;  realm: com.xxx.xxx.config.security.MyRealm&#10;  loginUrl: /view/sign-in.html&#10;  successUrl: /item.html&#10;  unauthorizedUrl: /forbidden.html&#10;  filterChainDefinitions:&#10;    &#34;/login&#34;: anon&#10;    &#34;/static/**&#34;: anon&#10;    &#34;/bower_components/**&#34;: anon&#10;    &#34;/logout&#34;: logout&#10;    &#34;/**&#34;: authc</span><br></pre></td></tr></table></figure>
+<p>说明：<br>realm: com.xxx.xxx.config.security.MyRealm<br>Realm，在shiro中相当于数据源，shiro的其他核心组件需要获取用户和认证数据，就是从Realm获取。<br>为了获得更好的自定义功能，通常我们会自己实现一个Realm.<br>所以这里使用realm: com.xxx.xxx.config.security.MyRealm配置了一个自定义的Realm。<br>loginUrl，定义了需要认证用户时，跳转到的登录页面<br>successUrl，定义登录成功后跳转的页面。通常也可以在自己登录认证方法里redirect到需要的页面。<br>unauthorizedUrl，定义未认证时显示的页面。<br>filterChainDefinitions，定义哪些路径应该做何种过滤策略。<br>anon，logout，authc这些都是shiro默认实现的过滤器filter。<br>anon表示可以匿名访问的路径，authc表示需要登录认证的路径</p>
+<p>过滤器链使用最先匹配返回策略，所以我们需要把不需要认证即可访问的路径放在前面。</p>
+<h3 id="下面是自己实现的自定义Realm：MyRealm"><a href="#下面是自己实现的自定义Realm：MyRealm" class="headerlink" title="下面是自己实现的自定义Realm：MyRealm"></a>下面是自己实现的自定义Realm：MyRealm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.authc.AuthenticationException;&#10;import org.apache.shiro.authc.AuthenticationInfo;&#10;import org.apache.shiro.authc.AuthenticationToken;&#10;import org.apache.shiro.authc.SimpleAuthenticationInfo;&#10;import org.apache.shiro.authc.UsernamePasswordToken;&#10;import org.apache.shiro.authz.AuthorizationInfo;&#10;import org.apache.shiro.authz.SimpleAuthorizationInfo;&#10;import org.apache.shiro.realm.AuthorizingRealm;&#10;import org.apache.shiro.subject.PrincipalCollection;&#10;import org.springframework.beans.factory.annotation.Autowired;&#10;&#10;import com.xxx.model.base.UserDTO;&#10;import com.xxx.remote.base.UserRemote;&#10;&#10;public class MyRealm extends AuthorizingRealm &#123;&#10;    @Autowired UserRemote userService;&#10;&#10;    @Override&#10;    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) &#123;&#10;        UserDTO user = (UserDTO) principals.getPrimaryPrincipal();&#10;        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();&#10;        List&#60;String&#62; roles = userService.findByUserId(user.getId());&#10;        info.addRoles(roles);&#10;        return info;&#10;    &#125;&#10;&#10;    @Override&#10;    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;&#10;        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;&#10;        String username = usernamePasswordToken.getUsername();&#10;        UserDTO user = userService.findUserByName(username);&#10;        if (null != user) &#123;&#10;            CredentialsInfoHolder cih = new CredentialsInfoHolder(user.getPassword(), user.getSalt());&#10;            return new SimpleAuthenticationInfo(user, cih, getName());&#10;        &#125;&#10;        return null;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>MyRealm集成AuthorizingRealm，需要重写AuthorizingRealm的两个方法：doGetAuthorizationInfo，doGetAuthenticationInfo。<br>AuthorizationInfo represents a single Subject’s stored authorization data (roles, permissions, etc) used during authorization (access control) checks only. </p>
+<p>doGetAuthorizationInfo方法返回一个AuthorizationInfo，AuthorizationInfo对象是一个单一的Subject对象，存储着用户的授权数据，只用于授权检查时使用。<br>doGetAuthenticationInfo方法，针对给定的用户，获取对应用户的认证数据，提供给认证用户身份时使用。</p>
+<p>例子中UserRemote userService是提供用户数据的具体service服务。</p>
+<h3 id="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"><a href="#有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器" class="headerlink" title="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"></a>有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器</h3><h4 id="springboot-shiro配置类：ShiroAutoConfig-java"><a href="#springboot-shiro配置类：ShiroAutoConfig-java" class="headerlink" title="springboot shiro配置类：ShiroAutoConfig.java"></a>springboot shiro配置类：ShiroAutoConfig.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;&#10;import org.apache.shiro.realm.Realm;&#10;import org.apache.shiro.spring.web.ShiroFilterFactoryBean;&#10;import org.springframework.beans.BeanUtils;&#10;import org.springframework.beans.factory.annotation.Autowired;&#10;import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;&#10;import org.springframework.boot.context.properties.EnableConfigurationProperties;&#10;import org.springframework.context.annotation.Bean;&#10;import org.springframework.context.annotation.Configuration;&#10;import org.springframework.context.annotation.DependsOn;&#10;import org.springframework.context.annotation.Import;&#10;&#10;import com.xxx.xxx.config.security.MyRealm;&#10;&#10;@Configuration&#10;@EnableConfigurationProperties(ShiroProperties.class)&#10;@Import(ShiroManager.class)&#10;public class ShiroAutoConfig &#123;&#10;    @Autowired private ShiroProperties properties;&#10;&#10;    @Bean(name = &#34;realm&#34;)&#10;    @DependsOn(&#34;lifecycleBeanPostProcessor&#34;)&#10;    @ConditionalOnMissingBean&#10;    public MyRealm realm() &#123;&#10;        Class&#60;?&#62; relmClass = properties.getRealm();&#10;        MyRealm r = (MyRealm) BeanUtils.instantiate(relmClass);&#10;        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();&#10;        credentialsMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);&#10;        r.setCredentialsMatcher(credentialsMatcher);&#10;        return r;&#10;    &#125;&#10;&#10;    @Bean(name = &#34;shiroFilter&#34;)&#10;    @DependsOn(&#34;securityManager&#34;)&#10;    @ConditionalOnMissingBean&#10;    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultSecurityManager securityManager, Realm realm) &#123;&#10;        MyRealm myRealm = (MyRealm) realm;&#10;        securityManager.setRealm(myRealm);&#10;        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();&#10;        shiroFilter.setSecurityManager(securityManager);&#10;        shiroFilter.setLoginUrl(properties.getLoginUrl());&#10;        shiroFilter.setSuccessUrl(properties.getSuccessUrl());&#10;        shiroFilter.setUnauthorizedUrl(properties.getUnauthorizedUrl());&#10;        shiroFilter.setFilterChainDefinitionMap(properties.getFilterChainDefinitions());&#10;        return shiroFilter;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>这里例子里说明，我们需要提供realm和shiroFilter两个bean配置给spring容器。<br>getShiroFilterFactoryBean方法返回ShiroFilterFactoryBean，将会把yml里面的配置读取到ShiroFilterFactoryBean中，然后把realm设置进securityManager。<br>yml配置有ShiroProperties类持有并提供给ShiroFilterFactoryBean。<br>当然，还需要配置几个其他配置，都在ShiroManager配置好了。</p>
+<h4 id="ShiroProperties："><a href="#ShiroProperties：" class="headerlink" title="ShiroProperties："></a>ShiroProperties：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Map;&#10;import org.springframework.boot.context.properties.ConfigurationProperties;&#10;/**&#10; * Configuration properties for Shiro.&#10; */&#10;@ConfigurationProperties(prefix = &#34;shiro&#34;)&#10;public class ShiroProperties &#123;&#10;    private Class&#60;?&#62; realm;&#10;    private String loginUrl;&#10;    private String successUrl;&#10;    private String unauthorizedUrl;&#10;    private Map&#60;String, String&#62; filterChainDefinitions;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ShiroManager："><a href="#ShiroManager：" class="headerlink" title="ShiroManager："></a>ShiroManager：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.cache.CacheManager;&#10;import org.apache.shiro.mgt.DefaultSecurityManager;&#10;import org.apache.shiro.session.mgt.SessionManager;&#10;import org.apache.shiro.session.mgt.eis.SessionDAO;&#10;import org.apache.shiro.spring.LifecycleBeanPostProcessor;&#10;import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;&#10;import org.apache.shiro.web.mgt.DefaultWebSecurityManager;&#10;import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;&#10;import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;&#10;import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;&#10;import org.springframework.context.annotation.Bean;&#10;import org.springframework.context.annotation.DependsOn;&#10;&#10;/**&#10; * Shiro Config Manager.&#10; */&#10;public class ShiroManager &#123;&#10;    /**&#10;     * &#20445;&#35777;&#23454;&#29616;&#20102;Shiro&#20869;&#37096;lifecycle&#20989;&#25968;&#30340;bean&#25191;&#34892;&#10;     */&#10;    @Bean(name = &#34;lifecycleBeanPostProcessor&#34;)&#10;    @ConditionalOnMissingBean&#10;    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() &#123;&#10;        return new LifecycleBeanPostProcessor();&#10;    &#125;&#10;    @Bean(name = &#34;defaultAdvisorAutoProxyCreator&#34;)&#10;    @ConditionalOnMissingBean&#10;    @DependsOn(&#34;lifecycleBeanPostProcessor&#34;)&#10;    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() &#123;&#10;        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();&#10;        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);&#10;        return defaultAdvisorAutoProxyCreator;&#10;&#10;    &#125;&#10;    /**&#10;     * &#29992;&#25143;&#25480;&#26435;&#20449;&#24687;Cache&#10;     */&#10;    @Bean(name = &#34;cacheManager&#34;)&#10;    @ConditionalOnMissingBean&#10;    public CacheManager cacheManager() &#123;&#10;        return new MemoryConstrainedCacheManager();&#10;    &#125;&#10;    @Bean(name = &#34;securityManager&#34;)&#10;    @ConditionalOnMissingBean&#10;    public DefaultSecurityManager securityManager(CacheManager cacheManager) &#123;&#10;        DefaultSecurityManager sm = new DefaultWebSecurityManager();&#10;        sm.setCacheManager(cacheManager);&#10;        return sm;&#10;    &#125;&#10;    @Bean&#10;    @ConditionalOnMissingBean&#10;    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) &#123;&#10;        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();&#10;        aasa.setSecurityManager(securityManager);&#10;        return new AuthorizationAttributeSourceAdvisor();&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>CacheManager负责缓存，这里简单的使用默认的内存缓存管理MemoryConstrainedCacheManager。<br>如果需要ehcache，或者使用redis作为缓存，则只需要实现自己的CacheManager和SessionManager即可。</p>
+<p>至此，springboot中引入shiro就完成了，其他更多具体使用方法，根据具体而定。</p>
+<h3 id="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"><a href="#这里简单的提供一下在mvc的controller中做登录和登出怎么做。" class="headerlink" title="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"></a>这里简单的提供一下在mvc的controller中做登录和登出怎么做。</h3><p>LoginController：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import javax.servlet.ServletException;&#10;import javax.servlet.http.HttpServletRequest;&#10;import javax.servlet.http.HttpServletResponse;&#10;&#10;import org.apache.shiro.SecurityUtils;&#10;import org.apache.shiro.authc.AuthenticationException;&#10;import org.apache.shiro.authc.IncorrectCredentialsException;&#10;import org.apache.shiro.authc.UnknownAccountException;&#10;import org.apache.shiro.authc.UsernamePasswordToken;&#10;import org.apache.shiro.subject.Subject;&#10;import org.springframework.stereotype.Controller;&#10;import org.springframework.web.bind.annotation.RequestMapping;&#10;import org.springframework.web.bind.annotation.ResponseBody;&#10;&#10;@Controller&#10;public class LoginController &#123;&#10;    @RequestMapping(&#34;/login&#34;)&#10;    @ResponseBody&#10;    public void login(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException &#123;&#10;        Subject subject = SecurityUtils.getSubject();&#10;        String error = null;&#10;        UsernamePasswordToken token = new UsernamePasswordToken(username, password);&#10;        try &#123;&#10;            subject.login(token);&#10;        &#125; catch (UnknownAccountException e) &#123;&#10;            error = &#34;&#29992;&#25143;&#21517;/&#23494;&#30721;&#38169;&#35823;&#34;;&#10;        &#125; catch (IncorrectCredentialsException e) &#123;&#10;            error = &#34;&#29992;&#25143;&#21517;/&#23494;&#30721;&#38169;&#35823;&#34;;&#10;        &#125; catch (AuthenticationException e) &#123;&#10;            // &#20854;&#20182;&#38169;&#35823;&#65292;&#27604;&#22914;&#38145;&#23450;&#65292;&#22914;&#26524;&#24819;&#21333;&#29420;&#22788;&#29702;&#35831;&#21333;&#29420;catch&#22788;&#29702;&#10;            error = &#34;&#20854;&#20182;&#38169;&#35823;&#65306;&#34; + e.getMessage();&#10;        &#125;&#10;        if (error != null) &#123;// &#20986;&#38169;&#20102;&#65292;&#36820;&#22238;&#30331;&#24405;&#39029;&#38754;&#10;            req.setAttribute(&#34;error&#34;, error);&#10;            resp.sendRedirect(&#34;/forbidden.html&#34;);&#10;        &#125; else &#123;// &#30331;&#24405;&#25104;&#21151;&#10;            resp.sendRedirect(&#34;/index.html&#34;);// &#35774;&#32622;&#36339;&#36716;&#30340;&#39029;&#38754;&#10;        &#125;&#10;    &#125;&#10;    @RequestMapping(value = &#34;/logout&#34;)&#10;    @ResponseBody&#10;    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;&#10;&#10;        Subject currentUser = SecurityUtils.getSubject();&#10;        currentUser.logout();&#10;        resp.sendRedirect(&#34;/index.html&#34;);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>done!</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1043,92 +1132,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/01/springboot-items-项目使用实践-springboot-get-started/" itemprop="url">
-                  [springboot][items][项目使用实践]springboot get started
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-02-01T17:10:18+08:00" content="2016-02-01">
-              2016-02-01
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
-<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1175,7 +1178,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1189,7 +1192,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

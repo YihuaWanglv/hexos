@@ -1,0 +1,650 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,shiro,spring boot," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="iyihua" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。
+现在开始是第一篇：在springboot项目中接入shiro
+引入shiro的maven依赖1&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro">
+<meta property="og:url" content="http://yoursite.com/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/index.html">
+<meta property="og:site_name" content="iyihua">
+<meta property="og:description" content="在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。
+现在开始是第一篇：在springboot项目中接入shiro
+引入shiro的maven依赖1&amp;#">
+<meta property="og:updated_time" content="2016-04-09T22:44:27.345Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro">
+<meta name="twitter:description" content="在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。
+现在开始是第一篇：在springboot项目中接入shiro
+引入shiro的maven依赖1&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro | iyihua </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">iyihua</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-04-09T12:52:53+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。</p>
+<p>现在开始是第一篇：在springboot项目中接入shiro</p>
+<h2 id="引入shiro的maven依赖"><a href="#引入shiro的maven依赖" class="headerlink" title="引入shiro的maven依赖"></a>引入shiro的maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-core&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-spring&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-web&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;org.apache.shiro&#60;/groupId&#62;&#10;    &#60;artifactId&#62;shiro-ehcache&#60;/artifactId&#62;&#10;    &#60;version&#62;1.2.3&#60;/version&#62;&#10;&#60;/dependency&#62;</span><br></pre></td></tr></table></figure>
+<h2 id="程序具体实现"><a href="#程序具体实现" class="headerlink" title="程序具体实现"></a>程序具体实现</h2><h3 id="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml"><a href="#首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml" class="headerlink" title="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml"></a>首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shiro:&#10;  realm: com.xxx.xxx.config.security.MyRealm&#10;  loginUrl: /view/sign-in.html&#10;  successUrl: /item.html&#10;  unauthorizedUrl: /forbidden.html&#10;  filterChainDefinitions:&#10;    &#34;/login&#34;: anon&#10;    &#34;/static/**&#34;: anon&#10;    &#34;/bower_components/**&#34;: anon&#10;    &#34;/logout&#34;: logout&#10;    &#34;/**&#34;: authc</span><br></pre></td></tr></table></figure>
+<p>说明：<br>realm: com.xxx.xxx.config.security.MyRealm<br>Realm，在shiro中相当于数据源，shiro的其他核心组件需要获取用户和认证数据，就是从Realm获取。<br>为了获得更好的自定义功能，通常我们会自己实现一个Realm.<br>所以这里使用realm: com.xxx.xxx.config.security.MyRealm配置了一个自定义的Realm。<br>loginUrl，定义了需要认证用户时，跳转到的登录页面<br>successUrl，定义登录成功后跳转的页面。通常也可以在自己登录认证方法里redirect到需要的页面。<br>unauthorizedUrl，定义未认证时显示的页面。<br>filterChainDefinitions，定义哪些路径应该做何种过滤策略。<br>anon，logout，authc这些都是shiro默认实现的过滤器filter。<br>anon表示可以匿名访问的路径，authc表示需要登录认证的路径</p>
+<p>过滤器链使用最先匹配返回策略，所以我们需要把不需要认证即可访问的路径放在前面。</p>
+<h3 id="下面是自己实现的自定义Realm：MyRealm"><a href="#下面是自己实现的自定义Realm：MyRealm" class="headerlink" title="下面是自己实现的自定义Realm：MyRealm"></a>下面是自己实现的自定义Realm：MyRealm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.authc.AuthenticationException;&#10;import org.apache.shiro.authc.AuthenticationInfo;&#10;import org.apache.shiro.authc.AuthenticationToken;&#10;import org.apache.shiro.authc.SimpleAuthenticationInfo;&#10;import org.apache.shiro.authc.UsernamePasswordToken;&#10;import org.apache.shiro.authz.AuthorizationInfo;&#10;import org.apache.shiro.authz.SimpleAuthorizationInfo;&#10;import org.apache.shiro.realm.AuthorizingRealm;&#10;import org.apache.shiro.subject.PrincipalCollection;&#10;import org.springframework.beans.factory.annotation.Autowired;&#10;&#10;import com.xxx.model.base.UserDTO;&#10;import com.xxx.remote.base.UserRemote;&#10;&#10;public class MyRealm extends AuthorizingRealm &#123;&#10;    @Autowired UserRemote userService;&#10;&#10;    @Override&#10;    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) &#123;&#10;        UserDTO user = (UserDTO) principals.getPrimaryPrincipal();&#10;        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();&#10;        List&#60;String&#62; roles = userService.findByUserId(user.getId());&#10;        info.addRoles(roles);&#10;        return info;&#10;    &#125;&#10;&#10;    @Override&#10;    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;&#10;        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;&#10;        String username = usernamePasswordToken.getUsername();&#10;        UserDTO user = userService.findUserByName(username);&#10;        if (null != user) &#123;&#10;            CredentialsInfoHolder cih = new CredentialsInfoHolder(user.getPassword(), user.getSalt());&#10;            return new SimpleAuthenticationInfo(user, cih, getName());&#10;        &#125;&#10;        return null;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>MyRealm集成AuthorizingRealm，需要重写AuthorizingRealm的两个方法：doGetAuthorizationInfo，doGetAuthenticationInfo。<br>AuthorizationInfo represents a single Subject’s stored authorization data (roles, permissions, etc) used during authorization (access control) checks only. </p>
+<p>doGetAuthorizationInfo方法返回一个AuthorizationInfo，AuthorizationInfo对象是一个单一的Subject对象，存储着用户的授权数据，只用于授权检查时使用。<br>doGetAuthenticationInfo方法，针对给定的用户，获取对应用户的认证数据，提供给认证用户身份时使用。</p>
+<p>例子中UserRemote userService是提供用户数据的具体service服务。</p>
+<h3 id="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"><a href="#有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器" class="headerlink" title="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"></a>有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器</h3><h4 id="springboot-shiro配置类：ShiroAutoConfig-java"><a href="#springboot-shiro配置类：ShiroAutoConfig-java" class="headerlink" title="springboot shiro配置类：ShiroAutoConfig.java"></a>springboot shiro配置类：ShiroAutoConfig.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;&#10;import org.apache.shiro.realm.Realm;&#10;import org.apache.shiro.spring.web.ShiroFilterFactoryBean;&#10;import org.springframework.beans.BeanUtils;&#10;import org.springframework.beans.factory.annotation.Autowired;&#10;import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;&#10;import org.springframework.boot.context.properties.EnableConfigurationProperties;&#10;import org.springframework.context.annotation.Bean;&#10;import org.springframework.context.annotation.Configuration;&#10;import org.springframework.context.annotation.DependsOn;&#10;import org.springframework.context.annotation.Import;&#10;&#10;import com.xxx.xxx.config.security.MyRealm;&#10;&#10;@Configuration&#10;@EnableConfigurationProperties(ShiroProperties.class)&#10;@Import(ShiroManager.class)&#10;public class ShiroAutoConfig &#123;&#10;    @Autowired private ShiroProperties properties;&#10;&#10;    @Bean(name = &#34;realm&#34;)&#10;    @DependsOn(&#34;lifecycleBeanPostProcessor&#34;)&#10;    @ConditionalOnMissingBean&#10;    public MyRealm realm() &#123;&#10;        Class&#60;?&#62; relmClass = properties.getRealm();&#10;        MyRealm r = (MyRealm) BeanUtils.instantiate(relmClass);&#10;        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();&#10;        credentialsMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);&#10;        r.setCredentialsMatcher(credentialsMatcher);&#10;        return r;&#10;    &#125;&#10;&#10;    @Bean(name = &#34;shiroFilter&#34;)&#10;    @DependsOn(&#34;securityManager&#34;)&#10;    @ConditionalOnMissingBean&#10;    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultSecurityManager securityManager, Realm realm) &#123;&#10;        MyRealm myRealm = (MyRealm) realm;&#10;        securityManager.setRealm(myRealm);&#10;        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();&#10;        shiroFilter.setSecurityManager(securityManager);&#10;        shiroFilter.setLoginUrl(properties.getLoginUrl());&#10;        shiroFilter.setSuccessUrl(properties.getSuccessUrl());&#10;        shiroFilter.setUnauthorizedUrl(properties.getUnauthorizedUrl());&#10;        shiroFilter.setFilterChainDefinitionMap(properties.getFilterChainDefinitions());&#10;        return shiroFilter;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>这里例子里说明，我们需要提供realm和shiroFilter两个bean配置给spring容器。<br>getShiroFilterFactoryBean方法返回ShiroFilterFactoryBean，将会把yml里面的配置读取到ShiroFilterFactoryBean中，然后把realm设置进securityManager。<br>yml配置有ShiroProperties类持有并提供给ShiroFilterFactoryBean。<br>当然，还需要配置几个其他配置，都在ShiroManager配置好了。</p>
+<h4 id="ShiroProperties："><a href="#ShiroProperties：" class="headerlink" title="ShiroProperties："></a>ShiroProperties：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Map;&#10;import org.springframework.boot.context.properties.ConfigurationProperties;&#10;/**&#10; * Configuration properties for Shiro.&#10; */&#10;@ConfigurationProperties(prefix = &#34;shiro&#34;)&#10;public class ShiroProperties &#123;&#10;    private Class&#60;?&#62; realm;&#10;    private String loginUrl;&#10;    private String successUrl;&#10;    private String unauthorizedUrl;&#10;    private Map&#60;String, String&#62; filterChainDefinitions;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ShiroManager："><a href="#ShiroManager：" class="headerlink" title="ShiroManager："></a>ShiroManager：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.cache.CacheManager;&#10;import org.apache.shiro.mgt.DefaultSecurityManager;&#10;import org.apache.shiro.session.mgt.SessionManager;&#10;import org.apache.shiro.session.mgt.eis.SessionDAO;&#10;import org.apache.shiro.spring.LifecycleBeanPostProcessor;&#10;import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;&#10;import org.apache.shiro.web.mgt.DefaultWebSecurityManager;&#10;import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;&#10;import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;&#10;import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;&#10;import org.springframework.context.annotation.Bean;&#10;import org.springframework.context.annotation.DependsOn;&#10;&#10;/**&#10; * Shiro Config Manager.&#10; */&#10;public class ShiroManager &#123;&#10;    /**&#10;     * &#20445;&#35777;&#23454;&#29616;&#20102;Shiro&#20869;&#37096;lifecycle&#20989;&#25968;&#30340;bean&#25191;&#34892;&#10;     */&#10;    @Bean(name = &#34;lifecycleBeanPostProcessor&#34;)&#10;    @ConditionalOnMissingBean&#10;    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() &#123;&#10;        return new LifecycleBeanPostProcessor();&#10;    &#125;&#10;    @Bean(name = &#34;defaultAdvisorAutoProxyCreator&#34;)&#10;    @ConditionalOnMissingBean&#10;    @DependsOn(&#34;lifecycleBeanPostProcessor&#34;)&#10;    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() &#123;&#10;        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();&#10;        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);&#10;        return defaultAdvisorAutoProxyCreator;&#10;&#10;    &#125;&#10;    /**&#10;     * &#29992;&#25143;&#25480;&#26435;&#20449;&#24687;Cache&#10;     */&#10;    @Bean(name = &#34;cacheManager&#34;)&#10;    @ConditionalOnMissingBean&#10;    public CacheManager cacheManager() &#123;&#10;        return new MemoryConstrainedCacheManager();&#10;    &#125;&#10;    @Bean(name = &#34;securityManager&#34;)&#10;    @ConditionalOnMissingBean&#10;    public DefaultSecurityManager securityManager(CacheManager cacheManager) &#123;&#10;        DefaultSecurityManager sm = new DefaultWebSecurityManager();&#10;        sm.setCacheManager(cacheManager);&#10;        return sm;&#10;    &#125;&#10;    @Bean&#10;    @ConditionalOnMissingBean&#10;    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) &#123;&#10;        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();&#10;        aasa.setSecurityManager(securityManager);&#10;        return new AuthorizationAttributeSourceAdvisor();&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>CacheManager负责缓存，这里简单的使用默认的内存缓存管理MemoryConstrainedCacheManager。<br>如果需要ehcache，或者使用redis作为缓存，则只需要实现自己的CacheManager和SessionManager即可。</p>
+<p>至此，springboot中引入shiro就完成了，其他更多具体使用方法，根据具体而定。</p>
+<h3 id="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"><a href="#这里简单的提供一下在mvc的controller中做登录和登出怎么做。" class="headerlink" title="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"></a>这里简单的提供一下在mvc的controller中做登录和登出怎么做。</h3><p>LoginController：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import javax.servlet.ServletException;&#10;import javax.servlet.http.HttpServletRequest;&#10;import javax.servlet.http.HttpServletResponse;&#10;&#10;import org.apache.shiro.SecurityUtils;&#10;import org.apache.shiro.authc.AuthenticationException;&#10;import org.apache.shiro.authc.IncorrectCredentialsException;&#10;import org.apache.shiro.authc.UnknownAccountException;&#10;import org.apache.shiro.authc.UsernamePasswordToken;&#10;import org.apache.shiro.subject.Subject;&#10;import org.springframework.stereotype.Controller;&#10;import org.springframework.web.bind.annotation.RequestMapping;&#10;import org.springframework.web.bind.annotation.ResponseBody;&#10;&#10;@Controller&#10;public class LoginController &#123;&#10;    @RequestMapping(&#34;/login&#34;)&#10;    @ResponseBody&#10;    public void login(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException &#123;&#10;        Subject subject = SecurityUtils.getSubject();&#10;        String error = null;&#10;        UsernamePasswordToken token = new UsernamePasswordToken(username, password);&#10;        try &#123;&#10;            subject.login(token);&#10;        &#125; catch (UnknownAccountException e) &#123;&#10;            error = &#34;&#29992;&#25143;&#21517;/&#23494;&#30721;&#38169;&#35823;&#34;;&#10;        &#125; catch (IncorrectCredentialsException e) &#123;&#10;            error = &#34;&#29992;&#25143;&#21517;/&#23494;&#30721;&#38169;&#35823;&#34;;&#10;        &#125; catch (AuthenticationException e) &#123;&#10;            // &#20854;&#20182;&#38169;&#35823;&#65292;&#27604;&#22914;&#38145;&#23450;&#65292;&#22914;&#26524;&#24819;&#21333;&#29420;&#22788;&#29702;&#35831;&#21333;&#29420;catch&#22788;&#29702;&#10;            error = &#34;&#20854;&#20182;&#38169;&#35823;&#65306;&#34; + e.getMessage();&#10;        &#125;&#10;        if (error != null) &#123;// &#20986;&#38169;&#20102;&#65292;&#36820;&#22238;&#30331;&#24405;&#39029;&#38754;&#10;            req.setAttribute(&#34;error&#34;, error);&#10;            resp.sendRedirect(&#34;/forbidden.html&#34;);&#10;        &#125; else &#123;// &#30331;&#24405;&#25104;&#21151;&#10;            resp.sendRedirect(&#34;/index.html&#34;);// &#35774;&#32622;&#36339;&#36716;&#30340;&#39029;&#38754;&#10;        &#125;&#10;    &#125;&#10;    @RequestMapping(value = &#34;/logout&#34;)&#10;    @ResponseBody&#10;    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;&#10;&#10;        Subject currentUser = SecurityUtils.getSubject();&#10;        currentUser.logout();&#10;        resp.sendRedirect(&#34;/index.html&#34;);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>done!</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/shiro/" rel="tag">#shiro</a>
+          
+            <a href="/tags/spring-boot/" rel="tag">#spring boot</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/09/springboot-在spring项目中连接数据库以及spring-datajpa和mybatis的使用/" rel="next" title="[springboot]在spring项目中连接数据库以及spring-datajpa和mybatis的使用">
+                <i class="fa fa-chevron-left"></i> [springboot]在spring项目中连接数据库以及spring-datajpa和mybatis的使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Wanglv Yihua" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Wanglv Yihua</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入shiro的maven依赖"><span class="nav-number">1.</span> <span class="nav-text">引入shiro的maven依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序具体实现"><span class="nav-number">2.</span> <span class="nav-text">程序具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml"><span class="nav-number">2.1.</span> <span class="nav-text">首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下面是自己实现的自定义Realm：MyRealm"><span class="nav-number">2.2.</span> <span class="nav-text">下面是自己实现的自定义Realm：MyRealm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"><span class="nav-number">2.3.</span> <span class="nav-text">有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#springboot-shiro配置类：ShiroAutoConfig-java"><span class="nav-number">2.3.1.</span> <span class="nav-text">springboot shiro配置类：ShiroAutoConfig.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroProperties："><span class="nav-number">2.3.2.</span> <span class="nav-text">ShiroProperties：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroManager："><span class="nav-number">2.3.3.</span> <span class="nav-text">ShiroManager：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这里简单的提供一下在mvc的controller中做登录和登出怎么做。"><span class="nav-number">2.4.</span> <span class="nav-text">这里简单的提供一下在mvc的controller中做登录和登出怎么做。</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wanglv Yihua</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
