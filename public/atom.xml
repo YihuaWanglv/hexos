@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-07T15:43:41.330Z</updated>
+  <updated>2016-04-09T03:25:57.600Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存</title>
+    <link href="http://yoursite.com/2016/04/09/spring-boot-springboot%E5%AE%9E%E8%B7%B5%E4%B9%8B%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8spring-cache%E5%92%8Credis%E5%AE%9E%E7%8E%B0%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2016/04/09/spring-boot-springboot实践之在项目中使用spring-cache和redis实现缓存/</id>
+    <published>2016-04-09T02:43:01.000Z</published>
+    <updated>2016-04-09T03:25:57.600Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;1-首先需要准备一个redis服务端作为缓存&quot;&gt;&lt;a href=&quot;#1-首先需要准备一个redis服务端作为缓存&quot; class=&quot;headerlink&quot; title=&quot;1.首先需要准备一个redis服务端作为缓存&quot;&gt;&lt;/a&gt;1.首先需要准备一个redis服务端作为缓存&lt;/h2&gt;&lt;p&gt;redis下载安装启动，比较简单，请google之。&lt;/p&gt;
+&lt;h2 id=&quot;2-项目依赖&quot;&gt;&lt;a href=&quot;#2-项目依赖&quot; class=&quot;headerlink&quot; title=&quot;2.项目依赖&quot;&gt;&lt;/a&gt;2.项目依赖&lt;/h2&gt;&lt;p&gt;使用spring boot和spring cache，需要springboot依赖&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#60;dependency&amp;#62;&amp;#10;    &amp;#60;groupId&amp;#62;org.springframework.boot&amp;#60;/groupId&amp;#62;&amp;#10;    &amp;#60;artifactId&amp;#62;spring-boot-starter&amp;#60;/artifactId&amp;#62;&amp;#10;&amp;#60;/dependency&amp;#62;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;连接redis，需要spring data redis和jedis包&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#60;dependency&amp;#62;&amp;#10;    &amp;#60;groupId&amp;#62;org.springframework.data&amp;#60;/groupId&amp;#62;&amp;#10;    &amp;#60;artifactId&amp;#62;spring-data-redis&amp;#60;/artifactId&amp;#62;&amp;#10;&amp;#60;/dependency&amp;#62;&amp;#10;&amp;#60;dependency&amp;#62;&amp;#10;    &amp;#60;groupId&amp;#62;redis.clients&amp;#60;/groupId&amp;#62;&amp;#10;    &amp;#60;artifactId&amp;#62;jedis&amp;#60;/artifactId&amp;#62;&amp;#10;&amp;#60;/dependency&amp;#62;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;3-程序配置实现与使用&quot;&gt;&lt;a href=&quot;#3-程序配置实现与使用&quot; class=&quot;headerlink&quot; title=&quot;3.程序配置实现与使用&quot;&gt;&lt;/a&gt;3.程序配置实现与使用&lt;/h2&gt;&lt;p&gt;不同于spring使用xml配置文件来配置bean，spring boot使用java bean直接在java类中配置需要用到的Bean。&lt;/p&gt;
+&lt;h3 id=&quot;添加redis-cache相关的config类，如下：&quot;&gt;&lt;a href=&quot;#添加redis-cache相关的config类，如下：&quot; class=&quot;headerlink&quot; title=&quot;添加redis cache相关的config类，如下：&quot;&gt;&lt;/a&gt;添加redis cache相关的config类，如下：&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;import org.springframework.cache.CacheManager;&amp;#10;import org.springframework.cache.annotation.CachingConfigurerSupport;&amp;#10;import org.springframework.cache.annotation.EnableCaching;&amp;#10;import org.springframework.context.annotation.Bean;&amp;#10;import org.springframework.context.annotation.Configuration;&amp;#10;import org.springframework.data.redis.cache.RedisCacheManager;&amp;#10;import org.springframework.data.redis.connection.RedisConnectionFactory;&amp;#10;import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;&amp;#10;import org.springframework.data.redis.core.RedisTemplate;&amp;#10;&amp;#10;@Configuration&amp;#10;@EnableCaching&amp;#10;public class RedisCacheConfig extends CachingConfigurerSupport &amp;#123;&amp;#10;    @Bean&amp;#10;    public JedisConnectionFactory redisConnectionFactory() &amp;#123;&amp;#10;        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();&amp;#10;        redisConnectionFactory.setHostName(&amp;#34;127.0.0.1&amp;#34;);&amp;#10;        redisConnectionFactory.setPort(6379);&amp;#10;        return redisConnectionFactory;&amp;#10;    &amp;#125;&amp;#10;    @Bean&amp;#10;    public RedisTemplate&amp;#60;String, String&amp;#62; redisTemplate(RedisConnectionFactory cf) &amp;#123;&amp;#10;        RedisTemplate&amp;#60;String, String&amp;#62; redisTemplate = new RedisTemplate&amp;#60;String, String&amp;#62;();&amp;#10;        redisTemplate.setConnectionFactory(cf);&amp;#10;        return redisTemplate;&amp;#10;    &amp;#125;&amp;#10;    @Bean(name = &amp;#34;redisCacheManager&amp;#34;)&amp;#10;    public CacheManager cacheManager(RedisTemplate redisTemplate) &amp;#123;&amp;#10;        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);&amp;#10;        cacheManager.setDefaultExpiration(300);&amp;#10;        return cacheManager;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;@Configuration标记此java类为spring boot的配置类&lt;br&gt;@EnableCaching标记为项目启用缓存&lt;br&gt;@Bean，每个被此注解标记的方法都会配置一个bean，等同于xml配置中的&lt;bean&gt;&lt;br&gt;从以上代码可以看到，使用spring cache和redis缓存，我们需要一个JedisConnectionFactory，一个RedisTemplate和一个CacheManager。&lt;br&gt;其中JedisConnectionFactory配置了redis服务的ip和端口，为了方便这里直接写在了程序里，可以移出去放到配置文件中读取。&lt;/bean&gt;&lt;/p&gt;
+&lt;h3 id=&quot;如何使用？&quot;&gt;&lt;a href=&quot;#如何使用？&quot; class=&quot;headerlink&quot; title=&quot;如何使用？&quot;&gt;&lt;/a&gt;如何使用？&lt;/h3&gt;&lt;p&gt;使用非常简单，只需要在我们想要缓存的方法前加一个@Cacheable注解即可&lt;br&gt;下面是一个例子：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Cacheable(value = &amp;#34;find&amp;#34;)&amp;#10;public List&amp;#60;Object&amp;#62; find(Long id) &amp;#123;&amp;#10;    ...&amp;#10;&amp;#125;&amp;#10;@CacheEvict(value = &amp;#34;find&amp;#34;, allEntries = true)&amp;#10;public Object saveProject(Object object) &amp;#123;&amp;#10;    ...&amp;#10;&amp;#125;&amp;#10;@CacheEvict(value = &amp;#34;find&amp;#34; , allEntries = true)&amp;#10;public void deleteProject(Long id) &amp;#123;&amp;#10;    ...&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这里@Cacheable标记的方法在首次调用后，将会将读取到的内容缓存到redis中，以后每次只要缓存中存在该缓存，读取都会从缓存中读取。&lt;br&gt;但如果实际数据改变了怎么办？&lt;br&gt;我查看spring cache的api后，没有适用的动态更新缓存的方法，所以这里适用了一种不怎么优雅的解决方案：&lt;br&gt;每次会对模型数据改变的方法，都清除一次缓存。清除后的第一次，查询会读取数据库，之后再缓存。&lt;br&gt;@CacheEvict标记的方法，表示将会清除缓存，value属性中配置了“find”，表示清除key为“find”的缓存数据。&lt;/p&gt;
+&lt;p&gt;这个方案不是很优雅，就是用起来简单，如果想更优雅的方案，应该要自己再实现一套自己可控的缓存程序。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-首先需要准备一个redis服务端作为缓存&quot;&gt;&lt;a href=&quot;#1-首先需要准备一个redis服务端作为缓存&quot; class=&quot;headerlink&quot; title=&quot;1.首先需要准备一个redis服务端作为缓存&quot;&gt;&lt;/a&gt;1.首先需要准备一个redis服务端作为
+    
+    </summary>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+      <category term="spring boot" scheme="http://yoursite.com/tags/spring-boot/"/>
+    
+      <category term="spring cache" scheme="http://yoursite.com/tags/spring-cache/"/>
+    
+      <category term="注解" scheme="http://yoursite.com/tags/%E6%B3%A8%E8%A7%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>为你的项目做合理的版本控制管理</title>

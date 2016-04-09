@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jquery,validate," />
+  <meta name="keywords" content="redis,spring boot,spring cache,注解," />
 
 
 
@@ -53,19 +53,19 @@
 
 
 
-<meta name="description" content="juqry validate中，如何对使用ajax提交的方式进行校验？有两种方式 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。
- 1//&amp;#36890;&amp;#">
+<meta name="description" content="1.首先需要准备一个redis服务端作为缓存redis下载安装启动，比较简单，请google之。
+2.项目依赖使用spring boot和spring cache，需要springboot依赖1&amp;#60;dependency&amp;#62;&amp;#10;    &amp;#60;groupId&amp;#62;org.springframework.boot&amp;#60;/groupId&amp;#62;&amp;#10;    &amp;#60;a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jquery-validate常用用法总结">
-<meta property="og:url" content="http://yoursite.com/2016/01/04/jquery-validate常用用法总结/index.html">
+<meta property="og:title" content="[spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存">
+<meta property="og:url" content="http://yoursite.com/2016/04/09/spring-boot-springboot实践之在项目中使用spring-cache和redis实现缓存/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="juqry validate中，如何对使用ajax提交的方式进行校验？有两种方式 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。
- 1//&amp;#36890;&amp;#">
-<meta property="og:updated_time" content="2016-02-20T04:02:04.719Z">
+<meta property="og:description" content="1.首先需要准备一个redis服务端作为缓存redis下载安装启动，比较简单，请google之。
+2.项目依赖使用spring boot和spring cache，需要springboot依赖1&amp;#60;dependency&amp;#62;&amp;#10;    &amp;#60;groupId&amp;#62;org.springframework.boot&amp;#60;/groupId&amp;#62;&amp;#10;    &amp;#60;a">
+<meta property="og:updated_time" content="2016-04-09T03:25:57.600Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jquery-validate常用用法总结">
-<meta name="twitter:description" content="juqry validate中，如何对使用ajax提交的方式进行校验？有两种方式 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。
- 1//&amp;#36890;&amp;#">
+<meta name="twitter:title" content="[spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存">
+<meta name="twitter:description" content="1.首先需要准备一个redis服务端作为缓存redis下载安装启动，比较简单，请google之。
+2.项目依赖使用spring boot和spring cache，需要springboot依赖1&amp;#60;dependency&amp;#62;&amp;#10;    &amp;#60;groupId&amp;#62;org.springframework.boot&amp;#60;/groupId&amp;#62;&amp;#10;    &amp;#60;a">
 
 
 
@@ -77,7 +77,7 @@
   };
 </script>
 
-  <title> jquery-validate常用用法总结 | iyihua </title>
+  <title> [spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存 | iyihua </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -197,7 +197,7 @@
             
             
               
-                jquery-validate常用用法总结
+                [spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存
               
             
           </h1>
@@ -206,8 +206,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2016-01-04T17:05:28+08:00" content="2016-01-04">
-              2016-01-04
+            <time itemprop="dateCreated" datetime="2016-04-09T10:43:01+08:00" content="2016-04-09">
+              2016-04-09
             </time>
           </span>
 
@@ -230,39 +230,15 @@
       
 
       
-        <span itemprop="articleBody"><ol>
-<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。<br> 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#36890;&#36807;&#30417;&#21548;form&#30340;submit&#20107;&#20214;&#65292;&#23545;form&#36827;&#34892;ajax&#25552;&#20132;&#12290;&#10; $(&#39;#formId&#39;).submit(function() &#123;&#10;     if (!$(&#34;#formId&#34;).valid()) &#10;         return false;&#10;     $(this).omAjaxSubmit(&#123;&#125;);&#10;     return false; //&#27492;&#22788;&#24517;&#39035;&#36820;&#22238;false&#65292;&#38459;&#27490;&#24120;&#35268;&#30340;form&#25552;&#20132;&#10; &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>juqry validate中，如何对校验错误的提示信息位置和样式进行更改？<br> 1）js代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;  &#10;    $(&#34;#form1&#34;).validate(&#123;  &#10;        errorPlacement: function (error, element) &#123;  &#10;            error.appendTo(element.parent(&#34;td&#34;));  &#10;        &#125;,  &#10;        rules:&#123;              &#10;        &#125;  &#10;    &#125;);  &#10;    $(&#34;[name$=&#39;.sign&#39;]&#34;).each(function()&#123;  &#10;        $(this).rules(&#34;add&#34;,&#123;required:true,messages:&#123;required:&#34;&#33267;&#23569;&#36873;&#25321;&#19968;&#20010;&#36873;&#39033;&#34;&#125;&#125;);  &#10;    &#125;);  &#10;&#125;);</span><br></pre></td></tr></table></figure>
-<p> 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;style&#62;  &#10;label.error &#123;   &#10;    color:Red;   &#10;    font-size:13px;   &#10;    margin-left:5px;   &#10;    padding-left:16px;   &#10;&#125;   &#10;&#60;/style&#62;</span><br></pre></td></tr></table></figure>
-<p> 3) 校验时机，可以自定义在js中想要的时候去校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;.selector&#39;).click(function() &#123;&#10;    if ($(&#34;selector of you form&#34;).valid()) &#123;&#10;        alert(&#39;in&#39;);&#10;    &#125; else &#123;&#10;        alert(&#39;out&#39;);&#10;    &#125;&#10;&#125;);&#10;$(&#34;selector of you form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        receiveDayFrom: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-<p> 4) 例子：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;,&#10;    errorPlacement: function ($error, $element) &#123;&#10;        var name = $element.attr(&#34;name&#34;);&#10;        $(&#34;#error&#34; + name).append($error);&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-<pre><code>or:
-</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    errorLabelContainer: &#34;#errors&#34;,&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如何添加自定义的校验？</p>
-</li>
-</ol>
-<ul>
-<li><p>添加一个方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#23383;&#31526;&#39564;&#35777;&#65292;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#12290;    &#10;jQuery.validator.addMethod(&#34;nameStringCheck&#34;, function(value, element) &#123;   &#10;     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); &#10;&#125;, &#34;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#34;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在validate配置中使用新加的方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            required: true,&#10;            nameStringCheck: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li><p>如何使用ajax请求进行远程校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jQuery.validator.addMethod(&#34;checkUnique&#34;, function(value, element) &#123;&#10;    return validateUsernameByAjax(value, element.name, &#39;ajax&#35831;&#27714;&#22320;&#22336;&#39;);&#10;&#125;, &#34;&#27492;&#36755;&#20837;&#30340;&#20540;&#19981;&#21487;&#29992;&#34;);</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#21516;&#27493;&#20570;&#29992;&#25143;&#21517;&#25110;&#37038;&#31665;&#30340;&#35831;&#27714;&#65292;&#26816;&#26597;&#21040;&#19981;&#21487;&#29992;&#65292;&#21017;&#36820;&#22238;false&#65292;&#21542;&#21017;&#36820;&#22238;true&#10; */&#10;function validateUsernameByAjax(value, fieldname, url) &#123;&#10;    var _request = url + &#34;?&#34;+fieldname+&#34;=&#34;+value;&#10;    var deferred = $.Deferred();//&#21019;&#24314;&#19968;&#20010;&#24310;&#36831;&#23545;&#35937;&#10;    $.ajax(&#123;&#10;        url:_request,&#10;        async:false,//&#35201;&#25351;&#23450;&#19981;&#33021;&#24322;&#27493;,&#24517;&#39035;&#31561;&#24453;&#21518;&#21488;&#26381;&#21153;&#26657;&#39564;&#23436;&#25104;&#20877;&#25191;&#34892;&#21518;&#32493;&#20195;&#30721;&#10;        dataType:&#34;json&#34;,&#10;        success:function(data) &#123;&#10;            if (data.status === &#34;error&#34; || data.status === &#34;fail&#34;) &#123;&#10;                deferred.reject();&#10;            &#125; else&#123;&#10;                deferred.resolve();  &#10;            &#125;&#10;        &#125;&#10;    &#125;);&#10;    //deferred.state()&#26377;3&#20010;&#29366;&#24577;:pending:&#36824;&#26410;&#32467;&#26463;,rejected:&#22833;&#36133;,resolved:&#25104;&#21151;&#10;    return deferred.state() == &#34;resolved&#34; ? true : false;&#10;&#125;</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            checkUnique: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <span itemprop="articleBody"><h2 id="1-首先需要准备一个redis服务端作为缓存"><a href="#1-首先需要准备一个redis服务端作为缓存" class="headerlink" title="1.首先需要准备一个redis服务端作为缓存"></a>1.首先需要准备一个redis服务端作为缓存</h2><p>redis下载安装启动，比较简单，请google之。</p>
+<h2 id="2-项目依赖"><a href="#2-项目依赖" class="headerlink" title="2.项目依赖"></a>2.项目依赖</h2><p>使用spring boot和spring cache，需要springboot依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependency&#62;&#10;    &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;&#60;/dependency&#62;</span><br></pre></td></tr></table></figure></p>
+<p>连接redis，需要spring data redis和jedis包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependency&#62;&#10;    &#60;groupId&#62;org.springframework.data&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-data-redis&#60;/artifactId&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;redis.clients&#60;/groupId&#62;&#10;    &#60;artifactId&#62;jedis&#60;/artifactId&#62;&#10;&#60;/dependency&#62;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-程序配置实现与使用"><a href="#3-程序配置实现与使用" class="headerlink" title="3.程序配置实现与使用"></a>3.程序配置实现与使用</h2><p>不同于spring使用xml配置文件来配置bean，spring boot使用java bean直接在java类中配置需要用到的Bean。</p>
+<h3 id="添加redis-cache相关的config类，如下："><a href="#添加redis-cache相关的config类，如下：" class="headerlink" title="添加redis cache相关的config类，如下："></a>添加redis cache相关的config类，如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.cache.CacheManager;&#10;import org.springframework.cache.annotation.CachingConfigurerSupport;&#10;import org.springframework.cache.annotation.EnableCaching;&#10;import org.springframework.context.annotation.Bean;&#10;import org.springframework.context.annotation.Configuration;&#10;import org.springframework.data.redis.cache.RedisCacheManager;&#10;import org.springframework.data.redis.connection.RedisConnectionFactory;&#10;import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;&#10;import org.springframework.data.redis.core.RedisTemplate;&#10;&#10;@Configuration&#10;@EnableCaching&#10;public class RedisCacheConfig extends CachingConfigurerSupport &#123;&#10;    @Bean&#10;    public JedisConnectionFactory redisConnectionFactory() &#123;&#10;        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();&#10;        redisConnectionFactory.setHostName(&#34;127.0.0.1&#34;);&#10;        redisConnectionFactory.setPort(6379);&#10;        return redisConnectionFactory;&#10;    &#125;&#10;    @Bean&#10;    public RedisTemplate&#60;String, String&#62; redisTemplate(RedisConnectionFactory cf) &#123;&#10;        RedisTemplate&#60;String, String&#62; redisTemplate = new RedisTemplate&#60;String, String&#62;();&#10;        redisTemplate.setConnectionFactory(cf);&#10;        return redisTemplate;&#10;    &#125;&#10;    @Bean(name = &#34;redisCacheManager&#34;)&#10;    public CacheManager cacheManager(RedisTemplate redisTemplate) &#123;&#10;        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);&#10;        cacheManager.setDefaultExpiration(300);&#10;        return cacheManager;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>@Configuration标记此java类为spring boot的配置类<br>@EnableCaching标记为项目启用缓存<br>@Bean，每个被此注解标记的方法都会配置一个bean，等同于xml配置中的<bean><br>从以上代码可以看到，使用spring cache和redis缓存，我们需要一个JedisConnectionFactory，一个RedisTemplate和一个CacheManager。<br>其中JedisConnectionFactory配置了redis服务的ip和端口，为了方便这里直接写在了程序里，可以移出去放到配置文件中读取。</bean></p>
+<h3 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h3><p>使用非常简单，只需要在我们想要缓存的方法前加一个@Cacheable注解即可<br>下面是一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Cacheable(value = &#34;find&#34;)&#10;public List&#60;Object&#62; find(Long id) &#123;&#10;    ...&#10;&#125;&#10;@CacheEvict(value = &#34;find&#34;, allEntries = true)&#10;public Object saveProject(Object object) &#123;&#10;    ...&#10;&#125;&#10;@CacheEvict(value = &#34;find&#34; , allEntries = true)&#10;public void deleteProject(Long id) &#123;&#10;    ...&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里@Cacheable标记的方法在首次调用后，将会将读取到的内容缓存到redis中，以后每次只要缓存中存在该缓存，读取都会从缓存中读取。<br>但如果实际数据改变了怎么办？<br>我查看spring cache的api后，没有适用的动态更新缓存的方法，所以这里适用了一种不怎么优雅的解决方案：<br>每次会对模型数据改变的方法，都清除一次缓存。清除后的第一次，查询会读取数据库，之后再缓存。<br>@CacheEvict标记的方法，表示将会清除缓存，value属性中配置了“find”，表示清除key为“find”的缓存数据。</p>
+<p>这个方案不是很优雅，就是用起来简单，如果想更优雅的方案，应该要自己再实现一套自己可控的缓存程序。</p>
 </span>
       
     </div>
@@ -271,9 +247,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jquery/" rel="tag">#jquery</a>
+            <a href="/tags/redis/" rel="tag">#redis</a>
           
-            <a href="/tags/validate/" rel="tag">#validate</a>
+            <a href="/tags/spring-boot/" rel="tag">#spring boot</a>
+          
+            <a href="/tags/spring-cache/" rel="tag">#spring cache</a>
+          
+            <a href="/tags/注解/" rel="tag">#注解</a>
           
         </div>
       
@@ -282,17 +262,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/31/git-git常用-把本地项目提交到github/" rel="next" title="[git]git常用-把本地项目提交到github">
-                <i class="fa fa-chevron-left"></i> [git]git常用-把本地项目提交到github
+              <a href="/2016/04/07/为你的项目做合理的版本控制管理/" rel="next" title="为你的项目做合理的版本控制管理">
+                <i class="fa fa-chevron-left"></i> 为你的项目做合理的版本控制管理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/01/springboot-items-项目使用实践-springboot-get-started/" rel="prev" title="[springboot][items][项目使用实践]springboot get started">
-                [springboot][items][项目使用实践]springboot get started <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -413,7 +389,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-首先需要准备一个redis服务端作为缓存"><span class="nav-number">1.</span> <span class="nav-text">1.首先需要准备一个redis服务端作为缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-项目依赖"><span class="nav-number">2.</span> <span class="nav-text">2.项目依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-程序配置实现与使用"><span class="nav-number">3.</span> <span class="nav-text">3.程序配置实现与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加redis-cache相关的config类，如下："><span class="nav-number">3.1.</span> <span class="nav-text">添加redis cache相关的config类，如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用？"><span class="nav-number">3.2.</span> <span class="nav-text">如何使用？</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
