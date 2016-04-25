@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="itime,springboot," />
+  <meta name="keywords" content="database,master-slave,mysql,主从同步,数据库," />
 
 
 
@@ -53,19 +53,19 @@
 
 
 
-<meta name="description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
-1.pom.xml中添加maven依赖1&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframewor">
+<meta name="description" content="1、主从服务器分别作以下操作：  1.1、版本一致  1.2、初始化表，并在后台启动mysql  1.3、修改root的密码
+2、修改主服务器master:   #vi /etc/my.cnf       [mysqld]       log-bin=mysql-bin   //[必须]启用二进制日志       server-id=222      //[必须]服务器唯一ID，默认是1，一般取I">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[springboot][items][项目使用实践]springboot get started">
-<meta property="og:url" content="http://yoursite.com/2016/02/01/springboot-items-项目使用实践-springboot-get-started/index.html">
+<meta property="og:title" content="centos6环境下配置mysql主从同步">
+<meta property="og:url" content="http://yoursite.com/2016/04/25/centos6环境下配置mysql主从同步/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
-1.pom.xml中添加maven依赖1&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframewor">
-<meta property="og:updated_time" content="2016-02-20T04:02:04.723Z">
+<meta property="og:description" content="1、主从服务器分别作以下操作：  1.1、版本一致  1.2、初始化表，并在后台启动mysql  1.3、修改root的密码
+2、修改主服务器master:   #vi /etc/my.cnf       [mysqld]       log-bin=mysql-bin   //[必须]启用二进制日志       server-id=222      //[必须]服务器唯一ID，默认是1，一般取I">
+<meta property="og:updated_time" content="2016-04-25T13:25:33.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[springboot][items][项目使用实践]springboot get started">
-<meta name="twitter:description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
-1.pom.xml中添加maven依赖1&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframewor">
+<meta name="twitter:title" content="centos6环境下配置mysql主从同步">
+<meta name="twitter:description" content="1、主从服务器分别作以下操作：  1.1、版本一致  1.2、初始化表，并在后台启动mysql  1.3、修改root的密码
+2、修改主服务器master:   #vi /etc/my.cnf       [mysqld]       log-bin=mysql-bin   //[必须]启用二进制日志       server-id=222      //[必须]服务器唯一ID，默认是1，一般取I">
 
 
 
@@ -77,7 +77,7 @@
   };
 </script>
 
-  <title> [springboot][items][项目使用实践]springboot get started | iyihua </title>
+  <title> centos6环境下配置mysql主从同步 | iyihua </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -197,7 +197,7 @@
             
             
               
-                [springboot][items][项目使用实践]springboot get started
+                centos6环境下配置mysql主从同步
               
             
           </h1>
@@ -206,8 +206,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2016-02-01T17:10:18+08:00" content="2016-02-01">
-              2016-02-01
+            <time itemprop="dateCreated" datetime="2016-04-25T21:22:51+08:00" content="2016-04-25">
+              2016-04-25
             </time>
           </span>
 
@@ -230,12 +230,33 @@
       
 
       
-        <span itemprop="articleBody"><p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
-<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
+        <span itemprop="articleBody"><h2 id="1、主从服务器分别作以下操作："><a href="#1、主从服务器分别作以下操作：" class="headerlink" title="1、主从服务器分别作以下操作："></a>1、主从服务器分别作以下操作：</h2><p>  1.1、版本一致<br>  1.2、初始化表，并在后台启动mysql<br>  1.3、修改root的密码</p>
+<h2 id="2、修改主服务器master"><a href="#2、修改主服务器master" class="headerlink" title="2、修改主服务器master:"></a>2、修改主服务器master:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[必须]启用二进制日志<br>       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<h2 id="3、修改从服务器slave"><a href="#3、修改从服务器slave" class="headerlink" title="3、修改从服务器slave:"></a>3、修改从服务器slave:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[不是必须]启用二进制日志<br>       server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<h2 id="4、重启两台服务器的mysql"><a href="#4、重启两台服务器的mysql" class="headerlink" title="4、重启两台服务器的mysql"></a>4、重启两台服务器的mysql</h2><pre><code>/etc/init.d/mysql restart
+or：
+service mysqld restart
+</code></pre><h2 id="5、在主服务器上建立帐户并授权slave"><a href="#5、在主服务器上建立帐户并授权slave" class="headerlink" title="5、在主服务器上建立帐户并授权slave:"></a>5、在主服务器上建立帐户并授权slave:</h2><p>  #mysql -uroot -proot<br>   mysql&gt;GRANT REPLICATION SLAVE ON <em>.</em> to ‘mysync’@’%’ identified by ‘root’; //一般不用root帐号，%表示所有客户端都可能连，只要帐号，密码正确，此处可用具体客户端IP代替，如192.168.145.226，加强安全。</p>
+<h2 id="6、登录主服务器的mysql，查询master的状态"><a href="#6、登录主服务器的mysql，查询master的状态" class="headerlink" title="6、登录主服务器的mysql，查询master的状态"></a>6、登录主服务器的mysql，查询master的状态</h2><p>   mysql&gt;show master status;<br>   +——————+———-+————–+——————+<br>   | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |<br>   +——————+———-+————–+——————+<br>   | mysql-bin.000004 |      308 |              |                  |<br>   +——————+———-+————–+——————+<br>   1 row in set (0.00 sec)<br>   注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</p>
+<h2 id="7、配置从服务器Slave："><a href="#7、配置从服务器Slave：" class="headerlink" title="7、配置从服务器Slave："></a>7、配置从服务器Slave：</h2><p>   mysql&gt;change master to master_host=’192.168.145.222’,master_user=’mysync’,master_password=’root’, master_log_file=’mysql-bin.000004’,master_log_pos=308;   //注意不要断开，308数字前后无单引号。</p>
+<p>   Mysql&gt;start slave;    //启动从服务器复制功能</p>
+<h2 id="8、检查从服务器复制功能状态："><a href="#8、检查从服务器复制功能状态：" class="headerlink" title="8、检查从服务器复制功能状态："></a>8、检查从服务器复制功能状态：</h2><p>   mysql&gt; show slave status\G</p>
+<p>   <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></p>
+<pre><code>Slave_IO_State: Waiting for master to send event
+Master_Host: 192.168.2.222  //主服务器地址
+Master_User: mysync   //授权帐户名，尽量避免使用root
+Master_Port: 3306    //数据库端口，部分版本没有此行
+Connect_Retry: 60
+Master_Log_File: mysql-bin.000004
+Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
+Relay_Log_File: ddte-relay-bin.000003
+Relay_Log_Pos: 251
+Relay_Master_Log_File: mysql-bin.000004
+Slave_IO_Running: Yes    //此状态必须YES
+Slave_SQL_Running: Yes     //此状态必须YES
+      ......
+</code></pre><p>注：Slave_IO及Slave_SQL进程必须正常运行，即YES状态，否则都是错误的状态(如：其中一个NO均属错误)。</p>
+<p>以上操作过程，主从服务器配置完成。</p>
 </span>
       
     </div>
@@ -244,9 +265,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/itime/" rel="tag">#itime</a>
+            <a href="/tags/database/" rel="tag">#database</a>
           
-            <a href="/tags/springboot/" rel="tag">#springboot</a>
+            <a href="/tags/master-slave/" rel="tag">#master-slave</a>
+          
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
+          
+            <a href="/tags/主从同步/" rel="tag">#主从同步</a>
+          
+            <a href="/tags/数据库/" rel="tag">#数据库</a>
           
         </div>
       
@@ -255,17 +282,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/04/jquery-validate常用用法总结/" rel="next" title="jquery-validate常用用法总结">
-                <i class="fa fa-chevron-left"></i> jquery-validate常用用法总结
+              <a href="/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/" rel="next" title="centos6下安装配置mysql，并开启mysql的远程登录">
+                <i class="fa fa-chevron-left"></i> centos6下安装配置mysql，并开启mysql的远程登录
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/02/java-从代码中去除if-else/" rel="prev" title="[java]从代码中去除if-else">
-                [java]从代码中去除if-else <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -386,7 +409,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pom-xml中添加maven依赖"><span class="nav-number">1.</span> <span class="nav-text">1.pom.xml中添加maven依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-编写项目启动入口App-java"><span class="nav-number">2.</span> <span class="nav-text">2.编写项目启动入口App.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再进一步，为应用引入spring-mvc"><span class="nav-number">3.</span> <span class="nav-text">再进一步，为应用引入spring mvc</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、主从服务器分别作以下操作："><span class="nav-number">1.</span> <span class="nav-text">1、主从服务器分别作以下操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、修改主服务器master"><span class="nav-number">2.</span> <span class="nav-text">2、修改主服务器master:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、修改从服务器slave"><span class="nav-number">3.</span> <span class="nav-text">3、修改从服务器slave:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、重启两台服务器的mysql"><span class="nav-number">4.</span> <span class="nav-text">4、重启两台服务器的mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、在主服务器上建立帐户并授权slave"><span class="nav-number">5.</span> <span class="nav-text">5、在主服务器上建立帐户并授权slave:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、登录主服务器的mysql，查询master的状态"><span class="nav-number">6.</span> <span class="nav-text">6、登录主服务器的mysql，查询master的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、配置从服务器Slave："><span class="nav-number">7.</span> <span class="nav-text">7、配置从服务器Slave：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、检查从服务器复制功能状态："><span class="nav-number">8.</span> <span class="nav-text">8、检查从服务器复制功能状态：</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

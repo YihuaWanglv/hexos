@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/04/25/centos6%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AEmysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
+    
+    <lastmod>2016-04-25T13:25:33.126Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/04/25/centos6%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEmysql%EF%BC%8C%E5%B9%B6%E5%BC%80%E5%90%AFmysql%E7%9A%84%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/</loc>
+    
+    <lastmod>2016-04-25T13:04:16.768Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/04/09/springboot-shiro-redis-rediscluster-sso-%E5%9C%A8springboot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%8E%A5%E5%85%A5shiro/</loc>
     
     <lastmod>2016-04-09T22:44:27.345Z</lastmod>

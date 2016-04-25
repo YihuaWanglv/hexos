@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-09T22:44:27.345Z</updated>
+  <updated>2016-04-25T13:25:33.126Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,96 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>centos6环境下配置mysql主从同步</title>
+    <link href="http://yoursite.com/2016/04/25/centos6%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AEmysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
+    <id>http://yoursite.com/2016/04/25/centos6环境下配置mysql主从同步/</id>
+    <published>2016-04-25T13:22:51.000Z</published>
+    <updated>2016-04-25T13:25:33.126Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;a href=&quot;#1、主从服务器分别作以下操作：&quot; class=&quot;headerlink&quot; title=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;/a&gt;1、主从服务器分别作以下操作：&lt;/h2&gt;&lt;p&gt;  1.1、版本一致&lt;br&gt;  1.2、初始化表，并在后台启动mysql&lt;br&gt;  1.3、修改root的密码&lt;/p&gt;
+&lt;h2 id=&quot;2、修改主服务器master&quot;&gt;&lt;a href=&quot;#2、修改主服务器master&quot; class=&quot;headerlink&quot; title=&quot;2、修改主服务器master:&quot;&gt;&lt;/a&gt;2、修改主服务器master:&lt;/h2&gt;&lt;p&gt;   #vi /etc/my.cnf&lt;br&gt;       [mysqld]&lt;br&gt;       log-bin=mysql-bin   //[必须]启用二进制日志&lt;br&gt;       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段&lt;/p&gt;
+&lt;h2 id=&quot;3、修改从服务器slave&quot;&gt;&lt;a href=&quot;#3、修改从服务器slave&quot; class=&quot;headerlink&quot; title=&quot;3、修改从服务器slave:&quot;&gt;&lt;/a&gt;3、修改从服务器slave:&lt;/h2&gt;&lt;p&gt;   #vi /etc/my.cnf&lt;br&gt;       [mysqld]&lt;br&gt;       log-bin=mysql-bin   //[不是必须]启用二进制日志&lt;br&gt;       server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段&lt;/p&gt;
+&lt;h2 id=&quot;4、重启两台服务器的mysql&quot;&gt;&lt;a href=&quot;#4、重启两台服务器的mysql&quot; class=&quot;headerlink&quot; title=&quot;4、重启两台服务器的mysql&quot;&gt;&lt;/a&gt;4、重启两台服务器的mysql&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;/etc/init.d/mysql restart
+or：
+service mysqld restart
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;5、在主服务器上建立帐户并授权slave&quot;&gt;&lt;a href=&quot;#5、在主服务器上建立帐户并授权slave&quot; class=&quot;headerlink&quot; title=&quot;5、在主服务器上建立帐户并授权slave:&quot;&gt;&lt;/a&gt;5、在主服务器上建立帐户并授权slave:&lt;/h2&gt;&lt;p&gt;  #mysql -uroot -proot&lt;br&gt;   mysql&amp;gt;GRANT REPLICATION SLAVE ON &lt;em&gt;.&lt;/em&gt; to ‘mysync’@’%’ identified by ‘root’; //一般不用root帐号，%表示所有客户端都可能连，只要帐号，密码正确，此处可用具体客户端IP代替，如192.168.145.226，加强安全。&lt;/p&gt;
+&lt;h2 id=&quot;6、登录主服务器的mysql，查询master的状态&quot;&gt;&lt;a href=&quot;#6、登录主服务器的mysql，查询master的状态&quot; class=&quot;headerlink&quot; title=&quot;6、登录主服务器的mysql，查询master的状态&quot;&gt;&lt;/a&gt;6、登录主服务器的mysql，查询master的状态&lt;/h2&gt;&lt;p&gt;   mysql&amp;gt;show master status;&lt;br&gt;   +——————+———-+————–+——————+&lt;br&gt;   | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |&lt;br&gt;   +——————+———-+————–+——————+&lt;br&gt;   | mysql-bin.000004 |      308 |              |                  |&lt;br&gt;   +——————+———-+————–+——————+&lt;br&gt;   1 row in set (0.00 sec)&lt;br&gt;   注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化&lt;/p&gt;
+&lt;h2 id=&quot;7、配置从服务器Slave：&quot;&gt;&lt;a href=&quot;#7、配置从服务器Slave：&quot; class=&quot;headerlink&quot; title=&quot;7、配置从服务器Slave：&quot;&gt;&lt;/a&gt;7、配置从服务器Slave：&lt;/h2&gt;&lt;p&gt;   mysql&amp;gt;change master to master_host=’192.168.145.222’,master_user=’mysync’,master_password=’root’, master_log_file=’mysql-bin.000004’,master_log_pos=308;   //注意不要断开，308数字前后无单引号。&lt;/p&gt;
+&lt;p&gt;   Mysql&amp;gt;start slave;    //启动从服务器复制功能&lt;/p&gt;
+&lt;h2 id=&quot;8、检查从服务器复制功能状态：&quot;&gt;&lt;a href=&quot;#8、检查从服务器复制功能状态：&quot; class=&quot;headerlink&quot; title=&quot;8、检查从服务器复制功能状态：&quot;&gt;&lt;/a&gt;8、检查从服务器复制功能状态：&lt;/h2&gt;&lt;p&gt;   mysql&amp;gt; show slave status\G&lt;/p&gt;
+&lt;p&gt;   &lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;em&gt;*&lt;/em&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt; 1. row &lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;em&gt;*&lt;/em&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Slave_IO_State: Waiting for master to send event
+Master_Host: 192.168.2.222  //主服务器地址
+Master_User: mysync   //授权帐户名，尽量避免使用root
+Master_Port: 3306    //数据库端口，部分版本没有此行
+Connect_Retry: 60
+Master_Log_File: mysql-bin.000004
+Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
+Relay_Log_File: ddte-relay-bin.000003
+Relay_Log_Pos: 251
+Relay_Master_Log_File: mysql-bin.000004
+Slave_IO_Running: Yes    //此状态必须YES
+Slave_SQL_Running: Yes     //此状态必须YES
+      ......
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注：Slave_IO及Slave_SQL进程必须正常运行，即YES状态，否则都是错误的状态(如：其中一个NO均属错误)。&lt;/p&gt;
+&lt;p&gt;以上操作过程，主从服务器配置完成。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;a href=&quot;#1、主从服务器分别作以下操作：&quot; class=&quot;headerlink&quot; title=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;/a&gt;1、主从服务器分别作以下操作：&lt;/h2&gt;&lt;p&gt;  1.1、版本一致&lt;br&gt;  1.
+    
+    </summary>
+    
+    
+      <category term="database" scheme="http://yoursite.com/tags/database/"/>
+    
+      <category term="master-slave" scheme="http://yoursite.com/tags/master-slave/"/>
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+      <category term="主从同步" scheme="http://yoursite.com/tags/%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos6下安装配置mysql，并开启mysql的远程登录</title>
+    <link href="http://yoursite.com/2016/04/25/centos6%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEmysql%EF%BC%8C%E5%B9%B6%E5%BC%80%E5%90%AFmysql%E7%9A%84%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/"/>
+    <id>http://yoursite.com/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/</id>
+    <published>2016-04-25T13:00:38.000Z</published>
+    <updated>2016-04-25T13:04:16.768Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;安装：&quot;&gt;&lt;a href=&quot;#安装：&quot; class=&quot;headerlink&quot; title=&quot;安装：&quot;&gt;&lt;/a&gt;安装：&lt;/h2&gt;&lt;h3 id=&quot;查看是否已安装mysql：&quot;&gt;&lt;a href=&quot;#查看是否已安装mysql：&quot; class=&quot;headerlink&quot; title=&quot;查看是否已安装mysql：&quot;&gt;&lt;/a&gt;查看是否已安装mysql：&lt;/h3&gt;&lt;p&gt;yum list installed | grep mysql&lt;/p&gt;
+&lt;h3 id=&quot;如果已安装，如下一次卸载：&quot;&gt;&lt;a href=&quot;#如果已安装，如下一次卸载：&quot; class=&quot;headerlink&quot; title=&quot;如果已安装，如下一次卸载：&quot;&gt;&lt;/a&gt;如果已安装，如下一次卸载：&lt;/h3&gt;&lt;p&gt;yum -y remove mysql-libs.x86_64&lt;/p&gt;
+&lt;h3 id=&quot;查看可用mysql：&quot;&gt;&lt;a href=&quot;#查看可用mysql：&quot; class=&quot;headerlink&quot; title=&quot;查看可用mysql：&quot;&gt;&lt;/a&gt;查看可用mysql：&lt;/h3&gt;&lt;p&gt;yum list | grep mysql 或 yum -y list mysql*&lt;/p&gt;
+&lt;h3 id=&quot;安装mysql：&quot;&gt;&lt;a href=&quot;#安装mysql：&quot; class=&quot;headerlink&quot; title=&quot;安装mysql：&quot;&gt;&lt;/a&gt;安装mysql：&lt;/h3&gt;&lt;p&gt;yum -y install mysql-server mysql mysql-devel&lt;/p&gt;
+&lt;h3 id=&quot;查看已安装的mysql状态：&quot;&gt;&lt;a href=&quot;#查看已安装的mysql状态：&quot; class=&quot;headerlink&quot; title=&quot;查看已安装的mysql状态：&quot;&gt;&lt;/a&gt;查看已安装的mysql状态：&lt;/h3&gt;&lt;p&gt;rpm -qi mysql-server&lt;/p&gt;
+&lt;h3 id=&quot;安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示&quot;&gt;&lt;a href=&quot;#安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示&quot; class=&quot;headerlink&quot; title=&quot;安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:&quot;&gt;&lt;/a&gt;安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:&lt;/h3&gt;&lt;p&gt;mysql -u root -p&lt;br&gt;Enter password:&lt;br&gt;ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)&lt;/p&gt;
+&lt;h3 id=&quot;解决：方法操作很简单，如下：&quot;&gt;&lt;a href=&quot;#解决：方法操作很简单，如下：&quot; class=&quot;headerlink&quot; title=&quot;解决：方法操作很简单，如下：&quot;&gt;&lt;/a&gt;解决：方法操作很简单，如下：&lt;/h3&gt;&lt;p&gt;/etc/init.d/mysql stop&lt;br&gt;mysqld_safe –user=mysql –skip-grant-tables –skip-networking &amp;amp;&lt;br&gt;mysql -u root mysql&lt;br&gt;mysql&amp;gt; UPDATE user SET Password=PASSWORD(‘root’) where USER=’root’ and host=’root’ or host=’localhost’;//把空的用户密码都修改成非空的密码就行了。&lt;br&gt;mysql&amp;gt; FLUSH PRIVILEGES;&lt;br&gt;mysql&amp;gt; quit&lt;br&gt;/etc/init.d/mysqld restart&lt;br&gt;mysql -uroot -p&lt;br&gt;Enter password: &amp;lt;输入新设的密码newpassword&amp;gt;&lt;/p&gt;
+&lt;h2 id=&quot;开启远程连接&quot;&gt;&lt;a href=&quot;#开启远程连接&quot; class=&quot;headerlink&quot; title=&quot;开启远程连接&quot;&gt;&lt;/a&gt;开启远程连接&lt;/h2&gt;&lt;h3 id=&quot;设置任意ip可以使用root账户和root密码远程登录&quot;&gt;&lt;a href=&quot;#设置任意ip可以使用root账户和root密码远程登录&quot; class=&quot;headerlink&quot; title=&quot;设置任意ip可以使用root账户和root密码远程登录&quot;&gt;&lt;/a&gt;设置任意ip可以使用root账户和root密码远程登录&lt;/h3&gt;&lt;p&gt;grant all privileges  on &lt;em&gt;.&lt;/em&gt; to root@’%’ identified by “root”;&lt;/p&gt;
+&lt;h3 id=&quot;刷新&quot;&gt;&lt;a href=&quot;#刷新&quot; class=&quot;headerlink&quot; title=&quot;刷新&quot;&gt;&lt;/a&gt;刷新&lt;/h3&gt;&lt;p&gt;FLUSH PRIVILEGES;&lt;/p&gt;
+&lt;h3 id=&quot;重启：&quot;&gt;&lt;a href=&quot;#重启：&quot; class=&quot;headerlink&quot; title=&quot;重启：&quot;&gt;&lt;/a&gt;重启：&lt;/h3&gt;&lt;p&gt;service mysqld restart&lt;/p&gt;
+&lt;p&gt;done！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;安装：&quot;&gt;&lt;a href=&quot;#安装：&quot; class=&quot;headerlink&quot; title=&quot;安装：&quot;&gt;&lt;/a&gt;安装：&lt;/h2&gt;&lt;h3 id=&quot;查看是否已安装mysql：&quot;&gt;&lt;a href=&quot;#查看是否已安装mysql：&quot; class=&quot;headerlink&quot; ti
+    
+    </summary>
+    
+    
+      <category term="database" scheme="http://yoursite.com/tags/database/"/>
+    
+      <category term="install" scheme="http://yoursite.com/tags/install/"/>
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>[springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro</title>

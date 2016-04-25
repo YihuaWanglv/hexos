@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="itime,springboot," />
+  <meta name="keywords" content="database,install,mysql," />
 
 
 
@@ -53,19 +53,25 @@
 
 
 
-<meta name="description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
-1.pom.xml中添加maven依赖1&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframewor">
+<meta name="description" content="安装：查看是否已安装mysql：yum list installed | grep mysql
+如果已安装，如下一次卸载：yum -y remove mysql-libs.x86_64
+查看可用mysql：yum list | grep mysql 或 yum -y list mysql*
+安装mysql：yum -y install mysql-server mysql mysql-devel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[springboot][items][项目使用实践]springboot get started">
-<meta property="og:url" content="http://yoursite.com/2016/02/01/springboot-items-项目使用实践-springboot-get-started/index.html">
+<meta property="og:title" content="centos6下安装配置mysql，并开启mysql的远程登录">
+<meta property="og:url" content="http://yoursite.com/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
-1.pom.xml中添加maven依赖1&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframewor">
-<meta property="og:updated_time" content="2016-02-20T04:02:04.723Z">
+<meta property="og:description" content="安装：查看是否已安装mysql：yum list installed | grep mysql
+如果已安装，如下一次卸载：yum -y remove mysql-libs.x86_64
+查看可用mysql：yum list | grep mysql 或 yum -y list mysql*
+安装mysql：yum -y install mysql-server mysql mysql-devel">
+<meta property="og:updated_time" content="2016-04-25T13:04:16.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[springboot][items][项目使用实践]springboot get started">
-<meta name="twitter:description" content="往后将通过一个时间记录web app项目，实践并记录spring boot的使用为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。
-1.pom.xml中添加maven依赖1&amp;#60;dependencies&amp;#62;&amp;#10;    &amp;#60;dependency&amp;#62;&amp;#10;        &amp;#60;groupId&amp;#62;org.springframewor">
+<meta name="twitter:title" content="centos6下安装配置mysql，并开启mysql的远程登录">
+<meta name="twitter:description" content="安装：查看是否已安装mysql：yum list installed | grep mysql
+如果已安装，如下一次卸载：yum -y remove mysql-libs.x86_64
+查看可用mysql：yum list | grep mysql 或 yum -y list mysql*
+安装mysql：yum -y install mysql-server mysql mysql-devel">
 
 
 
@@ -77,7 +83,7 @@
   };
 </script>
 
-  <title> [springboot][items][项目使用实践]springboot get started | iyihua </title>
+  <title> centos6下安装配置mysql，并开启mysql的远程登录 | iyihua </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -197,7 +203,7 @@
             
             
               
-                [springboot][items][项目使用实践]springboot get started
+                centos6下安装配置mysql，并开启mysql的远程登录
               
             
           </h1>
@@ -206,8 +212,8 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2016-02-01T17:10:18+08:00" content="2016-02-01">
-              2016-02-01
+            <time itemprop="dateCreated" datetime="2016-04-25T21:00:38+08:00" content="2016-04-25">
+              2016-04-25
             </time>
           </span>
 
@@ -230,12 +236,17 @@
       
 
       
-        <span itemprop="articleBody"><p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
-<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
+        <span itemprop="articleBody"><h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><h3 id="查看是否已安装mysql："><a href="#查看是否已安装mysql：" class="headerlink" title="查看是否已安装mysql："></a>查看是否已安装mysql：</h3><p>yum list installed | grep mysql</p>
+<h3 id="如果已安装，如下一次卸载："><a href="#如果已安装，如下一次卸载：" class="headerlink" title="如果已安装，如下一次卸载："></a>如果已安装，如下一次卸载：</h3><p>yum -y remove mysql-libs.x86_64</p>
+<h3 id="查看可用mysql："><a href="#查看可用mysql：" class="headerlink" title="查看可用mysql："></a>查看可用mysql：</h3><p>yum list | grep mysql 或 yum -y list mysql*</p>
+<h3 id="安装mysql："><a href="#安装mysql：" class="headerlink" title="安装mysql："></a>安装mysql：</h3><p>yum -y install mysql-server mysql mysql-devel</p>
+<h3 id="查看已安装的mysql状态："><a href="#查看已安装的mysql状态：" class="headerlink" title="查看已安装的mysql状态："></a>查看已安装的mysql状态：</h3><p>rpm -qi mysql-server</p>
+<h3 id="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示"><a href="#安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示" class="headerlink" title="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:"></a>安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:</h3><p>mysql -u root -p<br>Enter password:<br>ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)</p>
+<h3 id="解决：方法操作很简单，如下："><a href="#解决：方法操作很简单，如下：" class="headerlink" title="解决：方法操作很简单，如下："></a>解决：方法操作很简单，如下：</h3><p>/etc/init.d/mysql stop<br>mysqld_safe –user=mysql –skip-grant-tables –skip-networking &amp;<br>mysql -u root mysql<br>mysql&gt; UPDATE user SET Password=PASSWORD(‘root’) where USER=’root’ and host=’root’ or host=’localhost’;//把空的用户密码都修改成非空的密码就行了。<br>mysql&gt; FLUSH PRIVILEGES;<br>mysql&gt; quit<br>/etc/init.d/mysqld restart<br>mysql -uroot -p<br>Enter password: &lt;输入新设的密码newpassword&gt;</p>
+<h2 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h2><h3 id="设置任意ip可以使用root账户和root密码远程登录"><a href="#设置任意ip可以使用root账户和root密码远程登录" class="headerlink" title="设置任意ip可以使用root账户和root密码远程登录"></a>设置任意ip可以使用root账户和root密码远程登录</h3><p>grant all privileges  on <em>.</em> to root@’%’ identified by “root”;</p>
+<h3 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h3><p>FLUSH PRIVILEGES;</p>
+<h3 id="重启："><a href="#重启：" class="headerlink" title="重启："></a>重启：</h3><p>service mysqld restart</p>
+<p>done！</p>
 </span>
       
     </div>
@@ -244,9 +255,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/itime/" rel="tag">#itime</a>
+            <a href="/tags/database/" rel="tag">#database</a>
           
-            <a href="/tags/springboot/" rel="tag">#springboot</a>
+            <a href="/tags/install/" rel="tag">#install</a>
+          
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
           
         </div>
       
@@ -255,16 +268,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/04/jquery-validate常用用法总结/" rel="next" title="jquery-validate常用用法总结">
-                <i class="fa fa-chevron-left"></i> jquery-validate常用用法总结
+              <a href="/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/" rel="next" title="[springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro">
+                <i class="fa fa-chevron-left"></i> [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/02/02/java-从代码中去除if-else/" rel="prev" title="[java]从代码中去除if-else">
-                [java]从代码中去除if-else <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/25/centos6环境下配置mysql主从同步/" rel="prev" title="centos6环境下配置mysql主从同步">
+                centos6环境下配置mysql主从同步 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -386,7 +399,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pom-xml中添加maven依赖"><span class="nav-number">1.</span> <span class="nav-text">1.pom.xml中添加maven依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-编写项目启动入口App-java"><span class="nav-number">2.</span> <span class="nav-text">2.编写项目启动入口App.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再进一步，为应用引入spring-mvc"><span class="nav-number">3.</span> <span class="nav-text">再进一步，为应用引入spring mvc</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装："><span class="nav-number">1.</span> <span class="nav-text">安装：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看是否已安装mysql："><span class="nav-number">1.1.</span> <span class="nav-text">查看是否已安装mysql：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果已安装，如下一次卸载："><span class="nav-number">1.2.</span> <span class="nav-text">如果已安装，如下一次卸载：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看可用mysql："><span class="nav-number">1.3.</span> <span class="nav-text">查看可用mysql：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装mysql："><span class="nav-number">1.4.</span> <span class="nav-text">安装mysql：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看已安装的mysql状态："><span class="nav-number">1.5.</span> <span class="nav-text">查看已安装的mysql状态：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示"><span class="nav-number">1.6.</span> <span class="nav-text">安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决：方法操作很简单，如下："><span class="nav-number">1.7.</span> <span class="nav-text">解决：方法操作很简单，如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启远程连接"><span class="nav-number">2.</span> <span class="nav-text">开启远程连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置任意ip可以使用root账户和root密码远程登录"><span class="nav-number">2.1.</span> <span class="nav-text">设置任意ip可以使用root账户和root密码远程登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刷新"><span class="nav-number">2.2.</span> <span class="nav-text">刷新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启："><span class="nav-number">2.3.</span> <span class="nav-text">重启：</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

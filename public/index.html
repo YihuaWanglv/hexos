@@ -202,6 +202,204 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/25/centos6环境下配置mysql主从同步/" itemprop="url">
+                  centos6环境下配置mysql主从同步
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-04-25T21:22:51+08:00" content="2016-04-25">
+              2016-04-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="1、主从服务器分别作以下操作："><a href="#1、主从服务器分别作以下操作：" class="headerlink" title="1、主从服务器分别作以下操作："></a>1、主从服务器分别作以下操作：</h2><p>  1.1、版本一致<br>  1.2、初始化表，并在后台启动mysql<br>  1.3、修改root的密码</p>
+<h2 id="2、修改主服务器master"><a href="#2、修改主服务器master" class="headerlink" title="2、修改主服务器master:"></a>2、修改主服务器master:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[必须]启用二进制日志<br>       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<h2 id="3、修改从服务器slave"><a href="#3、修改从服务器slave" class="headerlink" title="3、修改从服务器slave:"></a>3、修改从服务器slave:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[不是必须]启用二进制日志<br>       server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<h2 id="4、重启两台服务器的mysql"><a href="#4、重启两台服务器的mysql" class="headerlink" title="4、重启两台服务器的mysql"></a>4、重启两台服务器的mysql</h2><pre><code>/etc/init.d/mysql restart
+or：
+service mysqld restart
+</code></pre><h2 id="5、在主服务器上建立帐户并授权slave"><a href="#5、在主服务器上建立帐户并授权slave" class="headerlink" title="5、在主服务器上建立帐户并授权slave:"></a>5、在主服务器上建立帐户并授权slave:</h2><p>  #mysql -uroot -proot<br>   mysql&gt;GRANT REPLICATION SLAVE ON <em>.</em> to ‘mysync’@’%’ identified by ‘root’; //一般不用root帐号，%表示所有客户端都可能连，只要帐号，密码正确，此处可用具体客户端IP代替，如192.168.145.226，加强安全。</p>
+<h2 id="6、登录主服务器的mysql，查询master的状态"><a href="#6、登录主服务器的mysql，查询master的状态" class="headerlink" title="6、登录主服务器的mysql，查询master的状态"></a>6、登录主服务器的mysql，查询master的状态</h2><p>   mysql&gt;show master status;<br>   +——————+———-+————–+——————+<br>   | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |<br>   +——————+———-+————–+——————+<br>   | mysql-bin.000004 |      308 |              |                  |<br>   +——————+———-+————–+——————+<br>   1 row in set (0.00 sec)<br>   注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</p>
+<h2 id="7、配置从服务器Slave："><a href="#7、配置从服务器Slave：" class="headerlink" title="7、配置从服务器Slave："></a>7、配置从服务器Slave：</h2><p>   mysql&gt;change master to master_host=’192.168.145.222’,master_user=’mysync’,master_password=’root’, master_log_file=’mysql-bin.000004’,master_log_pos=308;   //注意不要断开，308数字前后无单引号。</p>
+<p>   Mysql&gt;start slave;    //启动从服务器复制功能</p>
+<h2 id="8、检查从服务器复制功能状态："><a href="#8、检查从服务器复制功能状态：" class="headerlink" title="8、检查从服务器复制功能状态："></a>8、检查从服务器复制功能状态：</h2><p>   mysql&gt; show slave status\G</p>
+<p>   <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></p>
+<pre><code>Slave_IO_State: Waiting for master to send event
+Master_Host: 192.168.2.222  //主服务器地址
+Master_User: mysync   //授权帐户名，尽量避免使用root
+Master_Port: 3306    //数据库端口，部分版本没有此行
+Connect_Retry: 60
+Master_Log_File: mysql-bin.000004
+Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
+Relay_Log_File: ddte-relay-bin.000003
+Relay_Log_Pos: 251
+Relay_Master_Log_File: mysql-bin.000004
+Slave_IO_Running: Yes    //此状态必须YES
+Slave_SQL_Running: Yes     //此状态必须YES
+      ......
+</code></pre><p>注：Slave_IO及Slave_SQL进程必须正常运行，即YES状态，否则都是错误的状态(如：其中一个NO均属错误)。</p>
+<p>以上操作过程，主从服务器配置完成。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/" itemprop="url">
+                  centos6下安装配置mysql，并开启mysql的远程登录
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-04-25T21:00:38+08:00" content="2016-04-25">
+              2016-04-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><h3 id="查看是否已安装mysql："><a href="#查看是否已安装mysql：" class="headerlink" title="查看是否已安装mysql："></a>查看是否已安装mysql：</h3><p>yum list installed | grep mysql</p>
+<h3 id="如果已安装，如下一次卸载："><a href="#如果已安装，如下一次卸载：" class="headerlink" title="如果已安装，如下一次卸载："></a>如果已安装，如下一次卸载：</h3><p>yum -y remove mysql-libs.x86_64</p>
+<h3 id="查看可用mysql："><a href="#查看可用mysql：" class="headerlink" title="查看可用mysql："></a>查看可用mysql：</h3><p>yum list | grep mysql 或 yum -y list mysql*</p>
+<h3 id="安装mysql："><a href="#安装mysql：" class="headerlink" title="安装mysql："></a>安装mysql：</h3><p>yum -y install mysql-server mysql mysql-devel</p>
+<h3 id="查看已安装的mysql状态："><a href="#查看已安装的mysql状态：" class="headerlink" title="查看已安装的mysql状态："></a>查看已安装的mysql状态：</h3><p>rpm -qi mysql-server</p>
+<h3 id="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示"><a href="#安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示" class="headerlink" title="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:"></a>安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:</h3><p>mysql -u root -p<br>Enter password:<br>ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)</p>
+<h3 id="解决：方法操作很简单，如下："><a href="#解决：方法操作很简单，如下：" class="headerlink" title="解决：方法操作很简单，如下："></a>解决：方法操作很简单，如下：</h3><p>/etc/init.d/mysql stop<br>mysqld_safe –user=mysql –skip-grant-tables –skip-networking &amp;<br>mysql -u root mysql<br>mysql&gt; UPDATE user SET Password=PASSWORD(‘root’) where USER=’root’ and host=’root’ or host=’localhost’;//把空的用户密码都修改成非空的密码就行了。<br>mysql&gt; FLUSH PRIVILEGES;<br>mysql&gt; quit<br>/etc/init.d/mysqld restart<br>mysql -uroot -p<br>Enter password: &lt;输入新设的密码newpassword&gt;</p>
+<h2 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h2><h3 id="设置任意ip可以使用root账户和root密码远程登录"><a href="#设置任意ip可以使用root账户和root密码远程登录" class="headerlink" title="设置任意ip可以使用root账户和root密码远程登录"></a>设置任意ip可以使用root账户和root密码远程登录</h3><p>grant all privileges  on <em>.</em> to root@’%’ identified by “root”;</p>
+<h3 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h3><p>FLUSH PRIVILEGES;</p>
+<h3 id="重启："><a href="#重启：" class="headerlink" title="重启："></a>重启：</h3><p>service mysqld restart</p>
+<p>done！</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/" itemprop="url">
                   [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
                 </a>
@@ -943,195 +1141,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/20/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-02-20T12:02:04+08:00" content="2016-02-20">
-              2016-02-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/02/java-从代码中去除if-else/" itemprop="url">
-                  [java]从代码中去除if-else
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-02-02T16:09:30+08:00" content="2016-02-02">
-              2016-02-02
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？</p>
-<p>首先要明确的是，实践而言，并不是只要有大段的if else语句就一定需要优化，在开始的时候，如果这里的逻辑比较清楚简单，而且也没有预期到一些业务逻辑会产生变动，那么其实就并不需要，起码是并不急着需要去优化这个if else语句。</p>
-<p>当判断到确实需要优化if else，方法有很多，总结如下。</p>
-<ol>
-<li>使用map.</li>
-<li>使用枚举.</li>
-<li>多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。<br>当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。</li>
-</ol>
-<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int code;&#10;if(&#34;Name&#34;.equals(str))&#10;    code = 0;&#10;else if(&#34;Age&#34;.equals(str))&#10;    code = 1;&#10;else if(&#34;Address&#34;.equals(str))&#10;    code = 2;</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  &#10;static &#123;  &#10;    map.put(&#34;Name&#34;, 0);  &#10;    map.put(&#34;Age&#34;, 1);&#10;    map.put(&#34;Address&#34;, 2);  &#10;&#125;&#10;&#10;int code = map.get(type);</span><br></pre></td></tr></table></figure>
-<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;&#10;    Name(0), Age(1), Address(2);&#10;    public int code;&#10;    Codes(int code)&#123;&#10;        this.code = code;&#10;    &#125;&#10;&#125;&#10;&#10;int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
-<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&#34;com.xxx.&#34; + str).newInstance();&#10;&#10;int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
-<h2 id="“责任链”如何优化if-else？"><a href="#“责任链”如何优化if-else？" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
-<p>好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。</p>
-<p>现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。</p>
-<p>好，现在你有一个主控方法，这个方法创建一个上下文对象，再根据分支条件分别调用不同Handler子类上的handle方法，传入这个上下文。你注意到一个问题，分支条件本身和对应的处理逻辑是内聚的。如果条件发生变化，处理往往也要发生变化。反之依然。而且你读代码时，读到一个复杂的条件，往往不能轻易看出它要判断什么，这时最好的方法就是直接看看对应Handler的命名和文档，从处理方式反推这个条件对应的业务需求。既然这样，何不干脆把条件都搬到Handler里去，让每个Handler根据传入的上下文，看看在当前状态下自己是否应该执行处理。</p>
-<p>现在你得到了一个主控类，这个类持有一堆Handler实例，主控类创建一个上下文，然后把上下文依次传给各个Handler，Handler自行判断是否应该执行自己的处理。</p>
-<p>到了这一步，其实已经差不多了。不过对于某些人，他在进行前一步的重构时，就会醒悟：主控类现在已经变成了一个单纯的任务转发人（分配者）。它根本没有必要持有一个Handler的列表再分别逐个调用，还要管理该继续还是该中断等等逻辑（这些逻辑是依赖每个Handler返回的标志来决定的）。何不让Handler自己负责把控制向后分发，主控类只需要知道领头的那个Handler最终会把事情处理好就行了。这种结构还有一个好处，就是每个Handler可以自行决定是否该往下传递控制，还可以根据需要替换上下文实例的实现来影响后续的处理。（这一步与上一步是二选一，有些人喜欢在主控类中持有Handler队列，有些人喜欢链式Handler。我个人认为问题不大，两者的实现难度也没有差别，实现需求就行）</p>
-<p>最后，我们为了交流方便，把这种组合方式称为“责任链”。</p>
-<h2 id="使用状态模式优化if-else"><a href="#使用状态模式优化if-else" class="headerlink" title="使用状态模式优化if else"></a>使用状态模式优化if else</h2><p>参考：<a href="http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html" target="_blank" rel="external">http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html</a></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1178,7 +1187,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1192,7 +1201,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
