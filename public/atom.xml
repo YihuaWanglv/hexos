@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-25T13:25:33.126Z</updated>
+  <updated>2016-05-03T15:37:38.979Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springmvc rest api versioning</title>
+    <link href="http://yoursite.com/2016/05/03/springmvc-rest-api-versioning/"/>
+    <id>http://yoursite.com/2016/05/03/springmvc-rest-api-versioning/</id>
+    <published>2016-05-03T15:34:35.000Z</published>
+    <updated>2016-05-03T15:37:38.979Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/mindhaq/restapi-versioning-spring.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mindhaq/restapi-versioning-spring.git&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/augusto/restVersioning.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/augusto/restVersioning.git&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;/api/v1/xxx&lt;br&gt;controller中的方法注解写法：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@ResponseBody&amp;#10;@RequestMapping(value = &amp;#34;/apiurl/&amp;#123;version&amp;#125;/hello&amp;#34;, method = GET, produces = APPLICATION_JSON_VALUE)&amp;#10;public Hello sayHelloWorldUrl(@PathVariable final ValidVersion version) &amp;#123;&amp;#10;    return new Hello();&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;/api/xxx&lt;br&gt;在header中添加”X-API-Version”:”v1”来进行版本请求的区别&lt;br&gt;controller中的方法注解写法：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@ResponseBody&amp;#10;@RequestMapping(value = &amp;#34;/apiheader/hello&amp;#34;, method = GET, produces = APPLICATION_JSON_VALUE)&amp;#10;public Hello sayHelloWorldHeader(@RequestHeader(&amp;#34;X-API-Version&amp;#34;) final ValidVersion version) &amp;#123;&amp;#10;    return new Hello();&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;/api/xxx&lt;br&gt;在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别&lt;br&gt;controller中的方法注解写法：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@ResponseBody&amp;#10;@RequestMapping(&amp;#10;    value = &amp;#34;/apiaccept/hello&amp;#34;, method = GET,&amp;#10;    produces = &amp;#123;&amp;#34;application/vnd.company.app-v1+json&amp;#34;, &amp;#34;application/vnd.company.app-v2+json&amp;#34;&amp;#125;&amp;#10;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;/api/xxx&lt;br&gt;在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别&lt;br&gt;controller写法：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Controller&amp;#10;@VersionedResource(media = &amp;#34;application/vnd.app.resource&amp;#34;)&amp;#10;public class TestController &amp;#123;&amp;#10;&amp;#10;    @RequestMapping(value = &amp;#123;&amp;#34;/resource&amp;#34;&amp;#125;, method = RequestMethod.GET)&amp;#10;    @VersionedResource(from = &amp;#34;1.0&amp;#34;, to = &amp;#34;1.0&amp;#34;)&amp;#10;    @ResponseBody&amp;#10;    public Resource getResource_v1() &amp;#123;&amp;#10;        return new Resource(&amp;#34;1.0&amp;#34;);&amp;#10;    &amp;#125;&amp;#10;&amp;#10;    @RequestMapping(value = &amp;#123;&amp;#34;/resource&amp;#34;&amp;#125;, method = RequestMethod.GET)&amp;#10;    @VersionedResource(from = &amp;#34;2.0&amp;#34;)&amp;#10;    @ResponseBody&amp;#10;    public Resource getResource_v2_onwards() &amp;#123;&amp;#10;        return new Resource(&amp;#34;2.0&amp;#34;);&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://github.com/mindhaq/restapi-versioning-spring.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mindhaq/restapi-vers
+    
+    </summary>
+    
+    
+      <category term="api" scheme="http://yoursite.com/tags/api/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="rest" scheme="http://yoursite.com/tags/rest/"/>
+    
+      <category term="springmvc" scheme="http://yoursite.com/tags/springmvc/"/>
+    
+      <category term="versioning" scheme="http://yoursite.com/tags/versioning/"/>
+    
+  </entry>
   
   <entry>
     <title>centos6环境下配置mysql主从同步</title>

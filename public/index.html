@@ -202,6 +202,102 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/03/springmvc-rest-api-versioning/" itemprop="url">
+                  springmvc rest api versioning
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-05-03T23:34:35+08:00" content="2016-05-03">
+              2016-05-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p><a href="https://github.com/mindhaq/restapi-versioning-spring.git" target="_blank" rel="external">https://github.com/mindhaq/restapi-versioning-spring.git</a><br><a href="https://github.com/augusto/restVersioning.git" target="_blank" rel="external">https://github.com/augusto/restVersioning.git</a></p>
+<p>这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法。</p>
+<ol>
+<li><p>/api/v1/xxx<br>controller中的方法注解写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody&#10;@RequestMapping(value = &#34;/apiurl/&#123;version&#125;/hello&#34;, method = GET, produces = APPLICATION_JSON_VALUE)&#10;public Hello sayHelloWorldUrl(@PathVariable final ValidVersion version) &#123;&#10;    return new Hello();&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/api/xxx<br>在header中添加”X-API-Version”:”v1”来进行版本请求的区别<br>controller中的方法注解写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody&#10;@RequestMapping(value = &#34;/apiheader/hello&#34;, method = GET, produces = APPLICATION_JSON_VALUE)&#10;public Hello sayHelloWorldHeader(@RequestHeader(&#34;X-API-Version&#34;) final ValidVersion version) &#123;&#10;    return new Hello();&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller中的方法注解写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody&#10;@RequestMapping(&#10;    value = &#34;/apiaccept/hello&#34;, method = GET,&#10;    produces = &#123;&#34;application/vnd.company.app-v1+json&#34;, &#34;application/vnd.company.app-v2+json&#34;&#125;&#10;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;@VersionedResource(media = &#34;application/vnd.app.resource&#34;)&#10;public class TestController &#123;&#10;&#10;    @RequestMapping(value = &#123;&#34;/resource&#34;&#125;, method = RequestMethod.GET)&#10;    @VersionedResource(from = &#34;1.0&#34;, to = &#34;1.0&#34;)&#10;    @ResponseBody&#10;    public Resource getResource_v1() &#123;&#10;        return new Resource(&#34;1.0&#34;);&#10;    &#125;&#10;&#10;    @RequestMapping(value = &#123;&#34;/resource&#34;&#125;, method = RequestMethod.GET)&#10;    @VersionedResource(from = &#34;2.0&#34;)&#10;    @ResponseBody&#10;    public Resource getResource_v2_onwards() &#123;&#10;        return new Resource(&#34;2.0&#34;);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/25/centos6环境下配置mysql主从同步/" itemprop="url">
                   centos6环境下配置mysql主从同步
                 </a>
@@ -1056,91 +1152,6 @@ Slave_SQL_Running: Yes     //此状态必须YES
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/20/java-io体系整理/" itemprop="url">
-                  java-io体系整理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-02-20T12:20:38+08:00" content="2016-02-20">
-              2016-02-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h3 id="java-io体系使用整理"><a href="#java-io体系使用整理" class="headerlink" title="java io体系使用整理"></a>java io体系使用整理</h3><ul>
-<li>来源：<a href="http://www.importnew.com/17714.html" target="_blank" rel="external">http://www.importnew.com/17714.html</a></li>
-<li>思维导图：<a href="http://naotu.baidu.com/file/ef892698672800bd4e2a8306f946f91f" target="_blank" rel="external">http://naotu.baidu.com/file/ef892698672800bd4e2a8306f946f91f</a></li>
-</ul>
-<p><img src="/images/java+io.png" alt=""></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1187,7 +1198,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1201,7 +1212,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

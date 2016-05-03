@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/05/03/springmvc-rest-api-versioning/</loc>
+    
+    <lastmod>2016-05-03T15:37:38.979Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/04/25/centos6%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AEmysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
     
     <lastmod>2016-04-25T13:25:33.126Z</lastmod>
