@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-04T15:07:13.154Z</updated>
+  <updated>2016-05-08T09:00:12.177Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[java][design-pattern]java设计模式之Builder模式</title>
+    <link href="http://yoursite.com/2016/05/08/java-design-pattern-java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8BBuilder%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2016/05/08/java-design-pattern-java设计模式之Builder模式/</id>
+    <published>2016-05-08T08:58:38.000Z</published>
+    <updated>2016-05-08T09:00:12.177Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;java设计模式之Builder模式&quot;&gt;&lt;a href=&quot;#java设计模式之Builder模式&quot; class=&quot;headerlink&quot; title=&quot;java设计模式之Builder模式&quot;&gt;&lt;/a&gt;java设计模式之Builder模式&lt;/h2&gt;&lt;p&gt;设计模式模式很多，实际常用的很少。&lt;br&gt;《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。&lt;br&gt;假设有一个entity(Entity)，有id，name两个字段，如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package demo;&amp;#10;public class Entity &amp;#123;&amp;#10;    private int id;&amp;#10;    private String name;&amp;#10;    public int getId() &amp;#123;&amp;#10;        return id;&amp;#10;    &amp;#125;&amp;#10;    public void setId(int id) &amp;#123;&amp;#10;        this.id = id;&amp;#10;    &amp;#125;&amp;#10;    public String getName() &amp;#123;&amp;#10;        return name;&amp;#10;    &amp;#125;&amp;#10;    public void setName(String name) &amp;#123;&amp;#10;        this.name = name;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;为了不用每次初始化的时候，要一个一个的setxxx设置字段值，通常我们会创建构造函数，通过构造函数直接传入字段，初始化。&lt;br&gt;加入构造函数的实体代码如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public class Entity &amp;#123;&amp;#10;    private int id;&amp;#10;    private String name;&amp;#10;    public Entity() &amp;#123;&amp;#10;        super();&amp;#10;    &amp;#125;&amp;#10;    public Entity(int id, String name) &amp;#123;&amp;#10;        super();&amp;#10;        this.id = id;&amp;#10;        this.name = name;&amp;#10;    &amp;#125;&amp;#10;    public int getId() &amp;#123;&amp;#10;        return id;&amp;#10;    &amp;#125;&amp;#10;    public void setId(int id) &amp;#123;&amp;#10;        this.id = id;&amp;#10;    &amp;#125;&amp;#10;    public String getName() &amp;#123;&amp;#10;        return name;&amp;#10;    &amp;#125;&amp;#10;    public void setName(String name) &amp;#123;&amp;#10;        this.name = name;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后需要初始化实体的时候，我们这样做：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Entity entity = new Entity(1, &amp;#34;name&amp;#34;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这种用法很常用，但是问题来了。&lt;br&gt;当实体Entity的字段需要增加变化的时候怎么办呢？&lt;br&gt;比如增加字段descr，这样构造函数和客户端初始化都需要更新：&lt;br&gt;实体增加：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;private String descr;&amp;#10;public String getDescr() &amp;#123;&amp;#10;    return descr;&amp;#10;&amp;#125;&amp;#10;public void setDescr(String descr) &amp;#123;&amp;#10;    this.descr = descr;&amp;#10;&amp;#125;&amp;#10;public Entity(int id, String name, String descr) &amp;#123;&amp;#10;    super();&amp;#10;    this.id = id;&amp;#10;    this.name = name;&amp;#10;    this.descr = descr;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后原来调用构造函数初始化的代码也需要改动：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Entity entity = new Entity(1, &amp;#34;name&amp;#34;, &amp;#34;descr&amp;#34;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果你的class是不确定的参数，后续可能经常变动，那么你的构造函数可能需要很多个，并且不停的变动，而且，构造函数参数多的时候，参数也很不容易记住。&lt;/p&gt;
+&lt;p&gt;而Effective Java中则推荐一种builder模式来进行实体初始化&lt;br&gt;如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public class Entity &amp;#123;&amp;#10;    private int id;&amp;#10;    private String name;&amp;#10;    private String descr;&amp;#10;    public static class Builder &amp;#123;&amp;#10;        private int id;&amp;#10;        private String name;&amp;#10;        private String descr;&amp;#10;        public Builder(int id) &amp;#123;&amp;#10;            this.id = id;&amp;#10;        &amp;#125;&amp;#10;        public Builder name(String name) &amp;#123;&amp;#10;            this.name = name;&amp;#10;            return this;&amp;#10;        &amp;#125;&amp;#10;        public Builder descr(String descr) &amp;#123;&amp;#10;            this.descr = descr;&amp;#10;            return this;&amp;#10;        &amp;#125;&amp;#10;        public Entity build() &amp;#123;&amp;#10;            return new Entity(this);&amp;#10;        &amp;#125;&amp;#10;    &amp;#125;&amp;#10;    private Entity(Builder b) &amp;#123;&amp;#10;        this.id = b.id;&amp;#10;        this.name = b.name;&amp;#10;        this.descr = b.descr;&amp;#10;    &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;初始化实例的时候，如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Entity entity = new Entity.Builder(10).name(&amp;#34;name&amp;#34;).descr(&amp;#34;descr&amp;#34;).build();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这样的写法，好处是，假如实体Entity以后变化很大，加入很多字段，不会影响到之前客户端初始化的代码，而且，这个初始化的过程非常清晰简单。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;java设计模式之Builder模式&quot;&gt;&lt;a href=&quot;#java设计模式之Builder模式&quot; class=&quot;headerlink&quot; title=&quot;java设计模式之Builder模式&quot;&gt;&lt;/a&gt;java设计模式之Builder模式&lt;/h2&gt;&lt;p&gt;设计模式模式
+    
+    </summary>
+    
+    
+      <category term="Builder" scheme="http://yoursite.com/tags/Builder/"/>
+    
+      <category term="design pattern" scheme="http://yoursite.com/tags/design-pattern/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>java-web知识体系</title>
