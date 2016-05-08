@@ -202,6 +202,235 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/07/为你的项目做合理的版本控制管理/" itemprop="url">
+                  为你的项目做合理的版本控制管理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-04-07T23:32:15+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h3 id="一款经典的分支管理规范"><a href="#一款经典的分支管理规范" class="headerlink" title="一款经典的分支管理规范"></a>一款经典的分支管理规范</h3><p><img src="/images/version.png" alt=""></p>
+<p>###<br>我们需要善用代码版本控制系统。上图就是一款经典的分支管理规范，实践如下。</p>
+<p>1.<br>最稳定的代码放在 master 分支上（相当于 SVN 的 trunk 分支），我们不要直接在 master 分支上提交代码，只能在该分支上进行代码合并操作，例如将其它分支的代码合并到 master 分支上。</p>
+<p>2.<br>我们日常开发中的代码需要从 master 分支拉一条 develop 分支出来，该分支所有人都能访问，但一般情况下，我们也不会直接在该分支上提交代码，代码同样是从其它分支合并到 develop 分支上去。</p>
+<p>3.<br>当我们需要开发某个特性时，需要从 develop 分支拉出一条 feature 分支，例如 feature-1 与 feature-2，在这些分支上并行地开发具体特性。</p>
+<p>4.<br>当特性开发完毕后，我们决定需要发布某个版本了，此时需要从 develop 分支上拉出一条 release 分支，例如 release-1.0.0，并将需要发布的特性从相关 feature 分支一同合并到 release 分支上，随后将针对 release 分支部署测试环境，测试工程师在该分支上做功能测试，开发工程师在该分支上修改 bug。待测试工程师无法找到任何 bug 时，我们可将该 release 分支部署到预发环境，再次验证以后，均无任何 bug，此时可将 release 分支部署到生产环境。待上线完成后，将 release 分支上的代码同时合并到 develop 分支与 master 分支，并在 master 分支上打一个 tag，例如 v1.0.0。</p>
+<p>5.<br>当生产环境发现 bug 时，我们需要从对应的 tag 上（例如 v1.0.0）拉出一条 hotfix 分支（例如 hotfix-1.0.1），并在该分支上做 bug 修复。待 bug 完全修复后，需将 hotfix 分支上的代码同时合并到 develop 分支与 master 分支。</p>
+<p>6.<br>对于版本号我们也有要求，格式为：x.y.z，其中，x 用于有重大重构时才会升级，y 用于有新的特性发布时才会升级，z 用于修改了某个 bug 后才会升级。针对每个微服务，我们都需要严格按照以上开发模式来执行。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/21/在linux下部署spring-boot项目过程记录/" itemprop="url">
+                  在linux下部署spring boot项目过程记录
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-03-21T17:52:34+08:00" content="2016-03-21">
+              2016-03-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="在linux下部署spring-boot项目过程记录"><a href="#在linux下部署spring-boot项目过程记录" class="headerlink" title="在linux下部署spring boot项目过程记录"></a>在linux下部署spring boot项目过程记录</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本文章是在centos7下部署spring boot架构的java web项目的过程中的一些记录，记录了linux服务器中需要用到的软件服务的安装和使用</p>
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>linux版本：CentOs7<br>配备的开发环境软件服务：</p>
+<pre><code>- mysql（centos下默认使用mariadb，也可以，两者兼容）
+- jdk
+- ftp
+- redis
+</code></pre><h3 id="1-linux下开放端口"><a href="#1-linux下开放端口" class="headerlink" title="1. linux下开放端口"></a>1. linux下开放端口</h3><p>先把一些已知要用到的端口放开了，省的后面要用到的时候连不上<br>由于centos7默认没有iptables服务，所以需要先安装<br>首先暂停防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld&#10;systemctl mask firewalld</span><br></pre></td></tr></table></figure></p>
+<p>Then, install the iptables-services package:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install iptables-services</span><br></pre></td></tr></table></figure></p>
+<p>Enable the service at boot-time:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable iptables</span><br></pre></td></tr></table></figure></p>
+<p>配置要放开的端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 22 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 3306 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8080 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 21 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8081 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save&#10;or&#10;/usr/libexec/iptables/iptables.init save</span><br></pre></td></tr></table></figure></p>
+<p>Managing the service开启停止防火墙服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl [stop|start|restart] iptables</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-linux下安装使用mysql"><a href="#2-linux下安装使用mysql" class="headerlink" title="2. linux下安装使用mysql"></a>2. linux下安装使用mysql</h3><p>一般的linux安装mysql，会使用yum install mysql mysql-server mysql-devel<br>然而，在centos7下这样安装的时候，却发现mysql-server安装不上。<br>原来，由于Oracle收购mysql后，开源社区担心mysql有闭源的风险，于是使用mysql的一个分支mariadb替代mysql。mariadb完全兼容mysql。 而centos7就是默认推荐使用mariadb代替mysql。<br>那么，centos7下安装mysql就有两种方式<br>1）使用mariadb；<br>2）卸载mariadb，安装mysql</p>
+<h4 id="方法1-使用mariadb"><a href="#方法1-使用mariadb" class="headerlink" title="方法1:使用mariadb"></a>方法1:使用mariadb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb&#10;systemctl start mariadb&#10;mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h4 id="方法2-安装mysql："><a href="#方法2-安装mysql：" class="headerlink" title="方法2:安装mysql："></a>方法2:安装mysql：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm&#10;# rpm -ivh mysql-community-release-el7-5.noarch.rpm&#10;# yum install mysql-community-server</span><br></pre></td></tr></table></figure>
+<p>安装成功后重启mysql服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># service mysqld restart</span><br></pre></td></tr></table></figure></p>
+<p>初次安装mysql，root账户没有密码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yl-web yl]# mysql -u root</span><br></pre></td></tr></table></figure></p>
+<p>设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; set password for &#39;root&#39;@&#39;localhost&#39; =password(&#39;password&#39;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"><a href="#实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。" class="headerlink" title="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"></a>实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。</h4><p>记录如下：<br>1）在进入mysql工具时，总是有错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mysql -u root -p&#10;Enter password:&#10;ERROR 1045 (28000): Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: NO)</span><br></pre></td></tr></table></figure></p>
+<p>解决：方法操作很简单，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysql stop&#10;# mysqld_safe --user=mysql --skip-grant-tables --skip-networking &#38;&#10;# mysql -u root mysql&#10;mysql&#62; UPDATE user SET Password=PASSWORD(&#39;newpassword&#39;) where USER=&#39;root&#39; and host=&#39;root&#39; or host=&#39;localhost&#39;;//&#25226;&#31354;&#30340;&#29992;&#25143;&#23494;&#30721;&#37117;&#20462;&#25913;&#25104;&#38750;&#31354;&#30340;&#23494;&#30721;&#23601;&#34892;&#20102;&#12290;&#10;mysql&#62; FLUSH PRIVILEGES;&#10;mysql&#62; quit&#10;# /etc/init.d/mysqld restart&#10;# mysql -uroot -p&#10;Enter password: &#60;&#36755;&#20837;&#26032;&#35774;&#30340;&#23494;&#30721;newpassword&#62;</span><br></pre></td></tr></table></figure></p>
+<p>2）MySQL服务在启动的时候，不能创建pid文件。</p>
+<p>在终端看一下该目录是否存在，果然，不存在。<br>于是，创建了/var/run/mysqld/目录，重启MySQL服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# mkdir -p /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
+<p>如果依旧不能成功启动，那有可能是/var/run/mysqld/的属主和属组还是root，mysql并不能在其中创建文件，那么修改该目录的属主和属组，应该就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# ls -ld /var/run/mysqld/&#10;drwxr-xr-x 2 root root 40 Jan 20 18:28 /var/run/mysqld/&#10;[root@spark01 ~]# chown mysql.mysql /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-linux下安装jdk"><a href="#3-linux下安装jdk" class="headerlink" title="3. linux下安装jdk"></a>3. linux下安装jdk</h3><p>一、卸载系统自带的openjdk<br>1、查询系统内置的jdk，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java</span><br></pre></td></tr></table></figure></p>
+<p>此时会列出系统中存在的jdk，如果存在就进行卸载，不存在就直接进行安装。<br>如下：<br>python-javapackages-3.4.1-11.el7.noarch<br>java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64<br>java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64<br>java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64<br>tzdata-java-2015g-1.el7.noarch<br>javapackages-tools-3.4.1-11.el7.noarch<br>java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</p>
+<p>2、进行卸载，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps jdk&#30456;&#20851;&#21517;&#31216;</span><br></pre></td></tr></table></figure></p>
+<p>依次卸载如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps python-javapackages-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64&#10;rpm -e --nodeps java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps tzdata-java-2015g-1.el7.noarch&#10;rpm -e --nodeps javapackages-tools-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>二、jdk安装<br>1、下载jdk并上传到/usr/java目录<br>jdk7下载地址为：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a> 选择对应的linux版本，下载rpm文件。这里选择的是jdk-7u79-linux-x64.rpm。并上传到Linux的/urs/java目录下（java目录不存在则进行创建）。</p>
+<p>2、解压安装<br>进入/usr/java目录，运行如下命令进行解压(rpm -ivh rpm文件名称)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh jdk-7u79-linux-x64.rpm</span><br></pre></td></tr></table></figure></p>
+<p>3、配置profile文件<br>运行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>将如下内容添加到profile文件末尾并保持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.7.0_79&#10;export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar export PATH=$PATH:$JAVA_HOME/bin</span><br></pre></td></tr></table></figure></p>
+<p>/usr/java/jdk1.7.0_79 指的是jdk的路径</p>
+<p>保存之后，运行如下命令使配置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>检查jdk是否安装成功，运行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-linux下安装redis"><a href="#4-linux下安装redis" class="headerlink" title="4. linux下安装redis"></a>4. linux下安装redis</h3><p>1）方法1：使用命令安装<br>安装redis:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install redis</span><br></pre></td></tr></table></figure></p>
+<p>启动/停止/重启 Redis<br>启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start redis.service</span><br></pre></td></tr></table></figure></p>
+<p>停止服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop redis.service</span><br></pre></td></tr></table></figure></p>
+<p>重启服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart redis.service</span><br></pre></td></tr></table></figure></p>
+<p>检查状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status redis.service</span><br></pre></td></tr></table></figure></p>
+<p>随系统启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable redis.service</span><br></pre></td></tr></table></figure></p>
+<p>2）方法二：编译安装<br>下载安装编译:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.17.tar.gz&#10;tar xzf redis-2.8.17.tar.gz&#10;cd redis-2.8.17&#10;make&#10;make install</span><br></pre></td></tr></table></figure></p>
+<p>设置配置文件路径:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/redis &#38;&#38; cp redis.conf /etc/redis</span><br></pre></td></tr></table></figure></p>
+<p>修改配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
+<p>修改为： daemonize yes<br>启动Redis:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-linux配置ftp服务"><a href="#5-linux配置ftp服务" class="headerlink" title="5. linux配置ftp服务"></a>5. linux配置ftp服务</h3><p>在安装前查看是否已安装vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -q vsftpd&#10;vsftpd-3.0.2-9.el7.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>如果有显示类似以上的信息，说明已经安装vsftpd，如果没有，用yum安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install vsftpd</span><br></pre></td></tr></table></figure></p>
+<p>查看一下vsftpd安装在哪：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis vsftpd&#10;vsftpd: /usr/sbin/vsftpd /etc/vsftpd /usr/share/man/man8/vsftpd.8.gz</span><br></pre></td></tr></table></figure></p>
+<p>启动vsftpd服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start vsftpd.service</span><br></pre></td></tr></table></figure></p>
+<p>修改配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure></p>
+<p>修改如下配置：<br>anonymous_enable=NO<br>chroot_local_user=YES<br>allow_writeable_chroot=YES #加上这行解决了无法登陆的问题</p>
+<p>启动／重新启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start&#10;service vsftpd restart</span><br></pre></td></tr></table></figure></p>
+<p>设置开机启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig vsftpd on</span><br></pre></td></tr></table></figure></p>
+<p>配置用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# useradd -g root -M -d /var/www/html -s /sbin/nologin ftpuser&#10;[root@localhost ~]# passwd ftpuser&#10;[root@localhost ~]# &#36755;&#20837;&#23494;&#30721;</span><br></pre></td></tr></table></figure></p>
+<p>把 /var/www/html 的所有权给ftpuser.root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# chown -R ftpuser.root /var/www/html</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动"><a href="#6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动" class="headerlink" title="6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动"></a>6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动</h3><h4 id="编译打包："><a href="#编译打包：" class="headerlink" title="编译打包："></a>编译打包：</h4><p>方法1：使用maven-assembly-plugin插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;artifactId&#62;maven-assembly-plugin&#60;/artifactId&#62; &#10;    &#60;configuration&#62; &#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#60;/manifest&#62; &#10;            &#60;/archive&#62;&#10;        &#60;descriptorRefs&#62;&#10;            &#60;descriptorRef&#62; jar-with-dependencies &#60;/descriptorRef&#62; &#10;        &#60;/descriptorRefs&#62;&#10;    &#60;/configuration&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;id&#62;make-assembly&#60;/id&#62; &#10;            &#60;phase&#62;package&#60;/phase&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;single&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62; &#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
+<p>运行命令：mvn assembly:assembly<br>或者命令：mvn package</p>
+<p>由于我使用这个方式，打出来的jar包里，依赖的jar和模块的class都正常，但是自己项目内的所有class都是空的class，用反编译看class文件，发现都是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解压出来取单个class查看又是正常的，这个问题一直百撕不得骑姐，所以我最后使用了方法2的方式解决了问题。</p>
+<p>方法2：使用spring-boot-maven-plugin插件<br>由于我的project是spring boot项目，所以可以使用此方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-boot-maven-plugin&#60;/artifactId&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;repackage&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62;&#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;&#10;&#60;plugin&#62;&#10;    &#60;groupId&#62;org.apache.maven.plugins&#60;/groupId&#62;&#10;    &#60;artifactId&#62;maven-jar-plugin&#60;/artifactId&#62;&#10;    &#60;configuration&#62;&#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;addClasspath&#62;true&#60;/addClasspath&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#10;            &#60;/manifest&#62;&#10;        &#60;/archive&#62;&#10;    &#60;/configuration&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
+<p>运行mvn package打jar包，done！</p>
+<h4 id="上传并启动"><a href="#上传并启动" class="headerlink" title="上传并启动"></a>上传并启动</h4><p>连接sftp<br>lcd 打开本地路径<br>cd 进入服务器目标路径<br>put xxx.jar 把目标jar包上传到服务器对应路径<br>java -jar xxx.jar 启动java程序</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/11/集群监控初步整理/" itemprop="url">
                   集群监控初步整理
                 </a>
@@ -900,229 +1129,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/31/使用hexo-deploy直接发布到github/" itemprop="url">
-                  使用hexo-deploy直接发布到github
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-12-31T17:08:52+08:00" content="2015-12-31">
-              2015-12-31
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
-<h3 id="1-npm安装需要的东西"><a href="#1-npm安装需要的东西" class="headerlink" title="1.npm安装需要的东西"></a>1.npm安装需要的东西</h3><p>$ npm install hexo-deployer-git –save<br>$ npm install hexo-deployer-heroku –save<br>$ npm install hexo-deployer-rsync –save<br>$ npm install hexo-deployer-openshift –save<br>$ npm install hexo-deployer-ftpsync –save</p>
-<h3 id="2-修改配置文件-config-yml"><a href="#2-修改配置文件-config-yml" class="headerlink" title="2.修改配置文件_config.yml"></a>2.修改配置文件_config.yml</h3><p>deploy:<br>  type: git<br>  repository: <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git</a><br>  branch: master</p>
-<h3 id="3-执行命令提交发布"><a href="#3-执行命令提交发布" class="headerlink" title="3.执行命令提交发布"></a>3.执行命令提交发布</h3><p>$ hexo clean<br>$ hexo generate<br>$ hexo deploy</p>
-<p>over.</p>
-<h3 id="参考：https-hexo-io-zh-cn-docs-deployment-html"><a href="#参考：https-hexo-io-zh-cn-docs-deployment-html" class="headerlink" title="参考：https://hexo.io/zh-cn/docs/deployment.html"></a>参考：<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></h3>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/31/如何使用github-pages和hexo搭建简单blog/" itemprop="url">
-                  如何使用github-pages和hexo搭建简单blog
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-12-31T15:41:30+08:00" content="2015-12-31">
-              2015-12-31
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>前言</p>
-<ul>
-<li>github，写代码必备</li>
-<li>hexo，一个很方便的静态blog生成系统</li>
-<li>还不太熟悉，暂时不放图片</li>
-</ul>
-<p>步骤</p>
-<h3 id="1-首先得有一个github账号"><a href="#1-首先得有一个github账号" class="headerlink" title="1.首先得有一个github账号"></a>1.首先得有一个github账号</h3><p>没有的得先上github创建一个</p>
-<h3 id="2-创建一个repositories"><a href="#2-创建一个repositories" class="headerlink" title="2.创建一个repositories"></a>2.创建一个repositories</h3><ul>
-<li>Repository name的填写格式是xxx.github.io</li>
-<li>xxx要与你github的用户名一致（这样创建好后，可以直接通过xxx.github.io访问）</li>
-<li>创建Repository后，接着是对它进行设置，点击Repository的“setting”进行设置</li>
-<li>使用默认设置即可，最后点击“Launch automatic page generator”启动自动生成blog</li>
-<li>接下来是编辑用户界面，点击绿色的“continue to layouts”按钮配置布局和样式</li>
-<li>最后，点击“Publish page”，你的页面就公布出来了。</li>
-</ul>
-<h3 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><ul>
-<li>首先安装git</li>
-<li>安装node</li>
-<li>安装npm</li>
-<li><p>安装hexo<br>npm install hexo-cli -g<br>npm install hexo –save</p>
-</li>
-<li><p>hexo初始化<br>**根据自己需要创建一个hexo文件夹<br>$ hexo init <folder><br>$ cd <folder><br>$ npm install<br>新建完成后，指定文件夹的目录如下<br>.<br>├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── scripts<br>├── source<br>|      ├── _drafts<br>|      └── _posts<br>└── themes</folder></folder></p>
-</li>
-<li><p>安装Hexo插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save&#10;npm install hexo-generator-archive --save&#10;npm install hexo-generator-category --save&#10;npm install hexo-generator-tag --save&#10;npm install hexo-server --save&#10;npm install hexo-deployer-git --save&#10;npm install hexo-deployer-heroku --save&#10;npm install hexo-deployer-rsync --save&#10;npm install hexo-deployer-openshift --save&#10;npm install hexo-renderer-marked@0.2 --save&#10;npm install hexo-renderer-stylus@0.2 --save&#10;npm install hexo-generator-feed@1 --save&#10;npm install hexo-generator-sitemap@1 --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>本地查看效果<br>执行hexo server命令启动，然后访问localhost:4000查看效果</p>
-</li>
-</ul>
-<h3 id="4-创建一篇文章"><a href="#4-创建一篇文章" class="headerlink" title="4.创建一篇文章"></a>4.创建一篇文章</h3><ul>
-<li>git shell进入之前创建的hexo文件夹，hexo new “hello world”创建一篇新的文章</li>
-</ul>
-<h3 id="5-同步并发布"><a href="#5-同步并发布" class="headerlink" title="5.同步并发布"></a>5.同步并发布</h3><ul>
-<li>hexo g 生成静态文件</li>
-<li>git clone <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地</a></li>
-<li>复制生成的public文件夹内所有文件到clone到本地的yihuawanglv.github.io文件夹内</li>
-</ul>
-<h3 id="6-提交更改到github"><a href="#6-提交更改到github" class="headerlink" title="6.提交更改到github"></a>6.提交更改到github</h3><ul>
-<li>git add *</li>
-<li>git commit -m “代码提交信息”</li>
-<li>git push origin master</li>
-<li>输入用户名密码</li>
-</ul>
-<p>这样再次访问你github上的blog地址，即可发现内容已更新</p>
-<h3 id="7-使用hexo别的主题美化blog样式"><a href="#7-使用hexo别的主题美化blog样式" class="headerlink" title="7.使用hexo别的主题美化blog样式"></a>7.使用hexo别的主题美化blog样式</h3><ul>
-<li>我这里选用的是简介美观的next主题</li>
-<li>在终端窗口下，定位到 Hexo 站点目录下<br>$ cd your-hexo-site<br>$ git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a> themes/next</li>
-<li>启用 NexT 主题<br>克隆/下载 完成后，打开 站点配置文件，找到 theme 字段，并将其值更改为 next。</li>
-<li>验证主题是否启用<br>运行 hexo s –debug，并访问 <a href="http://localhost:4000，确保站点正确运行" target="_blank" rel="external">http://localhost:4000，确保站点正确运行</a></li>
-</ul>
-<h3 id="8-同步新的更改"><a href="#8-同步新的更改" class="headerlink" title="8.同步新的更改"></a>8.同步新的更改</h3><p>现在要把新的更改同步上github，重新执行步骤5和6即可。<br>当然把更新从hexo public文件夹同步到本地的Repository xxx.github.io文件夹内可以使用beyongcompare此类同步软件执行</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1163,7 +1175,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1177,7 +1189,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-08T09:00:12.177Z</updated>
+  <updated>2016-05-08T16:14:15.474Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java static 关键字总结</title>
+    <link href="http://yoursite.com/2016/05/09/java-static-%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2016/05/09/java-static-关键字总结/</id>
+    <published>2016-05-08T16:11:19.000Z</published>
+    <updated>2016-05-08T16:14:15.474Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;总结：&quot;&gt;&lt;a href=&quot;#总结：&quot; class=&quot;headerlink&quot; title=&quot;总结：&quot;&gt;&lt;/a&gt;总结：&lt;/h2&gt;&lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1.&quot;&gt;&lt;/a&gt;1.&lt;/h3&gt;&lt;p&gt;修饰方法时，表示该方法是静态方法，表示该类的该方法可以不产生实例而直接通过类名加方法名的方法去执行该静态方法；&lt;/p&gt;
+&lt;h3 id=&quot;2&quot;&gt;&lt;a href=&quot;#2&quot; class=&quot;headerlink&quot; title=&quot;2.&quot;&gt;&lt;/a&gt;2.&lt;/h3&gt;&lt;p&gt;修饰变量时，表示该变量是静态变量，在java里可以理解为静态变量全局变量。&lt;br&gt;该类的所有实例共享此静态变量，类装载时，只会分配一块存储空间，所有此类对象可以操作此块存储空间。&lt;br&gt;也就是说，static修饰的静态变量也是可以直接通过类名加变量名直接使用的&lt;/p&gt;
+&lt;h3 id=&quot;3&quot;&gt;&lt;a href=&quot;#3&quot; class=&quot;headerlink&quot; title=&quot;3.&quot;&gt;&lt;/a&gt;3.&lt;/h3&gt;&lt;p&gt;普通类不允许被声明为静态的，只有一个内部类可以。&lt;br&gt;被声明为静态的内部类，可以直接作为一个普通类来使用，而不需要一个外部类了。&lt;/p&gt;
+&lt;h2 id=&quot;详述：&quot;&gt;&lt;a href=&quot;#详述：&quot; class=&quot;headerlink&quot; title=&quot;详述：&quot;&gt;&lt;/a&gt;详述：&lt;/h2&gt;&lt;h3 id=&quot;1-1&quot;&gt;&lt;a href=&quot;#1-1&quot; class=&quot;headerlink&quot; title=&quot;1.&quot;&gt;&lt;/a&gt;1.&lt;/h3&gt;&lt;p&gt; static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法，也可以形成静态static代码块，但是Java语言中没有全局变量的概念。 &lt;/p&gt;
+&lt;p&gt;　被static修饰的成员变量和成员方法独立于该类的任何对象。也就是说，它不依赖类特定的实例，被类的所有实例共享。只要这个类被加载，Java虚拟机就能根据类名在运行时数据区的方法区内定找到他们。因此，static对象可以在它的任何对象创建之前访问，无需引用任何对象。 &lt;/p&gt;
+&lt;p&gt;　用public修饰的static成员变量和成员方法本质是全局变量和全局方法，当声明它类的对象时，不生成static变量的副本，而是类的所有实例共享同一个static变量。 &lt;/p&gt;
+&lt;p&gt;　static 变量前可以有private修饰，表示这个变量可以在类的静态代码块中，或者类的其他静态成员方法中使用（当然也可以在非静态成员方法中使用–废话），但是不能在其他类中通过类名来直接引用，这一点很重要。实际上你需要搞明白，private是访问权限限定，static表示不要实例化就可以使用，这样就容易理解多了。static前面加上其它访问权限关键字的效果也以此类推。 &lt;/p&gt;
+&lt;p&gt;　static修饰的成员变量和成员方法习惯上称为静态变量和静态方法，可以直接通过类名来访问，访问语法为：&lt;br&gt;类名.静态方法名(参数列表…)&lt;br&gt;类名.静态变量名 &lt;/p&gt;
+&lt;p&gt;　用static修饰的代码块表示静态代码块，当Java虚拟机（JVM）加载类时，就会执行该代码块（用处非常大，呵呵）。 &lt;/p&gt;
+&lt;h3 id=&quot;2-static变量&quot;&gt;&lt;a href=&quot;#2-static变量&quot; class=&quot;headerlink&quot; title=&quot;2.static变量&quot;&gt;&lt;/a&gt;2.static变量&lt;/h3&gt;&lt;p&gt;　按照是否静态的对类成员变量进行分类可分两种：一种是被static修饰的变量，叫静态变量或类变量；另一种是没有被static修饰的变量，叫实例变量。两者的区别是：&lt;br&gt;　对于静态变量在内存中只有一个拷贝（节省内存），JVM只为静态分配一次内存，在加载类的过程中完成静态变量的内存分配，可用类名直接访问（方便），当然也可以通过对象来访问（但是这是不推荐的）。&lt;br&gt;　对于实例变量，没创建一个实例，就会为实例变量分配一次内存，实例变量可以在内存中有多个拷贝，互不影响（灵活）。 &lt;/p&gt;
+&lt;h3 id=&quot;3-static方法&quot;&gt;&lt;a href=&quot;#3-static方法&quot; class=&quot;headerlink&quot; title=&quot;3.static方法&quot;&gt;&lt;/a&gt;3.static方法&lt;/h3&gt;&lt;p&gt;　静态方法可以直接通过类名调用，任何的实例也都可以调用，因此静态方法中不能用this和super关键字，不能直接访问所属类的实例变量和实例方法 (就是不带static的成员变量和成员成员方法)，只能访问所属类的静态成员变量和成员方法。因为实例成员与特定的对象关联！这个需要去理解，想明白其中的道理，不是记忆！！！&lt;br&gt;　因为static方法独立于任何实例，因此static方法必须被实现，而不能是抽象的abstract。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;总结：&quot;&gt;&lt;a href=&quot;#总结：&quot; class=&quot;headerlink&quot; title=&quot;总结：&quot;&gt;&lt;/a&gt;总结：&lt;/h2&gt;&lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1.&quot;&gt;&lt;/a&gt;1.&lt;/h3&gt;&lt;p&gt;修
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="static关键字" scheme="http://yoursite.com/tags/static%E5%85%B3%E9%94%AE%E5%AD%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[java][enum]典型用法</title>
+    <link href="http://yoursite.com/2016/05/08/java-enum-%E5%85%B8%E5%9E%8B%E7%94%A8%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/05/08/java-enum-典型用法/</id>
+    <published>2016-05-08T15:57:31.000Z</published>
+    <updated>2016-05-08T16:07:15.203Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;java-enum典型用法&quot;&gt;&lt;a href=&quot;#java-enum典型用法&quot; class=&quot;headerlink&quot; title=&quot;java enum典型用法&quot;&gt;&lt;/a&gt;java enum典型用法&lt;/h2&gt;&lt;h3 id=&quot;代码：&quot;&gt;&lt;a href=&quot;#代码：&quot; class=&quot;headerlink&quot; title=&quot;代码：&quot;&gt;&lt;/a&gt;代码：&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package com.iyihua.model.enums;&amp;#10;&amp;#10;import java.util.HashMap;&amp;#10;import java.util.Map;&amp;#10;&amp;#10;public enum GroupType &amp;#123;&amp;#10;&amp;#10;     CATEGORY(0, &amp;#34;category&amp;#34;), PROJECT(1, &amp;#34;project&amp;#34;), LOCATION(2, &amp;#34;location&amp;#34; );&amp;#10;&amp;#10;     private final int id;&amp;#10;     private final String key;&amp;#10;&amp;#10;     GroupType(int id, String key) &amp;#123;&amp;#10;            this. id = id;&amp;#10;            this. key = key;&amp;#10;     &amp;#125;&amp;#10;     &amp;#10;     public int getId() &amp;#123;&amp;#10;            return id;&amp;#10;     &amp;#125;&amp;#10;     public String getKey() &amp;#123;&amp;#10;            return key;&amp;#10;     &amp;#125;&amp;#10;&amp;#10;     private static final Map&amp;#60;String, GroupType&amp;#62; keyToEnum = new HashMap&amp;#60;String, GroupType&amp;#62;();&amp;#10;     static &amp;#123;&amp;#10;            for (GroupType gt : GroupType. values())&amp;#10;                 keyToEnum.put(gt .getKey(), gt );&amp;#10;     &amp;#125;&amp;#10;&amp;#10;     public static GroupType fromString(String symbol) &amp;#123;&amp;#10;            return keyToEnum.get(symbol );&amp;#10;     &amp;#125;&amp;#10;&amp;#10;     public static void main(String[] args) &amp;#123;&amp;#10;           System. out.println( fromString(&amp;#34;category&amp;#34;));&amp;#10;     &amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;说明：&quot;&gt;&lt;a href=&quot;#说明：&quot; class=&quot;headerlink&quot; title=&quot;说明：&quot;&gt;&lt;/a&gt;说明：&lt;/h3&gt;&lt;p&gt;代码中把枚举值对应的string-枚举放到了一个map keyToEnum中，并且是静态化的。&lt;br&gt;如此就可以通过fromString方法，传入key string值，即可返回对应的enum值&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;java-enum典型用法&quot;&gt;&lt;a href=&quot;#java-enum典型用法&quot; class=&quot;headerlink&quot; title=&quot;java enum典型用法&quot;&gt;&lt;/a&gt;java enum典型用法&lt;/h2&gt;&lt;h3 id=&quot;代码：&quot;&gt;&lt;a href=&quot;#代码：&quot; c
+    
+    </summary>
+    
+    
+      <category term="enum" scheme="http://yoursite.com/tags/enum/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>[java][design-pattern]java设计模式之Builder模式</title>
@@ -722,119 +779,6 @@ Slave_SQL_Running: Yes     //此状态必须YES
     
     
       <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用hexo-deploy直接发布到github</title>
-    <link href="http://yoursite.com/2015/12/31/%E4%BD%BF%E7%94%A8hexo-deploy%E7%9B%B4%E6%8E%A5%E5%8F%91%E5%B8%83%E5%88%B0github/"/>
-    <id>http://yoursite.com/2015/12/31/使用hexo-deploy直接发布到github/</id>
-    <published>2015-12-31T09:08:52.000Z</published>
-    <updated>2016-02-20T04:02:04.726Z</updated>
-    
-    <content type="html">&lt;p&gt;本文说明如何使用hexo deploy直接提交到github发布文章。&lt;/p&gt;
-&lt;h3 id=&quot;1-npm安装需要的东西&quot;&gt;&lt;a href=&quot;#1-npm安装需要的东西&quot; class=&quot;headerlink&quot; title=&quot;1.npm安装需要的东西&quot;&gt;&lt;/a&gt;1.npm安装需要的东西&lt;/h3&gt;&lt;p&gt;$ npm install hexo-deployer-git –save&lt;br&gt;$ npm install hexo-deployer-heroku –save&lt;br&gt;$ npm install hexo-deployer-rsync –save&lt;br&gt;$ npm install hexo-deployer-openshift –save&lt;br&gt;$ npm install hexo-deployer-ftpsync –save&lt;/p&gt;
-&lt;h3 id=&quot;2-修改配置文件-config-yml&quot;&gt;&lt;a href=&quot;#2-修改配置文件-config-yml&quot; class=&quot;headerlink&quot; title=&quot;2.修改配置文件_config.yml&quot;&gt;&lt;/a&gt;2.修改配置文件_config.yml&lt;/h3&gt;&lt;p&gt;deploy:&lt;br&gt;  type: git&lt;br&gt;  repository: &lt;a href=&quot;https://github.com/YihuaWanglv/yihuawanglv.github.io.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/yihuawanglv.github.io.git&lt;/a&gt;&lt;br&gt;  branch: master&lt;/p&gt;
-&lt;h3 id=&quot;3-执行命令提交发布&quot;&gt;&lt;a href=&quot;#3-执行命令提交发布&quot; class=&quot;headerlink&quot; title=&quot;3.执行命令提交发布&quot;&gt;&lt;/a&gt;3.执行命令提交发布&lt;/h3&gt;&lt;p&gt;$ hexo clean&lt;br&gt;$ hexo generate&lt;br&gt;$ hexo deploy&lt;/p&gt;
-&lt;p&gt;over.&lt;/p&gt;
-&lt;h3 id=&quot;参考：https-hexo-io-zh-cn-docs-deployment-html&quot;&gt;&lt;a href=&quot;#参考：https-hexo-io-zh-cn-docs-deployment-html&quot; class=&quot;headerlink&quot; title=&quot;参考：https://hexo.io/zh-cn/docs/deployment.html&quot;&gt;&lt;/a&gt;参考：&lt;a href=&quot;https://hexo.io/zh-cn/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hexo.io/zh-cn/docs/deployment.html&lt;/a&gt;&lt;/h3&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文说明如何使用hexo deploy直接提交到github发布文章。&lt;/p&gt;
-&lt;h3 id=&quot;1-npm安装需要的东西&quot;&gt;&lt;a href=&quot;#1-npm安装需要的东西&quot; class=&quot;headerlink&quot; title=&quot;1.npm安装需要的东西&quot;&gt;&lt;/a&gt;1.npm安装
-    
-    </summary>
-    
-    
-      <category term="deploy" scheme="http://yoursite.com/tags/deploy/"/>
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何使用github-pages和hexo搭建简单blog</title>
-    <link href="http://yoursite.com/2015/12/31/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github-pages%E5%92%8Chexo%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95blog/"/>
-    <id>http://yoursite.com/2015/12/31/如何使用github-pages和hexo搭建简单blog/</id>
-    <published>2015-12-31T07:41:30.000Z</published>
-    <updated>2016-02-20T04:02:04.729Z</updated>
-    
-    <content type="html">&lt;p&gt;前言&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;github，写代码必备&lt;/li&gt;
-&lt;li&gt;hexo，一个很方便的静态blog生成系统&lt;/li&gt;
-&lt;li&gt;还不太熟悉，暂时不放图片&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;步骤&lt;/p&gt;
-&lt;h3 id=&quot;1-首先得有一个github账号&quot;&gt;&lt;a href=&quot;#1-首先得有一个github账号&quot; class=&quot;headerlink&quot; title=&quot;1.首先得有一个github账号&quot;&gt;&lt;/a&gt;1.首先得有一个github账号&lt;/h3&gt;&lt;p&gt;没有的得先上github创建一个&lt;/p&gt;
-&lt;h3 id=&quot;2-创建一个repositories&quot;&gt;&lt;a href=&quot;#2-创建一个repositories&quot; class=&quot;headerlink&quot; title=&quot;2.创建一个repositories&quot;&gt;&lt;/a&gt;2.创建一个repositories&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Repository name的填写格式是xxx.github.io&lt;/li&gt;
-&lt;li&gt;xxx要与你github的用户名一致（这样创建好后，可以直接通过xxx.github.io访问）&lt;/li&gt;
-&lt;li&gt;创建Repository后，接着是对它进行设置，点击Repository的“setting”进行设置&lt;/li&gt;
-&lt;li&gt;使用默认设置即可，最后点击“Launch automatic page generator”启动自动生成blog&lt;/li&gt;
-&lt;li&gt;接下来是编辑用户界面，点击绿色的“continue to layouts”按钮配置布局和样式&lt;/li&gt;
-&lt;li&gt;最后，点击“Publish page”，你的页面就公布出来了。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;3-安装hexo&quot;&gt;&lt;a href=&quot;#3-安装hexo&quot; class=&quot;headerlink&quot; title=&quot;3.安装hexo&quot;&gt;&lt;/a&gt;3.安装hexo&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;首先安装git&lt;/li&gt;
-&lt;li&gt;安装node&lt;/li&gt;
-&lt;li&gt;安装npm&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安装hexo&lt;br&gt;npm install hexo-cli -g&lt;br&gt;npm install hexo –save&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;hexo初始化&lt;br&gt;**根据自己需要创建一个hexo文件夹&lt;br&gt;$ hexo init &lt;folder&gt;&lt;br&gt;$ cd &lt;folder&gt;&lt;br&gt;$ npm install&lt;br&gt;新建完成后，指定文件夹的目录如下&lt;br&gt;.&lt;br&gt;├── _config.yml&lt;br&gt;├── package.json&lt;br&gt;├── scaffolds&lt;br&gt;├── scripts&lt;br&gt;├── source&lt;br&gt;|      ├── _drafts&lt;br&gt;|      └── _posts&lt;br&gt;└── themes&lt;/folder&gt;&lt;/folder&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安装Hexo插件&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install hexo-generator-index --save&amp;#10;npm install hexo-generator-archive --save&amp;#10;npm install hexo-generator-category --save&amp;#10;npm install hexo-generator-tag --save&amp;#10;npm install hexo-server --save&amp;#10;npm install hexo-deployer-git --save&amp;#10;npm install hexo-deployer-heroku --save&amp;#10;npm install hexo-deployer-rsync --save&amp;#10;npm install hexo-deployer-openshift --save&amp;#10;npm install hexo-renderer-marked@0.2 --save&amp;#10;npm install hexo-renderer-stylus@0.2 --save&amp;#10;npm install hexo-generator-feed@1 --save&amp;#10;npm install hexo-generator-sitemap@1 --save&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;本地查看效果&lt;br&gt;执行hexo server命令启动，然后访问localhost:4000查看效果&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;4-创建一篇文章&quot;&gt;&lt;a href=&quot;#4-创建一篇文章&quot; class=&quot;headerlink&quot; title=&quot;4.创建一篇文章&quot;&gt;&lt;/a&gt;4.创建一篇文章&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;git shell进入之前创建的hexo文件夹，hexo new “hello world”创建一篇新的文章&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;5-同步并发布&quot;&gt;&lt;a href=&quot;#5-同步并发布&quot; class=&quot;headerlink&quot; title=&quot;5.同步并发布&quot;&gt;&lt;/a&gt;5.同步并发布&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;hexo g 生成静态文件&lt;/li&gt;
-&lt;li&gt;git clone &lt;a href=&quot;https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;复制生成的public文件夹内所有文件到clone到本地的yihuawanglv.github.io文件夹内&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;6-提交更改到github&quot;&gt;&lt;a href=&quot;#6-提交更改到github&quot; class=&quot;headerlink&quot; title=&quot;6.提交更改到github&quot;&gt;&lt;/a&gt;6.提交更改到github&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;git add *&lt;/li&gt;
-&lt;li&gt;git commit -m “代码提交信息”&lt;/li&gt;
-&lt;li&gt;git push origin master&lt;/li&gt;
-&lt;li&gt;输入用户名密码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这样再次访问你github上的blog地址，即可发现内容已更新&lt;/p&gt;
-&lt;h3 id=&quot;7-使用hexo别的主题美化blog样式&quot;&gt;&lt;a href=&quot;#7-使用hexo别的主题美化blog样式&quot; class=&quot;headerlink&quot; title=&quot;7.使用hexo别的主题美化blog样式&quot;&gt;&lt;/a&gt;7.使用hexo别的主题美化blog样式&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;我这里选用的是简介美观的next主题&lt;/li&gt;
-&lt;li&gt;在终端窗口下，定位到 Hexo 站点目录下&lt;br&gt;$ cd your-hexo-site&lt;br&gt;$ git clone &lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/iissnan/hexo-theme-next&lt;/a&gt; themes/next&lt;/li&gt;
-&lt;li&gt;启用 NexT 主题&lt;br&gt;克隆/下载 完成后，打开 站点配置文件，找到 theme 字段，并将其值更改为 next。&lt;/li&gt;
-&lt;li&gt;验证主题是否启用&lt;br&gt;运行 hexo s –debug，并访问 &lt;a href=&quot;http://localhost:4000，确保站点正确运行&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:4000，确保站点正确运行&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;8-同步新的更改&quot;&gt;&lt;a href=&quot;#8-同步新的更改&quot; class=&quot;headerlink&quot; title=&quot;8.同步新的更改&quot;&gt;&lt;/a&gt;8.同步新的更改&lt;/h3&gt;&lt;p&gt;现在要把新的更改同步上github，重新执行步骤5和6即可。&lt;br&gt;当然把更新从hexo public文件夹同步到本地的Repository xxx.github.io文件夹内可以使用beyongcompare此类同步软件执行&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前言&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;github，写代码必备&lt;/li&gt;
-&lt;li&gt;hexo，一个很方便的静态blog生成系统&lt;/li&gt;
-&lt;li&gt;还不太熟悉，暂时不放图片&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;步骤&lt;/p&gt;
-&lt;h3 id=&quot;1-首先得有一个github账号&quot;&gt;&lt;a href=
-    
-    </summary>
-    
-    
-      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-      <category term="github pages" scheme="http://yoursite.com/tags/github-pages/"/>
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
   </entry>
   
