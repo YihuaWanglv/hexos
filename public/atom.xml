@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-08T16:14:15.474Z</updated>
+  <updated>2016-05-30T15:05:26.125Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Jenkins配置Git和Maven的自动化构建Tomcat项目</title>
+    <link href="http://yoursite.com/2016/05/30/%E4%BD%BF%E7%94%A8Jenkins%E9%85%8D%E7%BD%AEGit%E5%92%8CMaven%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BATomcat%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://yoursite.com/2016/05/30/使用Jenkins配置Git和Maven的自动化构建Tomcat项目/</id>
+    <published>2016-05-30T14:50:38.000Z</published>
+    <updated>2016-05-30T15:05:26.125Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;0-前置条件&quot;&gt;&lt;a href=&quot;#0-前置条件&quot; class=&quot;headerlink&quot; title=&quot;0- 前置条件&quot;&gt;&lt;/a&gt;0- 前置条件&lt;/h3&gt;&lt;p&gt;安装jdk和tomcat&lt;br&gt;我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenkins的容器，另外一个tomcat作为简单mvc项目的部署服务器。&lt;br&gt;Jenkins服务器使用8080端口，mvc项目tomcat使用8081端口。&lt;/p&gt;
+&lt;h3 id=&quot;1-部署Jenkins&quot;&gt;&lt;a href=&quot;#1-部署Jenkins&quot; class=&quot;headerlink&quot; title=&quot;1 - 部署Jenkins&quot;&gt;&lt;/a&gt;1 - 部署Jenkins&lt;/h3&gt;&lt;p&gt;官网下载&lt;a href=&quot;http://jenkins-ci.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jenkins-ci.org/&lt;/a&gt;&lt;br&gt;我下载的是最新的2.5版本&lt;br&gt;下载得到一个jenkins.war的war包&lt;br&gt;可以直接使用java -j jenkins.war运行，或者把war包放到tomcat运行&lt;br&gt;我这里是放到tomcat，启动tomcat即可.&lt;br&gt;启动后可以在&lt;a href=&quot;http://localhost:8080/jenkins/，看到Jenkins已经在运行&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/jenkins/，看到Jenkins已经在运行&lt;/a&gt;&lt;br&gt;第一次进入，需要你输入一个key,会提示您在/root/.jenkins/…某个路径下找到&lt;br&gt;进入后会提示你安装一些插件，根据需要安装即可，或者直接安装它提供的一键建议安装.&lt;/p&gt;
+&lt;h3 id=&quot;2-安装相关插件&quot;&gt;&lt;a href=&quot;#2-安装相关插件&quot; class=&quot;headerlink&quot; title=&quot;2 - 安装相关插件&quot;&gt;&lt;/a&gt;2 - 安装相关插件&lt;/h3&gt;&lt;p&gt;我这里需要git plugin和maven plugin，可以在插件管理处搜索安装。&lt;br&gt;这两个基本是默认安装好了的.&lt;/p&gt;
+&lt;h3 id=&quot;3-安装git和maven&quot;&gt;&lt;a href=&quot;#3-安装git和maven&quot; class=&quot;headerlink&quot; title=&quot;3 - 安装git和maven&quot;&gt;&lt;/a&gt;3 - 安装git和maven&lt;/h3&gt;&lt;p&gt;安装git&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum install git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;安装maven&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&amp;#12289;&amp;#23448;&amp;#32593;&amp;#25214;&amp;#21040;&amp;#26368;&amp;#26032;&amp;#29256;&amp;#30340;&amp;#23433;&amp;#35013;&amp;#21253;&amp;#65306;&amp;#10;http://maven.apache.org/download.cgi&amp;#10;&amp;#10;&amp;#25335;&amp;#36125;&amp;#25991;&amp;#20214;&amp;#21517;&amp;#20026; *-bin.tar.gz &amp;#30340;&amp;#38142;&amp;#25509;&amp;#22320;&amp;#22336;&amp;#65307;&amp;#10;&amp;#10;2&amp;#12289;&amp;#19979;&amp;#36733;&amp;#10;# wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz&amp;#10;&amp;#10;3&amp;#12289;&amp;#35299;&amp;#21387;&amp;#10;# tar xvf apache-maven-3.3.3-bin.tar.gz&amp;#10;&amp;#10;&amp;#22914;&amp;#26524;&amp;#38656;&amp;#35201;&amp;#65306;&amp;#31227;&amp;#21160;&amp;#21040;&amp;#20854;&amp;#20182;&amp;#30446;&amp;#24405;&amp;#10;&amp;#24314;&amp;#31435;&amp;#36719;&amp;#36830;&amp;#25509;&amp;#65306;# ln -s apache-maven-3.3.3 maven&amp;#10;&amp;#10;4&amp;#12289;&amp;#37197;&amp;#32622;&amp;#29615;&amp;#22659;&amp;#21464;&amp;#37327;&amp;#10;# vi /etc/profile&amp;#10;export M2_HOME=/usr/local/apache-maven&amp;#10;export PATH=$PATH:$M2_HOME/bin&amp;#10;&amp;#10;# source /etc/profile&amp;#10;&amp;#10;5&amp;#12289;&amp;#39564;&amp;#35777;&amp;#26159;&amp;#21542;&amp;#23433;&amp;#35013;&amp;#25104;&amp;#21151;&amp;#10;# mvn -version&amp;#10;Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:37+08:00)&amp;#10;Maven home: /opt/app/maven&amp;#10;Java version: 1.8.0_51, vendor: Oracle Corporation&amp;#10;Java home: /usr/java/jdk1.8.0_51/jre&amp;#10;Default locale: zh_CN, platform encoding: UTF-8&amp;#10;OS name: &amp;#34;linux&amp;#34;, version: &amp;#34;3.10.0-229.el7.x86_64&amp;#34;, arch: &amp;#34;amd64&amp;#34;, family: &amp;#34;unix&amp;#34;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;4-配置jdk和maven路径等&quot;&gt;&lt;a href=&quot;#4-配置jdk和maven路径等&quot; class=&quot;headerlink&quot; title=&quot;4 - 配置jdk和maven路径等&quot;&gt;&lt;/a&gt;4 - 配置jdk和maven路径等&lt;/h3&gt;&lt;p&gt;选择”系统管理” -&amp;gt; “Global Tool Configuration”&lt;br&gt;在里面配置好jdk，maven的路径，只需要配置它们的根路径.&lt;/p&gt;
+&lt;h3 id=&quot;5-创建任务，配置项目信息&quot;&gt;&lt;a href=&quot;#5-创建任务，配置项目信息&quot; class=&quot;headerlink&quot; title=&quot;5 - 创建任务，配置项目信息&quot;&gt;&lt;/a&gt;5 - 创建任务，配置项目信息&lt;/h3&gt;&lt;p&gt;选择“新建”，填写项目任务名，并选择“构建一个maven项目”，保存.&lt;br&gt;&lt;img src=&quot;/images/jenkins-001.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;进入项目配置.&lt;br&gt;填写项目名称&lt;br&gt;填写Repository URL&lt;br&gt;我这里使用的是一个git上的一个建议springmvc项目&lt;br&gt;&lt;a href=&quot;https://github.com/bingyue/easy-springmvc-maven&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/bingyue/easy-springmvc-maven&lt;/a&gt;&lt;br&gt;如果需要，也可以配置一下构建后发送邮件到您的邮箱&lt;br&gt;&lt;img src=&quot;/images/jenkins-002.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;6-配置构建成功后的动作，添加shell&quot;&gt;&lt;a href=&quot;#6-配置构建成功后的动作，添加shell&quot; class=&quot;headerlink&quot; title=&quot;6 - 配置构建成功后的动作，添加shell&quot;&gt;&lt;/a&gt;6 - 配置构建成功后的动作，添加shell&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/jenkins-003.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;配置项目中的“Post Steps”，设置构建完成后的动作.&lt;br&gt;这里我设置为将war包拷贝到Tomcat目录，删除项目原来的内容文件夹，并重启Tomcat。&lt;br&gt;选择Run only if build succeeds or is unstable ，点击添加Execute Shell：&lt;br&gt;shell脚本:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#!/bin/bash&amp;#10;#copy file and restart tomcat&amp;#10;&amp;#10;tomcat_path=/usr/local/tomcat/apache-tomcat-7.0.65&amp;#10;project=easy-springmvc-maven&amp;#10;war_name=easy-springmvc-maven.war&amp;#10;war_path=http://192.168.1.119:8080/jenkins/job/jenkins-test/ws/target&amp;#10;server_port=8081&amp;#10;file_path=/root/.jenkins/workspace/jenkins-test/target&amp;#10;&amp;#10;now=$(date +&amp;#34;%Y%m%d%H%M%S&amp;#34;)&amp;#10;echo &amp;#34;the shell execute time is $&amp;#123;now&amp;#125;&amp;#34;&amp;#10;&amp;#10;echo `lsof -n -P -t -i :$&amp;#123;server_port&amp;#125;`&amp;#10;tomcat_pid=`lsof -n -P -t -i :$&amp;#123;server_port&amp;#125;`&amp;#10;echo &amp;#34;the tomcat_pid is $&amp;#123;tomcat_pid&amp;#125;&amp;#34;&amp;#10;&amp;#10;if [ &amp;#34;$&amp;#123;tomcat_pid&amp;#125;&amp;#34; != &amp;#34;&amp;#34; ]; then&amp;#10;   kill -9 $tomcat_pid&amp;#10;   echo &amp;#34;kill the server&amp;#34;&amp;#10;fi&amp;#10;&amp;#10;echo &amp;#34;rm $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;war_name&amp;#125;&amp;#34;&amp;#10;rm $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;war_name&amp;#125;&amp;#10;&amp;#10;echo &amp;#34;rm -rf $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;project&amp;#125;&amp;#34;&amp;#10;rm -rf $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;project&amp;#125;&amp;#10;&amp;#10;cd $file_path&amp;#10;if [ -f $&amp;#123;war_name&amp;#125; ]; then&amp;#10;   cp $&amp;#123;war_name&amp;#125; $&amp;#123;tomcat_path&amp;#125;/webapps&amp;#10;   echo &amp;#34;cp war to webapps finished&amp;#34;&amp;#10;else&amp;#10;   echo &amp;#34;$&amp;#123;war_name&amp;#125; unexists&amp;#34;&amp;#10;fi&amp;#10;&amp;#10;cd $tomcat_path/bin&amp;#10;echo &amp;#34;run startup&amp;#34;&amp;#10;sudo ./startup.sh&amp;#10;echo &amp;#34;server restarted&amp;#34;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;我这里是在/usr/local/tomcat/apache-tomcat-7.0.65&lt;br&gt;这个路径下配置了另外一个tomcat来运行测试的web项目.&lt;br&gt;shell脚本启动tomcat的命令”./startup.sh”，注意要使用sudo&lt;/p&gt;
+&lt;h3 id=&quot;7-运行构建项目&quot;&gt;&lt;a href=&quot;#7-运行构建项目&quot; class=&quot;headerlink&quot; title=&quot;7 - 运行构建项目&quot;&gt;&lt;/a&gt;7 - 运行构建项目&lt;/h3&gt;&lt;p&gt;打开项目的主面板，直接点击绿色的运行任务构建按钮。&lt;/p&gt;
+&lt;p&gt;done!&lt;/p&gt;
+&lt;h3 id=&quot;8-其他&quot;&gt;&lt;a href=&quot;#8-其他&quot; class=&quot;headerlink&quot; title=&quot;8 - 其他&quot;&gt;&lt;/a&gt;8 - 其他&lt;/h3&gt;&lt;p&gt;这个例子使用了同一台服务器部署Jenkins和实际项目。&lt;br&gt;实际应用则常用法是Jenkins单独部署，&lt;br&gt;所有别的要部署的项目，自己拥有服务器，为每个项目都创建Jenkins任务，在项目编译成功后，到Jenkins服务器下载编译好的部署包，然后依旧使用shell脚本完成这一切。&lt;br&gt;并且，可以为不同的部署环境配置不同的任务。一切都是可以定制的。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;0-前置条件&quot;&gt;&lt;a href=&quot;#0-前置条件&quot; class=&quot;headerlink&quot; title=&quot;0- 前置条件&quot;&gt;&lt;/a&gt;0- 前置条件&lt;/h3&gt;&lt;p&gt;安装jdk和tomcat&lt;br&gt;我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenk
+    
+    </summary>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="jenkins" scheme="http://yoursite.com/tags/jenkins/"/>
+    
+      <category term="持续集成" scheme="http://yoursite.com/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+      <category term="自动化构建" scheme="http://yoursite.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>java static 关键字总结</title>
@@ -756,29 +796,6 @@ Slave_SQL_Running: Yes     //此状态必须YES
       <category term="jquery" scheme="http://yoursite.com/tags/jquery/"/>
     
       <category term="validate" scheme="http://yoursite.com/tags/validate/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[git]git常用-把本地项目提交到github</title>
-    <link href="http://yoursite.com/2015/12/31/git-git%E5%B8%B8%E7%94%A8-%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/"/>
-    <id>http://yoursite.com/2015/12/31/git-git常用-把本地项目提交到github/</id>
-    <published>2015-12-31T10:04:12.000Z</published>
-    <updated>2016-02-20T04:02:04.710Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;1-把本地项目提交到github&quot;&gt;&lt;a href=&quot;#1-把本地项目提交到github&quot; class=&quot;headerlink&quot; title=&quot;1.把本地项目提交到github&quot;&gt;&lt;/a&gt;1.把本地项目提交到github&lt;/h3&gt;&lt;p&gt;touch README.md //新建说明文件&lt;br&gt;git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录&lt;br&gt;git add . //添加当前目录中的所有文件到索引&lt;br&gt;git commit -m “first commit” //提交到本地源码库，并附加提交注释&lt;br&gt;git remote add origin &lt;a href=&quot;https://github.com/chape/test.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/chape/test.git&lt;/a&gt; //添加到远程项目，别名为origin&lt;br&gt;git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交&lt;/p&gt;
-&lt;h3 id=&quot;2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘&quot;&gt;&lt;a href=&quot;#2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘&quot; class=&quot;headerlink&quot; title=&quot;2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘&quot;&gt;&lt;/a&gt;2.如果有error: failed to push some refs to ‘&lt;a href=&quot;https://github.com/YihuaWanglv/myhexo.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/myhexo.git&lt;/a&gt;‘&lt;/h3&gt;&lt;p&gt;有如下几种解决方法：&lt;/p&gt;
-&lt;p&gt;1.使用强制push的方法：&lt;br&gt;$ git push -u origin master -f&lt;br&gt;这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。&lt;br&gt;2.push前先将远程repository修改pull下来&lt;br&gt;$ git pull origin master&lt;br&gt;$ git push -u origin master&lt;br&gt;3.若不想merge远程和本地修改，可以先创建新的分支：&lt;br&gt;$ git branch [name]&lt;br&gt;然后push&lt;br&gt;$ git push -u origin [name]&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;1-把本地项目提交到github&quot;&gt;&lt;a href=&quot;#1-把本地项目提交到github&quot; class=&quot;headerlink&quot; title=&quot;1.把本地项目提交到github&quot;&gt;&lt;/a&gt;1.把本地项目提交到github&lt;/h3&gt;&lt;p&gt;touch README.m
-    
-    </summary>
-    
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
     
   </entry>
   
