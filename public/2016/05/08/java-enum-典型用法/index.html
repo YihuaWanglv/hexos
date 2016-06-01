@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="enum,java," />
+  <meta name="keywords" content="java,enum," />
 
 
 
@@ -53,16 +53,16 @@
 
 
 
-<meta name="description" content="java enum典型用法代码：1package com.iyihua.model.enums;&amp;#10;&amp;#10;import java.util.HashMap;&amp;#10;import java.util.Map;&amp;#10;&amp;#10;public enum GroupType &amp;#123;&amp;#10;&amp;#10;     CATEGORY(0, &amp;#34;category&amp;#34;), PROJE">
+<meta name="description" content="java enum典型用法代码：1234567891011121314151617181920212223242526272829303132333435363738package com.iyihua.model.enums;import java.util.HashMap;import java.util.Map;public enum GroupType &amp;#123;     CATEGOR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[java][enum]典型用法">
 <meta property="og:url" content="http://yoursite.com/2016/05/08/java-enum-典型用法/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="java enum典型用法代码：1package com.iyihua.model.enums;&amp;#10;&amp;#10;import java.util.HashMap;&amp;#10;import java.util.Map;&amp;#10;&amp;#10;public enum GroupType &amp;#123;&amp;#10;&amp;#10;     CATEGORY(0, &amp;#34;category&amp;#34;), PROJE">
+<meta property="og:description" content="java enum典型用法代码：1234567891011121314151617181920212223242526272829303132333435363738package com.iyihua.model.enums;import java.util.HashMap;import java.util.Map;public enum GroupType &amp;#123;     CATEGOR">
 <meta property="og:updated_time" content="2016-05-08T16:07:15.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[java][enum]典型用法">
-<meta name="twitter:description" content="java enum典型用法代码：1package com.iyihua.model.enums;&amp;#10;&amp;#10;import java.util.HashMap;&amp;#10;import java.util.Map;&amp;#10;&amp;#10;public enum GroupType &amp;#123;&amp;#10;&amp;#10;     CATEGORY(0, &amp;#34;category&amp;#34;), PROJE">
+<meta name="twitter:description" content="java enum典型用法代码：1234567891011121314151617181920212223242526272829303132333435363738package com.iyihua.model.enums;import java.util.HashMap;import java.util.Map;public enum GroupType &amp;#123;     CATEGOR">
 
 
 
@@ -132,7 +132,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首頁
+            Startseite
           </a>
         </li>
       
@@ -142,7 +142,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            歸檔
+            Archiv
           </a>
         </li>
       
@@ -152,7 +152,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            標籤
+            Tags
           </a>
         </li>
       
@@ -202,7 +202,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-05-08T23:57:31+08:00" content="2016-05-08">
               2016-05-08
             </time>
@@ -227,7 +227,7 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="java-enum典型用法"><a href="#java-enum典型用法" class="headerlink" title="java enum典型用法"></a>java enum典型用法</h2><h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package com.iyihua.model.enums;&#10;&#10;import java.util.HashMap;&#10;import java.util.Map;&#10;&#10;public enum GroupType &#123;&#10;&#10;     CATEGORY(0, &#34;category&#34;), PROJECT(1, &#34;project&#34;), LOCATION(2, &#34;location&#34; );&#10;&#10;     private final int id;&#10;     private final String key;&#10;&#10;     GroupType(int id, String key) &#123;&#10;            this. id = id;&#10;            this. key = key;&#10;     &#125;&#10;     &#10;     public int getId() &#123;&#10;            return id;&#10;     &#125;&#10;     public String getKey() &#123;&#10;            return key;&#10;     &#125;&#10;&#10;     private static final Map&#60;String, GroupType&#62; keyToEnum = new HashMap&#60;String, GroupType&#62;();&#10;     static &#123;&#10;            for (GroupType gt : GroupType. values())&#10;                 keyToEnum.put(gt .getKey(), gt );&#10;     &#125;&#10;&#10;     public static GroupType fromString(String symbol) &#123;&#10;            return keyToEnum.get(symbol );&#10;     &#125;&#10;&#10;     public static void main(String[] args) &#123;&#10;           System. out.println( fromString(&#34;category&#34;));&#10;     &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+        <span itemprop="articleBody"><h2 id="java-enum典型用法"><a href="#java-enum典型用法" class="headerlink" title="java enum典型用法"></a>java enum典型用法</h2><h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.iyihua.model.enums;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public enum GroupType &#123;</span><br><span class="line"></span><br><span class="line">     CATEGORY(0, &quot;category&quot;), PROJECT(1, &quot;project&quot;), LOCATION(2, &quot;location&quot; );</span><br><span class="line"></span><br><span class="line">     private final int id;</span><br><span class="line">     private final String key;</span><br><span class="line"></span><br><span class="line">     GroupType(int id, String key) &#123;</span><br><span class="line">            this. id = id;</span><br><span class="line">            this. key = key;</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     public int getId() &#123;</span><br><span class="line">            return id;</span><br><span class="line">     &#125;</span><br><span class="line">     public String getKey() &#123;</span><br><span class="line">            return key;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     private static final Map&lt;String, GroupType&gt; keyToEnum = new HashMap&lt;String, GroupType&gt;();</span><br><span class="line">     static &#123;</span><br><span class="line">            for (GroupType gt : GroupType. values())</span><br><span class="line">                 keyToEnum.put(gt .getKey(), gt );</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public static GroupType fromString(String symbol) &#123;</span><br><span class="line">            return keyToEnum.get(symbol );</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public static void main(String[] args) &#123;</span><br><span class="line">           System. out.println( fromString(&quot;category&quot;));</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>代码中把枚举值对应的string-枚举放到了一个map keyToEnum中，并且是静态化的。<br>如此就可以通过fromString方法，传入key string值，即可返回对应的enum值</p>
 </span>
       
@@ -237,9 +237,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/enum/" rel="tag">#enum</a>
-          
             <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/enum/" rel="tag">#enum</a>
           
         </div>
       
@@ -309,10 +309,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目錄
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            本站概覽
+            Übersicht
           </li>
         </ul>
       
@@ -326,22 +326,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">Kategorien</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -408,11 +408,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主題 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>

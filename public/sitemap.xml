@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/06/01/Jenkins%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5-Jenkins%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2git%E6%89%98%E7%AE%A1%E7%9A%84springboot%E9%A1%B9%E7%9B%AE/</loc>
+    
+    <lastmod>2016-06-01T14:09:14.708Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/05/30/%E4%BD%BF%E7%94%A8Jenkins%E9%85%8D%E7%BD%AEGit%E5%92%8CMaven%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BATomcat%E9%A1%B9%E7%9B%AE/</loc>
     
     <lastmod>2016-05-30T15:05:26.125Z</lastmod>

@@ -133,7 +133,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首頁
+            Startseite
           </a>
         </li>
       
@@ -143,7 +143,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            歸檔
+            Archiv
           </a>
         </li>
       
@@ -153,7 +153,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            標籤
+            Tags
           </a>
         </li>
       
@@ -202,6 +202,104 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/09/springboot-在spring项目中连接数据库以及spring-datajpa和mybatis的使用/" itemprop="url">
+                  [springboot]在spring项目中连接数据库以及spring-datajpa和mybatis的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-04-09T11:37:07+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="1-在项目中添加数据库配置（添加数据源等配置）"><a href="#1-在项目中添加数据库配置（添加数据源等配置）" class="headerlink" title="1.在项目中添加数据库配置（添加数据源等配置）"></a>1.在项目中添加数据库配置（添加数据源等配置）</h2><p>spring boot推崇约定大于配置，即是说，即使你什么也配置，spring boot也会为你添加一些约定俗成的默认配置。<br>比如数据源dataSource就是，如果你的spring boot项目没有数据源配置，那么默认情况下项目启动会失败，提示你配置数据源。<br>如果你的项目真的不需要数据源，没有数据库url等配置，那么你需要显式的使用注解配置告诉spring boot。<br>在启动类添加注解：<br>@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class}</p>
+<p>回到数据源配置上来。<br>首先,在配置文件application.properties里面配置数据库url<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:mysql://localhost/dbname</span><br><span class="line">spring.datasource.username=username</span><br><span class="line">spring.datasource.password=password</span><br><span class="line">spring.datasource.driver-class-name=com.mysql.jdbc.Driver</span><br></pre></td></tr></table></figure></p>
+<p>使用mysql数据库，还需要添加maven依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后，添加数据库配置类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import javax.sql.DataSource;</span><br><span class="line">import org.apache.ibatis.session.ExecutorType;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line">import org.mybatis.spring.SqlSessionFactoryBean;</span><br><span class="line">import org.mybatis.spring.SqlSessionTemplate;</span><br><span class="line">import org.mybatis.spring.annotation.MapperScan;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.core.io.ClassPathResource;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class DatabaseConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception &#123;</span><br><span class="line">        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();</span><br><span class="line">        sessionFactory.setDataSource(dataSource);</span><br><span class="line">        return sessionFactory.getObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如此，项目中就有了数据源</p>
+<h2 id="2-在项目中使用spring-data-jpa"><a href="#2-在项目中使用spring-data-jpa" class="headerlink" title="2.在项目中使用spring-data-jpa"></a>2.在项目中使用spring-data-jpa</h2><p>添加maven依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>添加Repository类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.data.domain.Page;</span><br><span class="line">import org.springframework.data.domain.Pageable;</span><br><span class="line">import org.springframework.data.repository.CrudRepository;</span><br><span class="line"></span><br><span class="line">import com.xxx.xxx.model.User;</span><br><span class="line"></span><br><span class="line">public interface UserRepository extends CrudRepository&lt;User, Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">    Page&lt;User&gt; findAll(Pageable pageable);</span><br><span class="line">    Page&lt;User&gt; findByNameContainingAndTypeContainingAllIgnoringCase(String name, Integer type, Pageable pageable);</span><br><span class="line">    User findByNameAndTypeAllIgnoringCase(String name, Integer type);</span><br><span class="line">    User findByName(String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>pring-data-jpa的使用极其简单，只需要配置好对应的Repository接口即可，不需要操作的具体实现<br>这个例子中，UserRepository继承了CrudRepository，默认即拥有基础的增删改查接口。<br>然后你只需添加一些你需要的额外接口方法。<br>同样你只需按照其约定的方式写好接口方法，而不需要具体实现。</p>
+<p>使用：<br>在需要的地方注解注入即可。<br>@Autowrite UserRepository userRepository;</p>
+<h2 id="3-在项目中使用mybatis"><a href="#3-在项目中使用mybatis" class="headerlink" title="3.在项目中使用mybatis"></a>3.在项目中使用mybatis</h2><p>添加maven依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>mybatis的使用，和jpa一样，默认也是只需要定义Mapper接口即可，不需要实现类，但需要具体实现的sql。<br>你可以使用xml写sql，或者在接口上面使用注解注入sql两种方式。</p>
+<p>注解sql例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface ItemMapper &#123;</span><br><span class="line">    @Select(&quot;select * from item&quot;)</span><br><span class="line">    List&lt;Item&gt; findAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而如果是xml配置文件的话，则需要mapper xml中的sql id和Mapper接口中的接口方法名称一致。</p>
+<p>当然，如果习惯了使用具体实现，使用SqlSessionTemplate，也可以实现。<br>首先需要改一下DatabaseConfig配置类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import javax.sql.DataSource;</span><br><span class="line">import org.apache.ibatis.session.ExecutorType;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line">import org.mybatis.spring.SqlSessionFactoryBean;</span><br><span class="line">import org.mybatis.spring.SqlSessionTemplate;</span><br><span class="line">import org.mybatis.spring.annotation.MapperScan;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.core.io.ClassPathResource;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@MapperScan(basePackages=&quot;com.xxx.xxx.mapper&quot;)</span><br><span class="line">public class DatabaseConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception &#123;</span><br><span class="line">        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();</span><br><span class="line">        sessionFactory.setDataSource(dataSource);</span><br><span class="line">        sessionFactory.setConfigLocation(new ClassPathResource(&quot;mybatis-config.xml&quot;));</span><br><span class="line">        return sessionFactory.getObject();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) &#123;</span><br><span class="line">        return new SqlSessionTemplate(sqlSessionFactory, ExecutorType.SIMPLE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加mybatis配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;package name=&quot;com.xxx.xxx.model&quot;/&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper resource=&quot;mapper/xxxMapper.xml&quot;/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>具体Mapper实现类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class ItemMapper &#123;</span><br><span class="line">    @Autowired private SqlSessionTemplate sqlSessionTemplate;</span><br><span class="line"></span><br><span class="line">    public Item selectItemById(long id) &#123;</span><br><span class="line">        return this.sqlSessionTemplate.selectOne(&quot;selectItemById&quot;, id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>done！</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/09/spring-boot-springboot实践之在项目中使用spring-cache和redis实现缓存/" itemprop="url">
                   [spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存
                 </a>
@@ -212,7 +310,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-04-09T10:43:01+08:00" content="2016-04-09">
               2016-04-09
             </time>
@@ -241,12 +339,12 @@
           <span itemprop="articleBody">
             
               <h2 id="1-首先需要准备一个redis服务端作为缓存"><a href="#1-首先需要准备一个redis服务端作为缓存" class="headerlink" title="1.首先需要准备一个redis服务端作为缓存"></a>1.首先需要准备一个redis服务端作为缓存</h2><p>redis下载安装启动，比较简单，请google之。</p>
-<h2 id="2-项目依赖"><a href="#2-项目依赖" class="headerlink" title="2.项目依赖"></a>2.项目依赖</h2><p>使用spring boot和spring cache，需要springboot依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependency&#62;&#10;    &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;&#60;/dependency&#62;</span><br></pre></td></tr></table></figure></p>
-<p>连接redis，需要spring data redis和jedis包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependency&#62;&#10;    &#60;groupId&#62;org.springframework.data&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-data-redis&#60;/artifactId&#62;&#10;&#60;/dependency&#62;&#10;&#60;dependency&#62;&#10;    &#60;groupId&#62;redis.clients&#60;/groupId&#62;&#10;    &#60;artifactId&#62;jedis&#60;/artifactId&#62;&#10;&#60;/dependency&#62;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-项目依赖"><a href="#2-项目依赖" class="headerlink" title="2.项目依赖"></a>2.项目依赖</h2><p>使用spring boot和spring cache，需要springboot依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>连接redis，需要spring data redis和jedis包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
 <h2 id="3-程序配置实现与使用"><a href="#3-程序配置实现与使用" class="headerlink" title="3.程序配置实现与使用"></a>3.程序配置实现与使用</h2><p>不同于spring使用xml配置文件来配置bean，spring boot使用java bean直接在java类中配置需要用到的Bean。</p>
-<h3 id="添加redis-cache相关的config类，如下："><a href="#添加redis-cache相关的config类，如下：" class="headerlink" title="添加redis cache相关的config类，如下："></a>添加redis cache相关的config类，如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.cache.CacheManager;&#10;import org.springframework.cache.annotation.CachingConfigurerSupport;&#10;import org.springframework.cache.annotation.EnableCaching;&#10;import org.springframework.context.annotation.Bean;&#10;import org.springframework.context.annotation.Configuration;&#10;import org.springframework.data.redis.cache.RedisCacheManager;&#10;import org.springframework.data.redis.connection.RedisConnectionFactory;&#10;import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;&#10;import org.springframework.data.redis.core.RedisTemplate;&#10;&#10;@Configuration&#10;@EnableCaching&#10;public class RedisCacheConfig extends CachingConfigurerSupport &#123;&#10;    @Bean&#10;    public JedisConnectionFactory redisConnectionFactory() &#123;&#10;        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();&#10;        redisConnectionFactory.setHostName(&#34;127.0.0.1&#34;);&#10;        redisConnectionFactory.setPort(6379);&#10;        return redisConnectionFactory;&#10;    &#125;&#10;    @Bean&#10;    public RedisTemplate&#60;String, String&#62; redisTemplate(RedisConnectionFactory cf) &#123;&#10;        RedisTemplate&#60;String, String&#62; redisTemplate = new RedisTemplate&#60;String, String&#62;();&#10;        redisTemplate.setConnectionFactory(cf);&#10;        return redisTemplate;&#10;    &#125;&#10;    @Bean(name = &#34;redisCacheManager&#34;)&#10;    public CacheManager cacheManager(RedisTemplate redisTemplate) &#123;&#10;        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);&#10;        cacheManager.setDefaultExpiration(300);&#10;        return cacheManager;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="添加redis-cache相关的config类，如下："><a href="#添加redis-cache相关的config类，如下：" class="headerlink" title="添加redis cache相关的config类，如下："></a>添加redis cache相关的config类，如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.cache.CacheManager;</span><br><span class="line">import org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line">import org.springframework.cache.annotation.EnableCaching;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.data.redis.cache.RedisCacheManager;</span><br><span class="line">import org.springframework.data.redis.connection.RedisConnectionFactory;</span><br><span class="line">import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;</span><br><span class="line">import org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableCaching</span><br><span class="line">public class RedisCacheConfig extends CachingConfigurerSupport &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public JedisConnectionFactory redisConnectionFactory() &#123;</span><br><span class="line">        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();</span><br><span class="line">        redisConnectionFactory.setHostName(&quot;127.0.0.1&quot;);</span><br><span class="line">        redisConnectionFactory.setPort(6379);</span><br><span class="line">        return redisConnectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public RedisTemplate&lt;String, String&gt; redisTemplate(RedisConnectionFactory cf) &#123;</span><br><span class="line">        RedisTemplate&lt;String, String&gt; redisTemplate = new RedisTemplate&lt;String, String&gt;();</span><br><span class="line">        redisTemplate.setConnectionFactory(cf);</span><br><span class="line">        return redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;redisCacheManager&quot;)</span><br><span class="line">    public CacheManager cacheManager(RedisTemplate redisTemplate) &#123;</span><br><span class="line">        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);</span><br><span class="line">        cacheManager.setDefaultExpiration(300);</span><br><span class="line">        return cacheManager;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>@Configuration标记此java类为spring boot的配置类<br>@EnableCaching标记为项目启用缓存<br>@Bean，每个被此注解标记的方法都会配置一个bean，等同于xml配置中的<bean><br>从以上代码可以看到，使用spring cache和redis缓存，我们需要一个JedisConnectionFactory，一个RedisTemplate和一个CacheManager。<br>其中JedisConnectionFactory配置了redis服务的ip和端口，为了方便这里直接写在了程序里，可以移出去放到配置文件中读取。</bean></p>
-<h3 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h3><p>使用非常简单，只需要在我们想要缓存的方法前加一个@Cacheable注解即可<br>下面是一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Cacheable(value = &#34;find&#34;)&#10;public List&#60;Object&#62; find(Long id) &#123;&#10;    ...&#10;&#125;&#10;@CacheEvict(value = &#34;find&#34;, allEntries = true)&#10;public Object saveProject(Object object) &#123;&#10;    ...&#10;&#125;&#10;@CacheEvict(value = &#34;find&#34; , allEntries = true)&#10;public void deleteProject(Long id) &#123;&#10;    ...&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h3><p>使用非常简单，只需要在我们想要缓存的方法前加一个@Cacheable注解即可<br>下面是一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Cacheable(value = &quot;find&quot;)</span><br><span class="line">public List&lt;Object&gt; find(Long id) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">@CacheEvict(value = &quot;find&quot;, allEntries = true)</span><br><span class="line">public Object saveProject(Object object) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">@CacheEvict(value = &quot;find&quot; , allEntries = true)</span><br><span class="line">public void deleteProject(Long id) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这里@Cacheable标记的方法在首次调用后，将会将读取到的内容缓存到redis中，以后每次只要缓存中存在该缓存，读取都会从缓存中读取。<br>但如果实际数据改变了怎么办？<br>我查看spring cache的api后，没有适用的动态更新缓存的方法，所以这里适用了一种不怎么优雅的解决方案：<br>每次会对模型数据改变的方法，都清除一次缓存。清除后的第一次，查询会读取数据库，之后再缓存。<br>@CacheEvict标记的方法，表示将会清除缓存，value属性中配置了“find”，表示清除key为“find”的缓存数据。</p>
 <p>这个方案不是很优雅，就是用起来简单，如果想更优雅的方案，应该要自己再实现一套自己可控的缓存程序。</p>
 
@@ -301,7 +399,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-04-07T23:32:15+08:00" content="2016-04-07">
               2016-04-07
             </time>
@@ -389,7 +487,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-03-21T17:52:34+08:00" content="2016-03-21">
               2016-03-21
             </time>
@@ -423,31 +521,31 @@
 - jdk
 - ftp
 - redis
-</code></pre><h3 id="1-linux下开放端口"><a href="#1-linux下开放端口" class="headerlink" title="1. linux下开放端口"></a>1. linux下开放端口</h3><p>先把一些已知要用到的端口放开了，省的后面要用到的时候连不上<br>由于centos7默认没有iptables服务，所以需要先安装<br>首先暂停防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld&#10;systemctl mask firewalld</span><br></pre></td></tr></table></figure></p>
+</code></pre><h3 id="1-linux下开放端口"><a href="#1-linux下开放端口" class="headerlink" title="1. linux下开放端口"></a>1. linux下开放端口</h3><p>先把一些已知要用到的端口放开了，省的后面要用到的时候连不上<br>由于centos7默认没有iptables服务，所以需要先安装<br>首先暂停防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl mask firewalld</span><br></pre></td></tr></table></figure></p>
 <p>Then, install the iptables-services package:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install iptables-services</span><br></pre></td></tr></table></figure></p>
 <p>Enable the service at boot-time:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable iptables</span><br></pre></td></tr></table></figure></p>
-<p>配置要放开的端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 22 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 3306 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8080 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 21 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8081 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
-<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save&#10;or&#10;/usr/libexec/iptables/iptables.init save</span><br></pre></td></tr></table></figure></p>
+<p>配置要放开的端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 22 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 3306 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 8081 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br><span class="line">or</span><br><span class="line">/usr/libexec/iptables/iptables.init save</span><br></pre></td></tr></table></figure></p>
 <p>Managing the service开启停止防火墙服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl [stop|start|restart] iptables</span><br></pre></td></tr></table></figure></p>
 <h3 id="2-linux下安装使用mysql"><a href="#2-linux下安装使用mysql" class="headerlink" title="2. linux下安装使用mysql"></a>2. linux下安装使用mysql</h3><p>一般的linux安装mysql，会使用yum install mysql mysql-server mysql-devel<br>然而，在centos7下这样安装的时候，却发现mysql-server安装不上。<br>原来，由于Oracle收购mysql后，开源社区担心mysql有闭源的风险，于是使用mysql的一个分支mariadb替代mysql。mariadb完全兼容mysql。 而centos7就是默认推荐使用mariadb代替mysql。<br>那么，centos7下安装mysql就有两种方式<br>1）使用mariadb；<br>2）卸载mariadb，安装mysql</p>
-<h4 id="方法1-使用mariadb"><a href="#方法1-使用mariadb" class="headerlink" title="方法1:使用mariadb"></a>方法1:使用mariadb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb&#10;systemctl start mariadb&#10;mysql -u root -p</span><br></pre></td></tr></table></figure>
-<h4 id="方法2-安装mysql："><a href="#方法2-安装mysql：" class="headerlink" title="方法2:安装mysql："></a>方法2:安装mysql：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm&#10;# rpm -ivh mysql-community-release-el7-5.noarch.rpm&#10;# yum install mysql-community-server</span><br></pre></td></tr></table></figure>
+<h4 id="方法1-使用mariadb"><a href="#方法1-使用mariadb" class="headerlink" title="方法1:使用mariadb"></a>方法1:使用mariadb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb</span><br><span class="line">systemctl start mariadb</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h4 id="方法2-安装mysql："><a href="#方法2-安装mysql：" class="headerlink" title="方法2:安装mysql："></a>方法2:安装mysql：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</span><br><span class="line"># rpm -ivh mysql-community-release-el7-5.noarch.rpm</span><br><span class="line"># yum install mysql-community-server</span><br></pre></td></tr></table></figure>
 <p>安装成功后重启mysql服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># service mysqld restart</span><br></pre></td></tr></table></figure></p>
 <p>初次安装mysql，root账户没有密码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yl-web yl]# mysql -u root</span><br></pre></td></tr></table></figure></p>
-<p>设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; set password for &#39;root&#39;@&#39;localhost&#39; =password(&#39;password&#39;);</span><br></pre></td></tr></table></figure></p>
-<h4 id="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"><a href="#实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。" class="headerlink" title="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"></a>实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。</h4><p>记录如下：<br>1）在进入mysql工具时，总是有错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mysql -u root -p&#10;Enter password:&#10;ERROR 1045 (28000): Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: NO)</span><br></pre></td></tr></table></figure></p>
-<p>解决：方法操作很简单，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysql stop&#10;# mysqld_safe --user=mysql --skip-grant-tables --skip-networking &#38;&#10;# mysql -u root mysql&#10;mysql&#62; UPDATE user SET Password=PASSWORD(&#39;newpassword&#39;) where USER=&#39;root&#39; and host=&#39;root&#39; or host=&#39;localhost&#39;;//&#25226;&#31354;&#30340;&#29992;&#25143;&#23494;&#30721;&#37117;&#20462;&#25913;&#25104;&#38750;&#31354;&#30340;&#23494;&#30721;&#23601;&#34892;&#20102;&#12290;&#10;mysql&#62; FLUSH PRIVILEGES;&#10;mysql&#62; quit&#10;# /etc/init.d/mysqld restart&#10;# mysql -uroot -p&#10;Enter password: &#60;&#36755;&#20837;&#26032;&#35774;&#30340;&#23494;&#30721;newpassword&#62;</span><br></pre></td></tr></table></figure></p>
+<p>设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set password for &apos;root&apos;@&apos;localhost&apos; =password(&apos;password&apos;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"><a href="#实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。" class="headerlink" title="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"></a>实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。</h4><p>记录如下：<br>1）在进入mysql工具时，总是有错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">ERROR 1045 (28000): Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: NO)</span><br></pre></td></tr></table></figure></p>
+<p>解决：方法操作很简单，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysql stop</span><br><span class="line"># mysqld_safe --user=mysql --skip-grant-tables --skip-networking &amp;</span><br><span class="line"># mysql -u root mysql</span><br><span class="line">mysql&gt; UPDATE user SET Password=PASSWORD(&apos;newpassword&apos;) where USER=&apos;root&apos; and host=&apos;root&apos; or host=&apos;localhost&apos;;//把空的用户密码都修改成非空的密码就行了。</span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line">mysql&gt; quit</span><br><span class="line"># /etc/init.d/mysqld restart</span><br><span class="line"># mysql -uroot -p</span><br><span class="line">Enter password: &lt;输入新设的密码newpassword&gt;</span><br></pre></td></tr></table></figure></p>
 <p>2）MySQL服务在启动的时候，不能创建pid文件。</p>
-<p>在终端看一下该目录是否存在，果然，不存在。<br>于是，创建了/var/run/mysqld/目录，重启MySQL服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# mkdir -p /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
-<p>如果依旧不能成功启动，那有可能是/var/run/mysqld/的属主和属组还是root，mysql并不能在其中创建文件，那么修改该目录的属主和属组，应该就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# ls -ld /var/run/mysqld/&#10;drwxr-xr-x 2 root root 40 Jan 20 18:28 /var/run/mysqld/&#10;[root@spark01 ~]# chown mysql.mysql /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
+<p>在终端看一下该目录是否存在，果然，不存在。<br>于是，创建了/var/run/mysqld/目录，重启MySQL服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# mkdir -p /var/run/mysqld/</span><br><span class="line">[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
+<p>如果依旧不能成功启动，那有可能是/var/run/mysqld/的属主和属组还是root，mysql并不能在其中创建文件，那么修改该目录的属主和属组，应该就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# ls -ld /var/run/mysqld/</span><br><span class="line">drwxr-xr-x 2 root root 40 Jan 20 18:28 /var/run/mysqld/</span><br><span class="line">[root@spark01 ~]# chown mysql.mysql /var/run/mysqld/</span><br><span class="line">[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
 <h3 id="3-linux下安装jdk"><a href="#3-linux下安装jdk" class="headerlink" title="3. linux下安装jdk"></a>3. linux下安装jdk</h3><p>一、卸载系统自带的openjdk<br>1、查询系统内置的jdk，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java</span><br></pre></td></tr></table></figure></p>
 <p>此时会列出系统中存在的jdk，如果存在就进行卸载，不存在就直接进行安装。<br>如下：<br>python-javapackages-3.4.1-11.el7.noarch<br>java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64<br>java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64<br>java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64<br>tzdata-java-2015g-1.el7.noarch<br>javapackages-tools-3.4.1-11.el7.noarch<br>java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</p>
-<p>2、进行卸载，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps jdk&#30456;&#20851;&#21517;&#31216;</span><br></pre></td></tr></table></figure></p>
-<p>依次卸载如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps python-javapackages-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64&#10;rpm -e --nodeps java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps tzdata-java-2015g-1.el7.noarch&#10;rpm -e --nodeps javapackages-tools-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>2、进行卸载，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps jdk相关名称</span><br></pre></td></tr></table></figure></p>
+<p>依次卸载如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps python-javapackages-3.4.1-11.el7.noarch</span><br><span class="line">rpm -e --nodeps java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64</span><br><span class="line">rpm -e --nodeps java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64</span><br><span class="line">rpm -e --nodeps java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64</span><br><span class="line">rpm -e --nodeps tzdata-java-2015g-1.el7.noarch</span><br><span class="line">rpm -e --nodeps javapackages-tools-3.4.1-11.el7.noarch</span><br><span class="line">rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</span><br></pre></td></tr></table></figure></p>
 <p>二、jdk安装<br>1、下载jdk并上传到/usr/java目录<br>jdk7下载地址为：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a> 选择对应的linux版本，下载rpm文件。这里选择的是jdk-7u79-linux-x64.rpm。并上传到Linux的/urs/java目录下（java目录不存在则进行创建）。</p>
 <p>2、解压安装<br>进入/usr/java目录，运行如下命令进行解压(rpm -ivh rpm文件名称)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh jdk-7u79-linux-x64.rpm</span><br></pre></td></tr></table></figure></p>
 <p>3、配置profile文件<br>运行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure></p>
-<p>将如下内容添加到profile文件末尾并保持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.7.0_79&#10;export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar export PATH=$PATH:$JAVA_HOME/bin</span><br></pre></td></tr></table></figure></p>
+<p>将如下内容添加到profile文件末尾并保持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.7.0_79</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar export PATH=$PATH:$JAVA_HOME/bin</span><br></pre></td></tr></table></figure></p>
 <p>/usr/java/jdk1.7.0_79 指的是jdk的路径</p>
 <p>保存之后，运行如下命令使配置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
 <p>检查jdk是否安装成功，运行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
@@ -457,25 +555,25 @@
 <p>重启服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart redis.service</span><br></pre></td></tr></table></figure></p>
 <p>检查状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status redis.service</span><br></pre></td></tr></table></figure></p>
 <p>随系统启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable redis.service</span><br></pre></td></tr></table></figure></p>
-<p>2）方法二：编译安装<br>下载安装编译:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.17.tar.gz&#10;tar xzf redis-2.8.17.tar.gz&#10;cd redis-2.8.17&#10;make&#10;make install</span><br></pre></td></tr></table></figure></p>
-<p>设置配置文件路径:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/redis &#38;&#38; cp redis.conf /etc/redis</span><br></pre></td></tr></table></figure></p>
+<p>2）方法二：编译安装<br>下载安装编译:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.17.tar.gz</span><br><span class="line">tar xzf redis-2.8.17.tar.gz</span><br><span class="line">cd redis-2.8.17</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>设置配置文件路径:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/redis &amp;&amp; cp redis.conf /etc/redis</span><br></pre></td></tr></table></figure></p>
 <p>修改配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
 <p>修改为： daemonize yes<br>启动Redis:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-linux配置ftp服务"><a href="#5-linux配置ftp服务" class="headerlink" title="5. linux配置ftp服务"></a>5. linux配置ftp服务</h3><p>在安装前查看是否已安装vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -q vsftpd&#10;vsftpd-3.0.2-9.el7.x86_64</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-linux配置ftp服务"><a href="#5-linux配置ftp服务" class="headerlink" title="5. linux配置ftp服务"></a>5. linux配置ftp服务</h3><p>在安装前查看是否已安装vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -q vsftpd</span><br><span class="line">vsftpd-3.0.2-9.el7.x86_64</span><br></pre></td></tr></table></figure></p>
 <p>如果有显示类似以上的信息，说明已经安装vsftpd，如果没有，用yum安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install vsftpd</span><br></pre></td></tr></table></figure></p>
-<p>查看一下vsftpd安装在哪：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis vsftpd&#10;vsftpd: /usr/sbin/vsftpd /etc/vsftpd /usr/share/man/man8/vsftpd.8.gz</span><br></pre></td></tr></table></figure></p>
+<p>查看一下vsftpd安装在哪：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis vsftpd</span><br><span class="line">vsftpd: /usr/sbin/vsftpd /etc/vsftpd /usr/share/man/man8/vsftpd.8.gz</span><br></pre></td></tr></table></figure></p>
 <p>启动vsftpd服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start vsftpd.service</span><br></pre></td></tr></table></figure></p>
 <p>修改配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure></p>
 <p>修改如下配置：<br>anonymous_enable=NO<br>chroot_local_user=YES<br>allow_writeable_chroot=YES #加上这行解决了无法登陆的问题</p>
-<p>启动／重新启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start&#10;service vsftpd restart</span><br></pre></td></tr></table></figure></p>
+<p>启动／重新启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start</span><br><span class="line">service vsftpd restart</span><br></pre></td></tr></table></figure></p>
 <p>设置开机启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig vsftpd on</span><br></pre></td></tr></table></figure></p>
-<p>配置用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# useradd -g root -M -d /var/www/html -s /sbin/nologin ftpuser&#10;[root@localhost ~]# passwd ftpuser&#10;[root@localhost ~]# &#36755;&#20837;&#23494;&#30721;</span><br></pre></td></tr></table></figure></p>
+<p>配置用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# useradd -g root -M -d /var/www/html -s /sbin/nologin ftpuser</span><br><span class="line">[root@localhost ~]# passwd ftpuser</span><br><span class="line">[root@localhost ~]# 输入密码</span><br></pre></td></tr></table></figure></p>
 <p>把 /var/www/html 的所有权给ftpuser.root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# chown -R ftpuser.root /var/www/html</span><br></pre></td></tr></table></figure></p>
-<h3 id="6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动"><a href="#6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动" class="headerlink" title="6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动"></a>6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动</h3><h4 id="编译打包："><a href="#编译打包：" class="headerlink" title="编译打包："></a>编译打包：</h4><p>方法1：使用maven-assembly-plugin插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;artifactId&#62;maven-assembly-plugin&#60;/artifactId&#62; &#10;    &#60;configuration&#62; &#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#60;/manifest&#62; &#10;            &#60;/archive&#62;&#10;        &#60;descriptorRefs&#62;&#10;            &#60;descriptorRef&#62; jar-with-dependencies &#60;/descriptorRef&#62; &#10;        &#60;/descriptorRefs&#62;&#10;    &#60;/configuration&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;id&#62;make-assembly&#60;/id&#62; &#10;            &#60;phase&#62;package&#60;/phase&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;single&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62; &#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动"><a href="#6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动" class="headerlink" title="6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动"></a>6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动</h3><h4 id="编译打包："><a href="#编译打包：" class="headerlink" title="编译打包："></a>编译打包：</h4><p>方法1：使用maven-assembly-plugin插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt; </span><br><span class="line">    &lt;configuration&gt; </span><br><span class="line">        &lt;archive&gt;</span><br><span class="line">            &lt;manifest&gt;</span><br><span class="line">                &lt;mainClass&gt;com.iyihua.itimes.App&lt;/mainClass&gt;&lt;/manifest&gt; </span><br><span class="line">            &lt;/archive&gt;</span><br><span class="line">        &lt;descriptorRefs&gt;</span><br><span class="line">            &lt;descriptorRef&gt; jar-with-dependencies &lt;/descriptorRef&gt; </span><br><span class="line">        &lt;/descriptorRefs&gt;</span><br><span class="line">    &lt;/configuration&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;make-assembly&lt;/id&gt; </span><br><span class="line">            &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">        &lt;/execution&gt; </span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
 <p>运行命令：mvn assembly:assembly<br>或者命令：mvn package</p>
 <p>由于我使用这个方式，打出来的jar包里，依赖的jar和模块的class都正常，但是自己项目内的所有class都是空的class，用反编译看class文件，发现都是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class &#123;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>解压出来取单个class查看又是正常的，这个问题一直百撕不得骑姐，所以我最后使用了方法2的方式解决了问题。</p>
-<p>方法2：使用spring-boot-maven-plugin插件<br>由于我的project是spring boot项目，所以可以使用此方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-boot-maven-plugin&#60;/artifactId&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;repackage&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62;&#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;&#10;&#60;plugin&#62;&#10;    &#60;groupId&#62;org.apache.maven.plugins&#60;/groupId&#62;&#10;    &#60;artifactId&#62;maven-jar-plugin&#60;/artifactId&#62;&#10;    &#60;configuration&#62;&#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;addClasspath&#62;true&#60;/addClasspath&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#10;            &#60;/manifest&#62;&#10;        &#60;/archive&#62;&#10;    &#60;/configuration&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
+<p>方法2：使用spring-boot-maven-plugin插件<br>由于我的project是spring boot项目，所以可以使用此方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;repackage&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;configuration&gt;</span><br><span class="line">        &lt;archive&gt;</span><br><span class="line">            &lt;manifest&gt;</span><br><span class="line">                &lt;addClasspath&gt;true&lt;/addClasspath&gt;</span><br><span class="line">                &lt;mainClass&gt;com.iyihua.itimes.App&lt;/mainClass&gt;</span><br><span class="line">            &lt;/manifest&gt;</span><br><span class="line">        &lt;/archive&gt;</span><br><span class="line">    &lt;/configuration&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
 <p>运行mvn package打jar包，done！</p>
 <h4 id="上传并启动"><a href="#上传并启动" class="headerlink" title="上传并启动"></a>上传并启动</h4><p>连接sftp<br>lcd 打开本地路径<br>cd 进入服务器目标路径<br>put xxx.jar 把目标jar包上传到服务器对应路径<br>java -jar xxx.jar 启动java程序</p>
 
@@ -530,7 +628,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-03-11T09:53:20+08:00" content="2016-03-11">
               2016-03-11
             </time>
@@ -611,7 +709,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-02-20T12:48:30+08:00" content="2016-02-20">
               2016-02-20
             </time>
@@ -693,7 +791,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-02-20T12:20:38+08:00" content="2016-02-20">
               2016-02-20
             </time>
@@ -778,7 +876,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-02-20T12:02:04+08:00" content="2016-02-20">
               2016-02-20
             </time>
@@ -867,7 +965,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-02-02T16:09:30+08:00" content="2016-02-02">
               2016-02-02
             </time>
@@ -903,10 +1001,10 @@
 <li>使用枚举.</li>
 <li>多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。<br>当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。</li>
 </ol>
-<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int code;&#10;if(&#34;Name&#34;.equals(str))&#10;    code = 0;&#10;else if(&#34;Age&#34;.equals(str))&#10;    code = 1;&#10;else if(&#34;Address&#34;.equals(str))&#10;    code = 2;</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  &#10;static &#123;  &#10;    map.put(&#34;Name&#34;, 0);  &#10;    map.put(&#34;Age&#34;, 1);&#10;    map.put(&#34;Address&#34;, 2);  &#10;&#125;&#10;&#10;int code = map.get(type);</span><br></pre></td></tr></table></figure>
-<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;&#10;    Name(0), Age(1), Address(2);&#10;    public int code;&#10;    Codes(int code)&#123;&#10;        this.code = code;&#10;    &#125;&#10;&#125;&#10;&#10;int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
-<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&#34;com.xxx.&#34; + str).newInstance();&#10;&#10;int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
+<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int code;</span><br><span class="line">if(&quot;Name&quot;.equals(str))</span><br><span class="line">    code = 0;</span><br><span class="line">else if(&quot;Age&quot;.equals(str))</span><br><span class="line">    code = 1;</span><br><span class="line">else if(&quot;Address&quot;.equals(str))</span><br><span class="line">    code = 2;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  </span><br><span class="line">static &#123;  </span><br><span class="line">    map.put(&quot;Name&quot;, 0);  </span><br><span class="line">    map.put(&quot;Age&quot;, 1);</span><br><span class="line">    map.put(&quot;Address&quot;, 2);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = map.get(type);</span><br></pre></td></tr></table></figure>
+<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;</span><br><span class="line">    Name(0), Age(1), Address(2);</span><br><span class="line">    public int code;</span><br><span class="line">    Codes(int code)&#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
+<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&quot;com.xxx.&quot; + str).newInstance();</span><br><span class="line"></span><br><span class="line">int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
 <h2 id="“责任链”如何优化if-else？"><a href="#“责任链”如何优化if-else？" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
 <p>好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。</p>
 <p>现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。</p>
@@ -967,7 +1065,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-02-01T17:10:18+08:00" content="2016-02-01">
               2016-02-01
             </time>
@@ -996,124 +1094,11 @@
           <span itemprop="articleBody">
             
               <p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;dependencies&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;    &#60;dependency&#62;&#10;        &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;        &#60;artifactId&#62;spring-boot-starter-web&#60;/artifactId&#62;&#10;    &#60;/dependency&#62;&#10;&#60;/dependencies&#62;</span><br></pre></td></tr></table></figure>
-<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication&#10;public class App &#10;&#123;&#10;    public static void main(String[] args) throws Exception &#123;&#10;        SpringApplication.run(App.class, args);&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class App </span><br><span class="line">&#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        SpringApplication.run(App.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Controller&#10;public class SampleController &#123;&#10;&#10;    &#10;    @RequestMapping(&#34;/&#34;)&#10;    @ResponseBody&#10;    String home() &#123;&#10;        String data = &#34;&#34;;&#10;        return &#34;Hello World!&#34;;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class SampleController &#123;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    String home() &#123;</span><br><span class="line">        String data = &quot;&quot;;</span><br><span class="line">        return &quot;Hello World!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/04/jquery-validate常用用法总结/" itemprop="url">
-                  jquery-validate常用用法总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-01-04T17:05:28+08:00" content="2016-01-04">
-              2016-01-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <ol>
-<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。<br> 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#36890;&#36807;&#30417;&#21548;form&#30340;submit&#20107;&#20214;&#65292;&#23545;form&#36827;&#34892;ajax&#25552;&#20132;&#12290;&#10; $(&#39;#formId&#39;).submit(function() &#123;&#10;     if (!$(&#34;#formId&#34;).valid()) &#10;         return false;&#10;     $(this).omAjaxSubmit(&#123;&#125;);&#10;     return false; //&#27492;&#22788;&#24517;&#39035;&#36820;&#22238;false&#65292;&#38459;&#27490;&#24120;&#35268;&#30340;form&#25552;&#20132;&#10; &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>juqry validate中，如何对校验错误的提示信息位置和样式进行更改？<br> 1）js代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;  &#10;    $(&#34;#form1&#34;).validate(&#123;  &#10;        errorPlacement: function (error, element) &#123;  &#10;            error.appendTo(element.parent(&#34;td&#34;));  &#10;        &#125;,  &#10;        rules:&#123;              &#10;        &#125;  &#10;    &#125;);  &#10;    $(&#34;[name$=&#39;.sign&#39;]&#34;).each(function()&#123;  &#10;        $(this).rules(&#34;add&#34;,&#123;required:true,messages:&#123;required:&#34;&#33267;&#23569;&#36873;&#25321;&#19968;&#20010;&#36873;&#39033;&#34;&#125;&#125;);  &#10;    &#125;);  &#10;&#125;);</span><br></pre></td></tr></table></figure>
-<p> 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;style&#62;  &#10;label.error &#123;   &#10;    color:Red;   &#10;    font-size:13px;   &#10;    margin-left:5px;   &#10;    padding-left:16px;   &#10;&#125;   &#10;&#60;/style&#62;</span><br></pre></td></tr></table></figure>
-<p> 3) 校验时机，可以自定义在js中想要的时候去校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;.selector&#39;).click(function() &#123;&#10;    if ($(&#34;selector of you form&#34;).valid()) &#123;&#10;        alert(&#39;in&#39;);&#10;    &#125; else &#123;&#10;        alert(&#39;out&#39;);&#10;    &#125;&#10;&#125;);&#10;$(&#34;selector of you form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        receiveDayFrom: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-<p> 4) 例子：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;,&#10;    errorPlacement: function ($error, $element) &#123;&#10;        var name = $element.attr(&#34;name&#34;);&#10;        $(&#34;#error&#34; + name).append($error);&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-<pre><code>or:
-</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;#form&#34;).validate(&#123;&#10;    errorLabelContainer: &#34;#errors&#34;,&#10;    rules: &#123;&#10;        name: &#123;&#10;            required: true&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: true&#10;        &#125;&#10;    &#125;,&#10;    messages: &#123;&#10;        name: &#123;&#10;            required: &#34;Enter name&#34;&#10;        &#125;,&#10;        firstname: &#123;&#10;            required: &#34;Enter firstname&#34;&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如何添加自定义的校验？</p>
-</li>
-</ol>
-<ul>
-<li><p>添加一个方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#23383;&#31526;&#39564;&#35777;&#65292;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#12290;    &#10;jQuery.validator.addMethod(&#34;nameStringCheck&#34;, function(value, element) &#123;   &#10;     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); &#10;&#125;, &#34;&#21482;&#33021;&#21253;&#21547;&#33521;&#25991;&#12289;&#25968;&#23383;&#12289;&#19979;&#21010;&#32447;&#31561;&#23383;&#31526;&#34;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在validate配置中使用新加的方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            required: true,&#10;            nameStringCheck: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li><p>如何使用ajax请求进行远程校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jQuery.validator.addMethod(&#34;checkUnique&#34;, function(value, element) &#123;&#10;    return validateUsernameByAjax(value, element.name, &#39;ajax&#35831;&#27714;&#22320;&#22336;&#39;);&#10;&#125;, &#34;&#27492;&#36755;&#20837;&#30340;&#20540;&#19981;&#21487;&#29992;&#34;);</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#21516;&#27493;&#20570;&#29992;&#25143;&#21517;&#25110;&#37038;&#31665;&#30340;&#35831;&#27714;&#65292;&#26816;&#26597;&#21040;&#19981;&#21487;&#29992;&#65292;&#21017;&#36820;&#22238;false&#65292;&#21542;&#21017;&#36820;&#22238;true&#10; */&#10;function validateUsernameByAjax(value, fieldname, url) &#123;&#10;    var _request = url + &#34;?&#34;+fieldname+&#34;=&#34;+value;&#10;    var deferred = $.Deferred();//&#21019;&#24314;&#19968;&#20010;&#24310;&#36831;&#23545;&#35937;&#10;    $.ajax(&#123;&#10;        url:_request,&#10;        async:false,//&#35201;&#25351;&#23450;&#19981;&#33021;&#24322;&#27493;,&#24517;&#39035;&#31561;&#24453;&#21518;&#21488;&#26381;&#21153;&#26657;&#39564;&#23436;&#25104;&#20877;&#25191;&#34892;&#21518;&#32493;&#20195;&#30721;&#10;        dataType:&#34;json&#34;,&#10;        success:function(data) &#123;&#10;            if (data.status === &#34;error&#34; || data.status === &#34;fail&#34;) &#123;&#10;                deferred.reject();&#10;            &#125; else&#123;&#10;                deferred.resolve();  &#10;            &#125;&#10;        &#125;&#10;    &#125;);&#10;    //deferred.state()&#26377;3&#20010;&#29366;&#24577;:pending:&#36824;&#26410;&#32467;&#26463;,rejected:&#22833;&#36133;,resolved:&#25104;&#21151;&#10;    return deferred.state() == &#34;resolved&#34; ? true : false;&#10;&#125;</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#39;#form selector&#39;).validate(&#123;&#10;    rules: &#123;&#10;        username: &#123;&#10;            checkUnique: true&#10;        &#125;&#10;    &#125;&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
 
             
           </span>
@@ -1181,22 +1166,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">Kategorien</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -1246,11 +1231,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主題 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>

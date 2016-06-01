@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="coding,java,patten," />
+  <meta name="keywords" content="java,patten,coding," />
 
 
 
@@ -138,7 +138,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首頁
+            Startseite
           </a>
         </li>
       
@@ -148,7 +148,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            歸檔
+            Archiv
           </a>
         </li>
       
@@ -158,7 +158,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            標籤
+            Tags
           </a>
         </li>
       
@@ -208,7 +208,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-02-02T16:09:30+08:00" content="2016-02-02">
               2016-02-02
             </time>
@@ -241,10 +241,10 @@
 <li>使用枚举.</li>
 <li>多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。<br>当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。</li>
 </ol>
-<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int code;&#10;if(&#34;Name&#34;.equals(str))&#10;    code = 0;&#10;else if(&#34;Age&#34;.equals(str))&#10;    code = 1;&#10;else if(&#34;Address&#34;.equals(str))&#10;    code = 2;</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  &#10;static &#123;  &#10;    map.put(&#34;Name&#34;, 0);  &#10;    map.put(&#34;Age&#34;, 1);&#10;    map.put(&#34;Address&#34;, 2);  &#10;&#125;&#10;&#10;int code = map.get(type);</span><br></pre></td></tr></table></figure>
-<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;&#10;    Name(0), Age(1), Address(2);&#10;    public int code;&#10;    Codes(int code)&#123;&#10;        this.code = code;&#10;    &#125;&#10;&#125;&#10;&#10;int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
-<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&#34;com.xxx.&#34; + str).newInstance();&#10;&#10;int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
+<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int code;</span><br><span class="line">if(&quot;Name&quot;.equals(str))</span><br><span class="line">    code = 0;</span><br><span class="line">else if(&quot;Age&quot;.equals(str))</span><br><span class="line">    code = 1;</span><br><span class="line">else if(&quot;Address&quot;.equals(str))</span><br><span class="line">    code = 2;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  </span><br><span class="line">static &#123;  </span><br><span class="line">    map.put(&quot;Name&quot;, 0);  </span><br><span class="line">    map.put(&quot;Age&quot;, 1);</span><br><span class="line">    map.put(&quot;Address&quot;, 2);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = map.get(type);</span><br></pre></td></tr></table></figure>
+<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;</span><br><span class="line">    Name(0), Age(1), Address(2);</span><br><span class="line">    public int code;</span><br><span class="line">    Codes(int code)&#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
+<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&quot;com.xxx.&quot; + str).newInstance();</span><br><span class="line"></span><br><span class="line">int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
 <h2 id="“责任链”如何优化if-else？"><a href="#“责任链”如何优化if-else？" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
 <p>好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。</p>
 <p>现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。</p>
@@ -261,11 +261,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/coding/" rel="tag">#coding</a>
-          
             <a href="/tags/java/" rel="tag">#java</a>
           
             <a href="/tags/patten/" rel="tag">#patten</a>
+          
+            <a href="/tags/coding/" rel="tag">#coding</a>
           
         </div>
       
@@ -335,10 +335,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目錄
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            本站概覽
+            Übersicht
           </li>
         </ul>
       
@@ -352,22 +352,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">Kategorien</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -434,11 +434,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主題 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>

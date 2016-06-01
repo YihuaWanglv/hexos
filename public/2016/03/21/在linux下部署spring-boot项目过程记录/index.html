@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="centos,java,linux,spring boot,部署," />
+  <meta name="keywords" content="java,spring boot,linux,centos,部署," />
 
 
 
@@ -150,7 +150,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首頁
+            Startseite
           </a>
         </li>
       
@@ -160,7 +160,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            歸檔
+            Archiv
           </a>
         </li>
       
@@ -170,7 +170,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            標籤
+            Tags
           </a>
         </li>
       
@@ -220,7 +220,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-03-21T17:52:34+08:00" content="2016-03-21">
               2016-03-21
             </time>
@@ -251,31 +251,31 @@
 - jdk
 - ftp
 - redis
-</code></pre><h3 id="1-linux下开放端口"><a href="#1-linux下开放端口" class="headerlink" title="1. linux下开放端口"></a>1. linux下开放端口</h3><p>先把一些已知要用到的端口放开了，省的后面要用到的时候连不上<br>由于centos7默认没有iptables服务，所以需要先安装<br>首先暂停防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld&#10;systemctl mask firewalld</span><br></pre></td></tr></table></figure></p>
+</code></pre><h3 id="1-linux下开放端口"><a href="#1-linux下开放端口" class="headerlink" title="1. linux下开放端口"></a>1. linux下开放端口</h3><p>先把一些已知要用到的端口放开了，省的后面要用到的时候连不上<br>由于centos7默认没有iptables服务，所以需要先安装<br>首先暂停防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl mask firewalld</span><br></pre></td></tr></table></figure></p>
 <p>Then, install the iptables-services package:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install iptables-services</span><br></pre></td></tr></table></figure></p>
 <p>Enable the service at boot-time:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable iptables</span><br></pre></td></tr></table></figure></p>
-<p>配置要放开的端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 22 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 3306 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8080 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 21 -j ACCEPT&#10;iptables -I INPUT -p tcp --dport 8081 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
-<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables save&#10;or&#10;/usr/libexec/iptables/iptables.init save</span><br></pre></td></tr></table></figure></p>
+<p>配置要放开的端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 22 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 3306 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 8081 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>保存配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br><span class="line">or</span><br><span class="line">/usr/libexec/iptables/iptables.init save</span><br></pre></td></tr></table></figure></p>
 <p>Managing the service开启停止防火墙服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl [stop|start|restart] iptables</span><br></pre></td></tr></table></figure></p>
 <h3 id="2-linux下安装使用mysql"><a href="#2-linux下安装使用mysql" class="headerlink" title="2. linux下安装使用mysql"></a>2. linux下安装使用mysql</h3><p>一般的linux安装mysql，会使用yum install mysql mysql-server mysql-devel<br>然而，在centos7下这样安装的时候，却发现mysql-server安装不上。<br>原来，由于Oracle收购mysql后，开源社区担心mysql有闭源的风险，于是使用mysql的一个分支mariadb替代mysql。mariadb完全兼容mysql。 而centos7就是默认推荐使用mariadb代替mysql。<br>那么，centos7下安装mysql就有两种方式<br>1）使用mariadb；<br>2）卸载mariadb，安装mysql</p>
-<h4 id="方法1-使用mariadb"><a href="#方法1-使用mariadb" class="headerlink" title="方法1:使用mariadb"></a>方法1:使用mariadb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb&#10;systemctl start mariadb&#10;mysql -u root -p</span><br></pre></td></tr></table></figure>
-<h4 id="方法2-安装mysql："><a href="#方法2-安装mysql：" class="headerlink" title="方法2:安装mysql："></a>方法2:安装mysql：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm&#10;# rpm -ivh mysql-community-release-el7-5.noarch.rpm&#10;# yum install mysql-community-server</span><br></pre></td></tr></table></figure>
+<h4 id="方法1-使用mariadb"><a href="#方法1-使用mariadb" class="headerlink" title="方法1:使用mariadb"></a>方法1:使用mariadb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb-server mariadb</span><br><span class="line">systemctl start mariadb</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h4 id="方法2-安装mysql："><a href="#方法2-安装mysql：" class="headerlink" title="方法2:安装mysql："></a>方法2:安装mysql：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</span><br><span class="line"># rpm -ivh mysql-community-release-el7-5.noarch.rpm</span><br><span class="line"># yum install mysql-community-server</span><br></pre></td></tr></table></figure>
 <p>安装成功后重启mysql服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># service mysqld restart</span><br></pre></td></tr></table></figure></p>
 <p>初次安装mysql，root账户没有密码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yl-web yl]# mysql -u root</span><br></pre></td></tr></table></figure></p>
-<p>设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&#62; set password for &#39;root&#39;@&#39;localhost&#39; =password(&#39;password&#39;);</span><br></pre></td></tr></table></figure></p>
-<h4 id="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"><a href="#实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。" class="headerlink" title="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"></a>实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。</h4><p>记录如下：<br>1）在进入mysql工具时，总是有错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mysql -u root -p&#10;Enter password:&#10;ERROR 1045 (28000): Access denied for user &#39;root&#39;@&#39;localhost&#39; (using password: NO)</span><br></pre></td></tr></table></figure></p>
-<p>解决：方法操作很简单，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysql stop&#10;# mysqld_safe --user=mysql --skip-grant-tables --skip-networking &#38;&#10;# mysql -u root mysql&#10;mysql&#62; UPDATE user SET Password=PASSWORD(&#39;newpassword&#39;) where USER=&#39;root&#39; and host=&#39;root&#39; or host=&#39;localhost&#39;;//&#25226;&#31354;&#30340;&#29992;&#25143;&#23494;&#30721;&#37117;&#20462;&#25913;&#25104;&#38750;&#31354;&#30340;&#23494;&#30721;&#23601;&#34892;&#20102;&#12290;&#10;mysql&#62; FLUSH PRIVILEGES;&#10;mysql&#62; quit&#10;# /etc/init.d/mysqld restart&#10;# mysql -uroot -p&#10;Enter password: &#60;&#36755;&#20837;&#26032;&#35774;&#30340;&#23494;&#30721;newpassword&#62;</span><br></pre></td></tr></table></figure></p>
+<p>设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set password for &apos;root&apos;@&apos;localhost&apos; =password(&apos;password&apos;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"><a href="#实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。" class="headerlink" title="实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。"></a>实践结论：如果不介意使用mariadb的话，就不用折腾安装mysql了，因为我在实际使用方法2安装MySQL的过程中，遇到不少需要折腾的问题。</h4><p>记录如下：<br>1）在进入mysql工具时，总是有错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">ERROR 1045 (28000): Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: NO)</span><br></pre></td></tr></table></figure></p>
+<p>解决：方法操作很简单，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysql stop</span><br><span class="line"># mysqld_safe --user=mysql --skip-grant-tables --skip-networking &amp;</span><br><span class="line"># mysql -u root mysql</span><br><span class="line">mysql&gt; UPDATE user SET Password=PASSWORD(&apos;newpassword&apos;) where USER=&apos;root&apos; and host=&apos;root&apos; or host=&apos;localhost&apos;;//把空的用户密码都修改成非空的密码就行了。</span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line">mysql&gt; quit</span><br><span class="line"># /etc/init.d/mysqld restart</span><br><span class="line"># mysql -uroot -p</span><br><span class="line">Enter password: &lt;输入新设的密码newpassword&gt;</span><br></pre></td></tr></table></figure></p>
 <p>2）MySQL服务在启动的时候，不能创建pid文件。</p>
-<p>在终端看一下该目录是否存在，果然，不存在。<br>于是，创建了/var/run/mysqld/目录，重启MySQL服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# mkdir -p /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
-<p>如果依旧不能成功启动，那有可能是/var/run/mysqld/的属主和属组还是root，mysql并不能在其中创建文件，那么修改该目录的属主和属组，应该就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# ls -ld /var/run/mysqld/&#10;drwxr-xr-x 2 root root 40 Jan 20 18:28 /var/run/mysqld/&#10;[root@spark01 ~]# chown mysql.mysql /var/run/mysqld/&#10;[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
+<p>在终端看一下该目录是否存在，果然，不存在。<br>于是，创建了/var/run/mysqld/目录，重启MySQL服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# mkdir -p /var/run/mysqld/</span><br><span class="line">[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
+<p>如果依旧不能成功启动，那有可能是/var/run/mysqld/的属主和属组还是root，mysql并不能在其中创建文件，那么修改该目录的属主和属组，应该就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@spark01 ~]# ls -ld /var/run/mysqld/</span><br><span class="line">drwxr-xr-x 2 root root 40 Jan 20 18:28 /var/run/mysqld/</span><br><span class="line">[root@spark01 ~]# chown mysql.mysql /var/run/mysqld/</span><br><span class="line">[root@spark01 ~]# /etc/init.d/mysqld start</span><br></pre></td></tr></table></figure></p>
 <h3 id="3-linux下安装jdk"><a href="#3-linux下安装jdk" class="headerlink" title="3. linux下安装jdk"></a>3. linux下安装jdk</h3><p>一、卸载系统自带的openjdk<br>1、查询系统内置的jdk，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java</span><br></pre></td></tr></table></figure></p>
 <p>此时会列出系统中存在的jdk，如果存在就进行卸载，不存在就直接进行安装。<br>如下：<br>python-javapackages-3.4.1-11.el7.noarch<br>java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64<br>java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64<br>java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64<br>tzdata-java-2015g-1.el7.noarch<br>javapackages-tools-3.4.1-11.el7.noarch<br>java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</p>
-<p>2、进行卸载，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps jdk&#30456;&#20851;&#21517;&#31216;</span><br></pre></td></tr></table></figure></p>
-<p>依次卸载如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps python-javapackages-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64&#10;rpm -e --nodeps java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64&#10;rpm -e --nodeps tzdata-java-2015g-1.el7.noarch&#10;rpm -e --nodeps javapackages-tools-3.4.1-11.el7.noarch&#10;rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</span><br></pre></td></tr></table></figure></p>
+<p>2、进行卸载，使用命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps jdk相关名称</span><br></pre></td></tr></table></figure></p>
+<p>依次卸载如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps python-javapackages-3.4.1-11.el7.noarch</span><br><span class="line">rpm -e --nodeps java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64</span><br><span class="line">rpm -e --nodeps java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64</span><br><span class="line">rpm -e --nodeps java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64</span><br><span class="line">rpm -e --nodeps tzdata-java-2015g-1.el7.noarch</span><br><span class="line">rpm -e --nodeps javapackages-tools-3.4.1-11.el7.noarch</span><br><span class="line">rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64</span><br></pre></td></tr></table></figure></p>
 <p>二、jdk安装<br>1、下载jdk并上传到/usr/java目录<br>jdk7下载地址为：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a> 选择对应的linux版本，下载rpm文件。这里选择的是jdk-7u79-linux-x64.rpm。并上传到Linux的/urs/java目录下（java目录不存在则进行创建）。</p>
 <p>2、解压安装<br>进入/usr/java目录，运行如下命令进行解压(rpm -ivh rpm文件名称)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh jdk-7u79-linux-x64.rpm</span><br></pre></td></tr></table></figure></p>
 <p>3、配置profile文件<br>运行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure></p>
-<p>将如下内容添加到profile文件末尾并保持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.7.0_79&#10;export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar export PATH=$PATH:$JAVA_HOME/bin</span><br></pre></td></tr></table></figure></p>
+<p>将如下内容添加到profile文件末尾并保持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.7.0_79</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar export PATH=$PATH:$JAVA_HOME/bin</span><br></pre></td></tr></table></figure></p>
 <p>/usr/java/jdk1.7.0_79 指的是jdk的路径</p>
 <p>保存之后，运行如下命令使配置生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
 <p>检查jdk是否安装成功，运行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
@@ -285,25 +285,25 @@
 <p>重启服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart redis.service</span><br></pre></td></tr></table></figure></p>
 <p>检查状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status redis.service</span><br></pre></td></tr></table></figure></p>
 <p>随系统启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable redis.service</span><br></pre></td></tr></table></figure></p>
-<p>2）方法二：编译安装<br>下载安装编译:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.17.tar.gz&#10;tar xzf redis-2.8.17.tar.gz&#10;cd redis-2.8.17&#10;make&#10;make install</span><br></pre></td></tr></table></figure></p>
-<p>设置配置文件路径:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/redis &#38;&#38; cp redis.conf /etc/redis</span><br></pre></td></tr></table></figure></p>
+<p>2）方法二：编译安装<br>下载安装编译:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.17.tar.gz</span><br><span class="line">tar xzf redis-2.8.17.tar.gz</span><br><span class="line">cd redis-2.8.17</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>设置配置文件路径:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/redis &amp;&amp; cp redis.conf /etc/redis</span><br></pre></td></tr></table></figure></p>
 <p>修改配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
 <p>修改为： daemonize yes<br>启动Redis:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-linux配置ftp服务"><a href="#5-linux配置ftp服务" class="headerlink" title="5. linux配置ftp服务"></a>5. linux配置ftp服务</h3><p>在安装前查看是否已安装vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -q vsftpd&#10;vsftpd-3.0.2-9.el7.x86_64</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-linux配置ftp服务"><a href="#5-linux配置ftp服务" class="headerlink" title="5. linux配置ftp服务"></a>5. linux配置ftp服务</h3><p>在安装前查看是否已安装vsftpd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -q vsftpd</span><br><span class="line">vsftpd-3.0.2-9.el7.x86_64</span><br></pre></td></tr></table></figure></p>
 <p>如果有显示类似以上的信息，说明已经安装vsftpd，如果没有，用yum安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install vsftpd</span><br></pre></td></tr></table></figure></p>
-<p>查看一下vsftpd安装在哪：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis vsftpd&#10;vsftpd: /usr/sbin/vsftpd /etc/vsftpd /usr/share/man/man8/vsftpd.8.gz</span><br></pre></td></tr></table></figure></p>
+<p>查看一下vsftpd安装在哪：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis vsftpd</span><br><span class="line">vsftpd: /usr/sbin/vsftpd /etc/vsftpd /usr/share/man/man8/vsftpd.8.gz</span><br></pre></td></tr></table></figure></p>
 <p>启动vsftpd服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start vsftpd.service</span><br></pre></td></tr></table></figure></p>
 <p>修改配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure></p>
 <p>修改如下配置：<br>anonymous_enable=NO<br>chroot_local_user=YES<br>allow_writeable_chroot=YES #加上这行解决了无法登陆的问题</p>
-<p>启动／重新启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start&#10;service vsftpd restart</span><br></pre></td></tr></table></figure></p>
+<p>启动／重新启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start</span><br><span class="line">service vsftpd restart</span><br></pre></td></tr></table></figure></p>
 <p>设置开机启动ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig vsftpd on</span><br></pre></td></tr></table></figure></p>
-<p>配置用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# useradd -g root -M -d /var/www/html -s /sbin/nologin ftpuser&#10;[root@localhost ~]# passwd ftpuser&#10;[root@localhost ~]# &#36755;&#20837;&#23494;&#30721;</span><br></pre></td></tr></table></figure></p>
+<p>配置用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# useradd -g root -M -d /var/www/html -s /sbin/nologin ftpuser</span><br><span class="line">[root@localhost ~]# passwd ftpuser</span><br><span class="line">[root@localhost ~]# 输入密码</span><br></pre></td></tr></table></figure></p>
 <p>把 /var/www/html 的所有权给ftpuser.root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# chown -R ftpuser.root /var/www/html</span><br></pre></td></tr></table></figure></p>
-<h3 id="6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动"><a href="#6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动" class="headerlink" title="6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动"></a>6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动</h3><h4 id="编译打包："><a href="#编译打包：" class="headerlink" title="编译打包："></a>编译打包：</h4><p>方法1：使用maven-assembly-plugin插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;artifactId&#62;maven-assembly-plugin&#60;/artifactId&#62; &#10;    &#60;configuration&#62; &#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#60;/manifest&#62; &#10;            &#60;/archive&#62;&#10;        &#60;descriptorRefs&#62;&#10;            &#60;descriptorRef&#62; jar-with-dependencies &#60;/descriptorRef&#62; &#10;        &#60;/descriptorRefs&#62;&#10;    &#60;/configuration&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;id&#62;make-assembly&#60;/id&#62; &#10;            &#60;phase&#62;package&#60;/phase&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;single&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62; &#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动"><a href="#6-附：使用maven把java-project打成包含依赖包的jar包，上传到服务器，并启动" class="headerlink" title="6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动"></a>6. 附：使用maven把java project打成包含依赖包的jar包，上传到服务器，并启动</h3><h4 id="编译打包："><a href="#编译打包：" class="headerlink" title="编译打包："></a>编译打包：</h4><p>方法1：使用maven-assembly-plugin插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt; </span><br><span class="line">    &lt;configuration&gt; </span><br><span class="line">        &lt;archive&gt;</span><br><span class="line">            &lt;manifest&gt;</span><br><span class="line">                &lt;mainClass&gt;com.iyihua.itimes.App&lt;/mainClass&gt;&lt;/manifest&gt; </span><br><span class="line">            &lt;/archive&gt;</span><br><span class="line">        &lt;descriptorRefs&gt;</span><br><span class="line">            &lt;descriptorRef&gt; jar-with-dependencies &lt;/descriptorRef&gt; </span><br><span class="line">        &lt;/descriptorRefs&gt;</span><br><span class="line">    &lt;/configuration&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;make-assembly&lt;/id&gt; </span><br><span class="line">            &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">        &lt;/execution&gt; </span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
 <p>运行命令：mvn assembly:assembly<br>或者命令：mvn package</p>
 <p>由于我使用这个方式，打出来的jar包里，依赖的jar和模块的class都正常，但是自己项目内的所有class都是空的class，用反编译看class文件，发现都是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class &#123;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>解压出来取单个class查看又是正常的，这个问题一直百撕不得骑姐，所以我最后使用了方法2的方式解决了问题。</p>
-<p>方法2：使用spring-boot-maven-plugin插件<br>由于我的project是spring boot项目，所以可以使用此方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;plugin&#62;&#10;    &#60;groupId&#62;org.springframework.boot&#60;/groupId&#62;&#10;    &#60;artifactId&#62;spring-boot-maven-plugin&#60;/artifactId&#62;&#10;    &#60;executions&#62;&#10;        &#60;execution&#62;&#10;            &#60;goals&#62;&#10;                &#60;goal&#62;repackage&#60;/goal&#62;&#10;            &#60;/goals&#62;&#10;        &#60;/execution&#62;&#10;    &#60;/executions&#62;&#10;&#60;/plugin&#62;&#10;&#60;plugin&#62;&#10;    &#60;groupId&#62;org.apache.maven.plugins&#60;/groupId&#62;&#10;    &#60;artifactId&#62;maven-jar-plugin&#60;/artifactId&#62;&#10;    &#60;configuration&#62;&#10;        &#60;archive&#62;&#10;            &#60;manifest&#62;&#10;                &#60;addClasspath&#62;true&#60;/addClasspath&#62;&#10;                &#60;mainClass&#62;com.iyihua.itimes.App&#60;/mainClass&#62;&#10;            &#60;/manifest&#62;&#10;        &#60;/archive&#62;&#10;    &#60;/configuration&#62;&#10;&#60;/plugin&#62;</span><br></pre></td></tr></table></figure></p>
+<p>方法2：使用spring-boot-maven-plugin插件<br>由于我的project是spring boot项目，所以可以使用此方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;repackage&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;configuration&gt;</span><br><span class="line">        &lt;archive&gt;</span><br><span class="line">            &lt;manifest&gt;</span><br><span class="line">                &lt;addClasspath&gt;true&lt;/addClasspath&gt;</span><br><span class="line">                &lt;mainClass&gt;com.iyihua.itimes.App&lt;/mainClass&gt;</span><br><span class="line">            &lt;/manifest&gt;</span><br><span class="line">        &lt;/archive&gt;</span><br><span class="line">    &lt;/configuration&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
 <p>运行mvn package打jar包，done！</p>
 <h4 id="上传并启动"><a href="#上传并启动" class="headerlink" title="上传并启动"></a>上传并启动</h4><p>连接sftp<br>lcd 打开本地路径<br>cd 进入服务器目标路径<br>put xxx.jar 把目标jar包上传到服务器对应路径<br>java -jar xxx.jar 启动java程序</p>
 </span>
@@ -314,13 +314,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/centos/" rel="tag">#centos</a>
-          
             <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring-boot/" rel="tag">#spring boot</a>
           
             <a href="/tags/linux/" rel="tag">#linux</a>
           
-            <a href="/tags/spring-boot/" rel="tag">#spring boot</a>
+            <a href="/tags/centos/" rel="tag">#centos</a>
           
             <a href="/tags/部署/" rel="tag">#部署</a>
           
@@ -392,10 +392,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目錄
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            本站概覽
+            Übersicht
           </li>
         </ul>
       
@@ -409,22 +409,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">Kategorien</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -491,11 +491,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主題 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>

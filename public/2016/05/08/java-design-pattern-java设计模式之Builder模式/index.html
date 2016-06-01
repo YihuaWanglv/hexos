@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Builder,design pattern,java,设计模式," />
+  <meta name="keywords" content="java,设计模式,Builder,design pattern," />
 
 
 
@@ -53,16 +53,16 @@
 
 
 
-<meta name="description" content="java设计模式之Builder模式设计模式模式很多，实际常用的很少。《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。假设有一个entity(Entity)，有id，name两个字段，如下：1package demo;&amp;#10;public class Entity &amp;#123;&amp;#10;    private int id;&amp;#10;    pr">
+<meta name="description" content="java设计模式之Builder模式设计模式模式很多，实际常用的很少。《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。假设有一个entity(Entity)，有id，name两个字段，如下：1234567891011121314151617package demo;public class Entity &amp;#123;    private int">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[java][design-pattern]java设计模式之Builder模式">
 <meta property="og:url" content="http://yoursite.com/2016/05/08/java-design-pattern-java设计模式之Builder模式/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="java设计模式之Builder模式设计模式模式很多，实际常用的很少。《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。假设有一个entity(Entity)，有id，name两个字段，如下：1package demo;&amp;#10;public class Entity &amp;#123;&amp;#10;    private int id;&amp;#10;    pr">
+<meta property="og:description" content="java设计模式之Builder模式设计模式模式很多，实际常用的很少。《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。假设有一个entity(Entity)，有id，name两个字段，如下：1234567891011121314151617package demo;public class Entity &amp;#123;    private int">
 <meta property="og:updated_time" content="2016-05-08T09:00:12.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[java][design-pattern]java设计模式之Builder模式">
-<meta name="twitter:description" content="java设计模式之Builder模式设计模式模式很多，实际常用的很少。《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。假设有一个entity(Entity)，有id，name两个字段，如下：1package demo;&amp;#10;public class Entity &amp;#123;&amp;#10;    private int id;&amp;#10;    pr">
+<meta name="twitter:description" content="java设计模式之Builder模式设计模式模式很多，实际常用的很少。《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。假设有一个entity(Entity)，有id，name两个字段，如下：1234567891011121314151617package demo;public class Entity &amp;#123;    private int">
 
 
 
@@ -132,7 +132,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            首頁
+            Startseite
           </a>
         </li>
       
@@ -142,7 +142,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            歸檔
+            Archiv
           </a>
         </li>
       
@@ -152,7 +152,7 @@
             
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
-            標籤
+            Tags
           </a>
         </li>
       
@@ -202,7 +202,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            發表於
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-05-08T16:58:38+08:00" content="2016-05-08">
               2016-05-08
             </time>
@@ -227,14 +227,14 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="java设计模式之Builder模式"><a href="#java设计模式之Builder模式" class="headerlink" title="java设计模式之Builder模式"></a>java设计模式之Builder模式</h2><p>设计模式模式很多，实际常用的很少。<br>《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。<br>假设有一个entity(Entity)，有id，name两个字段，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package demo;&#10;public class Entity &#123;&#10;    private int id;&#10;    private String name;&#10;    public int getId() &#123;&#10;        return id;&#10;    &#125;&#10;    public void setId(int id) &#123;&#10;        this.id = id;&#10;    &#125;&#10;    public String getName() &#123;&#10;        return name;&#10;    &#125;&#10;    public void setName(String name) &#123;&#10;        this.name = name;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>为了不用每次初始化的时候，要一个一个的setxxx设置字段值，通常我们会创建构造函数，通过构造函数直接传入字段，初始化。<br>加入构造函数的实体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;&#10;    private int id;&#10;    private String name;&#10;    public Entity() &#123;&#10;        super();&#10;    &#125;&#10;    public Entity(int id, String name) &#123;&#10;        super();&#10;        this.id = id;&#10;        this.name = name;&#10;    &#125;&#10;    public int getId() &#123;&#10;        return id;&#10;    &#125;&#10;    public void setId(int id) &#123;&#10;        this.id = id;&#10;    &#125;&#10;    public String getName() &#123;&#10;        return name;&#10;    &#125;&#10;    public void setName(String name) &#123;&#10;        this.name = name;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后需要初始化实体的时候，我们这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &#34;name&#34;);</span><br></pre></td></tr></table></figure></p>
-<p>这种用法很常用，但是问题来了。<br>当实体Entity的字段需要增加变化的时候怎么办呢？<br>比如增加字段descr，这样构造函数和客户端初始化都需要更新：<br>实体增加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private String descr;&#10;public String getDescr() &#123;&#10;    return descr;&#10;&#125;&#10;public void setDescr(String descr) &#123;&#10;    this.descr = descr;&#10;&#125;&#10;public Entity(int id, String name, String descr) &#123;&#10;    super();&#10;    this.id = id;&#10;    this.name = name;&#10;    this.descr = descr;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后原来调用构造函数初始化的代码也需要改动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &#34;name&#34;, &#34;descr&#34;);</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h2 id="java设计模式之Builder模式"><a href="#java设计模式之Builder模式" class="headerlink" title="java设计模式之Builder模式"></a>java设计模式之Builder模式</h2><p>设计模式模式很多，实际常用的很少。<br>《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。<br>假设有一个entity(Entity)，有id，name两个字段，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package demo;</span><br><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了不用每次初始化的时候，要一个一个的setxxx设置字段值，通常我们会创建构造函数，通过构造函数直接传入字段，初始化。<br>加入构造函数的实体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    public Entity() &#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line">    public Entity(int id, String name) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后需要初始化实体的时候，我们这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &quot;name&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>这种用法很常用，但是问题来了。<br>当实体Entity的字段需要增加变化的时候怎么办呢？<br>比如增加字段descr，这样构造函数和客户端初始化都需要更新：<br>实体增加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private String descr;</span><br><span class="line">public String getDescr() &#123;</span><br><span class="line">    return descr;</span><br><span class="line">&#125;</span><br><span class="line">public void setDescr(String descr) &#123;</span><br><span class="line">    this.descr = descr;</span><br><span class="line">&#125;</span><br><span class="line">public Entity(int id, String name, String descr) &#123;</span><br><span class="line">    super();</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.descr = descr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后原来调用构造函数初始化的代码也需要改动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &quot;name&quot;, &quot;descr&quot;);</span><br></pre></td></tr></table></figure></p>
 <p>如果你的class是不确定的参数，后续可能经常变动，那么你的构造函数可能需要很多个，并且不停的变动，而且，构造函数参数多的时候，参数也很不容易记住。</p>
-<p>而Effective Java中则推荐一种builder模式来进行实体初始化<br>如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;&#10;    private int id;&#10;    private String name;&#10;    private String descr;&#10;    public static class Builder &#123;&#10;        private int id;&#10;        private String name;&#10;        private String descr;&#10;        public Builder(int id) &#123;&#10;            this.id = id;&#10;        &#125;&#10;        public Builder name(String name) &#123;&#10;            this.name = name;&#10;            return this;&#10;        &#125;&#10;        public Builder descr(String descr) &#123;&#10;            this.descr = descr;&#10;            return this;&#10;        &#125;&#10;        public Entity build() &#123;&#10;            return new Entity(this);&#10;        &#125;&#10;    &#125;&#10;    private Entity(Builder b) &#123;&#10;        this.id = b.id;&#10;        this.name = b.name;&#10;        this.descr = b.descr;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>初始化实例的时候，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity.Builder(10).name(&#34;name&#34;).descr(&#34;descr&#34;).build();</span><br></pre></td></tr></table></figure></p>
+<p>而Effective Java中则推荐一种builder模式来进行实体初始化<br>如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String descr;</span><br><span class="line">    public static class Builder &#123;</span><br><span class="line">        private int id;</span><br><span class="line">        private String name;</span><br><span class="line">        private String descr;</span><br><span class="line">        public Builder(int id) &#123;</span><br><span class="line">            this.id = id;</span><br><span class="line">        &#125;</span><br><span class="line">        public Builder name(String name) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line">        public Builder descr(String descr) &#123;</span><br><span class="line">            this.descr = descr;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line">        public Entity build() &#123;</span><br><span class="line">            return new Entity(this);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private Entity(Builder b) &#123;</span><br><span class="line">        this.id = b.id;</span><br><span class="line">        this.name = b.name;</span><br><span class="line">        this.descr = b.descr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>初始化实例的时候，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity.Builder(10).name(&quot;name&quot;).descr(&quot;descr&quot;).build();</span><br></pre></td></tr></table></figure></p>
 <p>这样的写法，好处是，假如实体Entity以后变化很大，加入很多字段，不会影响到之前客户端初始化的代码，而且，这个初始化的过程非常清晰简单。</p>
 </span>
       
@@ -244,13 +244,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Builder/" rel="tag">#Builder</a>
-          
-            <a href="/tags/design-pattern/" rel="tag">#design pattern</a>
-          
             <a href="/tags/java/" rel="tag">#java</a>
           
             <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+            <a href="/tags/Builder/" rel="tag">#Builder</a>
+          
+            <a href="/tags/design-pattern/" rel="tag">#design pattern</a>
           
         </div>
       
@@ -320,10 +320,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目錄
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            本站概覽
+            Übersicht
           </li>
         </ul>
       
@@ -337,22 +337,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">Kategorien</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">53</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -419,11 +419,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主題 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>
