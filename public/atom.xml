@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-06-01T14:09:14.708Z</updated>
+  <updated>2016-06-04T02:26:01.845Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows下开启React-Native征途</title>
+    <link href="http://yoursite.com/2016/06/04/Windows%E4%B8%8B%E5%BC%80%E5%90%AFReact-Native%E5%BE%81%E9%80%94/"/>
+    <id>http://yoursite.com/2016/06/04/Windows下开启React-Native征途/</id>
+    <published>2016-06-04T01:55:48.000Z</published>
+    <updated>2016-06-04T02:26:01.845Z</updated>
+    
+    <content type="html">&lt;p&gt;我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。&lt;br&gt;不过说出来你可能不太相信，这故事的开头，来的并没有想象中的困难。&lt;/p&gt;
+&lt;p&gt;以下是过程：&lt;/p&gt;
+&lt;h2 id=&quot;1-安装Nodejs&quot;&gt;&lt;a href=&quot;#1-安装Nodejs&quot; class=&quot;headerlink&quot; title=&quot;1. 安装Nodejs&quot;&gt;&lt;/a&gt;1. 安装Nodejs&lt;/h2&gt;&lt;p&gt;React Native要求是4.0以上。&lt;/p&gt;
+&lt;h2 id=&quot;2-安装react-native-cli&quot;&gt;&lt;a href=&quot;#2-安装react-native-cli&quot; class=&quot;headerlink&quot; title=&quot;2. 安装react-native-cli&quot;&gt;&lt;/a&gt;2. 安装react-native-cli&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install -g react-native-cli&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;3-初始化第一个项目&quot;&gt;&lt;a href=&quot;#3-初始化第一个项目&quot; class=&quot;headerlink&quot; title=&quot;3. 初始化第一个项目&quot;&gt;&lt;/a&gt;3. 初始化第一个项目&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;react-native init TestProject&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;初始化第一个测试Demo，init的时候可能需要一点时间. 伟大的目标值的那么些耐心的等待。&lt;/p&gt;
+&lt;h2 id=&quot;4-设置环境变量&quot;&gt;&lt;a href=&quot;#4-设置环境变量&quot; class=&quot;headerlink&quot; title=&quot;4. 设置环境变量&quot;&gt;&lt;/a&gt;4. 设置环境变量&lt;/h2&gt;&lt;p&gt;设置环境变量ANDROID_HOME指向Android SDK的目录&lt;br&gt;eg:&lt;br&gt;&lt;img src=&quot;/images/react-001.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;5-安装Genymotion模拟器&quot;&gt;&lt;a href=&quot;#5-安装Genymotion模拟器&quot; class=&quot;headerlink&quot; title=&quot;5. 安装Genymotion模拟器&quot;&gt;&lt;/a&gt;5. 安装Genymotion模拟器&lt;/h2&gt;&lt;p&gt;Genymotion官网下载安装Genymotion模拟器，并创建Android emulator。&lt;br&gt;创建实例后，将得到如下画面：&lt;br&gt;&lt;img src=&quot;/images/react-002.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;Genymotion运行Android模拟实例需要VirtualBox和AndroidSdk的支持。&lt;br&gt;安装Genymotion后默认的VirtualBox和AndroidSdk不好使，我通过Setting设置配置好自己本地的VirtualBox和AndroidSdk。&lt;br&gt;设置VirtualBox&lt;br&gt;&lt;img src=&quot;/images/react-003.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;设置sdk&lt;br&gt;&lt;img src=&quot;/images/react-004.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;配置好后，就把模拟的Android实例启动起来放着吧。&lt;/p&gt;
+&lt;h2 id=&quot;6-启动&quot;&gt;&lt;a href=&quot;#6-启动&quot; class=&quot;headerlink&quot; title=&quot;6. 启动&quot;&gt;&lt;/a&gt;6. 启动&lt;/h2&gt;&lt;h3 id=&quot;1-启动React-Native-Server&quot;&gt;&lt;a href=&quot;#1-启动React-Native-Server&quot; class=&quot;headerlink&quot; title=&quot;1-启动React Native Server&quot;&gt;&lt;/a&gt;1-启动React Native Server&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;react-native start&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&quot;/images/react-005.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-开一个新的命令行终端-cmd-切换到项目目录安装APP&quot;&gt;&lt;a href=&quot;#2-开一个新的命令行终端-cmd-切换到项目目录安装APP&quot; class=&quot;headerlink&quot; title=&quot;2-开一个新的命令行终端(cmd), 切换到项目目录安装APP&quot;&gt;&lt;/a&gt;2-开一个新的命令行终端(cmd), 切换到项目目录安装APP&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cd android&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;gradlew.bat installDebug&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;执行gradlew.bat installDebug时，需要先正常打开Genymotion模拟器，否则build 和 install会报错。&lt;br&gt;&lt;img src=&quot;/images/react-006.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;安装成功后，在Genymotion里手动打开APP ，正常的话，你就可以看到React-Native的欢迎画面。&lt;br&gt;&lt;img src=&quot;/images/react-007.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Windows下的React Native开发环境搭建 – done.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。&lt;br&gt;不过说出来你可能不太相信，这故事的开头，来的并没有想象中的困难。&lt;/p&gt;
+&lt;p&gt;以下是过程：&lt;/p&gt;
+&lt;h2 
+    
+    </summary>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+      <category term="react-native" scheme="http://yoursite.com/tags/react-native/"/>
+    
+      <category term="nodejs" scheme="http://yoursite.com/tags/nodejs/"/>
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+      <category term="windows" scheme="http://yoursite.com/tags/windows/"/>
+    
+  </entry>
   
   <entry>
     <title>[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目</title>
@@ -748,35 +792,6 @@ Slave_SQL_Running: Yes     //此状态必须YES
       <category term="patten" scheme="http://yoursite.com/tags/patten/"/>
     
       <category term="coding" scheme="http://yoursite.com/tags/coding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[springboot][items][项目使用实践]springboot get started</title>
-    <link href="http://yoursite.com/2016/02/01/springboot-items-%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5-springboot-get-started/"/>
-    <id>http://yoursite.com/2016/02/01/springboot-items-项目使用实践-springboot-get-started/</id>
-    <published>2016-02-01T09:10:18.000Z</published>
-    <updated>2016-02-20T04:02:04.723Z</updated>
-    
-    <content type="html">&lt;p&gt;往后将通过一个时间记录web app项目，实践并记录spring boot的使用&lt;br&gt;为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。&lt;/p&gt;
-&lt;h3 id=&quot;1-pom-xml中添加maven依赖&quot;&gt;&lt;a href=&quot;#1-pom-xml中添加maven依赖&quot; class=&quot;headerlink&quot; title=&quot;1.pom.xml中添加maven依赖&quot;&gt;&lt;/a&gt;1.pom.xml中添加maven依赖&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;2-编写项目启动入口App-java&quot;&gt;&lt;a href=&quot;#2-编写项目启动入口App-java&quot; class=&quot;headerlink&quot; title=&quot;2.编写项目启动入口App.java&quot;&gt;&lt;/a&gt;2.编写项目启动入口App.java&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@SpringBootApplication&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class App &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public static void main(String[] args) throws Exception &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        SpringApplication.run(App.class, args);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;ok! done!&lt;br&gt;这样就已经能直接使用spring boot了.&lt;br&gt;启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。&lt;/p&gt;
-&lt;h3 id=&quot;再进一步，为应用引入spring-mvc&quot;&gt;&lt;a href=&quot;#再进一步，为应用引入spring-mvc&quot; class=&quot;headerlink&quot; title=&quot;再进一步，为应用引入spring mvc&quot;&gt;&lt;/a&gt;再进一步，为应用引入spring mvc&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Controller&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class SampleController &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @RequestMapping(&amp;quot;/&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @ResponseBody&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    String home() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String data = &amp;quot;&amp;quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return &amp;quot;Hello World!&amp;quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;启动App.java，访问localhost:8080, 即可遇见“Hello World!”&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;往后将通过一个时间记录web app项目，实践并记录spring boot的使用&lt;br&gt;为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。&lt;/p&gt;
-&lt;h3 id=&quot;1-pom-xml中添加maven依赖&quot;&gt;&lt;a href=&quot;#1-pom-xml
-    
-    </summary>
-    
-    
-      <category term="springboot" scheme="http://yoursite.com/tags/springboot/"/>
-    
-      <category term="itime" scheme="http://yoursite.com/tags/itime/"/>
     
   </entry>
   
