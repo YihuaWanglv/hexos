@@ -1,7 +1,7 @@
 ---
 title: '[dev][collect][2016-06-06]collect-of-im-netty-android-etc'
 date: 2016-06-06 17:42:22
-tags:
+tags: [dev, collect, post, git, resouce]
 ---
 
 此集合[dev][collect]汇总开发资源.

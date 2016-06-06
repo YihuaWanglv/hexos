@@ -179,11 +179,195 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/20/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-02-20T12:02:04+08:00" content="2016-02-20">
+              2016-02-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
       
 
       
+        
+          <span itemprop="articleBody">
+            
+              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/02/java-从代码中去除if-else/" itemprop="url">
+                  [java]从代码中去除if-else
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-02-02T16:09:30+08:00" content="2016-02-02">
+              2016-02-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？</p>
+<p>首先要明确的是，实践而言，并不是只要有大段的if else语句就一定需要优化，在开始的时候，如果这里的逻辑比较清楚简单，而且也没有预期到一些业务逻辑会产生变动，那么其实就并不需要，起码是并不急着需要去优化这个if else语句。</p>
+<p>当判断到确实需要优化if else，方法有很多，总结如下。</p>
+<ol>
+<li>使用map.</li>
+<li>使用枚举.</li>
+<li>多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。<br>当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。</li>
+</ol>
+<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int code;</span><br><span class="line">if(&quot;Name&quot;.equals(str))</span><br><span class="line">    code = 0;</span><br><span class="line">else if(&quot;Age&quot;.equals(str))</span><br><span class="line">    code = 1;</span><br><span class="line">else if(&quot;Address&quot;.equals(str))</span><br><span class="line">    code = 2;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  </span><br><span class="line">static &#123;  </span><br><span class="line">    map.put(&quot;Name&quot;, 0);  </span><br><span class="line">    map.put(&quot;Age&quot;, 1);</span><br><span class="line">    map.put(&quot;Address&quot;, 2);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = map.get(type);</span><br></pre></td></tr></table></figure>
+<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;</span><br><span class="line">    Name(0), Age(1), Address(2);</span><br><span class="line">    public int code;</span><br><span class="line">    Codes(int code)&#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
+<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&quot;com.xxx.&quot; + str).newInstance();</span><br><span class="line"></span><br><span class="line">int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
+<h2 id="“责任链”如何优化if-else？"><a href="#“责任链”如何优化if-else？" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
+<p>好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。</p>
+<p>现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。</p>
+<p>好，现在你有一个主控方法，这个方法创建一个上下文对象，再根据分支条件分别调用不同Handler子类上的handle方法，传入这个上下文。你注意到一个问题，分支条件本身和对应的处理逻辑是内聚的。如果条件发生变化，处理往往也要发生变化。反之依然。而且你读代码时，读到一个复杂的条件，往往不能轻易看出它要判断什么，这时最好的方法就是直接看看对应Handler的命名和文档，从处理方式反推这个条件对应的业务需求。既然这样，何不干脆把条件都搬到Handler里去，让每个Handler根据传入的上下文，看看在当前状态下自己是否应该执行处理。</p>
+<p>现在你得到了一个主控类，这个类持有一堆Handler实例，主控类创建一个上下文，然后把上下文依次传给各个Handler，Handler自行判断是否应该执行自己的处理。</p>
+<p>到了这一步，其实已经差不多了。不过对于某些人，他在进行前一步的重构时，就会醒悟：主控类现在已经变成了一个单纯的任务转发人（分配者）。它根本没有必要持有一个Handler的列表再分别逐个调用，还要管理该继续还是该中断等等逻辑（这些逻辑是依赖每个Handler返回的标志来决定的）。何不让Handler自己负责把控制向后分发，主控类只需要知道领头的那个Handler最终会把事情处理好就行了。这种结构还有一个好处，就是每个Handler可以自行决定是否该往下传递控制，还可以根据需要替换上下文实例的实现来影响后续的处理。（这一步与上一步是二选一，有些人喜欢在主控类中持有Handler队列，有些人喜欢链式Handler。我个人认为问题不大，两者的实现难度也没有差别，实现需求就行）</p>
+<p>最后，我们为了交流方便，把这种组合方式称为“责任链”。</p>
+<h2 id="使用状态模式优化if-else"><a href="#使用状态模式优化if-else" class="headerlink" title="使用状态模式优化if else"></a>使用状态模式优化if else</h2><p>参考：<a href="http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html" target="_blank" rel="external">http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -731,7 +915,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
@@ -745,7 +929,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">Tags</span>
               </a>
           </div>
