@@ -133,7 +133,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -143,7 +143,7 @@
             
               <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -179,15 +179,100 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/01/项目管理建议/" itemprop="url">
+                  项目管理建议
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-07-01T19:14:00+08:00" content="2016-07-01">
+              2016-07-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="对项目管理制度的一些看法和建议"><a href="#对项目管理制度的一些看法和建议" class="headerlink" title="对项目管理制度的一些看法和建议"></a>对项目管理制度的一些看法和建议</h1><h2 id="当前存在的问题"><a href="#当前存在的问题" class="headerlink" title="当前存在的问题"></a>当前存在的问题</h2><ol>
+<li><p>技术工程师反映，技术人员与业务隔离，技术人员难以熟悉第一手业务需求，对工程师开发出契合业务部分需求的产品造成一定的理解障碍。</p>
+</li>
+<li><p>安卓、iOS、H5、后端、测试等各部门分而治之，缺乏一个强而有力的统筹推进，虽然增加了项目经理角色，但目前这个角色只能在各部门之间协调，仍然难以有力推动各部门按时按量完成进度。</p>
+</li>
+<li><p>从业务到产品到开发到测试上线，这个流程还可以有优化的地方。</p>
+</li>
+</ol>
+<h2 id="分析和改进建议"><a href="#分析和改进建议" class="headerlink" title="分析和改进建议"></a>分析和改进建议</h2><h3 id="针对问题1。"><a href="#针对问题1。" class="headerlink" title="针对问题1。"></a>针对问题1。</h3><p>使用尝试让项目经理或者技术经理在产需求研和产品评审阶段就参与介入，能够一定程度的和业务部分做到沟通，让技术人员更熟悉业务。即使只是旁听也好</p>
+<h3 id="针对问题2。"><a href="#针对问题2。" class="headerlink" title="针对问题2。"></a>针对问题2。</h3><p>程序界有一句话，“没有完美的模型，但有一些能用。”<br>既然目前公司的情况是各部分分而治之，各施其职，那么可以考虑这样一个构思，产品对业务负责，提供产品的产出;测试则对产品负责，提供项目和模块完成情况；技术经理对项目经理负责，提供项目模块开发时间评估，以及开发产出；各开发工程师对技术经理负责，按时按量完成技术经理制定的模块开发计划。而项目经理则对项目的进度和协调负责，应该要有渠道能对接所有相关部门，跟进项目的进度，协调各方遇到的问题，并协助解决。<br><strong>这样，明确各部门应该对谁负责，各部门遇到项目开发相关问题，也就能明确的找到相应的人员，得到反馈，部门之间也能够相互推动。</strong></p>
+<p><strong>这里推荐使用一个团队协作管理的工具：“Worktile”。</strong><br>Worktile可以在一个看板中看到所有在做、已完成、在测试等等所有流程中的任务和完成情况。<br>例如，技术经理可以列出所有需要完成的模块和任务，为之分配负责人。负责人开发完成后，勾选完成，管理人员就可以拖动任务进入测试流程。<br>如此一个可视化简单的团队协作管理。<br>当然这个功能，像禅道也能部分实现。但是禅道的这个功能并不好用，从实践经验来说，使用的人积极性并不高。而Worktile这类工具如果推动成功，开发的管理效率将会得到提高。</p>
+<p><strong>各状态任务完成情况一览：</strong><br><img src="/images/project-002.jpg" alt=""><br><strong>完成任务，推动到另一状态：</strong><br><img src="/images/project-003.png" alt=""><br><strong>报表：</strong><br><img src="/images/project-004.jpg" alt=""><br><strong>团队日历：每个时间点要完成的任务也会在此显示</strong><br><img src="/images/project-005.png" alt=""></p>
+<h3 id="针对问题3"><a href="#针对问题3" class="headerlink" title="针对问题3."></a>针对问题3.</h3><p>以门店收银机为例，发现存在一些流程上的问题。<br><strong>首先，说接口，有两个问题。</strong><br>一，客户端和服务端接口文档，用的是word文档沟通，各个人员直接相互传递，很可能导致相互之间接口文档不同步，也就会造成开发期间关于接口的一些扯皮。<br>二，虽然接口文档有了，但是客户端还是要等服务端出接口后，才能进行接口接入后的相关开发，这样前端的进度就要依赖于后端的产出。<br>既然有这样的问题，那么有没有改进办法呢？有的，这里推荐使用阿里开源的“RAP”接口管理工具进行接口管理。<br>RAP对我们接口开发的帮助有：<br>1）可视化结构化的接口编辑和管理。这样接口只有服务器上的一份，并且管理简单。<br>2）生成Mock数据、校验真实接口的正确性。有了Mock功能，前端可以在后端提供接口之前，利用rap提供的模拟接口数据，提前进行接口接入的开发，提高前端开发速度。最重要的是，前后端接口开发解耦。<br><img src="/images/project-001.jpg" alt=""></p>
+<p><strong>其次，说说测试和螺旋式开发。</strong><br>测试本身是一个发现细节的过程，有些问题测试到细节的地方，就会出现值得推敲和不断调试的情况。而我们项目留给测试的时间太少了。而前期，没完成之前，测试在等待开发，同时，最后所有模块大致完成才提测，又一股脑挤在后期测试和迭代，时间难免太紧，很容易导致进度延误。<br><strong>这里的建议是，开发应该在项目开始时就梳理出模块间的依赖情况，前后端协调好应该先开发哪些模块，只要有一个模块开发完成，就马上提测。</strong>如此让测试尽早介入测试，达到项目螺旋式迭代推荐的目的。同时，也能让测试的时间合理分配，避免延误。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -221,7 +306,7 @@
 
         <div class="post-meta">
           <span class="post-time">
-            Posted on
+            Veröffentlicht am
             <time itemprop="dateCreated" datetime="2016-06-28T15:31:54+08:00" content="2016-06-28">
               2016-06-28
             </time>
@@ -291,6 +376,793 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/" itemprop="url">
+                  [dev][collect][2016-06-06]collect-of-im-netty-android-etc
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-06-06T17:42:22+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>此集合[dev][collect]汇总开发资源.<br>资源含文章，git code等等..</p>
+<h3 id="2016-06-06"><a href="#2016-06-06" class="headerlink" title="2016-06-06"></a>2016-06-06</h3><ul>
+<li><p>一套仿 微信 IM系统 基于apache mina<br><a href="http://my.oschina.net/u/1167637/blog/411312" target="_blank" rel="external">http://my.oschina.net/u/1167637/blog/411312</a></p>
+</li>
+<li><p>socketio 服务器推送<br><a href="http://blog.csdn.net/xtayfjpk/article/details/40948409" target="_blank" rel="external">http://blog.csdn.net/xtayfjpk/article/details/40948409</a></p>
+</li>
+<li><p>开放源码,基于springMVC+springSecurity3.x+Mybaits3.x的权限系统,,支持开源<br><a href="https://github.com/caprice/lanyuan" target="_blank" rel="external">https://github.com/caprice/lanyuan</a></p>
+</li>
+<li><p>Simple asynchronous non blocking chat server/client based on Netty 4<br><a href="https://github.com/caprice/nettychat" target="_blank" rel="external">https://github.com/caprice/nettychat</a><br><a href="https://github.com/YihuaWanglv/nettychat" target="_blank" rel="external">https://github.com/YihuaWanglv/nettychat</a></p>
+</li>
+<li><p>[5][android]A High Copy WeChat ,SNS APP (高仿微信)<br><a href="https://github.com/YihuaWanglv/wechat" target="_blank" rel="external">https://github.com/YihuaWanglv/wechat</a></p>
+</li>
+<li><p>一个Android开发者博客<br><a href="http://blog.csdn.net/finddreams" target="_blank" rel="external">http://blog.csdn.net/finddreams</a></p>
+</li>
+<li><p>案例剖析：从0开始搭建一个微服务的持续交付系统<br><a href="http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect</a></p>
+</li>
+<li><p>[5][android]这是一个可用于Android快速开发的框架，集成了很多项目中通用的东西，免去重复造轮子的麻烦，直接下载来了，修改一下就可以做为基础的框架进行开发，提高开发速度，适合当前移动互联网时代敏捷快速开发的节奏<br><a href="https://github.com/YihuaWanglv/Android_BaseLib" target="_blank" rel="external">https://github.com/YihuaWanglv/Android_BaseLib</a></p>
+</li>
+<li><p>使用Netty实现IMServer，方便的Entity解码编码机制，融合到二进制协议中<br><a href="https://github.com/YihuaWanglv/netty-chat" target="_blank" rel="external">https://github.com/YihuaWanglv/netty-chat</a></p>
+</li>
+<li><p>仿淘宝的B2C商城项目<br>页面用的jsp，稍显陈旧<br><a href="https://github.com/YihuaWanglv/B2CWeb" target="_blank" rel="external">https://github.com/YihuaWanglv/B2CWeb</a></p>
+</li>
+<li><p>JavaEE项目开发脚手架<br><a href="https://github.com/YihuaWanglv/es" target="_blank" rel="external">https://github.com/YihuaWanglv/es</a><br>后端:<br>IoC容器 spring<br>web框架 springmvc<br>orm框架 hibernate + spring data jpa<br>安全框架 shiro<br>验证框架 hibernate validator<br>任务调度框架 quartz<br>缓存 ehcache<br>数据源 druid<br>日志 slf4j+logback<br>Json fastjson<br>日期美化 prettytime<br>servlet 3.0(需要支持servlet3的servlet容器，如tomcat7)<br>jcaptcha 验证码<br>jsp 模板视图<br>前端:<br>jquery js框架<br>jquery-ui-bootstrap界面框架<br>font-wesome 字体/图标框架<br>jquery Validation Engine 验证框架（配合spring的验证框架，页面验证简化不少）<br>kindeditor 编辑器<br>nicescroll 漂亮的滚动条<br>zTree 树框架<br>jquery blockUI 弹出框/遮罩框架<br>jquery-fileupload 文件上传<br>bootstrap-datatimepicker 日历选择</p>
+</li>
+<li><p>[5][android]Collect and classify android open source projects<br><a href="https://github.com/YihuaWanglv/android-open-project" target="_blank" rel="external">https://github.com/YihuaWanglv/android-open-project</a></p>
+</li>
+<li><p>Blog avec Spring MVC + spring DATA + mongodb + angularjs<br><a href="https://github.com/YihuaWanglv/blog_java" target="_blank" rel="external">https://github.com/YihuaWanglv/blog_java</a></p>
+</li>
+<li><p>dianping-api-samples<br><a href="https://github.com/YihuaWanglv/dianping-open-sdk" target="_blank" rel="external">https://github.com/YihuaWanglv/dianping-open-sdk</a></p>
+</li>
+<li><p>JeeSite 是一个企业信息管理系统基础框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、Apache Shiro、Hibernate、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。<br><a href="https://github.com/YihuaWanglv/jeesite" target="_blank" rel="external">https://github.com/YihuaWanglv/jeesite</a></p>
+</li>
+<li><p>Demos of Apache MINA User Guide《Apache MINA 2 用户指南》中文翻译，文中用到的例子源码 <a href="https://github.com/waylau/apache-mina-2.x-user-guide" target="_blank" rel="external">https://github.com/waylau/apache-mina-2.x-user-guide</a><br><a href="https://github.com/waylau/apache-mina-2-user-guide-demos" target="_blank" rel="external">https://github.com/waylau/apache-mina-2-user-guide-demos</a></p>
+</li>
+<li><p>Spring Framework 4.x Reference Documentation 中文翻译<br><a href="https://www.gitbook.com/book/waylau/spring-framework-4-reference/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/spring-framework-4-reference/details</a><br><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">https://github.com/waylau/spring-framework-4-reference</a></p>
+</li>
+<li><p>免费的计算机编程类中文书籍<br><a href="https://github.com/YihuaWanglv/free-programming-books-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books-zh_CN</a><br>网页版：<br><a href="http://siberiawolf.com/free_programming/index.html" target="_blank" rel="external">http://siberiawolf.com/free_programming/index.html</a></p>
+</li>
+<li><p>一个合格的程序员应该读过哪些书<br><a href="http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html" target="_blank" rel="external">http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html</a></p>
+</li>
+<li><p>Google 全球 IP 地址库<br><a href="https://github.com/justjavac/Google-IPs" target="_blank" rel="external">https://github.com/justjavac/Google-IPs</a></p>
+</li>
+<li><p>一份关于“资料汇总”的汇总<br><a href="https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN</a></p>
+</li>
+<li><p>Freely available programming books<br><a href="https://github.com/YihuaWanglv/free-programming-books" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books</a></p>
+</li>
+<li><p>RESTful API 设计参考文献列表，可帮助你更加彻底的了解REST风格的接口设计<br><a href="https://github.com/aisuhua/restful-api-design-references" target="_blank" rel="external">https://github.com/aisuhua/restful-api-design-references</a></p>
+</li>
+<li><p>ssential Netty in Action 《Netty 实战(精髓)》<br><a href="https://github.com/waylau/essential-netty-in-action" target="_blank" rel="external">https://github.com/waylau/essential-netty-in-action</a><br>gitbook：<br><a href="http://waylau.com/essential-netty-in-action/" target="_blank" rel="external">http://waylau.com/essential-netty-in-action/</a></p>
+</li>
+<li><p>Gradle 2 User Guide 中文翻译《Gradle 2 用户指南》<br><a href="https://github.com/waylau/Gradle-2-User-Guide" target="_blank" rel="external">https://github.com/waylau/Gradle-2-User-Guide</a><br>gitbook：<br><a href="https://www.gitbook.com/book/waylau/gradle-2-user-guide/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/gradle-2-user-guide/details</a></p>
+</li>
+<li><p>Netty 4.x User Guide 中文翻译《Netty 4.x 用户指南》<br><a href="https://github.com/waylau/netty-4-user-guide" target="_blank" rel="external">https://github.com/waylau/netty-4-user-guide</a><br>gitbook：<br><a href="http://waylau.com/netty-4-user-guide/" target="_blank" rel="external">http://waylau.com/netty-4-user-guide/</a></p>
+</li>
+<li><p>这是一个整理即时通讯（IM）和社交系统（SNS）优秀开源项目的文档，项目上传github欢迎提交更新<br><a href="https://github.com/YihuaWanglv/Perfect_IM_SNS" target="_blank" rel="external">https://github.com/YihuaWanglv/Perfect_IM_SNS</a></p>
+</li>
+<li><p>基于位置信息，空间时间结合的社交与分享的应用<br><a href="https://github.com/YihuaWanglv/Tuyi" target="_blank" rel="external">https://github.com/YihuaWanglv/Tuyi</a></p>
+</li>
+<li><p>SYTeamApp：基于环信平台进行开发，旨在打造的高效团队沟通的移动客户端，供企业内部协作使用、适应移动办公需要，提升企业沟通协同效率，增强企业办公管理效率。（当前仅实现了用户登入登出功能、通讯功能、投票功能。）<br><a href="https://github.com/YihuaWanglv/SYTeamApp" target="_blank" rel="external">https://github.com/YihuaWanglv/SYTeamApp</a></p>
+</li>
+<li><p>MeifuGO：An open source android app by using easemob IM SDK<br><a href="https://github.com/YihuaWanglv/MeifuGO" target="_blank" rel="external">https://github.com/YihuaWanglv/MeifuGO</a></p>
+</li>
+<li><p>fangyuanshili：环信SDK,IM,geohash,lbs<br><a href="https://github.com/YihuaWanglv/fangyuanshili" target="_blank" rel="external">https://github.com/YihuaWanglv/fangyuanshili</a></p>
+</li>
+<li><p>zaina：该项目是改编自环信即时通讯云的demo改编<br><a href="https://github.com/YihuaWanglv/zaina" target="_blank" rel="external">https://github.com/YihuaWanglv/zaina</a></p>
+</li>
+<li><p>dianhua：基于react native 和 环信的实时通话的免费店话<br><a href="https://github.com/YihuaWanglv/dianhua" target="_blank" rel="external">https://github.com/YihuaWanglv/dianhua</a></p>
+</li>
+<li><p>Baby：一个私密社交APP<br><a href="https://github.com/YihuaWanglv/Baby" target="_blank" rel="external">https://github.com/YihuaWanglv/Baby</a></p>
+</li>
+<li><p>MVPCommon：一个集成了众多开源项目的Android MVP框架以及应用搭建，全程博客更新。<br>a common Architecture and project build with blogs releasing based on MVP，integrates many Open Source Projects ,to make your developing quicker and easier.<br><a href="https://github.com/YihuaWanglv/MVPCommon" target="_blank" rel="external">https://github.com/YihuaWanglv/MVPCommon</a><br>从零开始搭建android框架系列：<br><a href="http://www.jianshu.com/notebooks/3767449/latest" target="_blank" rel="external">http://www.jianshu.com/notebooks/3767449/latest</a></p>
+</li>
+<li><p>learnCloud：<br>和应用服务器、存储服务器说再见<br>再也不用租服务器，也不用写后端代码了。LeanCloud 提供一站式后端云服务，从数据存储、实时聊天、消息推送到移动统计，涵盖应用开发的多方面后端需求。<br><a href="https://leancloud.cn/" target="_blank" rel="external">https://leancloud.cn/</a></p>
+</li>
+<li><p>不容错过，最全的安卓架构合集【从零开始搭建android框架系列（2）】<br><a href="http://www.jianshu.com/p/1f21e1d375aa" target="_blank" rel="external">http://www.jianshu.com/p/1f21e1d375aa</a></p>
+</li>
+<li><p>安卓架构文章合集（a collection of android Architecture）<br><a href="https://github.com/YihuaWanglv/AndroidArchitectureCollection" target="_blank" rel="external">https://github.com/YihuaWanglv/AndroidArchitectureCollection</a></p>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/06/git-git分支使用和管理/" itemprop="url">
+                  [git]git分支使用和管理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-06-06T17:37:36+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="git分支常用命令"><a href="#git分支常用命令" class="headerlink" title="git分支常用命令"></a>git分支常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">从master创建dev分支，并checkout dev分支：</span><br><span class="line">git checkout -b dev</span><br><span class="line">此命令相当于：</span><br><span class="line">git branch dev</span><br><span class="line">git checkout dev</span><br><span class="line"></span><br><span class="line">回到master，合并dev的更改到master：</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">合并后删除dev分支：</span><br><span class="line">git branch -d dev</span><br><span class="line"></span><br><span class="line">如果直接用git merge dev合并分支，git使用的是fast forward的模式，并不会留下commit历史，如果想要留下commit历史，就要加上--no-ff参数，并使用-m添加commit描述</span><br><span class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev</span><br></pre></td></tr></table></figure>
+<h2 id="保存临时状态"><a href="#保存临时状态" class="headerlink" title="保存临时状态"></a>保存临时状态</h2><p>当你正在dev分支进行开发，还没有开发完成能提交，此时突然有一个线上版本的bug要紧急修复，这个时候你就需要用到git stash功能，保存正在开发的dev分支的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">保存当前开发状态：</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line">查看当前已保存的stash列表：</span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line">取出之前保存的stash状态：</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
+<h2 id="多人协作的工作模式"><a href="#多人协作的工作模式" class="headerlink" title="多人协作的工作模式"></a>多人协作的工作模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">多人协作的工作模式通常是这样：</span><br><span class="line"></span><br><span class="line">首先，可以试图用git push origin branch-name推送自己的修改；</span><br><span class="line"></span><br><span class="line">如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</span><br><span class="line"></span><br><span class="line">如果合并有冲突，则解决冲突，并在本地提交；</span><br><span class="line"></span><br><span class="line">没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！</span><br><span class="line"></span><br><span class="line">如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。</span><br><span class="line"></span><br><span class="line">这就是多人协作的工作模式，一旦熟悉了，就非常简单。</span><br><span class="line"></span><br><span class="line">小结</span><br><span class="line"></span><br><span class="line">查看远程库信息，使用git remote -v；</span><br><span class="line"></span><br><span class="line">本地新建的分支如果不推送到远程，对其他人就是不可见的；</span><br><span class="line"></span><br><span class="line">从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；</span><br><span class="line"></span><br><span class="line">在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；</span><br><span class="line"></span><br><span class="line">建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；</span><br><span class="line"></span><br><span class="line">从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/04/Windows下开启React-Native征途/" itemprop="url">
+                  Windows下开启React-Native征途
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-06-04T09:55:48+08:00" content="2016-06-04">
+              2016-06-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。<br>不过说出来你可能不太相信，这故事的开头，来的并没有想象中的困难。</p>
+<p>以下是过程：</p>
+<h2 id="1-安装Nodejs"><a href="#1-安装Nodejs" class="headerlink" title="1. 安装Nodejs"></a>1. 安装Nodejs</h2><p>React Native要求是4.0以上。</p>
+<h2 id="2-安装react-native-cli"><a href="#2-安装react-native-cli" class="headerlink" title="2. 安装react-native-cli"></a>2. 安装react-native-cli</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g react-native-cli</span><br></pre></td></tr></table></figure>
+<h2 id="3-初始化第一个项目"><a href="#3-初始化第一个项目" class="headerlink" title="3. 初始化第一个项目"></a>3. 初始化第一个项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init TestProject</span><br></pre></td></tr></table></figure>
+<p>初始化第一个测试Demo，init的时候可能需要一点时间. 伟大的目标值的那么些耐心的等待。</p>
+<h2 id="4-设置环境变量"><a href="#4-设置环境变量" class="headerlink" title="4. 设置环境变量"></a>4. 设置环境变量</h2><p>设置环境变量ANDROID_HOME指向Android SDK的目录<br>eg:<br><img src="/images/react-001.png" alt=""></p>
+<h2 id="5-安装Genymotion模拟器"><a href="#5-安装Genymotion模拟器" class="headerlink" title="5. 安装Genymotion模拟器"></a>5. 安装Genymotion模拟器</h2><p>Genymotion官网下载安装Genymotion模拟器，并创建Android emulator。<br>创建实例后，将得到如下画面：<br><img src="/images/react-002.png" alt=""><br>Genymotion运行Android模拟实例需要VirtualBox和AndroidSdk的支持。<br>安装Genymotion后默认的VirtualBox和AndroidSdk不好使，我通过Setting设置配置好自己本地的VirtualBox和AndroidSdk。<br>设置VirtualBox<br><img src="/images/react-003.png" alt=""><br>设置sdk<br><img src="/images/react-004.png" alt=""></p>
+<p>配置好后，就把模拟的Android实例启动起来放着吧。</p>
+<h2 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h2><h3 id="1-启动React-Native-Server"><a href="#1-启动React-Native-Server" class="headerlink" title="1-启动React Native Server"></a>1-启动React Native Server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native start</span><br></pre></td></tr></table></figure>
+<p><img src="/images/react-005.png" alt=""></p>
+<h3 id="2-开一个新的命令行终端-cmd-切换到项目目录安装APP"><a href="#2-开一个新的命令行终端-cmd-切换到项目目录安装APP" class="headerlink" title="2-开一个新的命令行终端(cmd), 切换到项目目录安装APP"></a>2-开一个新的命令行终端(cmd), 切换到项目目录安装APP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd android</span><br><span class="line">gradlew.bat installDebug</span><br></pre></td></tr></table></figure>
+<p>执行gradlew.bat installDebug时，需要先正常打开Genymotion模拟器，否则build 和 install会报错。<br><img src="/images/react-006.png" alt=""><br>安装成功后，在Genymotion里手动打开APP ，正常的话，你就可以看到React-Native的欢迎画面。<br><img src="/images/react-007.png" alt=""></p>
+<p>Windows下的React Native开发环境搭建 – done.</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/01/Jenkins自动化部署实践-Jenkins多环境部署git托管的springboot项目/" itemprop="url">
+                  [Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-06-01T18:56:42+08:00" content="2016-06-01">
+              2016-06-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目</p>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>Jenkins部署在服务器192.168.1.119:8080.<br>有一个在git托管的springboot构建的web项目，项目有n个依赖的父模块，现在想要把这个项目部署到服务器192.168.1.134上.<br>现在，我们需要使用Jenkins自动化部署实现这个目标.</p>
+<h4 id="为什么是springboot？"><a href="#为什么是springboot？" class="headerlink" title="为什么是springboot？"></a>为什么是springboot？</h4><p>Sprinboot允许项目使用内嵌的tomcat像启动普通java程序一样启动一个web项目.由于有了这个特性，项目不再需要打war包部署到tomcat，而是打成jar包，直接使用java -jar命令启动.</p>
+<h4 id="如何实现？"><a href="#如何实现？" class="headerlink" title="如何实现？"></a>如何实现？</h4><p>1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。<br>2-建立目标项目的maven打包项目。build。<br>3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。</p>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p>下面是具体操作</p>
+<h4 id="1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。"><a href="#1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。" class="headerlink" title="1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。"></a>1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。</h4><p>由于要区分不同的部署环境，所以这里先建一个dev环境的项目组<br><img src="/images/jenkins-maven-001.png" alt=""></p>
+<p>建立maven打包任务，为项目所依赖的父模块建立编译打包任务<br>主要填好项目任务名称和项目git地址即可<br><img src="/images/jenkins-maven-002.png" alt=""></p>
+<h4 id="2-建立目标项目的maven打包项目。build。"><a href="#2-建立目标项目的maven打包项目。build。" class="headerlink" title="2-建立目标项目的maven打包项目。build。"></a>2-建立目标项目的maven打包项目。build。</h4><p><img src="/images/jenkins-maven-003.png" alt=""></p>
+<p>由于我们要实现不同部署环境区分不同配置，所以我们需要对项目做些额外的工作<br>首先在maven pom中添加profiles设置。我这里添加了3个环境local，dev和prod<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;profiles&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">      &lt;id&gt;local&lt;/id&gt;</span><br><span class="line">      &lt;activation&gt;</span><br><span class="line">        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">      &lt;/activation&gt;</span><br><span class="line">      &lt;properties&gt;</span><br><span class="line">        &lt;env&gt;local&lt;/env&gt;</span><br><span class="line">      &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">      &lt;id&gt;dev&lt;/id&gt;</span><br><span class="line">      &lt;properties&gt;</span><br><span class="line">        &lt;env&gt;dev&lt;/env&gt;</span><br><span class="line">      &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">      &lt;id&gt;prod&lt;/id&gt;</span><br><span class="line">      &lt;properties&gt;</span><br><span class="line">        &lt;env&gt;prod&lt;/env&gt;</span><br><span class="line">      &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">  &lt;/profiles&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后，添加maven-resources-plugin插件，这个插件会为我们复制生成三个环境的配置文件目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">        &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;executions&gt;</span><br><span class="line">          &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;copy-prod-resources&lt;/id&gt;</span><br><span class="line">            &lt;phase&gt;process-resources&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">              &lt;goal&gt;copy-resources&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">              &lt;!-- this is important --&gt;</span><br><span class="line">              &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">              &lt;sourceDirectory&gt;$&#123;basedir&#125;/src/main/java&lt;/sourceDirectory&gt;</span><br><span class="line">              &lt;outputDirectory&gt;target/classes&lt;/outputDirectory&gt;</span><br><span class="line">              &lt;resources&gt;</span><br><span class="line">                &lt;resource&gt;</span><br><span class="line">                  &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">                  &lt;includes&gt;</span><br><span class="line">                    &lt;include&gt;*.properties&lt;/include&gt;</span><br><span class="line">                    &lt;include&gt;*.xml&lt;/include&gt;</span><br><span class="line">                  &lt;/includes&gt;</span><br><span class="line">                &lt;/resource&gt;</span><br><span class="line">                &lt;resource&gt;</span><br><span class="line">                  &lt;directory&gt;src/main/resources/$&#123;env&#125;&lt;/directory&gt;</span><br><span class="line">                  &lt;targetPath&gt;&lt;/targetPath&gt;</span><br><span class="line">                &lt;/resource&gt;</span><br><span class="line">              &lt;/resources&gt;</span><br><span class="line">              &lt;testSourceDirectory&gt;$&#123;basedir&#125;/src/test/java&lt;/testSourceDirectory&gt;</span><br><span class="line">              &lt;testOutputDirectory&gt;target/test-classes&lt;/testOutputDirectory&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">          &lt;/execution&gt;</span><br><span class="line">        &lt;/executions&gt;</span><br><span class="line">      &lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这样就会在resources目录下生成三个不同环境的目录和配置文件<br><img src="/images/jenkins-maven-007.png" alt=""></p>
+<p>如果是cli命令行下，我们就可以使用mvn install -P$env命令打包不同环境的配置<br>如dev环境就是mvn install -Pdev</p>
+<p>但是我们现在不是命令行，而是使用Jenkins做编译打包。<br>于是，添加的Jenkins任务，除了任务名称和git地址外，还需要额外多一个配置。<br>在“Build”标签下，填写“goals and options”字段，值为“clean install -Pdev”。<br>-Pdev表示我们要打的正是dev环境的配置<br><img src="/images/jenkins-maven-004.png" alt=""></p>
+<h4 id="3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192-168-1-134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。"><a href="#3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192-168-1-134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。" class="headerlink" title="3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。"></a>3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。</h4><p>由于我们需要执行远程服务器上的shell脚本，所以我们必须要让Jenkins知道远程服务器的ssh登录方法。<br>要让Jenkins能登录服务器做远程任务，我们需要在全局配置中配置好“SSH remote host”。<br><img src="/images/jenkins-maven-006.png" alt=""></p>
+<p>然后配置一个执行远程shell脚本的任务，如下图。<br><img src="/images/jenkins-maven-005.png" alt=""></p>
+<p>这个脚本很简单，只是设置好要登录的服务器，在shell中进入shell脚本所在目录，直接执行目标脚本。<br>而拉取jar包并更新启动springboot项目的任务则有远程脚本所承包了。</p>
+<p>任务脚本例子：<br>这个shell脚本主要做了几件事：<br>1）使用sshpass和scp从119服务器远程复制打包好的jar包回来134，备份，再复制到项目定好的目标路径<br>2）kill关闭原java进程<br>3）使用nohup java -jar ${target_path}/${target_jar} &lt; /dev/null &gt; ${target_bak_path}/${now}/itime-${now}.log 2&gt;&amp;1 &amp;<br>启动java程序，并把日志输出到指定的log文件。<br>4）检查java程序是否启动成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># script to update and restart project itimes</span><br><span class="line">remote_source_path=/root/.jenkins/workspace/dev-timeitem-itimes/target</span><br><span class="line">target_jar=itimes-1.0.0-SNAPSHOT.jar</span><br><span class="line">target_path=/usr/local/itimes</span><br><span class="line">target_bak_path=/usr/local/itimes_bak</span><br><span class="line"></span><br><span class="line">now=$(date &apos;+%Y%m%d%H%M%S&apos;)</span><br><span class="line">echo &quot;update and restart project itimes start...&quot;</span><br><span class="line">echo &quot;now time: $&#123;now&#125;&quot;</span><br><span class="line"></span><br><span class="line">mkdir -p $&#123;target_bak_path&#125;/$&#123;now&#125;</span><br><span class="line">/usr/bin/sshpass -p &quot;root&quot; scp root@192.168.1.119:$&#123;remote_source_path&#125;/itimes-1.0.0-SNAPSHOT.jar $&#123;target_bak_path</span><br><span class="line">&#125;/$&#123;now&#125;</span><br><span class="line"></span><br><span class="line">cd $target_bak_path/$now</span><br><span class="line">if [ -f $&#123;target_jar&#125; ]; then</span><br><span class="line">  pkill -f &apos;java.*itimes&apos;</span><br><span class="line">  sleep 3</span><br><span class="line">  temppid=$(ps aux | grep java| grep &quot;$&#123;target_jar&#125;&quot; | grep -v grep | awk &apos;&#123; print $2&#125;&apos;)</span><br><span class="line">  if [[ &quot;$temppid&quot; != &quot;&quot; ]]; then</span><br><span class="line">    echo &quot;temppid is $&#123;temppid&#125;&quot;</span><br><span class="line">    ps -ef | grep $&#123;target_jar&#125; | grep -v grep | awk &apos;&#123;print $2&#125;&apos; | xargs kill</span><br><span class="line">  fi</span><br><span class="line">  echo &quot;kill $&#123;target_jar&#125; done..&quot;</span><br><span class="line">  cd $target_path</span><br><span class="line">  if [ -f $&#123;target_jar&#125; ]; then</span><br><span class="line">    rm -f $&#123;target_jar&#125;</span><br><span class="line">    echo &quot;target_jar deleted..&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$&#123;target_jar&#125; not exist, go on to copy..&quot;</span><br><span class="line">  fi</span><br><span class="line">  cp $&#123;target_bak_path&#125;/$&#123;now&#125;/$&#123;target_jar&#125; $&#123;target_path&#125;</span><br><span class="line">  echo &quot;cp done!&quot;</span><br><span class="line">  chmod 755 $&#123;target_jar&#125;</span><br><span class="line">  nohup java -jar $&#123;target_path&#125;/$&#123;target_jar&#125; &lt; /dev/null &gt; $&#123;target_bak_path&#125;/$&#123;now&#125;/itime-$&#123;now&#125;.log 2&gt;&amp;1 &amp;</span><br><span class="line">  echo &quot;app startting..&quot;</span><br><span class="line">  for i in 2 4 6 10; do</span><br><span class="line">    sleep $i</span><br><span class="line">    echo &quot;wait and check app starting up...&quot;</span><br><span class="line">    APP_PID=`ps aux | grep java| grep &quot;$&#123;target_jar&#125;&quot; | grep -v grep | awk &apos;&#123; print $2&#125;&apos;`</span><br><span class="line">    if [ $APP_PID &gt; 0 ]; then</span><br><span class="line">        break;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;app is still starting up...&quot;</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  pid=$(ps aux | grep java| grep &quot;$&#123;target_jar&#125;&quot; | grep -v grep | awk &apos;&#123; print $2&#125;&apos;)</span><br><span class="line">  echo &quot;app id is: $&#123;pid&#125;&quot;</span><br><span class="line">  if [ $pid ]; then</span><br><span class="line">    echo &quot;$&#123;target_jar&#125; is running now!&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$&#123;target_jar&#125; is not running! $&#123;target_jar&#125; startup failed!&quot;</span><br><span class="line">  fi</span><br><span class="line">  success_flag=&quot;false&quot;</span><br><span class="line">  for i in 2 4 6 8 10 12; do</span><br><span class="line">    echo &quot;checking app startup status...&quot;</span><br><span class="line">    success_target_tag=`cat $&#123;target_bak_path&#125;/$&#123;now&#125;/itime-$&#123;now&#125;.log | grep &quot;Started App in&quot;`</span><br><span class="line">    if [[ &quot;&quot; != &quot;$success_target_tag&quot; ]]; then</span><br><span class="line">      echo &quot;Found success target tag, app startup successfully..&quot;</span><br><span class="line">      success_flag=&quot;true&quot;</span><br><span class="line">      break;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;app is still starting up...&quot;</span><br><span class="line">        sleep $i</span><br><span class="line">        echo &quot;sleep $i ...&quot;</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  if [[ &quot;true&quot; != &quot;$success_flag&quot;  ]]; then</span><br><span class="line">    echo &quot;Not found success target tag, app startup failed...&quot;</span><br><span class="line">  fi</span><br><span class="line">else</span><br><span class="line">  echo &quot;Target jar not exist! Update not complete!&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;update done!&quot;</span><br></pre></td></tr></table></figure></p>
+<p>done.</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/30/使用Jenkins配置Git和Maven的自动化构建Tomcat项目/" itemprop="url">
+                  使用Jenkins配置Git和Maven的自动化构建Tomcat项目
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-05-30T22:50:38+08:00" content="2016-05-30">
+              2016-05-30
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h3 id="0-前置条件"><a href="#0-前置条件" class="headerlink" title="0- 前置条件"></a>0- 前置条件</h3><p>安装jdk和tomcat<br>我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenkins的容器，另外一个tomcat作为简单mvc项目的部署服务器。<br>Jenkins服务器使用8080端口，mvc项目tomcat使用8081端口。</p>
+<h3 id="1-部署Jenkins"><a href="#1-部署Jenkins" class="headerlink" title="1 - 部署Jenkins"></a>1 - 部署Jenkins</h3><p>官网下载<a href="http://jenkins-ci.org/" target="_blank" rel="external">http://jenkins-ci.org/</a><br>我下载的是最新的2.5版本<br>下载得到一个jenkins.war的war包<br>可以直接使用java -j jenkins.war运行，或者把war包放到tomcat运行<br>我这里是放到tomcat，启动tomcat即可.<br>启动后可以在<a href="http://localhost:8080/jenkins/，看到Jenkins已经在运行" target="_blank" rel="external">http://localhost:8080/jenkins/，看到Jenkins已经在运行</a><br>第一次进入，需要你输入一个key,会提示您在/root/.jenkins/…某个路径下找到<br>进入后会提示你安装一些插件，根据需要安装即可，或者直接安装它提供的一键建议安装.</p>
+<h3 id="2-安装相关插件"><a href="#2-安装相关插件" class="headerlink" title="2 - 安装相关插件"></a>2 - 安装相关插件</h3><p>我这里需要git plugin和maven plugin，可以在插件管理处搜索安装。<br>这两个基本是默认安装好了的.</p>
+<h3 id="3-安装git和maven"><a href="#3-安装git和maven" class="headerlink" title="3 - 安装git和maven"></a>3 - 安装git和maven</h3><p>安装git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure></p>
+<p>安装maven<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">1、官网找到最新版的安装包：</span><br><span class="line">http://maven.apache.org/download.cgi</span><br><span class="line"></span><br><span class="line">拷贝文件名为 *-bin.tar.gz 的链接地址；</span><br><span class="line"></span><br><span class="line">2、下载</span><br><span class="line"># wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz</span><br><span class="line"></span><br><span class="line">3、解压</span><br><span class="line"># tar xvf apache-maven-3.3.3-bin.tar.gz</span><br><span class="line"></span><br><span class="line">如果需要：移动到其他目录</span><br><span class="line">建立软连接：# ln -s apache-maven-3.3.3 maven</span><br><span class="line"></span><br><span class="line">4、配置环境变量</span><br><span class="line"># vi /etc/profile</span><br><span class="line">export M2_HOME=/usr/local/apache-maven</span><br><span class="line">export PATH=$PATH:$M2_HOME/bin</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br><span class="line"></span><br><span class="line">5、验证是否安装成功</span><br><span class="line"># mvn -version</span><br><span class="line">Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:37+08:00)</span><br><span class="line">Maven home: /opt/app/maven</span><br><span class="line">Java version: 1.8.0_51, vendor: Oracle Corporation</span><br><span class="line">Java home: /usr/java/jdk1.8.0_51/jre</span><br><span class="line">Default locale: zh_CN, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;linux&quot;, version: &quot;3.10.0-229.el7.x86_64&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-配置jdk和maven路径等"><a href="#4-配置jdk和maven路径等" class="headerlink" title="4 - 配置jdk和maven路径等"></a>4 - 配置jdk和maven路径等</h3><p>选择”系统管理” -&gt; “Global Tool Configuration”<br>在里面配置好jdk，maven的路径，只需要配置它们的根路径.</p>
+<h3 id="5-创建任务，配置项目信息"><a href="#5-创建任务，配置项目信息" class="headerlink" title="5 - 创建任务，配置项目信息"></a>5 - 创建任务，配置项目信息</h3><p>选择“新建”，填写项目任务名，并选择“构建一个maven项目”，保存.<br><img src="/images/jenkins-001.png" alt=""><br>进入项目配置.<br>填写项目名称<br>填写Repository URL<br>我这里使用的是一个git上的一个建议springmvc项目<br><a href="https://github.com/bingyue/easy-springmvc-maven" target="_blank" rel="external">https://github.com/bingyue/easy-springmvc-maven</a><br>如果需要，也可以配置一下构建后发送邮件到您的邮箱<br><img src="/images/jenkins-002.png" alt=""></p>
+<h3 id="6-配置构建成功后的动作，添加shell"><a href="#6-配置构建成功后的动作，添加shell" class="headerlink" title="6 - 配置构建成功后的动作，添加shell"></a>6 - 配置构建成功后的动作，添加shell</h3><p><img src="/images/jenkins-003.png" alt=""><br>配置项目中的“Post Steps”，设置构建完成后的动作.<br>这里我设置为将war包拷贝到Tomcat目录，删除项目原来的内容文件夹，并重启Tomcat。<br>选择Run only if build succeeds or is unstable ，点击添加Execute Shell：<br>shell脚本:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#copy file and restart tomcat</span><br><span class="line"></span><br><span class="line">tomcat_path=/usr/local/tomcat/apache-tomcat-7.0.65</span><br><span class="line">project=easy-springmvc-maven</span><br><span class="line">war_name=easy-springmvc-maven.war</span><br><span class="line">war_path=http://192.168.1.119:8080/jenkins/job/jenkins-test/ws/target</span><br><span class="line">server_port=8081</span><br><span class="line">file_path=/root/.jenkins/workspace/jenkins-test/target</span><br><span class="line"></span><br><span class="line">now=$(date +&quot;%Y%m%d%H%M%S&quot;)</span><br><span class="line">echo &quot;the shell execute time is $&#123;now&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo `lsof -n -P -t -i :$&#123;server_port&#125;`</span><br><span class="line">tomcat_pid=`lsof -n -P -t -i :$&#123;server_port&#125;`</span><br><span class="line">echo &quot;the tomcat_pid is $&#123;tomcat_pid&#125;&quot;</span><br><span class="line"></span><br><span class="line">if [ &quot;$&#123;tomcat_pid&#125;&quot; != &quot;&quot; ]; then</span><br><span class="line">   kill -9 $tomcat_pid</span><br><span class="line">   echo &quot;kill the server&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;rm $&#123;tomcat_path&#125;/webapps/$&#123;war_name&#125;&quot;</span><br><span class="line">rm $&#123;tomcat_path&#125;/webapps/$&#123;war_name&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;rm -rf $&#123;tomcat_path&#125;/webapps/$&#123;project&#125;&quot;</span><br><span class="line">rm -rf $&#123;tomcat_path&#125;/webapps/$&#123;project&#125;</span><br><span class="line"></span><br><span class="line">cd $file_path</span><br><span class="line">if [ -f $&#123;war_name&#125; ]; then</span><br><span class="line">   cp $&#123;war_name&#125; $&#123;tomcat_path&#125;/webapps</span><br><span class="line">   echo &quot;cp war to webapps finished&quot;</span><br><span class="line">else</span><br><span class="line">   echo &quot;$&#123;war_name&#125; unexists&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cd $tomcat_path/bin</span><br><span class="line">echo &quot;run startup&quot;</span><br><span class="line">sudo ./startup.sh</span><br><span class="line">echo &quot;server restarted&quot;</span><br></pre></td></tr></table></figure></p>
+<p>我这里是在/usr/local/tomcat/apache-tomcat-7.0.65<br>这个路径下配置了另外一个tomcat来运行测试的web项目.<br>shell脚本启动tomcat的命令”./startup.sh”，注意要使用sudo</p>
+<h3 id="7-运行构建项目"><a href="#7-运行构建项目" class="headerlink" title="7 - 运行构建项目"></a>7 - 运行构建项目</h3><p>打开项目的主面板，直接点击绿色的运行任务构建按钮。</p>
+<p>done!</p>
+<h3 id="8-其他"><a href="#8-其他" class="headerlink" title="8 - 其他"></a>8 - 其他</h3><p>这个例子使用了同一台服务器部署Jenkins和实际项目。<br>实际应用则常用法是Jenkins单独部署，<br>所有别的要部署的项目，自己拥有服务器，为每个项目都创建Jenkins任务，在项目编译成功后，到Jenkins服务器下载编译好的部署包，然后依旧使用shell脚本完成这一切。<br>并且，可以为不同的部署环境配置不同的任务。一切都是可以定制的。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/09/java-static-关键字总结/" itemprop="url">
+                  java static 关键字总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-05-09T00:11:19+08:00" content="2016-05-09">
+              2016-05-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><p>修饰方法时，表示该方法是静态方法，表示该类的该方法可以不产生实例而直接通过类名加方法名的方法去执行该静态方法；</p>
+<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><p>修饰变量时，表示该变量是静态变量，在java里可以理解为静态变量全局变量。<br>该类的所有实例共享此静态变量，类装载时，只会分配一块存储空间，所有此类对象可以操作此块存储空间。<br>也就是说，static修饰的静态变量也是可以直接通过类名加变量名直接使用的</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h3><p>普通类不允许被声明为静态的，只有一个内部类可以。<br>被声明为静态的内部类，可以直接作为一个普通类来使用，而不需要一个外部类了。</p>
+<h2 id="详述："><a href="#详述：" class="headerlink" title="详述："></a>详述：</h2><h3 id="1-1"><a href="#1-1" class="headerlink" title="1."></a>1.</h3><p> static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法，也可以形成静态static代码块，但是Java语言中没有全局变量的概念。 </p>
+<p>　被static修饰的成员变量和成员方法独立于该类的任何对象。也就是说，它不依赖类特定的实例，被类的所有实例共享。只要这个类被加载，Java虚拟机就能根据类名在运行时数据区的方法区内定找到他们。因此，static对象可以在它的任何对象创建之前访问，无需引用任何对象。 </p>
+<p>　用public修饰的static成员变量和成员方法本质是全局变量和全局方法，当声明它类的对象时，不生成static变量的副本，而是类的所有实例共享同一个static变量。 </p>
+<p>　static 变量前可以有private修饰，表示这个变量可以在类的静态代码块中，或者类的其他静态成员方法中使用（当然也可以在非静态成员方法中使用–废话），但是不能在其他类中通过类名来直接引用，这一点很重要。实际上你需要搞明白，private是访问权限限定，static表示不要实例化就可以使用，这样就容易理解多了。static前面加上其它访问权限关键字的效果也以此类推。 </p>
+<p>　static修饰的成员变量和成员方法习惯上称为静态变量和静态方法，可以直接通过类名来访问，访问语法为：<br>类名.静态方法名(参数列表…)<br>类名.静态变量名 </p>
+<p>　用static修饰的代码块表示静态代码块，当Java虚拟机（JVM）加载类时，就会执行该代码块（用处非常大，呵呵）。 </p>
+<h3 id="2-static变量"><a href="#2-static变量" class="headerlink" title="2.static变量"></a>2.static变量</h3><p>　按照是否静态的对类成员变量进行分类可分两种：一种是被static修饰的变量，叫静态变量或类变量；另一种是没有被static修饰的变量，叫实例变量。两者的区别是：<br>　对于静态变量在内存中只有一个拷贝（节省内存），JVM只为静态分配一次内存，在加载类的过程中完成静态变量的内存分配，可用类名直接访问（方便），当然也可以通过对象来访问（但是这是不推荐的）。<br>　对于实例变量，没创建一个实例，就会为实例变量分配一次内存，实例变量可以在内存中有多个拷贝，互不影响（灵活）。 </p>
+<h3 id="3-static方法"><a href="#3-static方法" class="headerlink" title="3.static方法"></a>3.static方法</h3><p>　静态方法可以直接通过类名调用，任何的实例也都可以调用，因此静态方法中不能用this和super关键字，不能直接访问所属类的实例变量和实例方法 (就是不带static的成员变量和成员成员方法)，只能访问所属类的静态成员变量和成员方法。因为实例成员与特定的对象关联！这个需要去理解，想明白其中的道理，不是记忆！！！<br>　因为static方法独立于任何实例，因此static方法必须被实现，而不能是抽象的abstract。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/08/java-enum-典型用法/" itemprop="url">
+                  [java][enum]典型用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-05-08T23:57:31+08:00" content="2016-05-08">
+              2016-05-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="java-enum典型用法"><a href="#java-enum典型用法" class="headerlink" title="java enum典型用法"></a>java enum典型用法</h2><h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package com.iyihua.model.enums;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public enum GroupType &#123;</span><br><span class="line"></span><br><span class="line">     CATEGORY(0, &quot;category&quot;), PROJECT(1, &quot;project&quot;), LOCATION(2, &quot;location&quot; );</span><br><span class="line"></span><br><span class="line">     private final int id;</span><br><span class="line">     private final String key;</span><br><span class="line"></span><br><span class="line">     GroupType(int id, String key) &#123;</span><br><span class="line">            this. id = id;</span><br><span class="line">            this. key = key;</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     public int getId() &#123;</span><br><span class="line">            return id;</span><br><span class="line">     &#125;</span><br><span class="line">     public String getKey() &#123;</span><br><span class="line">            return key;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     private static final Map&lt;String, GroupType&gt; keyToEnum = new HashMap&lt;String, GroupType&gt;();</span><br><span class="line">     static &#123;</span><br><span class="line">            for (GroupType gt : GroupType. values())</span><br><span class="line">                 keyToEnum.put(gt .getKey(), gt );</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public static GroupType fromString(String symbol) &#123;</span><br><span class="line">            return keyToEnum.get(symbol );</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public static void main(String[] args) &#123;</span><br><span class="line">           System. out.println( fromString(&quot;category&quot;));</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>代码中把枚举值对应的string-枚举放到了一个map keyToEnum中，并且是静态化的。<br>如此就可以通过fromString方法，传入key string值，即可返回对应的enum值</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/08/java-design-pattern-java设计模式之Builder模式/" itemprop="url">
+                  [java][design-pattern]java设计模式之Builder模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            Veröffentlicht am
+            <time itemprop="dateCreated" datetime="2016-05-08T16:58:38+08:00" content="2016-05-08">
+              2016-05-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="java设计模式之Builder模式"><a href="#java设计模式之Builder模式" class="headerlink" title="java设计模式之Builder模式"></a>java设计模式之Builder模式</h2><p>设计模式模式很多，实际常用的很少。<br>《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。<br>假设有一个entity(Entity)，有id，name两个字段，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package demo;</span><br><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了不用每次初始化的时候，要一个一个的setxxx设置字段值，通常我们会创建构造函数，通过构造函数直接传入字段，初始化。<br>加入构造函数的实体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    public Entity() &#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line">    public Entity(int id, String name) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后需要初始化实体的时候，我们这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &quot;name&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>这种用法很常用，但是问题来了。<br>当实体Entity的字段需要增加变化的时候怎么办呢？<br>比如增加字段descr，这样构造函数和客户端初始化都需要更新：<br>实体增加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private String descr;</span><br><span class="line">public String getDescr() &#123;</span><br><span class="line">    return descr;</span><br><span class="line">&#125;</span><br><span class="line">public void setDescr(String descr) &#123;</span><br><span class="line">    this.descr = descr;</span><br><span class="line">&#125;</span><br><span class="line">public Entity(int id, String name, String descr) &#123;</span><br><span class="line">    super();</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.descr = descr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后原来调用构造函数初始化的代码也需要改动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &quot;name&quot;, &quot;descr&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>如果你的class是不确定的参数，后续可能经常变动，那么你的构造函数可能需要很多个，并且不停的变动，而且，构造函数参数多的时候，参数也很不容易记住。</p>
+<p>而Effective Java中则推荐一种builder模式来进行实体初始化<br>如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String descr;</span><br><span class="line">    public static class Builder &#123;</span><br><span class="line">        private int id;</span><br><span class="line">        private String name;</span><br><span class="line">        private String descr;</span><br><span class="line">        public Builder(int id) &#123;</span><br><span class="line">            this.id = id;</span><br><span class="line">        &#125;</span><br><span class="line">        public Builder name(String name) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line">        public Builder descr(String descr) &#123;</span><br><span class="line">            this.descr = descr;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line">        public Entity build() &#123;</span><br><span class="line">            return new Entity(this);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private Entity(Builder b) &#123;</span><br><span class="line">        this.id = b.id;</span><br><span class="line">        this.name = b.name;</span><br><span class="line">        this.descr = b.descr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>初始化实例的时候，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity.Builder(10).name(&quot;name&quot;).descr(&quot;descr&quot;).build();</span><br></pre></td></tr></table></figure></p>
+<p>这样的写法，好处是，假如实体Entity以后变化很大，加入很多字段，不会影响到之前客户端初始化的代码，而且，这个初始化的过程非常清晰简单。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
 
   </section>
 
@@ -337,22 +1209,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
+              <span class="site-state-item-name">Kategorien</span>
               
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">65</span>
-              <span class="site-state-item-name">tags</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -402,7 +1274,7 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

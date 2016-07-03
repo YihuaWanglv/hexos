@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-06-28T07:32:40.358Z</updated>
+  <updated>2016-07-03T02:07:23.163Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>项目管理建议</title>
+    <link href="http://yoursite.com/2016/07/01/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E5%BB%BA%E8%AE%AE/"/>
+    <id>http://yoursite.com/2016/07/01/项目管理建议/</id>
+    <published>2016-07-01T11:14:00.000Z</published>
+    <updated>2016-07-03T02:07:23.163Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;对项目管理制度的一些看法和建议&quot;&gt;&lt;a href=&quot;#对项目管理制度的一些看法和建议&quot; class=&quot;headerlink&quot; title=&quot;对项目管理制度的一些看法和建议&quot;&gt;&lt;/a&gt;对项目管理制度的一些看法和建议&lt;/h1&gt;&lt;h2 id=&quot;当前存在的问题&quot;&gt;&lt;a href=&quot;#当前存在的问题&quot; class=&quot;headerlink&quot; title=&quot;当前存在的问题&quot;&gt;&lt;/a&gt;当前存在的问题&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;技术工程师反映，技术人员与业务隔离，技术人员难以熟悉第一手业务需求，对工程师开发出契合业务部分需求的产品造成一定的理解障碍。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安卓、iOS、H5、后端、测试等各部门分而治之，缺乏一个强而有力的统筹推进，虽然增加了项目经理角色，但目前这个角色只能在各部门之间协调，仍然难以有力推动各部门按时按量完成进度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;从业务到产品到开发到测试上线，这个流程还可以有优化的地方。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;分析和改进建议&quot;&gt;&lt;a href=&quot;#分析和改进建议&quot; class=&quot;headerlink&quot; title=&quot;分析和改进建议&quot;&gt;&lt;/a&gt;分析和改进建议&lt;/h2&gt;&lt;h3 id=&quot;针对问题1。&quot;&gt;&lt;a href=&quot;#针对问题1。&quot; class=&quot;headerlink&quot; title=&quot;针对问题1。&quot;&gt;&lt;/a&gt;针对问题1。&lt;/h3&gt;&lt;p&gt;使用尝试让项目经理或者技术经理在产需求研和产品评审阶段就参与介入，能够一定程度的和业务部分做到沟通，让技术人员更熟悉业务。即使只是旁听也好&lt;/p&gt;
+&lt;h3 id=&quot;针对问题2。&quot;&gt;&lt;a href=&quot;#针对问题2。&quot; class=&quot;headerlink&quot; title=&quot;针对问题2。&quot;&gt;&lt;/a&gt;针对问题2。&lt;/h3&gt;&lt;p&gt;程序界有一句话，“没有完美的模型，但有一些能用。”&lt;br&gt;既然目前公司的情况是各部分分而治之，各施其职，那么可以考虑这样一个构思，产品对业务负责，提供产品的产出;测试则对产品负责，提供项目和模块完成情况；技术经理对项目经理负责，提供项目模块开发时间评估，以及开发产出；各开发工程师对技术经理负责，按时按量完成技术经理制定的模块开发计划。而项目经理则对项目的进度和协调负责，应该要有渠道能对接所有相关部门，跟进项目的进度，协调各方遇到的问题，并协助解决。&lt;br&gt;&lt;strong&gt;这样，明确各部门应该对谁负责，各部门遇到项目开发相关问题，也就能明确的找到相应的人员，得到反馈，部门之间也能够相互推动。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这里推荐使用一个团队协作管理的工具：“Worktile”。&lt;/strong&gt;&lt;br&gt;Worktile可以在一个看板中看到所有在做、已完成、在测试等等所有流程中的任务和完成情况。&lt;br&gt;例如，技术经理可以列出所有需要完成的模块和任务，为之分配负责人。负责人开发完成后，勾选完成，管理人员就可以拖动任务进入测试流程。&lt;br&gt;如此一个可视化简单的团队协作管理。&lt;br&gt;当然这个功能，像禅道也能部分实现。但是禅道的这个功能并不好用，从实践经验来说，使用的人积极性并不高。而Worktile这类工具如果推动成功，开发的管理效率将会得到提高。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;各状态任务完成情况一览：&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;/images/project-002.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;strong&gt;完成任务，推动到另一状态：&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;/images/project-003.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;strong&gt;报表：&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;/images/project-004.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;strong&gt;团队日历：每个时间点要完成的任务也会在此显示&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;/images/project-005.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;针对问题3&quot;&gt;&lt;a href=&quot;#针对问题3&quot; class=&quot;headerlink&quot; title=&quot;针对问题3.&quot;&gt;&lt;/a&gt;针对问题3.&lt;/h3&gt;&lt;p&gt;以门店收银机为例，发现存在一些流程上的问题。&lt;br&gt;&lt;strong&gt;首先，说接口，有两个问题。&lt;/strong&gt;&lt;br&gt;一，客户端和服务端接口文档，用的是word文档沟通，各个人员直接相互传递，很可能导致相互之间接口文档不同步，也就会造成开发期间关于接口的一些扯皮。&lt;br&gt;二，虽然接口文档有了，但是客户端还是要等服务端出接口后，才能进行接口接入后的相关开发，这样前端的进度就要依赖于后端的产出。&lt;br&gt;既然有这样的问题，那么有没有改进办法呢？有的，这里推荐使用阿里开源的“RAP”接口管理工具进行接口管理。&lt;br&gt;RAP对我们接口开发的帮助有：&lt;br&gt;1）可视化结构化的接口编辑和管理。这样接口只有服务器上的一份，并且管理简单。&lt;br&gt;2）生成Mock数据、校验真实接口的正确性。有了Mock功能，前端可以在后端提供接口之前，利用rap提供的模拟接口数据，提前进行接口接入的开发，提高前端开发速度。最重要的是，前后端接口开发解耦。&lt;br&gt;&lt;img src=&quot;/images/project-001.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;其次，说说测试和螺旋式开发。&lt;/strong&gt;&lt;br&gt;测试本身是一个发现细节的过程，有些问题测试到细节的地方，就会出现值得推敲和不断调试的情况。而我们项目留给测试的时间太少了。而前期，没完成之前，测试在等待开发，同时，最后所有模块大致完成才提测，又一股脑挤在后期测试和迭代，时间难免太紧，很容易导致进度延误。&lt;br&gt;&lt;strong&gt;这里的建议是，开发应该在项目开始时就梳理出模块间的依赖情况，前后端协调好应该先开发哪些模块，只要有一个模块开发完成，就马上提测。&lt;/strong&gt;如此让测试尽早介入测试，达到项目螺旋式迭代推荐的目的。同时，也能让测试的时间合理分配，避免延误。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;对项目管理制度的一些看法和建议&quot;&gt;&lt;a href=&quot;#对项目管理制度的一些看法和建议&quot; class=&quot;headerlink&quot; title=&quot;对项目管理制度的一些看法和建议&quot;&gt;&lt;/a&gt;对项目管理制度的一些看法和建议&lt;/h1&gt;&lt;h2 id=&quot;当前存在的问题&quot;&gt;&lt;a h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>[api_version]4种在springmvc中进行api版本控制的处理方法</title>
     <link href="http://yoursite.com/2016/06/28/api-version-4%E7%A7%8D%E5%9C%A8springmvc%E4%B8%AD%E8%BF%9B%E8%A1%8Capi%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2016/06/28/api-version-4种在springmvc中进行api版本控制的处理方法/</id>
     <published>2016-06-28T07:31:54.000Z</published>
-    <updated>2016-06-28T07:32:40.358Z</updated>
+    <updated>2016-06-30T15:56:59.038Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/mindhaq/restapi-versioning-spring.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mindhaq/restapi-versioning-spring.git&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/augusto/restVersioning.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/augusto/restVersioning.git&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法，你们看怎么样，能否不使用冗余部署的方式。&lt;/p&gt;
@@ -65,7 +97,7 @@
     <link href="http://yoursite.com/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/"/>
     <id>http://yoursite.com/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/</id>
     <published>2016-06-06T09:42:22.000Z</published>
-    <updated>2016-06-28T07:31:05.390Z</updated>
+    <updated>2016-06-06T13:07:42.450Z</updated>
     
     <content type="html">&lt;p&gt;此集合[dev][collect]汇总开发资源.&lt;br&gt;资源含文章，git code等等..&lt;/p&gt;
 &lt;h3 id=&quot;2016-06-06&quot;&gt;&lt;a href=&quot;#2016-06-06&quot; class=&quot;headerlink&quot; title=&quot;2016-06-06&quot;&gt;&lt;/a&gt;2016-06-06&lt;/h3&gt;&lt;ul&gt;
@@ -156,13 +188,13 @@
     </summary>
     
     
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
       <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
     
       <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
     
       <category term="post" scheme="http://yoursite.com/tags/post/"/>
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
     
       <category term="resouce" scheme="http://yoursite.com/tags/resouce/"/>
     
@@ -173,7 +205,7 @@
     <link href="http://yoursite.com/2016/06/06/git-git%E5%88%86%E6%94%AF%E4%BD%BF%E7%94%A8%E5%92%8C%E7%AE%A1%E7%90%86/"/>
     <id>http://yoursite.com/2016/06/06/git-git分支使用和管理/</id>
     <published>2016-06-06T09:37:36.000Z</published>
-    <updated>2016-06-28T07:31:05.391Z</updated>
+    <updated>2016-06-06T13:06:22.607Z</updated>
     
     <content type="html">&lt;h2 id=&quot;git分支常用命令&quot;&gt;&lt;a href=&quot;#git分支常用命令&quot; class=&quot;headerlink&quot; title=&quot;git分支常用命令&quot;&gt;&lt;/a&gt;git分支常用命令&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;从master创建dev分支，并checkout dev分支：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git checkout -b dev&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;此命令相当于：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git branch dev&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git checkout dev&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;回到master，合并dev的更改到master：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git checkout master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git merge dev&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;合并后删除dev分支：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git branch -d dev&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;如果直接用git merge dev合并分支，git使用的是fast forward的模式，并不会留下commit历史，如果想要留下commit历史，就要加上--no-ff参数，并使用-m添加commit描述&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git merge --no-ff -m &amp;quot;merge with no-ff&amp;quot; dev&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;保存临时状态&quot;&gt;&lt;a href=&quot;#保存临时状态&quot; class=&quot;headerlink&quot; title=&quot;保存临时状态&quot;&gt;&lt;/a&gt;保存临时状态&lt;/h2&gt;&lt;p&gt;当你正在dev分支进行开发，还没有开发完成能提交，此时突然有一个线上版本的bug要紧急修复，这个时候你就需要用到git stash功能，保存正在开发的dev分支的状态&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;保存当前开发状态：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git stash&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;查看当前已保存的stash列表：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git stash list&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;取出之前保存的stash状态：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git stash pop&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -201,7 +233,7 @@
     <link href="http://yoursite.com/2016/06/04/Windows%E4%B8%8B%E5%BC%80%E5%90%AFReact-Native%E5%BE%81%E9%80%94/"/>
     <id>http://yoursite.com/2016/06/04/Windows下开启React-Native征途/</id>
     <published>2016-06-04T01:55:48.000Z</published>
-    <updated>2016-06-06T01:37:15.414Z</updated>
+    <updated>2016-06-04T02:26:01.845Z</updated>
     
     <content type="html">&lt;p&gt;我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。&lt;br&gt;不过说出来你可能不太相信，这故事的开头，来的并没有想象中的困难。&lt;/p&gt;
 &lt;p&gt;以下是过程：&lt;/p&gt;
@@ -245,7 +277,7 @@
     <link href="http://yoursite.com/2016/06/01/Jenkins%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5-Jenkins%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2git%E6%89%98%E7%AE%A1%E7%9A%84springboot%E9%A1%B9%E7%9B%AE/"/>
     <id>http://yoursite.com/2016/06/01/Jenkins自动化部署实践-Jenkins多环境部署git托管的springboot项目/</id>
     <published>2016-06-01T10:56:42.000Z</published>
-    <updated>2016-06-02T01:23:38.342Z</updated>
+    <updated>2016-06-01T14:09:14.708Z</updated>
     
     <content type="html">&lt;p&gt;[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目&lt;/p&gt;
 &lt;h3 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h3&gt;&lt;h4 id=&quot;场景&quot;&gt;&lt;a href=&quot;#场景&quot; class=&quot;headerlink&quot; title=&quot;场景&quot;&gt;&lt;/a&gt;场景&lt;/h4&gt;&lt;p&gt;Jenkins部署在服务器192.168.1.119:8080.&lt;br&gt;有一个在git托管的springboot构建的web项目，项目有n个依赖的父模块，现在想要把这个项目部署到服务器192.168.1.134上.&lt;br&gt;现在，我们需要使用Jenkins自动化部署实现这个目标.&lt;/p&gt;
@@ -282,7 +314,7 @@
     <link href="http://yoursite.com/2016/05/30/%E4%BD%BF%E7%94%A8Jenkins%E9%85%8D%E7%BD%AEGit%E5%92%8CMaven%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BATomcat%E9%A1%B9%E7%9B%AE/"/>
     <id>http://yoursite.com/2016/05/30/使用Jenkins配置Git和Maven的自动化构建Tomcat项目/</id>
     <published>2016-05-30T14:50:38.000Z</published>
-    <updated>2016-06-01T10:24:54.842Z</updated>
+    <updated>2016-05-30T15:05:26.125Z</updated>
     
     <content type="html">&lt;h3 id=&quot;0-前置条件&quot;&gt;&lt;a href=&quot;#0-前置条件&quot; class=&quot;headerlink&quot; title=&quot;0- 前置条件&quot;&gt;&lt;/a&gt;0- 前置条件&lt;/h3&gt;&lt;p&gt;安装jdk和tomcat&lt;br&gt;我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenkins的容器，另外一个tomcat作为简单mvc项目的部署服务器。&lt;br&gt;Jenkins服务器使用8080端口，mvc项目tomcat使用8081端口。&lt;/p&gt;
 &lt;h3 id=&quot;1-部署Jenkins&quot;&gt;&lt;a href=&quot;#1-部署Jenkins&quot; class=&quot;headerlink&quot; title=&quot;1 - 部署Jenkins&quot;&gt;&lt;/a&gt;1 - 部署Jenkins&lt;/h3&gt;&lt;p&gt;官网下载&lt;a href=&quot;http://jenkins-ci.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jenkins-ci.org/&lt;/a&gt;&lt;br&gt;我下载的是最新的2.5版本&lt;br&gt;下载得到一个jenkins.war的war包&lt;br&gt;可以直接使用java -j jenkins.war运行，或者把war包放到tomcat运行&lt;br&gt;我这里是放到tomcat，启动tomcat即可.&lt;br&gt;启动后可以在&lt;a href=&quot;http://localhost:8080/jenkins/，看到Jenkins已经在运行&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/jenkins/，看到Jenkins已经在运行&lt;/a&gt;&lt;br&gt;第一次进入，需要你输入一个key,会提示您在/root/.jenkins/…某个路径下找到&lt;br&gt;进入后会提示你安装一些插件，根据需要安装即可，或者直接安装它提供的一键建议安装.&lt;/p&gt;
@@ -322,7 +354,7 @@
     <link href="http://yoursite.com/2016/05/09/java-static-%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2016/05/09/java-static-关键字总结/</id>
     <published>2016-05-08T16:11:19.000Z</published>
-    <updated>2016-06-01T10:24:54.841Z</updated>
+    <updated>2016-05-08T16:14:15.474Z</updated>
     
     <content type="html">&lt;h2 id=&quot;总结：&quot;&gt;&lt;a href=&quot;#总结：&quot; class=&quot;headerlink&quot; title=&quot;总结：&quot;&gt;&lt;/a&gt;总结：&lt;/h2&gt;&lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1.&quot;&gt;&lt;/a&gt;1.&lt;/h3&gt;&lt;p&gt;修饰方法时，表示该方法是静态方法，表示该类的该方法可以不产生实例而直接通过类名加方法名的方法去执行该静态方法；&lt;/p&gt;
 &lt;h3 id=&quot;2&quot;&gt;&lt;a href=&quot;#2&quot; class=&quot;headerlink&quot; title=&quot;2.&quot;&gt;&lt;/a&gt;2.&lt;/h3&gt;&lt;p&gt;修饰变量时，表示该变量是静态变量，在java里可以理解为静态变量全局变量。&lt;br&gt;该类的所有实例共享此静态变量，类装载时，只会分配一块存储空间，所有此类对象可以操作此块存储空间。&lt;br&gt;也就是说，static修饰的静态变量也是可以直接通过类名加变量名直接使用的&lt;/p&gt;
@@ -355,7 +387,7 @@
     <link href="http://yoursite.com/2016/05/08/java-enum-%E5%85%B8%E5%9E%8B%E7%94%A8%E6%B3%95/"/>
     <id>http://yoursite.com/2016/05/08/java-enum-典型用法/</id>
     <published>2016-05-08T15:57:31.000Z</published>
-    <updated>2016-06-01T10:24:54.841Z</updated>
+    <updated>2016-05-08T16:07:15.203Z</updated>
     
     <content type="html">&lt;h2 id=&quot;java-enum典型用法&quot;&gt;&lt;a href=&quot;#java-enum典型用法&quot; class=&quot;headerlink&quot; title=&quot;java enum典型用法&quot;&gt;&lt;/a&gt;java enum典型用法&lt;/h2&gt;&lt;h3 id=&quot;代码：&quot;&gt;&lt;a href=&quot;#代码：&quot; class=&quot;headerlink&quot; title=&quot;代码：&quot;&gt;&lt;/a&gt;代码：&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package com.iyihua.model.enums;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.HashMap;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.Map;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public enum GroupType &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     CATEGORY(0, &amp;quot;category&amp;quot;), PROJECT(1, &amp;quot;project&amp;quot;), LOCATION(2, &amp;quot;location&amp;quot; );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     private final int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     private final String key;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     GroupType(int id, String key) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            this. id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            this. key = key;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public int getId() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public String getKey() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return key;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     private static final Map&amp;lt;String, GroupType&amp;gt; keyToEnum = new HashMap&amp;lt;String, GroupType&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     static &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            for (GroupType gt : GroupType. values())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                 keyToEnum.put(gt .getKey(), gt );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public static GroupType fromString(String symbol) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return keyToEnum.get(symbol );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public static void main(String[] args) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           System. out.println( fromString(&amp;quot;category&amp;quot;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;说明：&quot;&gt;&lt;a href=&quot;#说明：&quot; class=&quot;headerlink&quot; title=&quot;说明：&quot;&gt;&lt;/a&gt;说明：&lt;/h3&gt;&lt;p&gt;代码中把枚举值对应的string-枚举放到了一个map keyToEnum中，并且是静态化的。&lt;br&gt;如此就可以通过fromString方法，传入key string值，即可返回对应的enum值&lt;/p&gt;
@@ -379,7 +411,7 @@
     <link href="http://yoursite.com/2016/05/08/java-design-pattern-java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8BBuilder%E6%A8%A1%E5%BC%8F/"/>
     <id>http://yoursite.com/2016/05/08/java-design-pattern-java设计模式之Builder模式/</id>
     <published>2016-05-08T08:58:38.000Z</published>
-    <updated>2016-06-01T10:24:54.841Z</updated>
+    <updated>2016-05-08T09:00:12.177Z</updated>
     
     <content type="html">&lt;h2 id=&quot;java设计模式之Builder模式&quot;&gt;&lt;a href=&quot;#java设计模式之Builder模式&quot; class=&quot;headerlink&quot; title=&quot;java设计模式之Builder模式&quot;&gt;&lt;/a&gt;java设计模式之Builder模式&lt;/h2&gt;&lt;p&gt;设计模式模式很多，实际常用的很少。&lt;br&gt;《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。&lt;br&gt;假设有一个entity(Entity)，有id，name两个字段，如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package demo;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class Entity &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private String name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public int getId() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setId(int id) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public String getName() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setName(String name) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;为了不用每次初始化的时候，要一个一个的setxxx设置字段值，通常我们会创建构造函数，通过构造函数直接传入字段，初始化。&lt;br&gt;加入构造函数的实体代码如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public class Entity &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private String name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public Entity() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        super();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public Entity(int id, String name) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        super();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public int getId() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setId(int id) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public String getName() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setName(String name) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -414,7 +446,7 @@
     <link href="http://yoursite.com/2016/05/04/java-web%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/"/>
     <id>http://yoursite.com/2016/05/04/java-web知识体系/</id>
     <published>2016-05-04T15:05:21.000Z</published>
-    <updated>2016-06-01T10:24:54.841Z</updated>
+    <updated>2016-05-04T15:07:13.154Z</updated>
     
     <content type="html">&lt;h2 id=&quot;一张java-web知识体系思维导图&quot;&gt;&lt;a href=&quot;#一张java-web知识体系思维导图&quot; class=&quot;headerlink&quot; title=&quot;一张java web知识体系思维导图&quot;&gt;&lt;/a&gt;一张java web知识体系思维导图&lt;/h2&gt;&lt;p&gt;就是稍微旧了点&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/java-web.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -429,11 +461,11 @@
     
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
+      <category term="思维导图" scheme="http://yoursite.com/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
+    
       <category term="web" scheme="http://yoursite.com/tags/web/"/>
     
       <category term="java web" scheme="http://yoursite.com/tags/java-web/"/>
-    
-      <category term="思维导图" scheme="http://yoursite.com/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
     
   </entry>
   
@@ -442,7 +474,7 @@
     <link href="http://yoursite.com/2016/05/03/springmvc-rest-api-versioning/"/>
     <id>http://yoursite.com/2016/05/03/springmvc-rest-api-versioning/</id>
     <published>2016-05-03T15:34:35.000Z</published>
-    <updated>2016-06-01T10:24:54.842Z</updated>
+    <updated>2016-05-03T15:37:38.979Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/mindhaq/restapi-versioning-spring.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mindhaq/restapi-versioning-spring.git&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/augusto/restVersioning.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/augusto/restVersioning.git&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法。&lt;/p&gt;
@@ -486,7 +518,7 @@
     <link href="http://yoursite.com/2016/04/25/centos6%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AEmysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
     <id>http://yoursite.com/2016/04/25/centos6环境下配置mysql主从同步/</id>
     <published>2016-04-25T13:22:51.000Z</published>
-    <updated>2016-04-26T01:19:09.778Z</updated>
+    <updated>2016-04-25T13:25:33.126Z</updated>
     
     <content type="html">&lt;h2 id=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;a href=&quot;#1、主从服务器分别作以下操作：&quot; class=&quot;headerlink&quot; title=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;/a&gt;1、主从服务器分别作以下操作：&lt;/h2&gt;&lt;p&gt;  1.1、版本一致&lt;br&gt;  1.2、初始化表，并在后台启动mysql&lt;br&gt;  1.3、修改root的密码&lt;/p&gt;
 &lt;h2 id=&quot;2、修改主服务器master&quot;&gt;&lt;a href=&quot;#2、修改主服务器master&quot; class=&quot;headerlink&quot; title=&quot;2、修改主服务器master:&quot;&gt;&lt;/a&gt;2、修改主服务器master:&lt;/h2&gt;&lt;p&gt;   #vi /etc/my.cnf&lt;br&gt;       [mysqld]&lt;br&gt;       log-bin=mysql-bin   //[必须]启用二进制日志&lt;br&gt;       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段&lt;/p&gt;
@@ -541,7 +573,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
     <link href="http://yoursite.com/2016/04/25/centos6%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEmysql%EF%BC%8C%E5%B9%B6%E5%BC%80%E5%90%AFmysql%E7%9A%84%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/"/>
     <id>http://yoursite.com/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/</id>
     <published>2016-04-25T13:00:38.000Z</published>
-    <updated>2016-04-26T01:19:09.778Z</updated>
+    <updated>2016-04-25T13:04:16.768Z</updated>
     
     <content type="html">&lt;h2 id=&quot;安装：&quot;&gt;&lt;a href=&quot;#安装：&quot; class=&quot;headerlink&quot; title=&quot;安装：&quot;&gt;&lt;/a&gt;安装：&lt;/h2&gt;&lt;h3 id=&quot;查看是否已安装mysql：&quot;&gt;&lt;a href=&quot;#查看是否已安装mysql：&quot; class=&quot;headerlink&quot; title=&quot;查看是否已安装mysql：&quot;&gt;&lt;/a&gt;查看是否已安装mysql：&lt;/h3&gt;&lt;p&gt;yum list installed | grep mysql&lt;/p&gt;
 &lt;h3 id=&quot;如果已安装，如下一次卸载：&quot;&gt;&lt;a href=&quot;#如果已安装，如下一次卸载：&quot; class=&quot;headerlink&quot; title=&quot;如果已安装，如下一次卸载：&quot;&gt;&lt;/a&gt;如果已安装，如下一次卸载：&lt;/h3&gt;&lt;p&gt;yum -y remove mysql-libs.x86_64&lt;/p&gt;
@@ -576,7 +608,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
     <link href="http://yoursite.com/2016/04/09/springboot-shiro-redis-rediscluster-sso-%E5%9C%A8springboot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%8E%A5%E5%85%A5shiro/"/>
     <id>http://yoursite.com/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/</id>
     <published>2016-04-09T04:52:53.000Z</published>
-    <updated>2016-04-25T10:12:47.260Z</updated>
+    <updated>2016-04-09T22:44:27.345Z</updated>
     
     <content type="html">&lt;p&gt;在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。&lt;/p&gt;
 &lt;p&gt;现在开始是第一篇：在springboot项目中接入shiro&lt;/p&gt;
@@ -618,7 +650,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
     <link href="http://yoursite.com/2016/04/09/springboot-%E5%9C%A8spring%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%A5%E5%8F%8Aspring-datajpa%E5%92%8Cmybatis%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/2016/04/09/springboot-在spring项目中连接数据库以及spring-datajpa和mybatis的使用/</id>
     <published>2016-04-09T03:37:07.000Z</published>
-    <updated>2016-04-25T10:12:47.260Z</updated>
+    <updated>2016-04-09T04:30:03.524Z</updated>
     
     <content type="html">&lt;h2 id=&quot;1-在项目中添加数据库配置（添加数据源等配置）&quot;&gt;&lt;a href=&quot;#1-在项目中添加数据库配置（添加数据源等配置）&quot; class=&quot;headerlink&quot; title=&quot;1.在项目中添加数据库配置（添加数据源等配置）&quot;&gt;&lt;/a&gt;1.在项目中添加数据库配置（添加数据源等配置）&lt;/h2&gt;&lt;p&gt;spring boot推崇约定大于配置，即是说，即使你什么也配置，spring boot也会为你添加一些约定俗成的默认配置。&lt;br&gt;比如数据源dataSource就是，如果你的spring boot项目没有数据源配置，那么默认情况下项目启动会失败，提示你配置数据源。&lt;br&gt;如果你的项目真的不需要数据源，没有数据库url等配置，那么你需要显式的使用注解配置告诉spring boot。&lt;br&gt;在启动类添加注解：&lt;br&gt;@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class}&lt;/p&gt;
 &lt;p&gt;回到数据源配置上来。&lt;br&gt;首先,在配置文件application.properties里面配置数据库url&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;spring.datasource.url=jdbc:mysql://localhost/dbname&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;spring.datasource.username=username&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;spring.datasource.password=password&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;spring.datasource.driver-class-name=com.mysql.jdbc.Driver&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -664,7 +696,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
     <link href="http://yoursite.com/2016/04/09/spring-boot-springboot%E5%AE%9E%E8%B7%B5%E4%B9%8B%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8spring-cache%E5%92%8Credis%E5%AE%9E%E7%8E%B0%E7%BC%93%E5%AD%98/"/>
     <id>http://yoursite.com/2016/04/09/spring-boot-springboot实践之在项目中使用spring-cache和redis实现缓存/</id>
     <published>2016-04-09T02:43:01.000Z</published>
-    <updated>2016-04-25T10:12:47.259Z</updated>
+    <updated>2016-04-09T03:25:57.600Z</updated>
     
     <content type="html">&lt;h2 id=&quot;1-首先需要准备一个redis服务端作为缓存&quot;&gt;&lt;a href=&quot;#1-首先需要准备一个redis服务端作为缓存&quot; class=&quot;headerlink&quot; title=&quot;1.首先需要准备一个redis服务端作为缓存&quot;&gt;&lt;/a&gt;1.首先需要准备一个redis服务端作为缓存&lt;/h2&gt;&lt;p&gt;redis下载安装启动，比较简单，请google之。&lt;/p&gt;
 &lt;h2 id=&quot;2-项目依赖&quot;&gt;&lt;a href=&quot;#2-项目依赖&quot; class=&quot;headerlink&quot; title=&quot;2.项目依赖&quot;&gt;&lt;/a&gt;2.项目依赖&lt;/h2&gt;&lt;p&gt;使用spring boot和spring cache，需要springboot依赖&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -699,7 +731,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
     <link href="http://yoursite.com/2016/04/07/%E4%B8%BA%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%81%9A%E5%90%88%E7%90%86%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%AE%A1%E7%90%86/"/>
     <id>http://yoursite.com/2016/04/07/为你的项目做合理的版本控制管理/</id>
     <published>2016-04-07T15:32:15.000Z</published>
-    <updated>2016-04-25T10:12:47.260Z</updated>
+    <updated>2016-04-07T15:43:41.330Z</updated>
     
     <content type="html">&lt;h3 id=&quot;一款经典的分支管理规范&quot;&gt;&lt;a href=&quot;#一款经典的分支管理规范&quot; class=&quot;headerlink&quot; title=&quot;一款经典的分支管理规范&quot;&gt;&lt;/a&gt;一款经典的分支管理规范&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/version.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;###&lt;br&gt;我们需要善用代码版本控制系统。上图就是一款经典的分支管理规范，实践如下。&lt;/p&gt;
@@ -729,38 +761,11 @@ Slave_SQL_Running: Yes     //此状态必须YES
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/03/28/hello-world/"/>
-    <id>http://yoursite.com/2016/03/28/hello-world/</id>
-    <published>2016-03-28T10:24:04.506Z</published>
-    <updated>2016-03-28T10:24:04.506Z</updated>
-    
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;http://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;http://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;http://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;http://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;http://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;http://hexo.io
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>在linux下部署spring boot项目过程记录</title>
     <link href="http://yoursite.com/2016/03/21/%E5%9C%A8linux%E4%B8%8B%E9%83%A8%E7%BD%B2spring-boot%E9%A1%B9%E7%9B%AE%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
     <id>http://yoursite.com/2016/03/21/在linux下部署spring-boot项目过程记录/</id>
     <published>2016-03-21T09:52:34.000Z</published>
-    <updated>2016-03-28T10:24:04.507Z</updated>
+    <updated>2016-04-07T15:28:36.659Z</updated>
     
     <content type="html">&lt;h1 id=&quot;在linux下部署spring-boot项目过程记录&quot;&gt;&lt;a href=&quot;#在linux下部署spring-boot项目过程记录&quot; class=&quot;headerlink&quot; title=&quot;在linux下部署spring boot项目过程记录&quot;&gt;&lt;/a&gt;在linux下部署spring boot项目过程记录&lt;/h1&gt;&lt;h2 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h2&gt;&lt;p&gt;本文章是在centos7下部署spring boot架构的java web项目的过程中的一些记录，记录了linux服务器中需要用到的软件服务的安装和使用&lt;/p&gt;
 &lt;h2 id=&quot;环境说明&quot;&gt;&lt;a href=&quot;#环境说明&quot; class=&quot;headerlink&quot; title=&quot;环境说明&quot;&gt;&lt;/a&gt;环境说明&lt;/h2&gt;&lt;p&gt;linux版本：CentOs7&lt;br&gt;配备的开发环境软件服务：&lt;/p&gt;
@@ -849,7 +854,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
     <link href="http://yoursite.com/2016/03/11/%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%E5%88%9D%E6%AD%A5%E6%95%B4%E7%90%86/"/>
     <id>http://yoursite.com/2016/03/11/集群监控初步整理/</id>
     <published>2016-03-11T01:53:20.000Z</published>
-    <updated>2016-03-28T10:24:04.508Z</updated>
+    <updated>2016-03-12T04:09:16.055Z</updated>
     
     <content type="html">&lt;h3 id=&quot;集群监控初步整理&quot;&gt;&lt;a href=&quot;#集群监控初步整理&quot; class=&quot;headerlink&quot; title=&quot;集群监控初步整理&quot;&gt;&lt;/a&gt;集群监控初步整理&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/java-monitor.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 </content>
