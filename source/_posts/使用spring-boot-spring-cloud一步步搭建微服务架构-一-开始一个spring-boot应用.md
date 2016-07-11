@@ -7,6 +7,8 @@ tags: [java, spring boot, spring cloud, 微服务, 使用spring-boot+spring-clou
 ## 一. 目标愿景
 
 **我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构**
+本系列demo项目githu地址：
+https://github.com/YihuaWanglv/lannisi
 
 ### 1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？
 
@@ -80,3 +82,6 @@ public class SampleController {
 
 
 启动App.java，访问localhost:8080, 即可遇见“Hello World!”
+
+helloword项目也可参照：https://github.com/YihuaWanglv/lannisi 下的boot-sample-helloword项目。
+https://github.com/YihuaWanglv/lannisi/tree/master/boot-sample-helloword
