@@ -53,25 +53,19 @@
 
 
 
-<meta name="description" content="一. 目标愿景我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构
-1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？之前，一个比较流行的soa服务化方案是dubbo/dubbox+zookeeper，配上spring boot。这个方案是比较流行的方案之一，但是有几点未达理想的地方：
-
-1) dubbo的性能并不如一些其他服务化开">
+<meta name="description" content="一. 目标愿景我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构本系列demo项目githu地址：https://github.com/YihuaWanglv/lannisi
+1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？之前，一个比较流行的soa服务化方案是dubbo/dubbox+zookeeper，配上spring bo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[使用spring-boot+spring-cloud一步步搭建微服务架构]一-开始一个spring-boot应用">
 <meta property="og:url" content="http://yoursite.com/2016/07/11/使用spring-boot-spring-cloud一步步搭建微服务架构-一-开始一个spring-boot应用/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="一. 目标愿景我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构
-1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？之前，一个比较流行的soa服务化方案是dubbo/dubbox+zookeeper，配上spring boot。这个方案是比较流行的方案之一，但是有几点未达理想的地方：
-
-1) dubbo的性能并不如一些其他服务化开">
-<meta property="og:updated_time" content="2016-07-11T13:16:57.357Z">
+<meta property="og:description" content="一. 目标愿景我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构本系列demo项目githu地址：https://github.com/YihuaWanglv/lannisi
+1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？之前，一个比较流行的soa服务化方案是dubbo/dubbox+zookeeper，配上spring bo">
+<meta property="og:updated_time" content="2016-07-11T13:30:20.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[使用spring-boot+spring-cloud一步步搭建微服务架构]一-开始一个spring-boot应用">
-<meta name="twitter:description" content="一. 目标愿景我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构
-1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？之前，一个比较流行的soa服务化方案是dubbo/dubbox+zookeeper，配上spring boot。这个方案是比较流行的方案之一，但是有几点未达理想的地方：
-
-1) dubbo的性能并不如一些其他服务化开">
+<meta name="twitter:description" content="一. 目标愿景我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构本系列demo项目githu地址：https://github.com/YihuaWanglv/lannisi
+1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？之前，一个比较流行的soa服务化方案是dubbo/dubbox+zookeeper，配上spring bo">
 
 
 
@@ -236,7 +230,7 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="一-目标愿景"><a href="#一-目标愿景" class="headerlink" title="一. 目标愿景"></a>一. 目标愿景</h2><p><strong>我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构</strong></p>
+        <span itemprop="articleBody"><h2 id="一-目标愿景"><a href="#一-目标愿景" class="headerlink" title="一. 目标愿景"></a>一. 目标愿景</h2><p><strong>我们的目标是：使用spring  boot + spring cloud一步步搭建微服务架构</strong><br>本系列demo项目githu地址：<br><a href="https://github.com/YihuaWanglv/lannisi" target="_blank" rel="external">https://github.com/YihuaWanglv/lannisi</a></p>
 <h3 id="1-都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？"><a href="#1-都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？" class="headerlink" title="1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？"></a>1. 都说服务化，以前我们是怎么搭建soa服务的？之前的架构有什么未达理想？</h3><p>之前，一个比较流行的soa服务化方案是dubbo/dubbox+zookeeper，配上spring boot。<br>这个方案是比较流行的方案之一，但是有几点未达理想的地方：</p>
 <ul>
 <li>1) dubbo的性能并不如一些其他服务化开发工具，比如thrift和ice。</li>
@@ -260,6 +254,7 @@
 <p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
 <h3 id="3-再进一步，为应用引入spring-mvc"><a href="#3-再进一步，为应用引入spring-mvc" class="headerlink" title="3. 再进一步，为应用引入spring mvc"></a>3. 再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class SampleController &#123;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    String home() &#123;</span><br><span class="line">        String data = &quot;&quot;;</span><br><span class="line">        return &quot;Hello World!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
+<p>helloword项目也可参照：<a href="https://github.com/YihuaWanglv/lannisi" target="_blank" rel="external">https://github.com/YihuaWanglv/lannisi</a> 下的boot-sample-helloword项目。<br><a href="https://github.com/YihuaWanglv/lannisi/tree/master/boot-sample-helloword" target="_blank" rel="external">https://github.com/YihuaWanglv/lannisi/tree/master/boot-sample-helloword</a></p>
 </span>
       
     </div>
@@ -292,6 +287,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/22/关于java项目中如何读取配置文件/" rel="prev" title="关于java项目中如何读取配置文件">
+                关于java项目中如何读取配置文件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -359,7 +358,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
@@ -373,7 +372,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-count">80</span>
               <span class="site-state-item-name">Tags</span>
               </a>
           </div>
