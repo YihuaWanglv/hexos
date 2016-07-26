@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-23T05:07:00.563Z</updated>
+  <updated>2016-07-26T14:21:26.520Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>多版本部署如何使用nginx根据url参数api_version值进行路由</title>
+    <link href="http://yoursite.com/2016/07/26/%E5%A4%9A%E7%89%88%E6%9C%AC%E9%83%A8%E7%BD%B2%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E6%A0%B9%E6%8D%AEurl%E5%8F%82%E6%95%B0api-version%E5%80%BC%E8%BF%9B%E8%A1%8C%E8%B7%AF%E7%94%B1/"/>
+    <id>http://yoursite.com/2016/07/26/多版本部署如何使用nginx根据url参数api-version值进行路由/</id>
+    <published>2016-07-26T10:53:07.000Z</published>
+    <updated>2016-07-26T14:21:26.520Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。&quot;&gt;&lt;a href=&quot;#目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。&quot; class=&quot;headerlink&quot; title=&quot;目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api_version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。&quot;&gt;&lt;/a&gt;目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api_version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。&lt;/h2&gt;&lt;h2 id=&quot;实际测试场景：&quot;&gt;&lt;a href=&quot;#实际测试场景：&quot; class=&quot;headerlink&quot; title=&quot;实际测试场景：&quot;&gt;&lt;/a&gt;实际测试场景：&lt;/h2&gt;&lt;p&gt;tomcat部署启动了2个实例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;127.0.0.1:8080&lt;/li&gt;
+&lt;li&gt;127.0.0.1:8081&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本地部署一个nginx服务器，对所有请求进行代理和路由。&lt;br&gt;部署的nginx简单配置如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;worker_processes  1;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;events &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    worker_connections  1024;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;http &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    include       mime.types;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    default_type  application/octet-stream;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sendfile        on;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    keepalive_timeout  65;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    gzip  on;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    server &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        listen       80;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        location /client &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            if ( $arg_api_version = &amp;apos;1.0.0&amp;apos; )&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                proxy_pass http://localhost:8080;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            if ( $arg_api_version = &amp;apos;1.0.1&amp;apos; )&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                proxy_pass http://localhost:8081;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            proxy_pass http://localhost:8080;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        location / &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             proxy_pass http://localhost:8080;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;预先配置好本地host，以便直接使用域名访问。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;127.0.0.1 local.xxx.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;说明：&quot;&gt;&lt;a href=&quot;#说明：&quot; class=&quot;headerlink&quot; title=&quot;说明：&quot;&gt;&lt;/a&gt;说明：&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;1.“listen       80;”配置nginx监听80端口，接收所有请求。&lt;/li&gt;
+&lt;li&gt;2.“location /client { … }”部分将会匹配到所有以“/client”开头的请求&lt;/li&gt;
+&lt;li&gt;3.“location /client { … }”部分，通过$http_api_version获取到url中字段名为’api_version’的参数值，用if判断版本值，做相应的路由。最后如果都没有匹配到，就会匹配最后一行“proxy_pass &lt;a href=&quot;http://localhost:8080;”走8080实例。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080;”走8080实例。&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;4.“location / { … }” 部分将会匹配其余的所有请求，路由到“&lt;a href=&quot;http://localhost:8080”。这样，除“/client”前缀开头的请求外，都会默认匹配到一个固定的实例。别的请求都不会受到多版本路由配置的影响。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080”。这样，除“/client”前缀开头的请求外，都会默认匹配到一个固定的实例。别的请求都不会受到多版本路由配置的影响。&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。&quot;&gt;&lt;a href=&quot;#目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-ver
+    
+    </summary>
+    
+    
+      <category term="冗余部署" scheme="http://yoursite.com/tags/%E5%86%97%E4%BD%99%E9%83%A8%E7%BD%B2/"/>
+    
+      <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
+    
+      <category term="api_version" scheme="http://yoursite.com/tags/api-version/"/>
+    
+      <category term="路由" scheme="http://yoursite.com/tags/%E8%B7%AF%E7%94%B1/"/>
+    
+  </entry>
   
   <entry>
     <title>Transform objects with guava(使用Guava库转换对象)</title>
@@ -871,61 +910,6 @@
       <category term="versioning" scheme="http://yoursite.com/tags/versioning/"/>
     
       <category term="springmvc" scheme="http://yoursite.com/tags/springmvc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos6环境下配置mysql主从同步</title>
-    <link href="http://yoursite.com/2016/04/25/centos6%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AEmysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
-    <id>http://yoursite.com/2016/04/25/centos6环境下配置mysql主从同步/</id>
-    <published>2016-04-25T13:22:51.000Z</published>
-    <updated>2016-04-25T13:25:33.126Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;a href=&quot;#1、主从服务器分别作以下操作：&quot; class=&quot;headerlink&quot; title=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;/a&gt;1、主从服务器分别作以下操作：&lt;/h2&gt;&lt;p&gt;  1.1、版本一致&lt;br&gt;  1.2、初始化表，并在后台启动mysql&lt;br&gt;  1.3、修改root的密码&lt;/p&gt;
-&lt;h2 id=&quot;2、修改主服务器master&quot;&gt;&lt;a href=&quot;#2、修改主服务器master&quot; class=&quot;headerlink&quot; title=&quot;2、修改主服务器master:&quot;&gt;&lt;/a&gt;2、修改主服务器master:&lt;/h2&gt;&lt;p&gt;   #vi /etc/my.cnf&lt;br&gt;       [mysqld]&lt;br&gt;       log-bin=mysql-bin   //[必须]启用二进制日志&lt;br&gt;       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段&lt;/p&gt;
-&lt;h2 id=&quot;3、修改从服务器slave&quot;&gt;&lt;a href=&quot;#3、修改从服务器slave&quot; class=&quot;headerlink&quot; title=&quot;3、修改从服务器slave:&quot;&gt;&lt;/a&gt;3、修改从服务器slave:&lt;/h2&gt;&lt;p&gt;   #vi /etc/my.cnf&lt;br&gt;       [mysqld]&lt;br&gt;       log-bin=mysql-bin   //[不是必须]启用二进制日志&lt;br&gt;       server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段&lt;/p&gt;
-&lt;h2 id=&quot;4、重启两台服务器的mysql&quot;&gt;&lt;a href=&quot;#4、重启两台服务器的mysql&quot; class=&quot;headerlink&quot; title=&quot;4、重启两台服务器的mysql&quot;&gt;&lt;/a&gt;4、重启两台服务器的mysql&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;/etc/init.d/mysql restart
-or：
-service mysqld restart
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;5、在主服务器上建立帐户并授权slave&quot;&gt;&lt;a href=&quot;#5、在主服务器上建立帐户并授权slave&quot; class=&quot;headerlink&quot; title=&quot;5、在主服务器上建立帐户并授权slave:&quot;&gt;&lt;/a&gt;5、在主服务器上建立帐户并授权slave:&lt;/h2&gt;&lt;p&gt;  #mysql -uroot -proot&lt;br&gt;   mysql&amp;gt;GRANT REPLICATION SLAVE ON &lt;em&gt;.&lt;/em&gt; to ‘mysync’@’%’ identified by ‘root’; //一般不用root帐号，%表示所有客户端都可能连，只要帐号，密码正确，此处可用具体客户端IP代替，如192.168.145.226，加强安全。&lt;/p&gt;
-&lt;h2 id=&quot;6、登录主服务器的mysql，查询master的状态&quot;&gt;&lt;a href=&quot;#6、登录主服务器的mysql，查询master的状态&quot; class=&quot;headerlink&quot; title=&quot;6、登录主服务器的mysql，查询master的状态&quot;&gt;&lt;/a&gt;6、登录主服务器的mysql，查询master的状态&lt;/h2&gt;&lt;p&gt;   mysql&amp;gt;show master status;&lt;br&gt;   +——————+———-+————–+——————+&lt;br&gt;   | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |&lt;br&gt;   +——————+———-+————–+——————+&lt;br&gt;   | mysql-bin.000004 |      308 |              |                  |&lt;br&gt;   +——————+———-+————–+——————+&lt;br&gt;   1 row in set (0.00 sec)&lt;br&gt;   注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化&lt;/p&gt;
-&lt;h2 id=&quot;7、配置从服务器Slave：&quot;&gt;&lt;a href=&quot;#7、配置从服务器Slave：&quot; class=&quot;headerlink&quot; title=&quot;7、配置从服务器Slave：&quot;&gt;&lt;/a&gt;7、配置从服务器Slave：&lt;/h2&gt;&lt;p&gt;   mysql&amp;gt;change master to master_host=’192.168.145.222’,master_user=’mysync’,master_password=’root’, master_log_file=’mysql-bin.000004’,master_log_pos=308;   //注意不要断开，308数字前后无单引号。&lt;/p&gt;
-&lt;p&gt;   Mysql&amp;gt;start slave;    //启动从服务器复制功能&lt;/p&gt;
-&lt;h2 id=&quot;8、检查从服务器复制功能状态：&quot;&gt;&lt;a href=&quot;#8、检查从服务器复制功能状态：&quot; class=&quot;headerlink&quot; title=&quot;8、检查从服务器复制功能状态：&quot;&gt;&lt;/a&gt;8、检查从服务器复制功能状态：&lt;/h2&gt;&lt;p&gt;   mysql&amp;gt; show slave status\G&lt;/p&gt;
-&lt;p&gt;   &lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;em&gt;*&lt;/em&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt; 1. row &lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;strong&gt;&lt;em&gt;*&lt;/em&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Slave_IO_State: Waiting for master to send event
-Master_Host: 192.168.2.222  //主服务器地址
-Master_User: mysync   //授权帐户名，尽量避免使用root
-Master_Port: 3306    //数据库端口，部分版本没有此行
-Connect_Retry: 60
-Master_Log_File: mysql-bin.000004
-Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
-Relay_Log_File: ddte-relay-bin.000003
-Relay_Log_Pos: 251
-Relay_Master_Log_File: mysql-bin.000004
-Slave_IO_Running: Yes    //此状态必须YES
-Slave_SQL_Running: Yes     //此状态必须YES
-      ......
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注：Slave_IO及Slave_SQL进程必须正常运行，即YES状态，否则都是错误的状态(如：其中一个NO均属错误)。&lt;/p&gt;
-&lt;p&gt;以上操作过程，主从服务器配置完成。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;a href=&quot;#1、主从服务器分别作以下操作：&quot; class=&quot;headerlink&quot; title=&quot;1、主从服务器分别作以下操作：&quot;&gt;&lt;/a&gt;1、主从服务器分别作以下操作：&lt;/h2&gt;&lt;p&gt;  1.1、版本一致&lt;br&gt;  1.
-    
-    </summary>
-    
-    
-      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
-    
-      <category term="database" scheme="http://yoursite.com/tags/database/"/>
-    
-      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-      <category term="主从同步" scheme="http://yoursite.com/tags/%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
-    
-      <category term="master-slave" scheme="http://yoursite.com/tags/master-slave/"/>
     
   </entry>
   

@@ -179,15 +179,99 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/26/多版本部署如何使用nginx根据url参数api-version值进行路由/" itemprop="url">
+                  多版本部署如何使用nginx根据url参数api_version值进行路由
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-26T18:53:07+08:00" content="2016-07-26">
+              2016-07-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。"><a href="#目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。" class="headerlink" title="目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api_version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。"></a>目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api_version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。</h2><h2 id="实际测试场景："><a href="#实际测试场景：" class="headerlink" title="实际测试场景："></a>实际测试场景：</h2><p>tomcat部署启动了2个实例：</p>
+<ul>
+<li>127.0.0.1:8080</li>
+<li>127.0.0.1:8081</li>
+</ul>
+<p>本地部署一个nginx服务器，对所有请求进行代理和路由。<br>部署的nginx简单配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    gzip  on;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        location /client &#123;</span><br><span class="line">            if ( $arg_api_version = &apos;1.0.0&apos; )&#123;</span><br><span class="line">                proxy_pass http://localhost:8080;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            if ( $arg_api_version = &apos;1.0.1&apos; )&#123;</span><br><span class="line">                proxy_pass http://localhost:8081;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">        location / &#123;</span><br><span class="line">             proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>预先配置好本地host，以便直接使用域名访问。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 local.xxx.com</span><br></pre></td></tr></table></figure></p>
+<h2 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h2><ul>
+<li>1.“listen       80;”配置nginx监听80端口，接收所有请求。</li>
+<li>2.“location /client { … }”部分将会匹配到所有以“/client”开头的请求</li>
+<li>3.“location /client { … }”部分，通过$http_api_version获取到url中字段名为’api_version’的参数值，用if判断版本值，做相应的路由。最后如果都没有匹配到，就会匹配最后一行“proxy_pass <a href="http://localhost:8080;”走8080实例。" target="_blank" rel="external">http://localhost:8080;”走8080实例。</a></li>
+<li>4.“location / { … }” 部分将会匹配其余的所有请求，路由到“<a href="http://localhost:8080”。这样，除“/client”前缀开头的请求外，都会默认匹配到一个固定的实例。别的请求都不会受到多版本路由配置的影响。" target="_blank" rel="external">http://localhost:8080”。这样，除“/client”前缀开头的请求外，都会默认匹配到一个固定的实例。别的请求都不会受到多版本路由配置的影响。</a></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1105,165 +1189,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/" itemprop="url">
-                  [dev][collect][2016-06-06]collect-of-im-netty-android-etc
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-06-06T17:42:22+08:00" content="2016-06-06">
-              2016-06-06
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>此集合[dev][collect]汇总开发资源.<br>资源含文章，git code等等..</p>
-<h3 id="2016-06-06"><a href="#2016-06-06" class="headerlink" title="2016-06-06"></a>2016-06-06</h3><ul>
-<li><p>一套仿 微信 IM系统 基于apache mina<br><a href="http://my.oschina.net/u/1167637/blog/411312" target="_blank" rel="external">http://my.oschina.net/u/1167637/blog/411312</a></p>
-</li>
-<li><p>socketio 服务器推送<br><a href="http://blog.csdn.net/xtayfjpk/article/details/40948409" target="_blank" rel="external">http://blog.csdn.net/xtayfjpk/article/details/40948409</a></p>
-</li>
-<li><p>开放源码,基于springMVC+springSecurity3.x+Mybaits3.x的权限系统,,支持开源<br><a href="https://github.com/caprice/lanyuan" target="_blank" rel="external">https://github.com/caprice/lanyuan</a></p>
-</li>
-<li><p>Simple asynchronous non blocking chat server/client based on Netty 4<br><a href="https://github.com/caprice/nettychat" target="_blank" rel="external">https://github.com/caprice/nettychat</a><br><a href="https://github.com/YihuaWanglv/nettychat" target="_blank" rel="external">https://github.com/YihuaWanglv/nettychat</a></p>
-</li>
-<li><p>[5][android]A High Copy WeChat ,SNS APP (高仿微信)<br><a href="https://github.com/YihuaWanglv/wechat" target="_blank" rel="external">https://github.com/YihuaWanglv/wechat</a></p>
-</li>
-<li><p>一个Android开发者博客<br><a href="http://blog.csdn.net/finddreams" target="_blank" rel="external">http://blog.csdn.net/finddreams</a></p>
-</li>
-<li><p>案例剖析：从0开始搭建一个微服务的持续交付系统<br><a href="http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect</a></p>
-</li>
-<li><p>[5][android]这是一个可用于Android快速开发的框架，集成了很多项目中通用的东西，免去重复造轮子的麻烦，直接下载来了，修改一下就可以做为基础的框架进行开发，提高开发速度，适合当前移动互联网时代敏捷快速开发的节奏<br><a href="https://github.com/YihuaWanglv/Android_BaseLib" target="_blank" rel="external">https://github.com/YihuaWanglv/Android_BaseLib</a></p>
-</li>
-<li><p>使用Netty实现IMServer，方便的Entity解码编码机制，融合到二进制协议中<br><a href="https://github.com/YihuaWanglv/netty-chat" target="_blank" rel="external">https://github.com/YihuaWanglv/netty-chat</a></p>
-</li>
-<li><p>仿淘宝的B2C商城项目<br>页面用的jsp，稍显陈旧<br><a href="https://github.com/YihuaWanglv/B2CWeb" target="_blank" rel="external">https://github.com/YihuaWanglv/B2CWeb</a></p>
-</li>
-<li><p>JavaEE项目开发脚手架<br><a href="https://github.com/YihuaWanglv/es" target="_blank" rel="external">https://github.com/YihuaWanglv/es</a><br>后端:<br>IoC容器 spring<br>web框架 springmvc<br>orm框架 hibernate + spring data jpa<br>安全框架 shiro<br>验证框架 hibernate validator<br>任务调度框架 quartz<br>缓存 ehcache<br>数据源 druid<br>日志 slf4j+logback<br>Json fastjson<br>日期美化 prettytime<br>servlet 3.0(需要支持servlet3的servlet容器，如tomcat7)<br>jcaptcha 验证码<br>jsp 模板视图<br>前端:<br>jquery js框架<br>jquery-ui-bootstrap界面框架<br>font-wesome 字体/图标框架<br>jquery Validation Engine 验证框架（配合spring的验证框架，页面验证简化不少）<br>kindeditor 编辑器<br>nicescroll 漂亮的滚动条<br>zTree 树框架<br>jquery blockUI 弹出框/遮罩框架<br>jquery-fileupload 文件上传<br>bootstrap-datatimepicker 日历选择</p>
-</li>
-<li><p>[5][android]Collect and classify android open source projects<br><a href="https://github.com/YihuaWanglv/android-open-project" target="_blank" rel="external">https://github.com/YihuaWanglv/android-open-project</a></p>
-</li>
-<li><p>Blog avec Spring MVC + spring DATA + mongodb + angularjs<br><a href="https://github.com/YihuaWanglv/blog_java" target="_blank" rel="external">https://github.com/YihuaWanglv/blog_java</a></p>
-</li>
-<li><p>dianping-api-samples<br><a href="https://github.com/YihuaWanglv/dianping-open-sdk" target="_blank" rel="external">https://github.com/YihuaWanglv/dianping-open-sdk</a></p>
-</li>
-<li><p>JeeSite 是一个企业信息管理系统基础框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、Apache Shiro、Hibernate、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。<br><a href="https://github.com/YihuaWanglv/jeesite" target="_blank" rel="external">https://github.com/YihuaWanglv/jeesite</a></p>
-</li>
-<li><p>Demos of Apache MINA User Guide《Apache MINA 2 用户指南》中文翻译，文中用到的例子源码 <a href="https://github.com/waylau/apache-mina-2.x-user-guide" target="_blank" rel="external">https://github.com/waylau/apache-mina-2.x-user-guide</a><br><a href="https://github.com/waylau/apache-mina-2-user-guide-demos" target="_blank" rel="external">https://github.com/waylau/apache-mina-2-user-guide-demos</a></p>
-</li>
-<li><p>Spring Framework 4.x Reference Documentation 中文翻译<br><a href="https://www.gitbook.com/book/waylau/spring-framework-4-reference/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/spring-framework-4-reference/details</a><br><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">https://github.com/waylau/spring-framework-4-reference</a></p>
-</li>
-<li><p>免费的计算机编程类中文书籍<br><a href="https://github.com/YihuaWanglv/free-programming-books-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books-zh_CN</a><br>网页版：<br><a href="http://siberiawolf.com/free_programming/index.html" target="_blank" rel="external">http://siberiawolf.com/free_programming/index.html</a></p>
-</li>
-<li><p>一个合格的程序员应该读过哪些书<br><a href="http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html" target="_blank" rel="external">http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html</a></p>
-</li>
-<li><p>Google 全球 IP 地址库<br><a href="https://github.com/justjavac/Google-IPs" target="_blank" rel="external">https://github.com/justjavac/Google-IPs</a></p>
-</li>
-<li><p>一份关于“资料汇总”的汇总<br><a href="https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN</a></p>
-</li>
-<li><p>Freely available programming books<br><a href="https://github.com/YihuaWanglv/free-programming-books" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books</a></p>
-</li>
-<li><p>RESTful API 设计参考文献列表，可帮助你更加彻底的了解REST风格的接口设计<br><a href="https://github.com/aisuhua/restful-api-design-references" target="_blank" rel="external">https://github.com/aisuhua/restful-api-design-references</a></p>
-</li>
-<li><p>ssential Netty in Action 《Netty 实战(精髓)》<br><a href="https://github.com/waylau/essential-netty-in-action" target="_blank" rel="external">https://github.com/waylau/essential-netty-in-action</a><br>gitbook：<br><a href="http://waylau.com/essential-netty-in-action/" target="_blank" rel="external">http://waylau.com/essential-netty-in-action/</a></p>
-</li>
-<li><p>Gradle 2 User Guide 中文翻译《Gradle 2 用户指南》<br><a href="https://github.com/waylau/Gradle-2-User-Guide" target="_blank" rel="external">https://github.com/waylau/Gradle-2-User-Guide</a><br>gitbook：<br><a href="https://www.gitbook.com/book/waylau/gradle-2-user-guide/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/gradle-2-user-guide/details</a></p>
-</li>
-<li><p>Netty 4.x User Guide 中文翻译《Netty 4.x 用户指南》<br><a href="https://github.com/waylau/netty-4-user-guide" target="_blank" rel="external">https://github.com/waylau/netty-4-user-guide</a><br>gitbook：<br><a href="http://waylau.com/netty-4-user-guide/" target="_blank" rel="external">http://waylau.com/netty-4-user-guide/</a></p>
-</li>
-<li><p>这是一个整理即时通讯（IM）和社交系统（SNS）优秀开源项目的文档，项目上传github欢迎提交更新<br><a href="https://github.com/YihuaWanglv/Perfect_IM_SNS" target="_blank" rel="external">https://github.com/YihuaWanglv/Perfect_IM_SNS</a></p>
-</li>
-<li><p>基于位置信息，空间时间结合的社交与分享的应用<br><a href="https://github.com/YihuaWanglv/Tuyi" target="_blank" rel="external">https://github.com/YihuaWanglv/Tuyi</a></p>
-</li>
-<li><p>SYTeamApp：基于环信平台进行开发，旨在打造的高效团队沟通的移动客户端，供企业内部协作使用、适应移动办公需要，提升企业沟通协同效率，增强企业办公管理效率。（当前仅实现了用户登入登出功能、通讯功能、投票功能。）<br><a href="https://github.com/YihuaWanglv/SYTeamApp" target="_blank" rel="external">https://github.com/YihuaWanglv/SYTeamApp</a></p>
-</li>
-<li><p>MeifuGO：An open source android app by using easemob IM SDK<br><a href="https://github.com/YihuaWanglv/MeifuGO" target="_blank" rel="external">https://github.com/YihuaWanglv/MeifuGO</a></p>
-</li>
-<li><p>fangyuanshili：环信SDK,IM,geohash,lbs<br><a href="https://github.com/YihuaWanglv/fangyuanshili" target="_blank" rel="external">https://github.com/YihuaWanglv/fangyuanshili</a></p>
-</li>
-<li><p>zaina：该项目是改编自环信即时通讯云的demo改编<br><a href="https://github.com/YihuaWanglv/zaina" target="_blank" rel="external">https://github.com/YihuaWanglv/zaina</a></p>
-</li>
-<li><p>dianhua：基于react native 和 环信的实时通话的免费店话<br><a href="https://github.com/YihuaWanglv/dianhua" target="_blank" rel="external">https://github.com/YihuaWanglv/dianhua</a></p>
-</li>
-<li><p>Baby：一个私密社交APP<br><a href="https://github.com/YihuaWanglv/Baby" target="_blank" rel="external">https://github.com/YihuaWanglv/Baby</a></p>
-</li>
-<li><p>MVPCommon：一个集成了众多开源项目的Android MVP框架以及应用搭建，全程博客更新。<br>a common Architecture and project build with blogs releasing based on MVP，integrates many Open Source Projects ,to make your developing quicker and easier.<br><a href="https://github.com/YihuaWanglv/MVPCommon" target="_blank" rel="external">https://github.com/YihuaWanglv/MVPCommon</a><br>从零开始搭建android框架系列：<br><a href="http://www.jianshu.com/notebooks/3767449/latest" target="_blank" rel="external">http://www.jianshu.com/notebooks/3767449/latest</a></p>
-</li>
-<li><p>learnCloud：<br>和应用服务器、存储服务器说再见<br>再也不用租服务器，也不用写后端代码了。LeanCloud 提供一站式后端云服务，从数据存储、实时聊天、消息推送到移动统计，涵盖应用开发的多方面后端需求。<br><a href="https://leancloud.cn/" target="_blank" rel="external">https://leancloud.cn/</a></p>
-</li>
-<li><p>不容错过，最全的安卓架构合集【从零开始搭建android框架系列（2）】<br><a href="http://www.jianshu.com/p/1f21e1d375aa" target="_blank" rel="external">http://www.jianshu.com/p/1f21e1d375aa</a></p>
-</li>
-<li><p>安卓架构文章合集（a collection of android Architecture）<br><a href="https://github.com/YihuaWanglv/AndroidArchitectureCollection" target="_blank" rel="external">https://github.com/YihuaWanglv/AndroidArchitectureCollection</a></p>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1310,7 +1235,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1324,7 +1249,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">87</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

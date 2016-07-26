@@ -50,7 +50,7 @@ http {
 
 预先配置好本地host，以便直接使用域名访问。
 ```
-127.0.0.1 local.ssms.carisok.com
+127.0.0.1 local.xxx.com
 ```
 
 ## 说明：
