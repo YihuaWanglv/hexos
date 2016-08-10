@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-26T14:21:26.520Z</updated>
+  <updated>2016-08-10T15:18:20.132Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,440 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【转】-支付宝架构与技术</title>
+    <link href="http://yoursite.com/2016/08/10/%E3%80%90%E8%BD%AC%E3%80%91-%E6%94%AF%E4%BB%98%E5%AE%9D%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%8A%80%E6%9C%AF/"/>
+    <id>http://yoursite.com/2016/08/10/【转】-支付宝架构与技术/</id>
+    <published>2016-08-10T03:07:13.000Z</published>
+    <updated>2016-08-10T15:18:20.132Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-001.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-002.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-003.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-004.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-005.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-006.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-007.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-008.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-009.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-010.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-011.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-012.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-013.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-014.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-015.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-016.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-017.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-018.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-019.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-020.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-021.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-022.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-023.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-024.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-025.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-026.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-027.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-028.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-029.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;支付宝的开源分布式消息中间件–Metamorphosis(MetaQ)&lt;br&gt;　　Metamorphosis (MetaQ) 是一个高性能、高可用、可扩展的分布式消息中间件，类似于LinkedIn的Kafka，具有消息存储顺序写、吞吐量大和支持本地和XA事务等特性，适用于大吞吐量、顺序消息、广播和日志数据传输等场景，在淘宝和支付宝有着广泛的应用，现已开源。&lt;br&gt;　　Metamorphosis是淘宝开源的一个Java消息中间件。关于消息中间件，你应该听说过JMS规范，以及一些开源实现，如ActiveMQ和HornetQ等。Metamorphosis也是其中之一。&lt;br&gt;　　Metamorphosis的起源是我从对linkedin的开源MQ–现在转移到apache的kafka的学习开始的，这是一个设计很独特的MQ系统，它采用pull机制，而不是一般MQ的push模型，它大量利用了zookeeper做服务发现和offset存储，它的设计理念我非常欣赏并赞同，强烈建议你阅读一下它的设计文档，总体上说metamorphosis的设计跟它是完全一致的。但是为什么还需要meta呢？&lt;br&gt;　　简单概括下我重新写出meta的原因：&lt;br&gt;　　Kafka是scala写，我对scala不熟悉，并且kafka整个社区的发展太缓慢了。&lt;br&gt;　　有一些功能是kakfa没有实现，但是我们却需要：事务、多种offset存储、高可用方案(HA)等&lt;br&gt;　　Meta相对于kafka特有的一些功能：&lt;br&gt;　　文本协议设计，非常透明，支持类似memcached stats的协议来监控broker&lt;br&gt;　　纯Java实现，从通讯到存储，从client到server都是重新实现。&lt;br&gt;　　提供事务支持，包括本地事务和XA分布式事务&lt;br&gt;　　支持HA复制，包括异步复制和同步复制，保证消息的可靠性&lt;br&gt;　　支持异步发送消息&lt;br&gt;　　消费消息失败，支持本地恢复&lt;br&gt;　　多种offset存储支持，数据库、磁盘、zookeeper，可自定义实现&lt;br&gt;　　支持group commit，提升数据可靠性和吞吐量。&lt;br&gt;　　支持消息广播模式&lt;br&gt;　　一系列配套项目：python客户端、twitter storm的spout、tail4j等。&lt;br&gt;　　因此meta相比于kafka的提升是巨大的。meta在淘宝和支付宝都得到了广泛应用，现在每天支付宝每天经由meta路由的消息达到120亿，淘宝也有每天也有上亿的消息量。&lt;br&gt;　　Meta适合的应用：&lt;br&gt;　　日志传输，高吞吐量的日志传输本来就是kafka的强项&lt;br&gt;　　消息广播功能，如广播缓存配置失效。&lt;br&gt;　　数据的顺序同步功能，如mysql binlog复制&lt;br&gt;　　分布式环境下（broker,producer,consumer都为集群）的消息路由，对顺序和可靠性有极高要求的场景。&lt;br&gt;　　作为一般MQ来使用的其他功能&lt;/p&gt;
+&lt;p&gt;总体结构：&lt;br&gt;&lt;img src=&quot;/images/frame-zhifubao-030.jpeg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;内部结构：&lt;br&gt;&lt;img src=&quot;/images/frame-zhifubao-031.jpeg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-001.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame-zhifubao-002.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/frame
+    
+    </summary>
+    
+    
+      <category term="支付宝" scheme="http://yoursite.com/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/"/>
+    
+      <category term="架构" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>系统分布式情况下最终一致性方案梳理</title>
+    <link href="http://yoursite.com/2016/08/10/%E7%B3%BB%E7%BB%9F%E5%88%86%E5%B8%83%E5%BC%8F%E6%83%85%E5%86%B5%E4%B8%8B%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E6%96%B9%E6%A1%88%E6%A2%B3%E7%90%86/"/>
+    <id>http://yoursite.com/2016/08/10/系统分布式情况下最终一致性方案梳理/</id>
+    <published>2016-08-10T02:14:29.000Z</published>
+    <updated>2016-08-10T15:15:57.211Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;目前的应用系统，不管是企业级应用还是互联网应用，最终数据的一致性是每个应用系统都要面临的问题，随着分布式的逐渐普及，数据一致性更加艰难，但是也很难有银弹的解决方案，也并不是引入特定的中间件或者特定的开源框架能够解决的，更多的还是看业务场景，根据场景来给出解决方案。根据笔者最近几年的了解，总结了几个点，更多的应用系统在编码的时候，更加关注数据的一致性，这样系统才是健壮的。&lt;/p&gt;
+&lt;h2 id=&quot;基础理论相关&quot;&gt;&lt;a href=&quot;#基础理论相关&quot; class=&quot;headerlink&quot; title=&quot;基础理论相关&quot;&gt;&lt;/a&gt;基础理论相关&lt;/h2&gt;&lt;p&gt;说起事务，目前的几个理论，ACID事务特性，CAP分布式理论，以及BASE等，ACID在数据库事务中体现，CAP和BASE则是分布式事务的理论，结合业务系统，例如订单管理，例如仓储管理等，可以借鉴这些理论，从而解决问题。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ACID 特性&lt;br&gt;A（原子性）事务的原子操作单元，对数据的修改，要么全部执行，要么全部不执行；&lt;br&gt;C（一致性）在事务开始和完成时，数据必须保持一致状态，相关的数据规则必须应用于事务的修改，以保证数据的完整性，事务结束时，所有的内部数据结构必须正确；&lt;br&gt;I（隔离性）保证事务不受外部并发操作的独立环境执行；&lt;br&gt;D（持久性）事务完成之后，对于数据的修改是永久的，即使系统出现故障也能够保持；&lt;/li&gt;
+&lt;li&gt;CAP&lt;br&gt;C（一致性）一致性是指数据的原子性，在经典的数据库中通过事务来保障，事务完成时，无论成功或回滚，数据都会处于一致的状态，在分布式环境下，一致性是指多个节点数据是否一致；&lt;br&gt;A（可用性）服务一直保持可用的状态，当用户发出一个请求，服务能在一定的时间内返回结果；&lt;br&gt;P（分区容忍性）在分布式应用中，可能因为一些分布式的原因导致系统无法运转，好的分区容忍性，使应用虽然是一个分布式系统，但是好像一个可以正常运转的整体&lt;/li&gt;
+&lt;li&gt;BASE&lt;br&gt;BA: Basic Availability 基本业务可用性；&lt;br&gt;S: Soft state 柔性状态；&lt;br&gt;E: Eventual consistency 最终一致性；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;最终一致性的几种做法&quot;&gt;&lt;a href=&quot;#最终一致性的几种做法&quot; class=&quot;headerlink&quot; title=&quot;最终一致性的几种做法&quot;&gt;&lt;/a&gt;最终一致性的几种做法&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/transaction-001.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;单数据库情况下的事务&quot;&gt;&lt;a href=&quot;#单数据库情况下的事务&quot; class=&quot;headerlink&quot; title=&quot;单数据库情况下的事务&quot;&gt;&lt;/a&gt;单数据库情况下的事务&lt;/h3&gt;&lt;p&gt;如果应用系统是单一的数据库，那么这个很好保证，利用数据库的事务特性来满足事务的一致性，这时候的一致性是强一致性的。对于java应用系统来讲，很少直接通过事务的start和commit以及rollback来硬编码，大多通过spring的事务模板或者声明式事务来保证。&lt;/p&gt;
+&lt;h3 id=&quot;基于事务型消息队列的最终一致性&quot;&gt;&lt;a href=&quot;#基于事务型消息队列的最终一致性&quot; class=&quot;headerlink&quot; title=&quot;基于事务型消息队列的最终一致性&quot;&gt;&lt;/a&gt;基于事务型消息队列的最终一致性&lt;/h3&gt;&lt;p&gt;借助消息队列，在处理业务逻辑的地方，发送消息，业务逻辑处理成功后，提交消息，确保消息是发送成功的，之后消息队列投递来进行处理，如果成功，则结束，如果没有成功，则重试，直到成功，不过仅仅适用业务逻辑中，第一阶段成功，第二阶段必须成功的场景。对应上图中的C流程。&lt;/p&gt;
+&lt;h3 id=&quot;基于消息队列-定时补偿机制的最终一致性&quot;&gt;&lt;a href=&quot;#基于消息队列-定时补偿机制的最终一致性&quot; class=&quot;headerlink&quot; title=&quot;基于消息队列+定时补偿机制的最终一致性&quot;&gt;&lt;/a&gt;基于消息队列+定时补偿机制的最终一致性&lt;/h3&gt;&lt;p&gt;前面部分和上面基于事务型消息的队列，不同的是，第二阶段重试的地方，不再是消息中间件自身的重试逻辑了，而是单独的补偿任务机制。其实在大多数的逻辑中，第二阶段失败的概率比较小，所以单独独立补偿任务表出来，可以更加清晰，能够比较明确的直到当前多少任务是失败的。对应上图的E流程。&lt;/p&gt;
+&lt;h3 id=&quot;业务系统业务逻辑的commit-rollback机制&quot;&gt;&lt;a href=&quot;#业务系统业务逻辑的commit-rollback机制&quot; class=&quot;headerlink&quot; title=&quot;业务系统业务逻辑的commit/rollback机制&quot;&gt;&lt;/a&gt;业务系统业务逻辑的commit/rollback机制&lt;/h3&gt;&lt;p&gt;这一点说的话确实不难，commit和rollback是数据库事务中的比较典型的概念，但是在系统分布式情况下，需要业务代码中实现这种，成功了commit，失败了rollback。&lt;/p&gt;
+&lt;h3 id=&quot;业务应用系统的幂等性控制&quot;&gt;&lt;a href=&quot;#业务应用系统的幂等性控制&quot; class=&quot;headerlink&quot; title=&quot;业务应用系统的幂等性控制&quot;&gt;&lt;/a&gt;业务应用系统的幂等性控制&lt;/h3&gt;&lt;p&gt;为啥要做幂等呢？ 原因很简单，在系统调用没有达到期望的结果后，会重试。那重试就会面临问题，重试之后不能给业务逻辑带来影响，例如创建订单，第一次调用超时了，但是调用的系统不知道超时了是成功了还是失败了，然后他就重试，但是实际上第一次调用订单创建是成功了的，这时候重试了，显然不能再创建订单了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查询&lt;br&gt;查询的API，可以说是天然的幂等性，因为你查询一次和查询两次，对于系统来讲，没有任何数据的变更，所以，查询一次和查询多次一样的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MVCC方案&lt;br&gt;多版本并发控制，update with condition，更新带条件，这也是在系统设计的时候，合理的选择乐观锁，通过version或者其他条件，来做乐观锁，这样保证更新及时在并发的情况下，也不会有太大的问题。例如update tablexxx set name=#name#,version=version+1 where version=#version# ,或者是 update tablexxx set quality=quality-#subQuality# where quality-#subQuality# &amp;gt;= 0 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;单独的去重表&lt;br&gt;如果涉及到的去重的地方特别多，例如ERP系统中有各种各样的业务单据，每一种业务单据都需要去重，这时候，可以单独搞一张去重表，在插入数据的时候，插入去重表，利用数据库的唯一索引特性，保证唯一的逻辑。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;分布式锁&lt;br&gt;还是拿插入数据的例子，如果是分布是系统，构建唯一索引比较困难，例如唯一性的字段没法确定，这时候可以引入分布式锁，通过第三方的系统，在业务系统插入数据或者更新数据，获取分布式锁，然后做操作，之后释放锁，这样其实是把多线程并发的锁的思路，引入多多个系统，也就是分布式系统中得解决思路。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;删除数据&lt;br&gt;删除数据，仅仅第一次删除是真正的操作数据，第二次甚至第三次删除，直接返回成功，这样保证了幂等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;插入数据的唯一索引&lt;br&gt;插入数据的唯一性，可以通过业务主键来进行约束，例如一个特定的业务场景，三个字段肯定确定唯一性，那么，可以在数据库表添加唯一索引来进行标示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;API层面的幂等&lt;br&gt;这里有一个场景，API层面的幂等，例如提交数据，如何控制重复提交，这里可以在提交数据的form表单或者客户端软件，增加一个唯一标示，然后服务端，根据这个UUID来进行去重，这样就能比较好的做到API层面的唯一标示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;状态机幂等&lt;br&gt;在设计单据相关的业务，或者是任务相关的业务，肯定会涉及到状态机，就是业务单据上面有个状态，状态在不同的情况下会发生变更，一般情况下存在有限状态机，这时候，如果状态机已经处于下一个状态，这时候来了一个上一个状态的变更，理论上是不能够变更的，这样的话，保证了有限状态机的幂等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;异步回调机制的引入&quot;&gt;&lt;a href=&quot;#异步回调机制的引入&quot; class=&quot;headerlink&quot; title=&quot;异步回调机制的引入&quot;&gt;&lt;/a&gt;异步回调机制的引入&lt;/h3&gt;&lt;p&gt;A应用调用B，在同步调用的返回结果中，B返回成功给到A，一般情况下，这时候就结束了，其实在99.99%的情况是没问题的，但是有时候为了确保100%，记住最起码在系统设计中100%，这时候B系统再回调A一下，告诉A，你调用我的逻辑，确实成功了。其实这个逻辑，非常类似TCP协议中的三次握手。上图中的B流程。&lt;/p&gt;
+&lt;h3 id=&quot;类似double-check机制的确认机制&quot;&gt;&lt;a href=&quot;#类似double-check机制的确认机制&quot; class=&quot;headerlink&quot; title=&quot;类似double check机制的确认机制&quot;&gt;&lt;/a&gt;类似double check机制的确认机制&lt;/h3&gt;&lt;p&gt;还是上图中异步回调的过程，A在同步调用B，B返回成功了。这次调用结束了，但是A为了确保，在过一段时间，这个时间可以是几秒，也可以是每天定时处理，再调用B一次，查询一下之前的那次调用是否成功。例如A调用B更新订单状态，这时候成功了，延迟几秒后，A查询B，确认一下状态是否是自己刚刚期望的。上图中的D流程。&lt;/p&gt;
+&lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;上面的几点总结，更多的在业务系统中体现，在超复杂的系统中，数据的一致性，不是说简单的引入啥中间件能够解决的，更多的是根据业务场景，来灵活应对。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;目前的应用系统，不管是企业级应用还是互联网应用，最终数据的一致性是每个应用系统都要面临的问题，随着分布式的逐渐普及，数据一致性更加艰难，但是
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SOA分布式事务解决方案</title>
+    <link href="http://yoursite.com/2016/08/10/SOA%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://yoursite.com/2016/08/10/SOA分布式事务解决方案/</id>
+    <published>2016-08-10T01:48:30.000Z</published>
+    <updated>2016-08-10T15:15:57.203Z</updated>
+    
+    <content type="html">&lt;p&gt;这里是转的一段摘录：&lt;/p&gt;
+&lt;p&gt;传统分布式系统与当代的面向SOA的分布式系统有一定区别，论概念上来讲SOA是以服务为中心，既然以服务为中心就会有很多面向服务的设计原则。而传统的分布式系统没有服务的概念，也没有所谓的一切皆是服务的原则。而当代SOA则首要原则就要以服务为中心，针对服务的设计又有了很多服务设计原则。&lt;br&gt;SOA对服务还进行了类型的划分，按照服务的应用层次来分类：业务服务、组合服务、应用服务，包装服务等。再按照管理与运维的层面来分类：控制服务、调度服务、监控服务等等。传统的分布式系统是没有这些的，我们谈论的是当代SOA的分布式系统，所以我们强调的是以服务为中心，以服务设计原则为架构设计的指导要求，当代SOA是对传统分布式系统的一个迭代进化，不是一个时代的产物，SOA更加强调了以服务为首要原则，已经提升到了另外一个更加高级的层面。&lt;br&gt;本节我们交流一下在当代SOA分布式系统中的数据一致性问题，在SOA中这主要涉及两个层面来考虑，一个是服务层面、一个数据持久化层面。再按照一致性的基本要求，可以分为：读一致性、写一致性、会话一致性、最终一致性、实时一致性等几个维度，当然还有其他几个维度的一致性要求。&lt;br&gt;我们这里重点讨论在企业应用中实施SOA时遇到的一些比较棘手的数据一致性问题和解决方案，对于刚才提到的几个维度的一致性要求均具有重要的参考价值。&lt;br&gt;1.分布式事务（基于DTC的分布式事务）&lt;br&gt;以往包括目前很多项目还是倾向于使用DTC来处理分布式事务，这个方案多数适用于一般的企业应用，业务、访问量、数据量要求都不是很高的情况下。用DTC很方便，事务的自动传播、事务的自动感知、事务的自动回滚和提交，这都是中央DTC帮我们管理好了。&lt;br&gt;由于有中央DTC的统一协调，看似好像帮我们解决了很多我们需要考虑的问题，但是它也是整个平台的致命的瓶颈，一旦DTC由于某个问题出现错误，而且这种错误都是系统层面的错误，很多问题我们是无能为力的。如果出现问题，整个应用平台都无法完成任何一个跨服务的业务流程，这其实很危险，你不无法控制系统的稳定性。&lt;br&gt;这里总结，DTC用于一般的小型企业应用，不建议用在中等规模的企业应用中，不是说这个东西不好，而是无法控制它。&lt;br&gt;2.事务补偿（提供正向或反向的操作来让数据在业务上是一致的）&lt;br&gt;世界级SOA专家所编写的书籍里都提到了使用“补偿”操作来完成数据的不一致性，当我们编写了一个服务方法A，就需要一个服务方法A1的补偿接口来完成A服务的补偿操作。但是真实的业务情况下很难实施这种看起来好像很优美很柔性的设计。没有实践就没有发言权，我们公司的技术团队就实施过这种方案，但是很不理想，这跟技术本身及技术团队没关系，只是我们的平台业务太复杂，很难去“补偿”一个已经做过的操作。&lt;br&gt;这当然也要看你所面对的项目情况，量变引起质变，如果你的各种量都上去了，这个“补偿”方案不实际，而且很难在数据层面进行“补偿“。总之，这不是一个中长期的方案。&lt;br&gt;3.异步EDA（基于异步事件流来实现柔性的分布式事务）&lt;br&gt;EDA简称”事件驱动架构“。多个系统之间通过传播”事件“来驱动整个业务的运转。系统之间没有紧耦合的同步调用的操作，都是通过发出异步的“事件”来通知下一个业务环节。&lt;br&gt;可能你会有一个疑问，异步操作，是不是系统之间延迟会很长，其实不是，现在有很多成熟的消息中间件在内网内几乎是毫秒级别的延迟，至于跨机房就看物理上的距离了。&lt;br&gt;异步操作有很多好处，这里我就不浪费大家时间重复那些好处。使用EDA实现系统之间的一个松散的事务关系，要把控好项目的质量，对系统的非功能需求、BUG数等等可能会影响业务操作中断的地方都要建立起适当的机制，让这些问题尽早的在线下解决。比如可以实施UnitTest、持续集成等一些敏捷的方法论。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里是转的一段摘录：&lt;/p&gt;
+&lt;p&gt;传统分布式系统与当代的面向SOA的分布式系统有一定区别，论概念上来讲SOA是以服务为中心，既然以服务为中心就会有很多面向服务的设计原则。而传统的分布式系统没有服务的概念，也没有所谓的一切皆是服务的原则。而当代SOA则首要原则就要以服务为中
+    
+    </summary>
+    
+    
+      <category term="SOA" scheme="http://yoursite.com/tags/SOA/"/>
+    
+      <category term="分布式事务" scheme="http://yoursite.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    
+      <category term="柔性事务" scheme="http://yoursite.com/tags/%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1/"/>
+    
+      <category term="消息事务" scheme="http://yoursite.com/tags/%E6%B6%88%E6%81%AF%E4%BA%8B%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>What&#39;s the simplest way to print a Java array?</title>
+    <link href="http://yoursite.com/2016/08/08/What-s-the-simplest-way-to-print-a-Java-array/"/>
+    <id>http://yoursite.com/2016/08/08/What-s-the-simplest-way-to-print-a-Java-array/</id>
+    <published>2016-08-08T10:24:43.000Z</published>
+    <updated>2016-08-08T11:33:26.582Z</updated>
+    
+    <content type="html">&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple Array:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;String[] array = new String[] &amp;#123;&amp;quot;John&amp;quot;, &amp;quot;Mary&amp;quot;, &amp;quot;Bob&amp;quot;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;System.out.println(Arrays.toString(array));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Output:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[John, Mary, Bob]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Nested Array:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;String[][] deepArray = new String[][] &amp;#123;&amp;#123;&amp;quot;John&amp;quot;, &amp;quot;Mary&amp;quot;&amp;#125;, &amp;#123;&amp;quot;Alice&amp;quot;, &amp;quot;Bob&amp;quot;&amp;#125;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;System.out.println(Arrays.toString(deepArray));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;//output: [[Ljava.lang.String;@106d69c, [Ljava.lang.String;@52e922]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;System.out.println(Arrays.deepToString(deepArray));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Output:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[[John, Mary], [Alice, Bob]]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;double Array:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;double[] doubleArray = &amp;#123; 7.0, 9.0, 5.0, 1.0, 3.0 &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;System.out.println(Arrays.toString(doubleArray));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Output:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[7.0, 9.0, 5.0, 1.0, 3.0 ]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;int Array:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;int[] intArray = &amp;#123; 7, 9, 5, 1, 3 &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;System.out.println(Arrays.toString(intArray));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Output:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[7, 9, 5, 1, 3 ]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple Array:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;sp
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="j2se" scheme="http://yoursite.com/tags/j2se/"/>
+    
+      <category term="array" scheme="http://yoursite.com/tags/array/"/>
+    
+      <category term="print" scheme="http://yoursite.com/tags/print/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 中int和Integer的区别</title>
+    <link href="http://yoursite.com/2016/08/04/Java-%E4%B8%ADint%E5%92%8CInteger%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2016/08/04/Java-中int和Integer的区别/</id>
+    <published>2016-08-04T03:41:57.000Z</published>
+    <updated>2016-08-08T11:33:26.578Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;Java中int和Integer的区别&quot;&gt;&lt;a href=&quot;#Java中int和Integer的区别&quot; class=&quot;headerlink&quot; title=&quot;Java中int和Integer的区别&quot;&gt;&lt;/a&gt;Java中int和Integer的区别&lt;/h1&gt;&lt;h2 id=&quot;Java各种数据类型详细介绍及其区别&quot;&gt;&lt;a href=&quot;#Java各种数据类型详细介绍及其区别&quot; class=&quot;headerlink&quot; title=&quot;Java各种数据类型详细介绍及其区别&quot;&gt;&lt;/a&gt;Java各种数据类型详细介绍及其区别&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;基本类型，或者叫做内置类型，是JAVA中不同于类的特殊类型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：&lt;/p&gt;
+&lt;p&gt;实数：double、float&lt;/p&gt;
+&lt;p&gt;整数：byte、short、int、long&lt;/p&gt;
+&lt;p&gt;字符：char&lt;/p&gt;
+&lt;p&gt;布尔值：boolean&lt;/p&gt;
+&lt;p&gt;复杂类型和基本类型的内存模型本质上是不一样的，简单数据类型的存储原理是这样的：所有的简单数据类型不存在“引用”的概念，简单数据类型都是直接存储在内存中的内存栈上的，数据本身的值就是存储在栈空间里面，而Java语言里面只有这八种数据类型是这种存储模型；而其他的只要是继承于Object类的复杂数据类型都是按照Java里面存储对象的内存模型来进行数据存储的，使用Java内存堆和内存栈来进行这种类型的数据存储，简单地讲，“引用”是存储在有序的内存栈上的，而对象本身的值存储在内存堆上的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Java的简单数据讲解列表如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;int：int为整数类型，在存储的时候，用4个字节存储，范围为-2,147,483,648到2,147,483,647，在变量初始化的时候，int类型的默认值为0。&lt;/p&gt;
+&lt;p&gt;short：short也属于整数类型，在存储的时候，用2个字节存储，范围为-32,768到32,767，在变量初始化的时候，short类型的默认值为0，一般情况下，因为Java本身转型的原因，可以直接写为0。&lt;/p&gt;
+&lt;p&gt;long：long也属于整数类型，在存储的时候，用8个字节存储，范围为-9,223,372,036,854,775,808到9,223,372,036, 854,775,807，在变量初始化的时候，long类型的默认值为0L或0l，也可直接写为0。&lt;/p&gt;
+&lt;p&gt;byte：byte同样属于整数类型，在存储的时候，用1个字节来存储，范围为-128到127，在变量初始化的时候，byte类型的默认值也为0。&lt;/p&gt;
+&lt;p&gt;float：float属于实数类型，在存储的时候，用4个字节来存储，范围为32位IEEEE 754单精度范围，在变量初始化的时候，float的默认值为0.0f或0.0F，在初始化的时候可以写0.0。&lt;/p&gt;
+&lt;p&gt;double：double同样属于实数类型，在存储的时候，用8个字节来存储，范围为64位IEEE 754双精度范围，在变量初始化的时候，double的默认值为0.0。&lt;/p&gt;
+&lt;p&gt;char：char属于字符类型，在存储的时候用2个字节来存储，因为Java本身的字符集不是用ASCII码来进行存储，是使用的16位Unicode字符集，它的字符范围即是Unicode的字符范围，在变量初始化的时候，char类型的默认值为’u0000’。&lt;/p&gt;
+&lt;p&gt;boolean：boolean属于布尔类型，在存储的时候不使用字节，仅仅使用1位来存储，范围仅仅为0和1，其字面量为true和false，而boolean变量在初始化的时候变量的默认值为false。&lt;/p&gt;
+&lt;p&gt;Integer是int的封装类，里面有很多进行处理的静态方法&lt;/p&gt;
+&lt;p&gt;Integer是对象而int不是，内存的分配位置也不一样&lt;/p&gt;
+&lt;p&gt;Integer的属性和其他类一样的！在方法里都是引用传递，而原始类型是值传递！&lt;/p&gt;
+&lt;p&gt;jdk1.5以后可以从int自动装箱Integer类。&lt;/p&gt;
+&lt;p&gt;int是为了兼容以前的编程语言使用的基本类型，目的是让程序效率更高，以为它是直接分配到栈上的。所以它不是对象，不能有类似 int.operation()的操作。&lt;/p&gt;
+&lt;p&gt;Integer是java中一切都是对象这个大前提下的int的包装类型，可以使用方法，是个对象，是用new分配到堆上的。&lt;/p&gt;
+&lt;p&gt;jdk1.5后，引入了类似c#中的自动装、拆箱，使得Integer i = 1；这样的表达直接可行。&lt;/p&gt;
+&lt;p&gt;int是一种基本数据类型，而Integer是相应于int的类类型，称为对象包装。&lt;/p&gt;
+&lt;p&gt;实现这种对象包装的目的主要是因为类能够提供必要的方法，用于实现基本数据类型的数值与可打印字符串之间的转换，以及一些其他的实用程序方法；&lt;/p&gt;
+&lt;p&gt;另外，有些数据结构库类只能操作对象，而不支持基本数据类型的变量，包装类提供一种便利的方式，能够把基本数据类型转换成等价的对象，从而可以利用数据结构库类进行处理。&lt;/p&gt;
+&lt;p&gt;int 是基本类型，(int)(Math.Random()*100)就是一个数，可以进行加见乘除。 Integer是class ,那么 new Integer(temp)就是一个对象了，可以用到Integer这个class的方法，例如用intvalue()可以返回这个int的值。int a=1;这是基本数据类型是能参与运算的.而Integer b= new Integer(1);c=b.floatvalue;Float a= new Float(null);是可以的用Float初始化一个对象这个a有很多方法而float a;就没有因为原始没有引用类，java 提供两种不同的类型：引用类型（或者封装类型，Warpper）和原始类型（或内置类型，Primitive）。Int是java的原始数据类型，Integer是java为int提供的封装类。Java为每个原始类型提供了封装类。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原始类型 封装类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;boolean Boolean&lt;/p&gt;
+&lt;p&gt;char Character&lt;/p&gt;
+&lt;p&gt;byte Byte&lt;/p&gt;
+&lt;p&gt;short Short&lt;/p&gt;
+&lt;p&gt;int Integer&lt;/p&gt;
+&lt;p&gt;long Long&lt;/p&gt;
+&lt;p&gt;float Float&lt;/p&gt;
+&lt;p&gt;double Double&lt;/p&gt;
+&lt;p&gt;引用类型和原始类型的行为完全不同，并且它们具有不同的语义。引用类型和原始类型具有不同的特征和用法，它们包括：大小和速度问题，这种类型以哪种类型的数据结构存储，当引用类型和原始类型用作某个类的实例数据时所指定的缺省值。对象引用实例变量的缺省值为 null，而原始类型实例变量的缺省值与它们的类型有关。&lt;/p&gt;
+&lt;h2 id=&quot;1-、Boolean-VS-boolean&quot;&gt;&lt;a href=&quot;#1-、Boolean-VS-boolean&quot; class=&quot;headerlink&quot; title=&quot;1 、Boolean VS boolean&quot;&gt;&lt;/a&gt;1 、Boolean VS boolean&lt;/h2&gt;&lt;p&gt;public final class Boolean extends Object  implementsSerializable,Comparable&lt;/p&gt;
+&lt;p&gt;Boolean 类将基本类型为boolean的值包装在一个对象中。一个Boolean类型的对象只包含一个类型为boolean的字段。此外，此类还为boolean和String的相互转换提供了许多方法，并提供了处理 boolean时非常有用的其他一些常量和方法。&lt;/p&gt;
+&lt;h2 id=&quot;2、-Byte-VS-byte&quot;&gt;&lt;a href=&quot;#2、-Byte-VS-byte&quot; class=&quot;headerlink&quot; title=&quot;2、 Byte VS byte&quot;&gt;&lt;/a&gt;2、 Byte VS byte&lt;/h2&gt;&lt;p&gt;public final class Byte extends Number implements Comparable Byte类将基本类型 byte的值包装在一个对象中。一个Byte类型的对象只包含一个类型为 byte的字段。此外，该类还为 byte和 String的相互转换提供了几种方法，并提供了处理 byte时非常有用的其他一些常量和方法。&lt;/p&gt;
+&lt;h2 id=&quot;3、-Character-VS-char&quot;&gt;&lt;a href=&quot;#3、-Character-VS-char&quot; class=&quot;headerlink&quot; title=&quot;3、 Character VS char&quot;&gt;&lt;/a&gt;3、 Character VS char&lt;/h2&gt;&lt;p&gt;public final class Character extends Object  implements Serializable, Comparable&lt;/p&gt;
+&lt;p&gt;Character类在对象中包装一个基本类型char的值。&lt;/p&gt;
+&lt;p&gt;Character类型的对象包含类型为char的单个字段。此外，该类提供了几种方法，以确定字符的类别（小写字母，数字，等等），并将字符从大写转换成小写，反之亦然。&lt;/p&gt;
+&lt;h2 id=&quot;4-、Double-VS-double&quot;&gt;&lt;a href=&quot;#4-、Double-VS-double&quot; class=&quot;headerlink&quot; title=&quot;4 、Double VS double&quot;&gt;&lt;/a&gt;4 、Double VS double&lt;/h2&gt;&lt;p&gt;public final class Double extends Number implements Comparable Double类在对象中包装了一个基本类型double的值。每个Double类型的对象都包含一个double类型的字段。此外，该类还提供了多个方法，可以将double转换为String，将String转换为double，还提供了其他一些处理double时有用的常量和方法。&lt;/p&gt;
+&lt;h2 id=&quot;5、-Float-VS-float&quot;&gt;&lt;a href=&quot;#5、-Float-VS-float&quot; class=&quot;headerlink&quot; title=&quot;5、 Float VS float&quot;&gt;&lt;/a&gt;5、 Float VS float&lt;/h2&gt;&lt;p&gt;public final class Float extends Number implements Comparable&lt;/p&gt;
+&lt;p&gt;Float类在对象中包装了一个float基本类型的值。Float类型的对象包含一个float类型的字段。此外，此类提供了几种方法，可在float类型和String类型之间互相转换，并且还提供了处理float类型时非常有用的其他一些常量和方法。&lt;/p&gt;
+&lt;h2 id=&quot;6、-Integer-VS-int&quot;&gt;&lt;a href=&quot;#6、-Integer-VS-int&quot; class=&quot;headerlink&quot; title=&quot;6、 Integer VS int&quot;&gt;&lt;/a&gt;6、 Integer VS int&lt;/h2&gt;&lt;p&gt;public final class Integer extends Number implements Comparable&lt;/p&gt;
+&lt;p&gt;Integer类在对象中包装了一个基本类型int的值。Integer类型的对象包含一个int类型的字段。&lt;/p&gt;
+&lt;p&gt;此外，该类提供了多个方法，能在int类型和String类型之间互相转换，还提供了处理int类型时非常有用的其他一些常量和方法。&lt;/p&gt;
+&lt;h2 id=&quot;7-Long-VS-long&quot;&gt;&lt;a href=&quot;#7-Long-VS-long&quot; class=&quot;headerlink&quot; title=&quot;7 Long VS long&quot;&gt;&lt;/a&gt;7 Long VS long&lt;/h2&gt;&lt;p&gt;public final class Long extends Number implements Comparable&lt;/p&gt;
+&lt;p&gt;Long类在对象中封装了基本类型long的值。每个Long类型的对象都包含一个long类型的字段。&lt;/p&gt;
+&lt;p&gt;此外，该类提供了多个方法，可以将long转换为String，将String转换为long，除此之外，还提供了其他一些处理long时有用的常量和方法。&lt;/p&gt;
+&lt;h2 id=&quot;8、-Short-VS-short&quot;&gt;&lt;a href=&quot;#8、-Short-VS-short&quot; class=&quot;headerlink&quot; title=&quot;8、 Short VS short&quot;&gt;&lt;/a&gt;8、 Short VS short&lt;/h2&gt;&lt;p&gt;public final class Short extends Number implements Comparable&lt;/p&gt;
+&lt;p&gt;Short类在对象中包装基本类型short的值。一个Short类型的对象只包含一个short类型的字段。另外，该类提供了多个方法，可以将short转换为String，将String转换为short，同时还提供了其他一些处理short时有用的常量和方法。&lt;/p&gt;
+&lt;h2 id=&quot;9、public-final-class-Voidextends-Object&quot;&gt;&lt;a href=&quot;#9、public-final-class-Voidextends-Object&quot; class=&quot;headerlink&quot; title=&quot;9、public final class Voidextends Object&quot;&gt;&lt;/a&gt;9、public final class Voidextends Object&lt;/h2&gt;&lt;p&gt;Void 类是一个不可实例化的占位符类，它保持一个对代表 Java 关键字 void 的 Class 对象的引用。&lt;/p&gt;
+&lt;p&gt;类的对象才能为null，不能把null赋值给一个变量不能，如int m=null;但可以String s=null;因为String是个类。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Java中int和Integer的区别&quot;&gt;&lt;a href=&quot;#Java中int和Integer的区别&quot; class=&quot;headerlink&quot; title=&quot;Java中int和Integer的区别&quot;&gt;&lt;/a&gt;Java中int和Integer的区别&lt;/h1&gt;&lt;h2 i
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="int" scheme="http://yoursite.com/tags/int/"/>
+    
+      <category term="Integer" scheme="http://yoursite.com/tags/Integer/"/>
+    
+      <category term="j2se" scheme="http://yoursite.com/tags/j2se/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[dev][collect][2016-07]collect-of-dev</title>
+    <link href="http://yoursite.com/2016/08/03/dev-collect-2016-07-collect-of-dev/"/>
+    <id>http://yoursite.com/2016/08/03/dev-collect-2016-07-collect-of-dev/</id>
+    <published>2016-08-03T05:21:52.000Z</published>
+    <updated>2016-08-03T14:42:36.539Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;2016-07&quot;&gt;&lt;a href=&quot;#2016-07&quot; class=&quot;headerlink&quot; title=&quot;2016-07&quot;&gt;&lt;/a&gt;2016-07&lt;/h2&gt;&lt;h3 id=&quot;2016-07-29&quot;&gt;&lt;a href=&quot;#2016-07-29&quot; class=&quot;headerlink&quot; title=&quot;2016-07-29&quot;&gt;&lt;/a&gt;2016-07-29&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;搭建ElasticSearch-2.x Logstash-2.x Kibana-4.5.x Kafka为消息中心的ELK日志平台&lt;br&gt;&lt;a href=&quot;https://www.iamle.com/archives/2058.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.iamle.com/archives/2058.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-23&quot;&gt;&lt;a href=&quot;#2016-07-23&quot; class=&quot;headerlink&quot; title=&quot;2016-07-23&quot;&gt;&lt;/a&gt;2016-07-23&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;discover meteor&lt;br&gt;&lt;a href=&quot;http://zh.discovermeteor.com/chapters/introduction/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://zh.discovermeteor.com/chapters/introduction/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;webpack gitbook&lt;br&gt;&lt;a href=&quot;https://hulufei.gitbooks.io/react-tutorial/content/webpack.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hulufei.gitbooks.io/react-tutorial/content/webpack.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-22&quot;&gt;&lt;a href=&quot;#2016-07-22&quot; class=&quot;headerlink&quot; title=&quot;2016-07-22&quot;&gt;&lt;/a&gt;2016-07-22&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Spring Boot应用的测试——Mockito&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/972cd6b93206&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/972cd6b93206&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;利用Mockito模拟DB&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/c1c495f231ea&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/c1c495f231ea&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在Spring Boot项目中使用Spock框架&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/f1e354d382cd&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/f1e354d382cd&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Spring Boot Testing&lt;br&gt;&lt;a href=&quot;http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Integration Testing a Spring Boot Application&lt;br&gt;&lt;a href=&quot;https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-21&quot;&gt;&lt;a href=&quot;#2016-07-21&quot; class=&quot;headerlink&quot; title=&quot;2016-07-21&quot;&gt;&lt;/a&gt;2016-07-21&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Growth: 全栈增长工程师指南&lt;br&gt;&lt;a href=&quot;http://growth.phodal.com/#&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://growth.phodal.com/#&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-19&quot;&gt;&lt;a href=&quot;#2016-07-19&quot; class=&quot;headerlink&quot; title=&quot;2016-07-19&quot;&gt;&lt;/a&gt;2016-07-19&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;微服务架构的分布式事务解决方案&lt;br&gt;&lt;a href=&quot;http://www.roncoo.com/details?cid=7ae3d7eddc4742f78b0548aa8bd9ccdb&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.roncoo.com/details?cid=7ae3d7eddc4742f78b0548aa8bd9ccdb&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-16&quot;&gt;&lt;a href=&quot;#2016-07-16&quot; class=&quot;headerlink&quot; title=&quot;2016-07-16&quot;&gt;&lt;/a&gt;2016-07-16&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用 Vaadin 实现全堆栈 Java Web 开发&lt;br&gt;&lt;a href=&quot;http://www.ibm.com/developerworks/cn/java/j-full-stack-java-web-dev-vaadin/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ibm.com/developerworks/cn/java/j-full-stack-java-web-dev-vaadin/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Creating CRUD UI with Vaadin&lt;br&gt;&lt;a href=&quot;https://spring.io/guides/gs/crud-with-vaadin/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://spring.io/guides/gs/crud-with-vaadin/&lt;/a&gt;&lt;br&gt;git clone &lt;a href=&quot;https://github.com/spring-guides/gs-crud-with-vaadin.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/spring-guides/gs-crud-with-vaadin.git&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当当网开源Dubbox，扩展Dubbo服务框架支持REST风格远程调用&lt;br&gt;&lt;a href=&quot;http://www.infoq.com/cn/news/2014/10/dubbox-open-source&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.infoq.com/cn/news/2014/10/dubbox-open-source&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在Dubbo中开发REST风格的远程调用（RESTful Remoting）&lt;br&gt;&lt;a href=&quot;http://dangdangdotcom.github.io/dubbox/rest.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://dangdangdotcom.github.io/dubbox/rest.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用JavaConfig方式配置dubbox&lt;br&gt;&lt;a href=&quot;http://dangdangdotcom.github.io/dubbox/java-config.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://dangdangdotcom.github.io/dubbox/java-config.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Microservices with Spring&lt;br&gt;&lt;a href=&quot;https://spring.io/blog/2015/07/14/microservices-with-spring&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://spring.io/blog/2015/07/14/microservices-with-spring&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-14&quot;&gt;&lt;a href=&quot;#2016-07-14&quot; class=&quot;headerlink&quot; title=&quot;2016-07-14&quot;&gt;&lt;/a&gt;2016-07-14&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Import/Read excel file 2003 or 2007 with Spring MVC&lt;br&gt;&lt;a href=&quot;http://lvtutorial.com/spring-mvc/read-excel-file-2003-or-2007-with-spring-mvc.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lvtutorial.com/spring-mvc/read-excel-file-2003-or-2007-with-spring-mvc.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;SPRING BOOT FILE UPLOAD WITH AJAX&lt;br&gt;&lt;a href=&quot;http://blog.netgloo.com/2015/02/08/spring-boot-file-upload-with-ajax/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.netgloo.com/2015/02/08/spring-boot-file-upload-with-ajax/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/netgloo/spring-boot-samples&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/netgloo/spring-boot-samples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-13&quot;&gt;&lt;a href=&quot;#2016-07-13&quot; class=&quot;headerlink&quot; title=&quot;2016-07-13&quot;&gt;&lt;/a&gt;2016-07-13&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;cSphere Docker 实训课程&lt;br&gt;&lt;a href=&quot;http://git.oschina.net/dockerf/docker-training&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://git.oschina.net/dockerf/docker-training&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Spring Cloud方面的博客&lt;br&gt;&lt;a href=&quot;http://blog.didispace.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.didispace.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;白话 IT 之浅谈 ELK 日志系统&lt;br&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MzA4ODgwNjk1MQ==&amp;amp;mid=2653788351&amp;amp;idx=1&amp;amp;sn=a38a0b95b63186b789423195fa09f91d&amp;amp;scene=0&amp;amp;key=77421cf58af4a653195d70dcdaaed6e78c06fe4711f95c19349f5ca630c1e7f8481f6f21ba392beedcc329dbcc331cc8&amp;amp;ascene=0&amp;amp;uin=MTM4NTI5NTI4Mg%3D%3D&amp;amp;devicetype=iMac+MacBookAir6%2C2+OSX+OSX+10.9.5+build(13F1808)&amp;amp;version=11020201&amp;amp;pass_ticket=MxW0cGHvKj7WTMRpzBpE%2FND%2BPkUf91pVVetULpXmjhLbsP9btRTYFt3DF6QSZ5Ct&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://mp.weixin.qq.com/s?__biz=MzA4ODgwNjk1MQ==&amp;amp;mid=2653788351&amp;amp;idx=1&amp;amp;sn=a38a0b95b63186b789423195fa09f91d&amp;amp;scene=0&amp;amp;key=77421cf58af4a653195d70dcdaaed6e78c06fe4711f95c19349f5ca630c1e7f8481f6f21ba392beedcc329dbcc331cc8&amp;amp;ascene=0&amp;amp;uin=MTM4NTI5NTI4Mg%3D%3D&amp;amp;devicetype=iMac+MacBookAir6%2C2+OSX+OSX+10.9.5+build(13F1808)&amp;amp;version=11020201&amp;amp;pass_ticket=MxW0cGHvKj7WTMRpzBpE%2FND%2BPkUf91pVVetULpXmjhLbsP9btRTYFt3DF6QSZ5Ct&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;用户行为分析项目&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/piwik&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/piwik&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-12&quot;&gt;&lt;a href=&quot;#2016-07-12&quot; class=&quot;headerlink&quot; title=&quot;2016-07-12&quot;&gt;&lt;/a&gt;2016-07-12&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用API网关构建微服务&lt;br&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/construct-micro-service-using-api-gateway&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.infoq.com/cn/articles/construct-micro-service-using-api-gateway&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用Spring Cloud和Docker构建微服务&lt;br&gt;&lt;a href=&quot;http://www.dockone.io/article/510&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.dockone.io/article/510&lt;/a&gt;&lt;br&gt;原文链接：&lt;br&gt;&lt;a href=&quot;http://www.kennybastani.com/2015/07/spring-cloud-docker-microservices.html?mkt_tok=3RkMMJWWfF9wsRonuqTMZKXonjHpfsX57ukoWaC0lMI%2F0ER3fOvrPUfGjI4ATcdqI%2BSLDwEYGJlv6SgFQ7LMMaZq1rgMXBk%3D&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.kennybastani.com/2015/07/spring-cloud-docker-microservices.html?mkt_tok=3RkMMJWWfF9wsRonuqTMZKXonjHpfsX57ukoWaC0lMI%2F0ER3fOvrPUfGjI4ATcdqI%2BSLDwEYGJlv6SgFQ7LMMaZq1rgMXBk%3D&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The API Gateway Pattern: Angular JS and Spring Security Part IV&lt;br&gt;&lt;a href=&quot;https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;git demo for spring-boot-microservices&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/spring-boot-microservices&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/spring-boot-microservices&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/spring-cloud-microservice-example&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/spring-cloud-microservice-example&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Implementing Netflix Zuul in Spring Cloud&lt;br&gt;&lt;a href=&quot;http://kubecloud.io/apigatewaypattern/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://kubecloud.io/apigatewaypattern/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://start.spring.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://start.spring.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-11&quot;&gt;&lt;a href=&quot;#2016-07-11&quot; class=&quot;headerlink&quot; title=&quot;2016-07-11&quot;&gt;&lt;/a&gt;2016-07-11&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用 Vuex + Vue.js 构建单页应用&lt;br&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000005891026&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://segmentfault.com/a/1190000005891026&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/lichenbuliren/vuex-notes-app&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/lichenbuliren/vuex-notes-app&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;两篇关于微服务api gateway的著名文章&lt;br&gt;&lt;a href=&quot;http://microservices.io/patterns/apigateway.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://microservices.io/patterns/apigateway.html&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.nginx.com/blog/building-microservices-using-an-api-gateway/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.nginx.com/blog/building-microservices-using-an-api-gateway/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-08&quot;&gt;&lt;a href=&quot;#2016-07-08&quot; class=&quot;headerlink&quot; title=&quot;2016-07-08&quot;&gt;&lt;/a&gt;2016-07-08&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用spring boot和thrift、zookeeper建立微服务&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/skyblog/p/5535418.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/skyblog/p/5535418.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Jenkins+Docker搭建持续集成测试环境&lt;br&gt;&lt;a href=&quot;http://www.dockone.io/article/1464&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.dockone.io/article/1464&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;spring boot+spring cloud服务化系列博客&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/skyblog/category/774535.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/skyblog/category/774535.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-07-06&quot;&gt;&lt;a href=&quot;#2016-07-06&quot; class=&quot;headerlink&quot; title=&quot;2016-07-06&quot;&gt;&lt;/a&gt;2016-07-06&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用Jenkins搭建iOS/Android持续集成打包平台&lt;br&gt;&lt;a href=&quot;http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;React-Native For Android 环境搭建及踩坑&lt;br&gt;&lt;a href=&quot;http://www.imbeta.cn/react-native-for-android-huan-jing-da-jian-ji-cai-keng.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.imbeta.cn/react-native-for-android-huan-jing-da-jian-ji-cai-keng.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;React Native 开发培训免费书&lt;br&gt;&lt;a href=&quot;https://unbug.gitbooks.io/react-native-training/content/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://unbug.gitbooks.io/react-native-training/content/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Android Studio插件整理&lt;br&gt;&lt;a href=&quot;https://ydmmocoo.github.io/2016/06/28/Android-Studio%E6%8F%92%E4%BB%B6%E6%95%B4%E7%90%86/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://ydmmocoo.github.io/2016/06/28/Android-Studio%E6%8F%92%E4%BB%B6%E6%95%B4%E7%90%86/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;FastDFS + Nginx 反向代理缓存 安装与配置&lt;br&gt;&lt;a href=&quot;http://www.linux178.com/storage/fastdfs-nginx-cache.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.linux178.com/storage/fastdfs-nginx-cache.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;2016-07&quot;&gt;&lt;a href=&quot;#2016-07&quot; class=&quot;headerlink&quot; title=&quot;2016-07&quot;&gt;&lt;/a&gt;2016-07&lt;/h2&gt;&lt;h3 id=&quot;2016-07-29&quot;&gt;&lt;a href=&quot;#2016-07-29&quot; class=&quot;head
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+      <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
+    
+      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
+    
+      <category term="collect-of-dev" scheme="http://yoursite.com/tags/collect-of-dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>How to synchronize ArrayList in java with example</title>
+    <link href="http://yoursite.com/2016/07/28/How-to-synchronize-ArrayList-in-java-with-example/"/>
+    <id>http://yoursite.com/2016/07/28/How-to-synchronize-ArrayList-in-java-with-example/</id>
+    <published>2016-07-28T05:21:15.000Z</published>
+    <updated>2016-07-28T14:57:55.280Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;There-are-two-ways-to-synchronize-explicitly&quot;&gt;&lt;a href=&quot;#There-are-two-ways-to-synchronize-explicitly&quot; class=&quot;headerlink&quot; title=&quot;There are two ways to synchronize explicitly:&quot;&gt;&lt;/a&gt;There are two ways to synchronize explicitly:&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Using Collections.synchronizedList() method&lt;/li&gt;
+&lt;li&gt;Using thread-safe variant of ArrayList: CopyOnWriteArrayList&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Example-1-Collections-synchronizedList-method-for-Synchronizing-ArrayList&quot;&gt;&lt;a href=&quot;#Example-1-Collections-synchronizedList-method-for-Synchronizing-ArrayList&quot; class=&quot;headerlink&quot; title=&quot;Example 1: Collections.synchronizedList() method for Synchronizing ArrayList&quot;&gt;&lt;/a&gt;Example 1: Collections.synchronizedList() method for Synchronizing ArrayList&lt;/h2&gt;&lt;p&gt;In this example we are using Collections.synchronizedList() method. The important point to note here is that iterator should be in synchronized block in this type of synchronization as shown in the below example.&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package beginnersbook.com;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.ArrayList;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.Iterator;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.List;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.Collections;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class Details &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   public static void main(String a[])&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       List&amp;lt;String&amp;gt; syncal = &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         Collections.synchronizedList(new ArrayList&amp;lt;String&amp;gt;());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       //Adding elements to synchronized ArrayList&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       syncal.add(&amp;quot;Pen&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       syncal.add(&amp;quot;NoteBook&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       syncal.add(&amp;quot;Ink&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       System.out.println(&amp;quot;Iterating synchronized ArrayList:&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       synchronized(syncal) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       Iterator&amp;lt;String&amp;gt; iterator = syncal.iterator(); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       while (iterator.hasNext())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          System.out.println(iterator.next());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;Output:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Iterating synchronized ArrayList:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Pen&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NoteBook&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Ink&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Method-2-Using-CopyOnWriteArrayList&quot;&gt;&lt;a href=&quot;#Method-2-Using-CopyOnWriteArrayList&quot; class=&quot;headerlink&quot; title=&quot;Method 2: Using CopyOnWriteArrayList&quot;&gt;&lt;/a&gt;Method 2: Using CopyOnWriteArrayList&lt;/h2&gt;&lt;p&gt;CopyOnWriteArrayList is a thread-safe variant of ArrayList.&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package beginnersbook.com;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.concurrent.CopyOnWriteArrayList;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.Iterator;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class Details &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; public static void main(String a[])&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    CopyOnWriteArrayList&amp;lt;String&amp;gt; al = new CopyOnWriteArrayList&amp;lt;String&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //Adding elements to synchronized ArrayList&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    al.add(&amp;quot;Pen&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    al.add(&amp;quot;NoteBook&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    al.add(&amp;quot;Ink&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    System.out.println(&amp;quot;Displaying synchronized ArrayList Elements:&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //Synchronized block is not required in this method&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    Iterator&amp;lt;String&amp;gt; iterator = al.iterator(); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    while (iterator.hasNext())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       System.out.println(iterator.next());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;Output:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Displaying synchronized ArrayList Elements:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Pen&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;NoteBook&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Ink&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;There-are-two-ways-to-synchronize-explicitly&quot;&gt;&lt;a href=&quot;#There-are-two-ways-to-synchronize-explicitly&quot; class=&quot;headerlink&quot; title=&quot;Ther
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="synchronize" scheme="http://yoursite.com/tags/synchronize/"/>
+    
+      <category term="ArrayList" scheme="http://yoursite.com/tags/ArrayList/"/>
+    
+  </entry>
   
   <entry>
     <title>多版本部署如何使用nginx根据url参数api_version值进行路由</title>
@@ -114,9 +548,9 @@
     </summary>
     
     
-      <category term="spring boot" scheme="http://yoursite.com/tags/spring-boot/"/>
-    
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="spring boot" scheme="http://yoursite.com/tags/spring-boot/"/>
     
       <category term="junit" scheme="http://yoursite.com/tags/junit/"/>
     
@@ -201,9 +635,9 @@
     </summary>
     
     
-      <category term="spring boot" scheme="http://yoursite.com/tags/spring-boot/"/>
-    
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="spring boot" scheme="http://yoursite.com/tags/spring-boot/"/>
     
       <category term="spring cloud" scheme="http://yoursite.com/tags/spring-cloud/"/>
     
@@ -330,9 +764,9 @@
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
-    
       <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
+    
+      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
     
       <category term="collect-of-dev" scheme="http://yoursite.com/tags/collect-of-dev/"/>
     
@@ -588,13 +1022,13 @@
     </summary>
     
     
-      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
     
       <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
     
-      <category term="post" scheme="http://yoursite.com/tags/post/"/>
+      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="post" scheme="http://yoursite.com/tags/post/"/>
     
       <category term="resouce" scheme="http://yoursite.com/tags/resouce/"/>
     
@@ -669,247 +1103,6 @@
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
       <category term="windows" scheme="http://yoursite.com/tags/windows/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目</title>
-    <link href="http://yoursite.com/2016/06/01/Jenkins%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5-Jenkins%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2git%E6%89%98%E7%AE%A1%E7%9A%84springboot%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://yoursite.com/2016/06/01/Jenkins自动化部署实践-Jenkins多环境部署git托管的springboot项目/</id>
-    <published>2016-06-01T10:56:42.000Z</published>
-    <updated>2016-06-01T14:09:14.708Z</updated>
-    
-    <content type="html">&lt;p&gt;[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目&lt;/p&gt;
-&lt;h3 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h3&gt;&lt;h4 id=&quot;场景&quot;&gt;&lt;a href=&quot;#场景&quot; class=&quot;headerlink&quot; title=&quot;场景&quot;&gt;&lt;/a&gt;场景&lt;/h4&gt;&lt;p&gt;Jenkins部署在服务器192.168.1.119:8080.&lt;br&gt;有一个在git托管的springboot构建的web项目，项目有n个依赖的父模块，现在想要把这个项目部署到服务器192.168.1.134上.&lt;br&gt;现在，我们需要使用Jenkins自动化部署实现这个目标.&lt;/p&gt;
-&lt;h4 id=&quot;为什么是springboot？&quot;&gt;&lt;a href=&quot;#为什么是springboot？&quot; class=&quot;headerlink&quot; title=&quot;为什么是springboot？&quot;&gt;&lt;/a&gt;为什么是springboot？&lt;/h4&gt;&lt;p&gt;Sprinboot允许项目使用内嵌的tomcat像启动普通java程序一样启动一个web项目.由于有了这个特性，项目不再需要打war包部署到tomcat，而是打成jar包，直接使用java -jar命令启动.&lt;/p&gt;
-&lt;h4 id=&quot;如何实现？&quot;&gt;&lt;a href=&quot;#如何实现？&quot; class=&quot;headerlink&quot; title=&quot;如何实现？&quot;&gt;&lt;/a&gt;如何实现？&lt;/h4&gt;&lt;p&gt;1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。&lt;br&gt;2-建立目标项目的maven打包项目。build。&lt;br&gt;3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。&lt;/p&gt;
-&lt;h3 id=&quot;实现步骤&quot;&gt;&lt;a href=&quot;#实现步骤&quot; class=&quot;headerlink&quot; title=&quot;实现步骤&quot;&gt;&lt;/a&gt;实现步骤&lt;/h3&gt;&lt;p&gt;下面是具体操作&lt;/p&gt;
-&lt;h4 id=&quot;1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。&quot;&gt;&lt;a href=&quot;#1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。&quot; class=&quot;headerlink&quot; title=&quot;1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。&quot;&gt;&lt;/a&gt;1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。&lt;/h4&gt;&lt;p&gt;由于要区分不同的部署环境，所以这里先建一个dev环境的项目组&lt;br&gt;&lt;img src=&quot;/images/jenkins-maven-001.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;建立maven打包任务，为项目所依赖的父模块建立编译打包任务&lt;br&gt;主要填好项目任务名称和项目git地址即可&lt;br&gt;&lt;img src=&quot;/images/jenkins-maven-002.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h4 id=&quot;2-建立目标项目的maven打包项目。build。&quot;&gt;&lt;a href=&quot;#2-建立目标项目的maven打包项目。build。&quot; class=&quot;headerlink&quot; title=&quot;2-建立目标项目的maven打包项目。build。&quot;&gt;&lt;/a&gt;2-建立目标项目的maven打包项目。build。&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;/images/jenkins-maven-003.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;由于我们要实现不同部署环境区分不同配置，所以我们需要对项目做些额外的工作&lt;br&gt;首先在maven pom中添加profiles设置。我这里添加了3个环境local，dev和prod&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;profiles&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;profile&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;id&amp;gt;local&amp;lt;/id&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;activation&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;activeByDefault&amp;gt;true&amp;lt;/activeByDefault&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;/activation&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;properties&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;env&amp;gt;local&amp;lt;/env&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;/properties&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/profile&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;profile&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;id&amp;gt;dev&amp;lt;/id&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;properties&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;env&amp;gt;dev&amp;lt;/env&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;/properties&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/profile&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;profile&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;id&amp;gt;prod&amp;lt;/id&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;properties&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;env&amp;gt;prod&amp;lt;/env&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;/properties&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;/profile&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/profiles&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然后，添加maven-resources-plugin插件，这个插件会为我们复制生成三个环境的配置文件目录。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;artifactId&amp;gt;maven-resources-plugin&amp;lt;/artifactId&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;executions&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;lt;execution&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;id&amp;gt;copy-prod-resources&amp;lt;/id&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;phase&amp;gt;process-resources&amp;lt;/phase&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;goals&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;goal&amp;gt;copy-resources&amp;lt;/goal&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;/goals&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;!-- this is important --&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;overwrite&amp;gt;true&amp;lt;/overwrite&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;sourceDirectory&amp;gt;$&amp;#123;basedir&amp;#125;/src/main/java&amp;lt;/sourceDirectory&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;outputDirectory&amp;gt;target/classes&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;resources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;lt;resource&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                  &amp;lt;directory&amp;gt;src/main/resources&amp;lt;/directory&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                  &amp;lt;includes&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;lt;include&amp;gt;*.properties&amp;lt;/include&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;lt;include&amp;gt;*.xml&amp;lt;/include&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                  &amp;lt;/includes&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;lt;/resource&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;lt;resource&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                  &amp;lt;directory&amp;gt;src/main/resources/$&amp;#123;env&amp;#125;&amp;lt;/directory&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                  &amp;lt;targetPath&amp;gt;&amp;lt;/targetPath&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;lt;/resource&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;/resources&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;testSourceDirectory&amp;gt;$&amp;#123;basedir&amp;#125;/src/test/java&amp;lt;/testSourceDirectory&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;lt;testOutputDirectory&amp;gt;target/test-classes&amp;lt;/testOutputDirectory&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;lt;/execution&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;lt;/executions&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;/plugin&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这样就会在resources目录下生成三个不同环境的目录和配置文件&lt;br&gt;&lt;img src=&quot;/images/jenkins-maven-007.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;如果是cli命令行下，我们就可以使用mvn install -P$env命令打包不同环境的配置&lt;br&gt;如dev环境就是mvn install -Pdev&lt;/p&gt;
-&lt;p&gt;但是我们现在不是命令行，而是使用Jenkins做编译打包。&lt;br&gt;于是，添加的Jenkins任务，除了任务名称和git地址外，还需要额外多一个配置。&lt;br&gt;在“Build”标签下，填写“goals and options”字段，值为“clean install -Pdev”。&lt;br&gt;-Pdev表示我们要打的正是dev环境的配置&lt;br&gt;&lt;img src=&quot;/images/jenkins-maven-004.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h4 id=&quot;3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192-168-1-134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。&quot;&gt;&lt;a href=&quot;#3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192-168-1-134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。&quot; class=&quot;headerlink&quot; title=&quot;3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。&quot;&gt;&lt;/a&gt;3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。&lt;/h4&gt;&lt;p&gt;由于我们需要执行远程服务器上的shell脚本，所以我们必须要让Jenkins知道远程服务器的ssh登录方法。&lt;br&gt;要让Jenkins能登录服务器做远程任务，我们需要在全局配置中配置好“SSH remote host”。&lt;br&gt;&lt;img src=&quot;/images/jenkins-maven-006.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;然后配置一个执行远程shell脚本的任务，如下图。&lt;br&gt;&lt;img src=&quot;/images/jenkins-maven-005.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;这个脚本很简单，只是设置好要登录的服务器，在shell中进入shell脚本所在目录，直接执行目标脚本。&lt;br&gt;而拉取jar包并更新启动springboot项目的任务则有远程脚本所承包了。&lt;/p&gt;
-&lt;p&gt;任务脚本例子：&lt;br&gt;这个shell脚本主要做了几件事：&lt;br&gt;1）使用sshpass和scp从119服务器远程复制打包好的jar包回来134，备份，再复制到项目定好的目标路径&lt;br&gt;2）kill关闭原java进程&lt;br&gt;3）使用nohup java -jar ${target_path}/${target_jar} &amp;lt; /dev/null &amp;gt; ${target_bak_path}/${now}/itime-${now}.log 2&amp;gt;&amp;amp;1 &amp;amp;&lt;br&gt;启动java程序，并把日志输出到指定的log文件。&lt;br&gt;4）检查java程序是否启动成功。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;52&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;53&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;54&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;55&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;56&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;57&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;58&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;59&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;60&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;61&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;62&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;63&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;64&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;65&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;66&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;67&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;68&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;69&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;70&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;71&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;72&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;73&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;74&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;75&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;76&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# script to update and restart project itimes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;remote_source_path=/root/.jenkins/workspace/dev-timeitem-itimes/target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;target_jar=itimes-1.0.0-SNAPSHOT.jar&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;target_path=/usr/local/itimes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;target_bak_path=/usr/local/itimes_bak&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;now=$(date &amp;apos;+%Y%m%d%H%M%S&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;update and restart project itimes start...&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;now time: $&amp;#123;now&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mkdir -p $&amp;#123;target_bak_path&amp;#125;/$&amp;#123;now&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;/usr/bin/sshpass -p &amp;quot;root&amp;quot; scp root@192.168.1.119:$&amp;#123;remote_source_path&amp;#125;/itimes-1.0.0-SNAPSHOT.jar $&amp;#123;target_bak_path&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;/$&amp;#123;now&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd $target_bak_path/$now&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;if [ -f $&amp;#123;target_jar&amp;#125; ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  pkill -f &amp;apos;java.*itimes&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  sleep 3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  temppid=$(ps aux | grep java| grep &amp;quot;$&amp;#123;target_jar&amp;#125;&amp;quot; | grep -v grep | awk &amp;apos;&amp;#123; print $2&amp;#125;&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  if [[ &amp;quot;$temppid&amp;quot; != &amp;quot;&amp;quot; ]]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;temppid is $&amp;#123;temppid&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ps -ef | grep $&amp;#123;target_jar&amp;#125; | grep -v grep | awk &amp;apos;&amp;#123;print $2&amp;#125;&amp;apos; | xargs kill&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  echo &amp;quot;kill $&amp;#123;target_jar&amp;#125; done..&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  cd $target_path&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  if [ -f $&amp;#123;target_jar&amp;#125; ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    rm -f $&amp;#123;target_jar&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;target_jar deleted..&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;$&amp;#123;target_jar&amp;#125; not exist, go on to copy..&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  cp $&amp;#123;target_bak_path&amp;#125;/$&amp;#123;now&amp;#125;/$&amp;#123;target_jar&amp;#125; $&amp;#123;target_path&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  echo &amp;quot;cp done!&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  chmod 755 $&amp;#123;target_jar&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  nohup java -jar $&amp;#123;target_path&amp;#125;/$&amp;#123;target_jar&amp;#125; &amp;lt; /dev/null &amp;gt; $&amp;#123;target_bak_path&amp;#125;/$&amp;#123;now&amp;#125;/itime-$&amp;#123;now&amp;#125;.log 2&amp;gt;&amp;amp;1 &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  echo &amp;quot;app startting..&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  for i in 2 4 6 10; do&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    sleep $i&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;wait and check app starting up...&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    APP_PID=`ps aux | grep java| grep &amp;quot;$&amp;#123;target_jar&amp;#125;&amp;quot; | grep -v grep | awk &amp;apos;&amp;#123; print $2&amp;#125;&amp;apos;`&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if [ $APP_PID &amp;gt; 0 ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        echo &amp;quot;app is still starting up...&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  done&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  pid=$(ps aux | grep java| grep &amp;quot;$&amp;#123;target_jar&amp;#125;&amp;quot; | grep -v grep | awk &amp;apos;&amp;#123; print $2&amp;#125;&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  echo &amp;quot;app id is: $&amp;#123;pid&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  if [ $pid ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;$&amp;#123;target_jar&amp;#125; is running now!&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;$&amp;#123;target_jar&amp;#125; is not running! $&amp;#123;target_jar&amp;#125; startup failed!&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  success_flag=&amp;quot;false&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  for i in 2 4 6 8 10 12; do&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;checking app startup status...&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    success_target_tag=`cat $&amp;#123;target_bak_path&amp;#125;/$&amp;#123;now&amp;#125;/itime-$&amp;#123;now&amp;#125;.log | grep &amp;quot;Started App in&amp;quot;`&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if [[ &amp;quot;&amp;quot; != &amp;quot;$success_target_tag&amp;quot; ]]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      echo &amp;quot;Found success target tag, app startup successfully..&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      success_flag=&amp;quot;true&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        echo &amp;quot;app is still starting up...&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        sleep $i&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        echo &amp;quot;sleep $i ...&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  done&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  if [[ &amp;quot;true&amp;quot; != &amp;quot;$success_flag&amp;quot;  ]]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;quot;Not found success target tag, app startup failed...&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  echo &amp;quot;Target jar not exist! Update not complete!&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;update done!&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;done.&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目&lt;/p&gt;
-&lt;h3 id=&quot;目标&quot;&gt;&lt;a href=&quot;#目标&quot; class=&quot;headerlink&quot; title=&quot;目标&quot;&gt;&lt;/a&gt;目标&lt;/h3&gt;&lt;h4 id=&quot;场景&quot;&gt;&lt;a href
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>使用Jenkins配置Git和Maven的自动化构建Tomcat项目</title>
-    <link href="http://yoursite.com/2016/05/30/%E4%BD%BF%E7%94%A8Jenkins%E9%85%8D%E7%BD%AEGit%E5%92%8CMaven%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BATomcat%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://yoursite.com/2016/05/30/使用Jenkins配置Git和Maven的自动化构建Tomcat项目/</id>
-    <published>2016-05-30T14:50:38.000Z</published>
-    <updated>2016-05-30T15:05:26.125Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;0-前置条件&quot;&gt;&lt;a href=&quot;#0-前置条件&quot; class=&quot;headerlink&quot; title=&quot;0- 前置条件&quot;&gt;&lt;/a&gt;0- 前置条件&lt;/h3&gt;&lt;p&gt;安装jdk和tomcat&lt;br&gt;我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenkins的容器，另外一个tomcat作为简单mvc项目的部署服务器。&lt;br&gt;Jenkins服务器使用8080端口，mvc项目tomcat使用8081端口。&lt;/p&gt;
-&lt;h3 id=&quot;1-部署Jenkins&quot;&gt;&lt;a href=&quot;#1-部署Jenkins&quot; class=&quot;headerlink&quot; title=&quot;1 - 部署Jenkins&quot;&gt;&lt;/a&gt;1 - 部署Jenkins&lt;/h3&gt;&lt;p&gt;官网下载&lt;a href=&quot;http://jenkins-ci.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jenkins-ci.org/&lt;/a&gt;&lt;br&gt;我下载的是最新的2.5版本&lt;br&gt;下载得到一个jenkins.war的war包&lt;br&gt;可以直接使用java -j jenkins.war运行，或者把war包放到tomcat运行&lt;br&gt;我这里是放到tomcat，启动tomcat即可.&lt;br&gt;启动后可以在&lt;a href=&quot;http://localhost:8080/jenkins/，看到Jenkins已经在运行&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/jenkins/，看到Jenkins已经在运行&lt;/a&gt;&lt;br&gt;第一次进入，需要你输入一个key,会提示您在/root/.jenkins/…某个路径下找到&lt;br&gt;进入后会提示你安装一些插件，根据需要安装即可，或者直接安装它提供的一键建议安装.&lt;/p&gt;
-&lt;h3 id=&quot;2-安装相关插件&quot;&gt;&lt;a href=&quot;#2-安装相关插件&quot; class=&quot;headerlink&quot; title=&quot;2 - 安装相关插件&quot;&gt;&lt;/a&gt;2 - 安装相关插件&lt;/h3&gt;&lt;p&gt;我这里需要git plugin和maven plugin，可以在插件管理处搜索安装。&lt;br&gt;这两个基本是默认安装好了的.&lt;/p&gt;
-&lt;h3 id=&quot;3-安装git和maven&quot;&gt;&lt;a href=&quot;#3-安装git和maven&quot; class=&quot;headerlink&quot; title=&quot;3 - 安装git和maven&quot;&gt;&lt;/a&gt;3 - 安装git和maven&lt;/h3&gt;&lt;p&gt;安装git&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum install git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;安装maven&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1、官网找到最新版的安装包：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;http://maven.apache.org/download.cgi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;拷贝文件名为 *-bin.tar.gz 的链接地址；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2、下载&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3、解压&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# tar xvf apache-maven-3.3.3-bin.tar.gz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;如果需要：移动到其他目录&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;建立软连接：# ln -s apache-maven-3.3.3 maven&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4、配置环境变量&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# vi /etc/profile&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;export M2_HOME=/usr/local/apache-maven&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;export PATH=$PATH:$M2_HOME/bin&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# source /etc/profile&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5、验证是否安装成功&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# mvn -version&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:37+08:00)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Maven home: /opt/app/maven&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Java version: 1.8.0_51, vendor: Oracle Corporation&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Java home: /usr/java/jdk1.8.0_51/jre&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Default locale: zh_CN, platform encoding: UTF-8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OS name: &amp;quot;linux&amp;quot;, version: &amp;quot;3.10.0-229.el7.x86_64&amp;quot;, arch: &amp;quot;amd64&amp;quot;, family: &amp;quot;unix&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;4-配置jdk和maven路径等&quot;&gt;&lt;a href=&quot;#4-配置jdk和maven路径等&quot; class=&quot;headerlink&quot; title=&quot;4 - 配置jdk和maven路径等&quot;&gt;&lt;/a&gt;4 - 配置jdk和maven路径等&lt;/h3&gt;&lt;p&gt;选择”系统管理” -&amp;gt; “Global Tool Configuration”&lt;br&gt;在里面配置好jdk，maven的路径，只需要配置它们的根路径.&lt;/p&gt;
-&lt;h3 id=&quot;5-创建任务，配置项目信息&quot;&gt;&lt;a href=&quot;#5-创建任务，配置项目信息&quot; class=&quot;headerlink&quot; title=&quot;5 - 创建任务，配置项目信息&quot;&gt;&lt;/a&gt;5 - 创建任务，配置项目信息&lt;/h3&gt;&lt;p&gt;选择“新建”，填写项目任务名，并选择“构建一个maven项目”，保存.&lt;br&gt;&lt;img src=&quot;/images/jenkins-001.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;进入项目配置.&lt;br&gt;填写项目名称&lt;br&gt;填写Repository URL&lt;br&gt;我这里使用的是一个git上的一个建议springmvc项目&lt;br&gt;&lt;a href=&quot;https://github.com/bingyue/easy-springmvc-maven&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/bingyue/easy-springmvc-maven&lt;/a&gt;&lt;br&gt;如果需要，也可以配置一下构建后发送邮件到您的邮箱&lt;br&gt;&lt;img src=&quot;/images/jenkins-002.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;6-配置构建成功后的动作，添加shell&quot;&gt;&lt;a href=&quot;#6-配置构建成功后的动作，添加shell&quot; class=&quot;headerlink&quot; title=&quot;6 - 配置构建成功后的动作，添加shell&quot;&gt;&lt;/a&gt;6 - 配置构建成功后的动作，添加shell&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/jenkins-003.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;配置项目中的“Post Steps”，设置构建完成后的动作.&lt;br&gt;这里我设置为将war包拷贝到Tomcat目录，删除项目原来的内容文件夹，并重启Tomcat。&lt;br&gt;选择Run only if build succeeds or is unstable ，点击添加Execute Shell：&lt;br&gt;shell脚本:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#copy file and restart tomcat&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tomcat_path=/usr/local/tomcat/apache-tomcat-7.0.65&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;project=easy-springmvc-maven&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;war_name=easy-springmvc-maven.war&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;war_path=http://192.168.1.119:8080/jenkins/job/jenkins-test/ws/target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;server_port=8081&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;file_path=/root/.jenkins/workspace/jenkins-test/target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;now=$(date +&amp;quot;%Y%m%d%H%M%S&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;the shell execute time is $&amp;#123;now&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo `lsof -n -P -t -i :$&amp;#123;server_port&amp;#125;`&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tomcat_pid=`lsof -n -P -t -i :$&amp;#123;server_port&amp;#125;`&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;the tomcat_pid is $&amp;#123;tomcat_pid&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;if [ &amp;quot;$&amp;#123;tomcat_pid&amp;#125;&amp;quot; != &amp;quot;&amp;quot; ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   kill -9 $tomcat_pid&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   echo &amp;quot;kill the server&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;rm $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;war_name&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rm $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;war_name&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;rm -rf $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;project&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rm -rf $&amp;#123;tomcat_path&amp;#125;/webapps/$&amp;#123;project&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd $file_path&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;if [ -f $&amp;#123;war_name&amp;#125; ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   cp $&amp;#123;war_name&amp;#125; $&amp;#123;tomcat_path&amp;#125;/webapps&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   echo &amp;quot;cp war to webapps finished&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   echo &amp;quot;$&amp;#123;war_name&amp;#125; unexists&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd $tomcat_path/bin&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;run startup&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo ./startup.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;quot;server restarted&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;我这里是在/usr/local/tomcat/apache-tomcat-7.0.65&lt;br&gt;这个路径下配置了另外一个tomcat来运行测试的web项目.&lt;br&gt;shell脚本启动tomcat的命令”./startup.sh”，注意要使用sudo&lt;/p&gt;
-&lt;h3 id=&quot;7-运行构建项目&quot;&gt;&lt;a href=&quot;#7-运行构建项目&quot; class=&quot;headerlink&quot; title=&quot;7 - 运行构建项目&quot;&gt;&lt;/a&gt;7 - 运行构建项目&lt;/h3&gt;&lt;p&gt;打开项目的主面板，直接点击绿色的运行任务构建按钮。&lt;/p&gt;
-&lt;p&gt;done!&lt;/p&gt;
-&lt;h3 id=&quot;8-其他&quot;&gt;&lt;a href=&quot;#8-其他&quot; class=&quot;headerlink&quot; title=&quot;8 - 其他&quot;&gt;&lt;/a&gt;8 - 其他&lt;/h3&gt;&lt;p&gt;这个例子使用了同一台服务器部署Jenkins和实际项目。&lt;br&gt;实际应用则常用法是Jenkins单独部署，&lt;br&gt;所有别的要部署的项目，自己拥有服务器，为每个项目都创建Jenkins任务，在项目编译成功后，到Jenkins服务器下载编译好的部署包，然后依旧使用shell脚本完成这一切。&lt;br&gt;并且，可以为不同的部署环境配置不同的任务。一切都是可以定制的。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;0-前置条件&quot;&gt;&lt;a href=&quot;#0-前置条件&quot; class=&quot;headerlink&quot; title=&quot;0- 前置条件&quot;&gt;&lt;/a&gt;0- 前置条件&lt;/h3&gt;&lt;p&gt;安装jdk和tomcat&lt;br&gt;我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenk
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-      <category term="jenkins" scheme="http://yoursite.com/tags/jenkins/"/>
-    
-      <category term="持续集成" scheme="http://yoursite.com/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-      <category term="自动化构建" scheme="http://yoursite.com/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java static 关键字总结</title>
-    <link href="http://yoursite.com/2016/05/09/java-static-%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2016/05/09/java-static-关键字总结/</id>
-    <published>2016-05-08T16:11:19.000Z</published>
-    <updated>2016-05-08T16:14:15.474Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;总结：&quot;&gt;&lt;a href=&quot;#总结：&quot; class=&quot;headerlink&quot; title=&quot;总结：&quot;&gt;&lt;/a&gt;总结：&lt;/h2&gt;&lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1.&quot;&gt;&lt;/a&gt;1.&lt;/h3&gt;&lt;p&gt;修饰方法时，表示该方法是静态方法，表示该类的该方法可以不产生实例而直接通过类名加方法名的方法去执行该静态方法；&lt;/p&gt;
-&lt;h3 id=&quot;2&quot;&gt;&lt;a href=&quot;#2&quot; class=&quot;headerlink&quot; title=&quot;2.&quot;&gt;&lt;/a&gt;2.&lt;/h3&gt;&lt;p&gt;修饰变量时，表示该变量是静态变量，在java里可以理解为静态变量全局变量。&lt;br&gt;该类的所有实例共享此静态变量，类装载时，只会分配一块存储空间，所有此类对象可以操作此块存储空间。&lt;br&gt;也就是说，static修饰的静态变量也是可以直接通过类名加变量名直接使用的&lt;/p&gt;
-&lt;h3 id=&quot;3&quot;&gt;&lt;a href=&quot;#3&quot; class=&quot;headerlink&quot; title=&quot;3.&quot;&gt;&lt;/a&gt;3.&lt;/h3&gt;&lt;p&gt;普通类不允许被声明为静态的，只有一个内部类可以。&lt;br&gt;被声明为静态的内部类，可以直接作为一个普通类来使用，而不需要一个外部类了。&lt;/p&gt;
-&lt;h2 id=&quot;详述：&quot;&gt;&lt;a href=&quot;#详述：&quot; class=&quot;headerlink&quot; title=&quot;详述：&quot;&gt;&lt;/a&gt;详述：&lt;/h2&gt;&lt;h3 id=&quot;1-1&quot;&gt;&lt;a href=&quot;#1-1&quot; class=&quot;headerlink&quot; title=&quot;1.&quot;&gt;&lt;/a&gt;1.&lt;/h3&gt;&lt;p&gt; static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法，也可以形成静态static代码块，但是Java语言中没有全局变量的概念。 &lt;/p&gt;
-&lt;p&gt;　被static修饰的成员变量和成员方法独立于该类的任何对象。也就是说，它不依赖类特定的实例，被类的所有实例共享。只要这个类被加载，Java虚拟机就能根据类名在运行时数据区的方法区内定找到他们。因此，static对象可以在它的任何对象创建之前访问，无需引用任何对象。 &lt;/p&gt;
-&lt;p&gt;　用public修饰的static成员变量和成员方法本质是全局变量和全局方法，当声明它类的对象时，不生成static变量的副本，而是类的所有实例共享同一个static变量。 &lt;/p&gt;
-&lt;p&gt;　static 变量前可以有private修饰，表示这个变量可以在类的静态代码块中，或者类的其他静态成员方法中使用（当然也可以在非静态成员方法中使用–废话），但是不能在其他类中通过类名来直接引用，这一点很重要。实际上你需要搞明白，private是访问权限限定，static表示不要实例化就可以使用，这样就容易理解多了。static前面加上其它访问权限关键字的效果也以此类推。 &lt;/p&gt;
-&lt;p&gt;　static修饰的成员变量和成员方法习惯上称为静态变量和静态方法，可以直接通过类名来访问，访问语法为：&lt;br&gt;类名.静态方法名(参数列表…)&lt;br&gt;类名.静态变量名 &lt;/p&gt;
-&lt;p&gt;　用static修饰的代码块表示静态代码块，当Java虚拟机（JVM）加载类时，就会执行该代码块（用处非常大，呵呵）。 &lt;/p&gt;
-&lt;h3 id=&quot;2-static变量&quot;&gt;&lt;a href=&quot;#2-static变量&quot; class=&quot;headerlink&quot; title=&quot;2.static变量&quot;&gt;&lt;/a&gt;2.static变量&lt;/h3&gt;&lt;p&gt;　按照是否静态的对类成员变量进行分类可分两种：一种是被static修饰的变量，叫静态变量或类变量；另一种是没有被static修饰的变量，叫实例变量。两者的区别是：&lt;br&gt;　对于静态变量在内存中只有一个拷贝（节省内存），JVM只为静态分配一次内存，在加载类的过程中完成静态变量的内存分配，可用类名直接访问（方便），当然也可以通过对象来访问（但是这是不推荐的）。&lt;br&gt;　对于实例变量，没创建一个实例，就会为实例变量分配一次内存，实例变量可以在内存中有多个拷贝，互不影响（灵活）。 &lt;/p&gt;
-&lt;h3 id=&quot;3-static方法&quot;&gt;&lt;a href=&quot;#3-static方法&quot; class=&quot;headerlink&quot; title=&quot;3.static方法&quot;&gt;&lt;/a&gt;3.static方法&lt;/h3&gt;&lt;p&gt;　静态方法可以直接通过类名调用，任何的实例也都可以调用，因此静态方法中不能用this和super关键字，不能直接访问所属类的实例变量和实例方法 (就是不带static的成员变量和成员成员方法)，只能访问所属类的静态成员变量和成员方法。因为实例成员与特定的对象关联！这个需要去理解，想明白其中的道理，不是记忆！！！&lt;br&gt;　因为static方法独立于任何实例，因此static方法必须被实现，而不能是抽象的abstract。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;总结：&quot;&gt;&lt;a href=&quot;#总结：&quot; class=&quot;headerlink&quot; title=&quot;总结：&quot;&gt;&lt;/a&gt;总结：&lt;/h2&gt;&lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1.&quot;&gt;&lt;/a&gt;1.&lt;/h3&gt;&lt;p&gt;修
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="static关键字" scheme="http://yoursite.com/tags/static%E5%85%B3%E9%94%AE%E5%AD%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[java][enum]典型用法</title>
-    <link href="http://yoursite.com/2016/05/08/java-enum-%E5%85%B8%E5%9E%8B%E7%94%A8%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/05/08/java-enum-典型用法/</id>
-    <published>2016-05-08T15:57:31.000Z</published>
-    <updated>2016-05-08T16:07:15.203Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;java-enum典型用法&quot;&gt;&lt;a href=&quot;#java-enum典型用法&quot; class=&quot;headerlink&quot; title=&quot;java enum典型用法&quot;&gt;&lt;/a&gt;java enum典型用法&lt;/h2&gt;&lt;h3 id=&quot;代码：&quot;&gt;&lt;a href=&quot;#代码：&quot; class=&quot;headerlink&quot; title=&quot;代码：&quot;&gt;&lt;/a&gt;代码：&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package com.iyihua.model.enums;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.HashMap;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;import java.util.Map;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public enum GroupType &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     CATEGORY(0, &amp;quot;category&amp;quot;), PROJECT(1, &amp;quot;project&amp;quot;), LOCATION(2, &amp;quot;location&amp;quot; );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     private final int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     private final String key;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     GroupType(int id, String key) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            this. id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            this. key = key;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public int getId() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public String getKey() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return key;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     private static final Map&amp;lt;String, GroupType&amp;gt; keyToEnum = new HashMap&amp;lt;String, GroupType&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     static &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            for (GroupType gt : GroupType. values())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                 keyToEnum.put(gt .getKey(), gt );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public static GroupType fromString(String symbol) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return keyToEnum.get(symbol );&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     public static void main(String[] args) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           System. out.println( fromString(&amp;quot;category&amp;quot;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;说明：&quot;&gt;&lt;a href=&quot;#说明：&quot; class=&quot;headerlink&quot; title=&quot;说明：&quot;&gt;&lt;/a&gt;说明：&lt;/h3&gt;&lt;p&gt;代码中把枚举值对应的string-枚举放到了一个map keyToEnum中，并且是静态化的。&lt;br&gt;如此就可以通过fromString方法，传入key string值，即可返回对应的enum值&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;java-enum典型用法&quot;&gt;&lt;a href=&quot;#java-enum典型用法&quot; class=&quot;headerlink&quot; title=&quot;java enum典型用法&quot;&gt;&lt;/a&gt;java enum典型用法&lt;/h2&gt;&lt;h3 id=&quot;代码：&quot;&gt;&lt;a href=&quot;#代码：&quot; c
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="enum" scheme="http://yoursite.com/tags/enum/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[java][design-pattern]java设计模式之Builder模式</title>
-    <link href="http://yoursite.com/2016/05/08/java-design-pattern-java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8BBuilder%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://yoursite.com/2016/05/08/java-design-pattern-java设计模式之Builder模式/</id>
-    <published>2016-05-08T08:58:38.000Z</published>
-    <updated>2016-05-08T09:00:12.177Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;java设计模式之Builder模式&quot;&gt;&lt;a href=&quot;#java设计模式之Builder模式&quot; class=&quot;headerlink&quot; title=&quot;java设计模式之Builder模式&quot;&gt;&lt;/a&gt;java设计模式之Builder模式&lt;/h2&gt;&lt;p&gt;设计模式模式很多，实际常用的很少。&lt;br&gt;《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。&lt;br&gt;假设有一个entity(Entity)，有id，name两个字段，如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;package demo;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class Entity &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private String name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public int getId() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setId(int id) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public String getName() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setName(String name) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;为了不用每次初始化的时候，要一个一个的setxxx设置字段值，通常我们会创建构造函数，通过构造函数直接传入字段，初始化。&lt;br&gt;加入构造函数的实体代码如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public class Entity &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private String name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public Entity() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        super();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public Entity(int id, String name) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        super();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public int getId() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setId(int id) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public String getName() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void setName(String name) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然后需要初始化实体的时候，我们这样做：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Entity entity = new Entity(1, &amp;quot;name&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这种用法很常用，但是问题来了。&lt;br&gt;当实体Entity的字段需要增加变化的时候怎么办呢？&lt;br&gt;比如增加字段descr，这样构造函数和客户端初始化都需要更新：&lt;br&gt;实体增加：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;private String descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public String getDescr() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public void setDescr(String descr) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    this.descr = descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public Entity(int id, String name, String descr) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    super();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    this.descr = descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然后原来调用构造函数初始化的代码也需要改动：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Entity entity = new Entity(1, &amp;quot;name&amp;quot;, &amp;quot;descr&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;如果你的class是不确定的参数，后续可能经常变动，那么你的构造函数可能需要很多个，并且不停的变动，而且，构造函数参数多的时候，参数也很不容易记住。&lt;/p&gt;
-&lt;p&gt;而Effective Java中则推荐一种builder模式来进行实体初始化&lt;br&gt;如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public class Entity &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private String name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private String descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public static class Builder &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        private int id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        private String name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        private String descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        public Builder(int id) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            this.id = id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        public Builder name(String name) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            this.name = name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return this;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        public Builder descr(String descr) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            this.descr = descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return this;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        public Entity build() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            return new Entity(this);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    private Entity(Builder b) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.id = b.id;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.name = b.name;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        this.descr = b.descr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;初始化实例的时候，如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Entity entity = new Entity.Builder(10).name(&amp;quot;name&amp;quot;).descr(&amp;quot;descr&amp;quot;).build();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这样的写法，好处是，假如实体Entity以后变化很大，加入很多字段，不会影响到之前客户端初始化的代码，而且，这个初始化的过程非常清晰简单。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;java设计模式之Builder模式&quot;&gt;&lt;a href=&quot;#java设计模式之Builder模式&quot; class=&quot;headerlink&quot; title=&quot;java设计模式之Builder模式&quot;&gt;&lt;/a&gt;java设计模式之Builder模式&lt;/h2&gt;&lt;p&gt;设计模式模式
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Builder" scheme="http://yoursite.com/tags/Builder/"/>
-    
-      <category term="design pattern" scheme="http://yoursite.com/tags/design-pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java-web知识体系</title>
-    <link href="http://yoursite.com/2016/05/04/java-web%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/"/>
-    <id>http://yoursite.com/2016/05/04/java-web知识体系/</id>
-    <published>2016-05-04T15:05:21.000Z</published>
-    <updated>2016-05-04T15:07:13.154Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;一张java-web知识体系思维导图&quot;&gt;&lt;a href=&quot;#一张java-web知识体系思维导图&quot; class=&quot;headerlink&quot; title=&quot;一张java web知识体系思维导图&quot;&gt;&lt;/a&gt;一张java web知识体系思维导图&lt;/h2&gt;&lt;p&gt;就是稍微旧了点&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/java-web.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;一张java-web知识体系思维导图&quot;&gt;&lt;a href=&quot;#一张java-web知识体系思维导图&quot; class=&quot;headerlink&quot; title=&quot;一张java web知识体系思维导图&quot;&gt;&lt;/a&gt;一张java web知识体系思维导图&lt;/h2&gt;&lt;p&gt;就是稍微旧了
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="思维导图" scheme="http://yoursite.com/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
-    
-      <category term="web" scheme="http://yoursite.com/tags/web/"/>
-    
-      <category term="java web" scheme="http://yoursite.com/tags/java-web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springmvc rest api versioning</title>
-    <link href="http://yoursite.com/2016/05/03/springmvc-rest-api-versioning/"/>
-    <id>http://yoursite.com/2016/05/03/springmvc-rest-api-versioning/</id>
-    <published>2016-05-03T15:34:35.000Z</published>
-    <updated>2016-05-03T15:37:38.979Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/mindhaq/restapi-versioning-spring.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mindhaq/restapi-versioning-spring.git&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/augusto/restVersioning.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/augusto/restVersioning.git&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;/api/v1/xxx&lt;br&gt;controller中的方法注解写法：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@ResponseBody&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@RequestMapping(value = &amp;quot;/apiurl/&amp;#123;version&amp;#125;/hello&amp;quot;, method = GET, produces = APPLICATION_JSON_VALUE)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public Hello sayHelloWorldUrl(@PathVariable final ValidVersion version) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return new Hello();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;/api/xxx&lt;br&gt;在header中添加”X-API-Version”:”v1”来进行版本请求的区别&lt;br&gt;controller中的方法注解写法：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@ResponseBody&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@RequestMapping(value = &amp;quot;/apiheader/hello&amp;quot;, method = GET, produces = APPLICATION_JSON_VALUE)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public Hello sayHelloWorldHeader(@RequestHeader(&amp;quot;X-API-Version&amp;quot;) final ValidVersion version) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return new Hello();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;/api/xxx&lt;br&gt;在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别&lt;br&gt;controller中的方法注解写法：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@ResponseBody&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@RequestMapping(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    value = &amp;quot;/apiaccept/hello&amp;quot;, method = GET,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    produces = &amp;#123;&amp;quot;application/vnd.company.app-v1+json&amp;quot;, &amp;quot;application/vnd.company.app-v2+json&amp;quot;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;/api/xxx&lt;br&gt;在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别&lt;br&gt;controller写法：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Controller&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@VersionedResource(media = &amp;quot;application/vnd.app.resource&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class TestController &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @RequestMapping(value = &amp;#123;&amp;quot;/resource&amp;quot;&amp;#125;, method = RequestMethod.GET)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @VersionedResource(from = &amp;quot;1.0&amp;quot;, to = &amp;quot;1.0&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @ResponseBody&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public Resource getResource_v1() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return new Resource(&amp;quot;1.0&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @RequestMapping(value = &amp;#123;&amp;quot;/resource&amp;quot;&amp;#125;, method = RequestMethod.GET)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @VersionedResource(from = &amp;quot;2.0&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @ResponseBody&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public Resource getResource_v2_onwards() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return new Resource(&amp;quot;2.0&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://github.com/mindhaq/restapi-versioning-spring.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/mindhaq/restapi-vers
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="rest" scheme="http://yoursite.com/tags/rest/"/>
-    
-      <category term="api" scheme="http://yoursite.com/tags/api/"/>
-    
-      <category term="versioning" scheme="http://yoursite.com/tags/versioning/"/>
-    
-      <category term="springmvc" scheme="http://yoursite.com/tags/springmvc/"/>
     
   </entry>
   

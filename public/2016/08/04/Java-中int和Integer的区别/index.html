@@ -1,0 +1,718 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,int,Integer,j2se," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="iyihua" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="Java中int和Integer的区别Java各种数据类型详细介绍及其区别
+基本类型，或者叫做内置类型，是JAVA中不同于类的特殊类型。
+
+Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：
+实数：double、float
+整数：byte、short、int、long
+字符：char
+布尔值：boolean
+复杂类型和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 中int和Integer的区别">
+<meta property="og:url" content="http://yoursite.com/2016/08/04/Java-中int和Integer的区别/index.html">
+<meta property="og:site_name" content="iyihua">
+<meta property="og:description" content="Java中int和Integer的区别Java各种数据类型详细介绍及其区别
+基本类型，或者叫做内置类型，是JAVA中不同于类的特殊类型。
+
+Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：
+实数：double、float
+整数：byte、short、int、long
+字符：char
+布尔值：boolean
+复杂类型和">
+<meta property="og:updated_time" content="2016-08-08T11:33:26.578Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 中int和Integer的区别">
+<meta name="twitter:description" content="Java中int和Integer的区别Java各种数据类型详细介绍及其区别
+基本类型，或者叫做内置类型，是JAVA中不同于类的特殊类型。
+
+Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：
+实数：double、float
+整数：byte、short、int、long
+字符：char
+布尔值：boolean
+复杂类型和">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Java 中int和Integer的区别 | iyihua </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">iyihua</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java 中int和Integer的区别
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-08-04T11:41:57+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="Java中int和Integer的区别"><a href="#Java中int和Integer的区别" class="headerlink" title="Java中int和Integer的区别"></a>Java中int和Integer的区别</h1><h2 id="Java各种数据类型详细介绍及其区别"><a href="#Java各种数据类型详细介绍及其区别" class="headerlink" title="Java各种数据类型详细介绍及其区别"></a>Java各种数据类型详细介绍及其区别</h2><ul>
+<li>基本类型，或者叫做内置类型，是JAVA中不同于类的特殊类型。</li>
+</ul>
+<p>Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：</p>
+<p>实数：double、float</p>
+<p>整数：byte、short、int、long</p>
+<p>字符：char</p>
+<p>布尔值：boolean</p>
+<p>复杂类型和基本类型的内存模型本质上是不一样的，简单数据类型的存储原理是这样的：所有的简单数据类型不存在“引用”的概念，简单数据类型都是直接存储在内存中的内存栈上的，数据本身的值就是存储在栈空间里面，而Java语言里面只有这八种数据类型是这种存储模型；而其他的只要是继承于Object类的复杂数据类型都是按照Java里面存储对象的内存模型来进行数据存储的，使用Java内存堆和内存栈来进行这种类型的数据存储，简单地讲，“引用”是存储在有序的内存栈上的，而对象本身的值存储在内存堆上的。</p>
+<ul>
+<li>Java的简单数据讲解列表如下：</li>
+</ul>
+<p>int：int为整数类型，在存储的时候，用4个字节存储，范围为-2,147,483,648到2,147,483,647，在变量初始化的时候，int类型的默认值为0。</p>
+<p>short：short也属于整数类型，在存储的时候，用2个字节存储，范围为-32,768到32,767，在变量初始化的时候，short类型的默认值为0，一般情况下，因为Java本身转型的原因，可以直接写为0。</p>
+<p>long：long也属于整数类型，在存储的时候，用8个字节存储，范围为-9,223,372,036,854,775,808到9,223,372,036, 854,775,807，在变量初始化的时候，long类型的默认值为0L或0l，也可直接写为0。</p>
+<p>byte：byte同样属于整数类型，在存储的时候，用1个字节来存储，范围为-128到127，在变量初始化的时候，byte类型的默认值也为0。</p>
+<p>float：float属于实数类型，在存储的时候，用4个字节来存储，范围为32位IEEEE 754单精度范围，在变量初始化的时候，float的默认值为0.0f或0.0F，在初始化的时候可以写0.0。</p>
+<p>double：double同样属于实数类型，在存储的时候，用8个字节来存储，范围为64位IEEE 754双精度范围，在变量初始化的时候，double的默认值为0.0。</p>
+<p>char：char属于字符类型，在存储的时候用2个字节来存储，因为Java本身的字符集不是用ASCII码来进行存储，是使用的16位Unicode字符集，它的字符范围即是Unicode的字符范围，在变量初始化的时候，char类型的默认值为’u0000’。</p>
+<p>boolean：boolean属于布尔类型，在存储的时候不使用字节，仅仅使用1位来存储，范围仅仅为0和1，其字面量为true和false，而boolean变量在初始化的时候变量的默认值为false。</p>
+<p>Integer是int的封装类，里面有很多进行处理的静态方法</p>
+<p>Integer是对象而int不是，内存的分配位置也不一样</p>
+<p>Integer的属性和其他类一样的！在方法里都是引用传递，而原始类型是值传递！</p>
+<p>jdk1.5以后可以从int自动装箱Integer类。</p>
+<p>int是为了兼容以前的编程语言使用的基本类型，目的是让程序效率更高，以为它是直接分配到栈上的。所以它不是对象，不能有类似 int.operation()的操作。</p>
+<p>Integer是java中一切都是对象这个大前提下的int的包装类型，可以使用方法，是个对象，是用new分配到堆上的。</p>
+<p>jdk1.5后，引入了类似c#中的自动装、拆箱，使得Integer i = 1；这样的表达直接可行。</p>
+<p>int是一种基本数据类型，而Integer是相应于int的类类型，称为对象包装。</p>
+<p>实现这种对象包装的目的主要是因为类能够提供必要的方法，用于实现基本数据类型的数值与可打印字符串之间的转换，以及一些其他的实用程序方法；</p>
+<p>另外，有些数据结构库类只能操作对象，而不支持基本数据类型的变量，包装类提供一种便利的方式，能够把基本数据类型转换成等价的对象，从而可以利用数据结构库类进行处理。</p>
+<p>int 是基本类型，(int)(Math.Random()*100)就是一个数，可以进行加见乘除。 Integer是class ,那么 new Integer(temp)就是一个对象了，可以用到Integer这个class的方法，例如用intvalue()可以返回这个int的值。int a=1;这是基本数据类型是能参与运算的.而Integer b= new Integer(1);c=b.floatvalue;Float a= new Float(null);是可以的用Float初始化一个对象这个a有很多方法而float a;就没有因为原始没有引用类，java 提供两种不同的类型：引用类型（或者封装类型，Warpper）和原始类型（或内置类型，Primitive）。Int是java的原始数据类型，Integer是java为int提供的封装类。Java为每个原始类型提供了封装类。</p>
+<ul>
+<li>原始类型 封装类</li>
+</ul>
+<p>boolean Boolean</p>
+<p>char Character</p>
+<p>byte Byte</p>
+<p>short Short</p>
+<p>int Integer</p>
+<p>long Long</p>
+<p>float Float</p>
+<p>double Double</p>
+<p>引用类型和原始类型的行为完全不同，并且它们具有不同的语义。引用类型和原始类型具有不同的特征和用法，它们包括：大小和速度问题，这种类型以哪种类型的数据结构存储，当引用类型和原始类型用作某个类的实例数据时所指定的缺省值。对象引用实例变量的缺省值为 null，而原始类型实例变量的缺省值与它们的类型有关。</p>
+<h2 id="1-、Boolean-VS-boolean"><a href="#1-、Boolean-VS-boolean" class="headerlink" title="1 、Boolean VS boolean"></a>1 、Boolean VS boolean</h2><p>public final class Boolean extends Object  implementsSerializable,Comparable</p>
+<p>Boolean 类将基本类型为boolean的值包装在一个对象中。一个Boolean类型的对象只包含一个类型为boolean的字段。此外，此类还为boolean和String的相互转换提供了许多方法，并提供了处理 boolean时非常有用的其他一些常量和方法。</p>
+<h2 id="2、-Byte-VS-byte"><a href="#2、-Byte-VS-byte" class="headerlink" title="2、 Byte VS byte"></a>2、 Byte VS byte</h2><p>public final class Byte extends Number implements Comparable Byte类将基本类型 byte的值包装在一个对象中。一个Byte类型的对象只包含一个类型为 byte的字段。此外，该类还为 byte和 String的相互转换提供了几种方法，并提供了处理 byte时非常有用的其他一些常量和方法。</p>
+<h2 id="3、-Character-VS-char"><a href="#3、-Character-VS-char" class="headerlink" title="3、 Character VS char"></a>3、 Character VS char</h2><p>public final class Character extends Object  implements Serializable, Comparable</p>
+<p>Character类在对象中包装一个基本类型char的值。</p>
+<p>Character类型的对象包含类型为char的单个字段。此外，该类提供了几种方法，以确定字符的类别（小写字母，数字，等等），并将字符从大写转换成小写，反之亦然。</p>
+<h2 id="4-、Double-VS-double"><a href="#4-、Double-VS-double" class="headerlink" title="4 、Double VS double"></a>4 、Double VS double</h2><p>public final class Double extends Number implements Comparable Double类在对象中包装了一个基本类型double的值。每个Double类型的对象都包含一个double类型的字段。此外，该类还提供了多个方法，可以将double转换为String，将String转换为double，还提供了其他一些处理double时有用的常量和方法。</p>
+<h2 id="5、-Float-VS-float"><a href="#5、-Float-VS-float" class="headerlink" title="5、 Float VS float"></a>5、 Float VS float</h2><p>public final class Float extends Number implements Comparable</p>
+<p>Float类在对象中包装了一个float基本类型的值。Float类型的对象包含一个float类型的字段。此外，此类提供了几种方法，可在float类型和String类型之间互相转换，并且还提供了处理float类型时非常有用的其他一些常量和方法。</p>
+<h2 id="6、-Integer-VS-int"><a href="#6、-Integer-VS-int" class="headerlink" title="6、 Integer VS int"></a>6、 Integer VS int</h2><p>public final class Integer extends Number implements Comparable</p>
+<p>Integer类在对象中包装了一个基本类型int的值。Integer类型的对象包含一个int类型的字段。</p>
+<p>此外，该类提供了多个方法，能在int类型和String类型之间互相转换，还提供了处理int类型时非常有用的其他一些常量和方法。</p>
+<h2 id="7-Long-VS-long"><a href="#7-Long-VS-long" class="headerlink" title="7 Long VS long"></a>7 Long VS long</h2><p>public final class Long extends Number implements Comparable</p>
+<p>Long类在对象中封装了基本类型long的值。每个Long类型的对象都包含一个long类型的字段。</p>
+<p>此外，该类提供了多个方法，可以将long转换为String，将String转换为long，除此之外，还提供了其他一些处理long时有用的常量和方法。</p>
+<h2 id="8、-Short-VS-short"><a href="#8、-Short-VS-short" class="headerlink" title="8、 Short VS short"></a>8、 Short VS short</h2><p>public final class Short extends Number implements Comparable</p>
+<p>Short类在对象中包装基本类型short的值。一个Short类型的对象只包含一个short类型的字段。另外，该类提供了多个方法，可以将short转换为String，将String转换为short，同时还提供了其他一些处理short时有用的常量和方法。</p>
+<h2 id="9、public-final-class-Voidextends-Object"><a href="#9、public-final-class-Voidextends-Object" class="headerlink" title="9、public final class Voidextends Object"></a>9、public final class Voidextends Object</h2><p>Void 类是一个不可实例化的占位符类，它保持一个对代表 Java 关键字 void 的 Class 对象的引用。</p>
+<p>类的对象才能为null，不能把null赋值给一个变量不能，如int m=null;但可以String s=null;因为String是个类。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/int/" rel="tag">#int</a>
+          
+            <a href="/tags/Integer/" rel="tag">#Integer</a>
+          
+            <a href="/tags/j2se/" rel="tag">#j2se</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/03/dev-collect-2016-07-collect-of-dev/" rel="next" title="[dev][collect][2016-07]collect-of-dev">
+                <i class="fa fa-chevron-left"></i> [dev][collect][2016-07]collect-of-dev
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/08/What-s-the-simplest-way-to-print-a-Java-array/" rel="prev" title="What's the simplest way to print a Java array?">
+                What's the simplest way to print a Java array? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Wanglv Yihua" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Wanglv Yihua</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中int和Integer的区别"><span class="nav-number">1.</span> <span class="nav-text">Java中int和Integer的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java各种数据类型详细介绍及其区别"><span class="nav-number">1.1.</span> <span class="nav-text">Java各种数据类型详细介绍及其区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-、Boolean-VS-boolean"><span class="nav-number">1.2.</span> <span class="nav-text">1 、Boolean VS boolean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、-Byte-VS-byte"><span class="nav-number">1.3.</span> <span class="nav-text">2、 Byte VS byte</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、-Character-VS-char"><span class="nav-number">1.4.</span> <span class="nav-text">3、 Character VS char</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-、Double-VS-double"><span class="nav-number">1.5.</span> <span class="nav-text">4 、Double VS double</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、-Float-VS-float"><span class="nav-number">1.6.</span> <span class="nav-text">5、 Float VS float</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、-Integer-VS-int"><span class="nav-number">1.7.</span> <span class="nav-text">6、 Integer VS int</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Long-VS-long"><span class="nav-number">1.8.</span> <span class="nav-text">7 Long VS long</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、-Short-VS-short"><span class="nav-number">1.9.</span> <span class="nav-text">8、 Short VS short</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、public-final-class-Voidextends-Object"><span class="nav-number">1.10.</span> <span class="nav-text">9、public final class Voidextends Object</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wanglv Yihua</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

@@ -1,0 +1,771 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="iyihua" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iyihua">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="iyihua">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iyihua">
+<meta name="twitter:description">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> iyihua </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">iyihua</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+  <section id="posts" class="posts-expand">
+
+    
+
+    
+    
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/04/jquery-validate常用用法总结/" itemprop="url">
+                  jquery-validate常用用法总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-04T17:05:28+08:00" content="2016-01-04">
+              2016-01-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <ol>
+<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。<br> 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//通过监听form的submit事件，对form进行ajax提交。</span><br><span class="line"> $(&apos;#formId&apos;).submit(function() &#123;</span><br><span class="line">     if (!$(&quot;#formId&quot;).valid()) </span><br><span class="line">         return false;</span><br><span class="line">     $(this).omAjaxSubmit(&#123;&#125;);</span><br><span class="line">     return false; //此处必须返回false，阻止常规的form提交</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>juqry validate中，如何对校验错误的提示信息位置和样式进行更改？<br> 1）js代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;  </span><br><span class="line">    $(&quot;#form1&quot;).validate(&#123;  </span><br><span class="line">        errorPlacement: function (error, element) &#123;  </span><br><span class="line">            error.appendTo(element.parent(&quot;td&quot;));  </span><br><span class="line">        &#125;,  </span><br><span class="line">        rules:&#123;              </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    $(&quot;[name$=&apos;.sign&apos;]&quot;).each(function()&#123;  </span><br><span class="line">        $(this).rules(&quot;add&quot;,&#123;required:true,messages:&#123;required:&quot;至少选择一个选项&quot;&#125;&#125;);  </span><br><span class="line">    &#125;);  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;  </span><br><span class="line">label.error &#123;   </span><br><span class="line">    color:Red;   </span><br><span class="line">    font-size:13px;   </span><br><span class="line">    margin-left:5px;   </span><br><span class="line">    padding-left:16px;   </span><br><span class="line">&#125;   </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p> 3) 校验时机，可以自定义在js中想要的时候去校验</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;.selector&apos;).click(function() &#123;</span><br><span class="line">    if ($(&quot;selector of you form&quot;).valid()) &#123;</span><br><span class="line">        alert(&apos;in&apos;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        alert(&apos;out&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">$(&quot;selector of you form&quot;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        receiveDayFrom: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 4) 例子：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#form&quot;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    messages: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: &quot;Enter name&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: &quot;Enter firstname&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    errorPlacement: function ($error, $element) &#123;</span><br><span class="line">        var name = $element.attr(&quot;name&quot;);</span><br><span class="line">        $(&quot;#error&quot; + name).append($error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code>or:
+</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#form&quot;).validate(&#123;</span><br><span class="line">    errorLabelContainer: &quot;#errors&quot;,</span><br><span class="line">    rules: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    messages: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: &quot;Enter name&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: &quot;Enter firstname&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何添加自定义的校验？</p>
+</li>
+</ol>
+<ul>
+<li><p>添加一个方法</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 字符验证，只能包含英文、数字、下划线等字符。    </span><br><span class="line">jQuery.validator.addMethod(&quot;nameStringCheck&quot;, function(value, element) &#123;   </span><br><span class="line">     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); </span><br><span class="line">&#125;, &quot;只能包含英文、数字、下划线等字符&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在validate配置中使用新加的方法</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#form selector&apos;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        username: &#123;</span><br><span class="line">            required: true,</span><br><span class="line">            nameStringCheck: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>如何使用ajax请求进行远程校验</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery.validator.addMethod(&quot;checkUnique&quot;, function(value, element) &#123;</span><br><span class="line">    return validateUsernameByAjax(value, element.name, &apos;ajax请求地址&apos;);</span><br><span class="line">&#125;, &quot;此输入的值不可用&quot;);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 同步做用户名或邮箱的请求，检查到不可用，则返回false，否则返回true</span><br><span class="line"> */</span><br><span class="line">function validateUsernameByAjax(value, fieldname, url) &#123;</span><br><span class="line">    var _request = url + &quot;?&quot;+fieldname+&quot;=&quot;+value;</span><br><span class="line">    var deferred = $.Deferred();//创建一个延迟对象</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url:_request,</span><br><span class="line">        async:false,//要指定不能异步,必须等待后台服务校验完成再执行后续代码</span><br><span class="line">        dataType:&quot;json&quot;,</span><br><span class="line">        success:function(data) &#123;</span><br><span class="line">            if (data.status === &quot;error&quot; || data.status === &quot;fail&quot;) &#123;</span><br><span class="line">                deferred.reject();</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                deferred.resolve();  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    //deferred.state()有3个状态:pending:还未结束,rejected:失败,resolved:成功</span><br><span class="line">    return deferred.state() == &quot;resolved&quot; ? true : false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#form selector&apos;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        username: &#123;</span><br><span class="line">            checkUnique: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/git-git常用-把本地项目提交到github/" itemprop="url">
+                  [git]git常用-把本地项目提交到github
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-31T18:04:12+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h3 id="1-把本地项目提交到github"><a href="#1-把本地项目提交到github" class="headerlink" title="1.把本地项目提交到github"></a>1.把本地项目提交到github</h3><p>touch README.md //新建说明文件<br>git init //在当前项目目录中生成本地git管理,并建立一个隐藏.git目录<br>git add . //添加当前目录中的所有文件到索引<br>git commit -m “first commit” //提交到本地源码库，并附加提交注释<br>git remote add origin <a href="https://github.com/chape/test.git" target="_blank" rel="external">https://github.com/chape/test.git</a> //添加到远程项目，别名为origin<br>git push -u origin master //把本地源码库push到github 别名为origin的远程项目中，确认提交</p>
+<h3 id="2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘"><a href="#2-如果有error-failed-to-push-some-refs-to-‘https-github-com-YihuaWanglv-myhexo-git‘" class="headerlink" title="2.如果有error: failed to push some refs to ‘https://github.com/YihuaWanglv/myhexo.git‘"></a>2.如果有error: failed to push some refs to ‘<a href="https://github.com/YihuaWanglv/myhexo.git" target="_blank" rel="external">https://github.com/YihuaWanglv/myhexo.git</a>‘</h3><p>有如下几种解决方法：</p>
+<p>1.使用强制push的方法：<br>$ git push -u origin master -f<br>这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。<br>2.push前先将远程repository修改pull下来<br>$ git pull origin master<br>$ git push -u origin master<br>3.若不想merge远程和本地修改，可以先创建新的分支：<br>$ git branch [name]<br>然后push<br>$ git push -u origin [name]</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/使用hexo-deploy直接发布到github/" itemprop="url">
+                  使用hexo-deploy直接发布到github
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-31T17:08:52+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
+<h3 id="1-npm安装需要的东西"><a href="#1-npm安装需要的东西" class="headerlink" title="1.npm安装需要的东西"></a>1.npm安装需要的东西</h3><p>$ npm install hexo-deployer-git –save<br>$ npm install hexo-deployer-heroku –save<br>$ npm install hexo-deployer-rsync –save<br>$ npm install hexo-deployer-openshift –save<br>$ npm install hexo-deployer-ftpsync –save</p>
+<h3 id="2-修改配置文件-config-yml"><a href="#2-修改配置文件-config-yml" class="headerlink" title="2.修改配置文件_config.yml"></a>2.修改配置文件_config.yml</h3><p>deploy:<br>  type: git<br>  repository: <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git</a><br>  branch: master</p>
+<h3 id="3-执行命令提交发布"><a href="#3-执行命令提交发布" class="headerlink" title="3.执行命令提交发布"></a>3.执行命令提交发布</h3><p>$ hexo clean<br>$ hexo generate<br>$ hexo deploy</p>
+<p>over.</p>
+<h3 id="参考：https-hexo-io-zh-cn-docs-deployment-html"><a href="#参考：https-hexo-io-zh-cn-docs-deployment-html" class="headerlink" title="参考：https://hexo.io/zh-cn/docs/deployment.html"></a>参考：<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></h3>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/31/如何使用github-pages和hexo搭建简单blog/" itemprop="url">
+                  如何使用github-pages和hexo搭建简单blog
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-31T15:41:30+08:00" content="2015-12-31">
+              2015-12-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>前言</p>
+<ul>
+<li>github，写代码必备</li>
+<li>hexo，一个很方便的静态blog生成系统</li>
+<li>还不太熟悉，暂时不放图片</li>
+</ul>
+<p>步骤</p>
+<h3 id="1-首先得有一个github账号"><a href="#1-首先得有一个github账号" class="headerlink" title="1.首先得有一个github账号"></a>1.首先得有一个github账号</h3><p>没有的得先上github创建一个</p>
+<h3 id="2-创建一个repositories"><a href="#2-创建一个repositories" class="headerlink" title="2.创建一个repositories"></a>2.创建一个repositories</h3><ul>
+<li>Repository name的填写格式是xxx.github.io</li>
+<li>xxx要与你github的用户名一致（这样创建好后，可以直接通过xxx.github.io访问）</li>
+<li>创建Repository后，接着是对它进行设置，点击Repository的“setting”进行设置</li>
+<li>使用默认设置即可，最后点击“Launch automatic page generator”启动自动生成blog</li>
+<li>接下来是编辑用户界面，点击绿色的“continue to layouts”按钮配置布局和样式</li>
+<li>最后，点击“Publish page”，你的页面就公布出来了。</li>
+</ul>
+<h3 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><ul>
+<li>首先安装git</li>
+<li>安装node</li>
+<li>安装npm</li>
+<li><p>安装hexo<br>npm install hexo-cli -g<br>npm install hexo –save</p>
+</li>
+<li><p>hexo初始化<br>**根据自己需要创建一个hexo文件夹<br>$ hexo init <folder><br>$ cd <folder><br>$ npm install<br>新建完成后，指定文件夹的目录如下<br>.<br>├── _config.yml<br>├── package.json<br>├── scaffolds<br>├── scripts<br>├── source<br>|      ├── _drafts<br>|      └── _posts<br>└── themes</folder></folder></p>
+</li>
+<li><p>安装Hexo插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-deployer-heroku --save</span><br><span class="line">npm install hexo-deployer-rsync --save</span><br><span class="line">npm install hexo-deployer-openshift --save</span><br><span class="line">npm install hexo-renderer-marked@0.2 --save</span><br><span class="line">npm install hexo-renderer-stylus@0.2 --save</span><br><span class="line">npm install hexo-generator-feed@1 --save</span><br><span class="line">npm install hexo-generator-sitemap@1 --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本地查看效果<br>执行hexo server命令启动，然后访问localhost:4000查看效果</p>
+</li>
+</ul>
+<h3 id="4-创建一篇文章"><a href="#4-创建一篇文章" class="headerlink" title="4.创建一篇文章"></a>4.创建一篇文章</h3><ul>
+<li>git shell进入之前创建的hexo文件夹，hexo new “hello world”创建一篇新的文章</li>
+</ul>
+<h3 id="5-同步并发布"><a href="#5-同步并发布" class="headerlink" title="5.同步并发布"></a>5.同步并发布</h3><ul>
+<li>hexo g 生成静态文件</li>
+<li>git clone <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git（替换成你之前在github上创建的Repository的地址）把项目clone到本地</a></li>
+<li>复制生成的public文件夹内所有文件到clone到本地的yihuawanglv.github.io文件夹内</li>
+</ul>
+<h3 id="6-提交更改到github"><a href="#6-提交更改到github" class="headerlink" title="6.提交更改到github"></a>6.提交更改到github</h3><ul>
+<li>git add *</li>
+<li>git commit -m “代码提交信息”</li>
+<li>git push origin master</li>
+<li>输入用户名密码</li>
+</ul>
+<p>这样再次访问你github上的blog地址，即可发现内容已更新</p>
+<h3 id="7-使用hexo别的主题美化blog样式"><a href="#7-使用hexo别的主题美化blog样式" class="headerlink" title="7.使用hexo别的主题美化blog样式"></a>7.使用hexo别的主题美化blog样式</h3><ul>
+<li>我这里选用的是简介美观的next主题</li>
+<li>在终端窗口下，定位到 Hexo 站点目录下<br>$ cd your-hexo-site<br>$ git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a> themes/next</li>
+<li>启用 NexT 主题<br>克隆/下载 完成后，打开 站点配置文件，找到 theme 字段，并将其值更改为 next。</li>
+<li>验证主题是否启用<br>运行 hexo s –debug，并访问 <a href="http://localhost:4000，确保站点正确运行" target="_blank" rel="external">http://localhost:4000，确保站点正确运行</a></li>
+</ul>
+<h3 id="8-同步新的更改"><a href="#8-同步新的更改" class="headerlink" title="8.同步新的更改"></a>8.同步新的更改</h3><p>现在要把新的更改同步上github，重新执行步骤5和6即可。<br>当然把更新从hexo public文件夹同步到本地的Repository xxx.github.io文件夹内可以使用beyongcompare此类同步软件执行</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+
+
+
+        </div>
+
+        
+
+
+        
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Wanglv Yihua" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Wanglv Yihua</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wanglv Yihua</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
