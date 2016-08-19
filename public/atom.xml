@@ -402,9 +402,9 @@
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
-    
       <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
+    
+      <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
     
       <category term="collect-of-dev" scheme="http://yoursite.com/tags/collect-of-dev/"/>
     
@@ -764,9 +764,9 @@
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
-    
       <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
+    
+      <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
     
       <category term="collect-of-dev" scheme="http://yoursite.com/tags/collect-of-dev/"/>
     
@@ -1022,13 +1022,13 @@
     </summary>
     
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
     
       <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
     
-      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
-    
       <category term="post" scheme="http://yoursite.com/tags/post/"/>
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
     
       <category term="resouce" scheme="http://yoursite.com/tags/resouce/"/>
     
