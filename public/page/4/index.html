@@ -179,6 +179,200 @@
 
     
     
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/" itemprop="url">
+                  centos6下安装配置mysql，并开启mysql的远程登录
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-25T21:00:38+08:00" content="2016-04-25">
+              2016-04-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><h3 id="查看是否已安装mysql："><a href="#查看是否已安装mysql：" class="headerlink" title="查看是否已安装mysql："></a>查看是否已安装mysql：</h3><p>yum list installed | grep mysql</p>
+<h3 id="如果已安装，如下一次卸载："><a href="#如果已安装，如下一次卸载：" class="headerlink" title="如果已安装，如下一次卸载："></a>如果已安装，如下一次卸载：</h3><p>yum -y remove mysql-libs.x86_64</p>
+<h3 id="查看可用mysql："><a href="#查看可用mysql：" class="headerlink" title="查看可用mysql："></a>查看可用mysql：</h3><p>yum list | grep mysql 或 yum -y list mysql*</p>
+<h3 id="安装mysql："><a href="#安装mysql：" class="headerlink" title="安装mysql："></a>安装mysql：</h3><p>yum -y install mysql-server mysql mysql-devel</p>
+<h3 id="查看已安装的mysql状态："><a href="#查看已安装的mysql状态：" class="headerlink" title="查看已安装的mysql状态："></a>查看已安装的mysql状态：</h3><p>rpm -qi mysql-server</p>
+<h3 id="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示"><a href="#安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示" class="headerlink" title="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:"></a>安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:</h3><p>mysql -u root -p<br>Enter password:<br>ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)</p>
+<h3 id="解决：方法操作很简单，如下："><a href="#解决：方法操作很简单，如下：" class="headerlink" title="解决：方法操作很简单，如下："></a>解决：方法操作很简单，如下：</h3><p>/etc/init.d/mysql stop<br>mysqld_safe –user=mysql –skip-grant-tables –skip-networking &amp;<br>mysql -u root mysql<br>mysql&gt; UPDATE user SET Password=PASSWORD(‘root’) where USER=’root’ and host=’root’ or host=’localhost’;//把空的用户密码都修改成非空的密码就行了。<br>mysql&gt; FLUSH PRIVILEGES;<br>mysql&gt; quit<br>/etc/init.d/mysqld restart<br>mysql -uroot -p<br>Enter password: &lt;输入新设的密码newpassword&gt;</p>
+<h2 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h2><h3 id="设置任意ip可以使用root账户和root密码远程登录"><a href="#设置任意ip可以使用root账户和root密码远程登录" class="headerlink" title="设置任意ip可以使用root账户和root密码远程登录"></a>设置任意ip可以使用root账户和root密码远程登录</h3><p>grant all privileges  on <em>.</em> to root@’%’ identified by “root”;</p>
+<h3 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h3><p>FLUSH PRIVILEGES;</p>
+<h3 id="重启："><a href="#重启：" class="headerlink" title="重启："></a>重启：</h3><p>service mysqld restart</p>
+<p>done！</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/" itemprop="url">
+                  [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-09T12:52:53+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。</p>
+<p>现在开始是第一篇：在springboot项目中接入shiro</p>
+<h2 id="引入shiro的maven依赖"><a href="#引入shiro的maven依赖" class="headerlink" title="引入shiro的maven依赖"></a>引入shiro的maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-ehcache&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="程序具体实现"><a href="#程序具体实现" class="headerlink" title="程序具体实现"></a>程序具体实现</h2><h3 id="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml"><a href="#首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml" class="headerlink" title="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml"></a>首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shiro:</span><br><span class="line">  realm: com.xxx.xxx.config.security.MyRealm</span><br><span class="line">  loginUrl: /view/sign-in.html</span><br><span class="line">  successUrl: /item.html</span><br><span class="line">  unauthorizedUrl: /forbidden.html</span><br><span class="line">  filterChainDefinitions:</span><br><span class="line">    &quot;/login&quot;: anon</span><br><span class="line">    &quot;/static/**&quot;: anon</span><br><span class="line">    &quot;/bower_components/**&quot;: anon</span><br><span class="line">    &quot;/logout&quot;: logout</span><br><span class="line">    &quot;/**&quot;: authc</span><br></pre></td></tr></table></figure>
+<p>说明：<br>realm: com.xxx.xxx.config.security.MyRealm<br>Realm，在shiro中相当于数据源，shiro的其他核心组件需要获取用户和认证数据，就是从Realm获取。<br>为了获得更好的自定义功能，通常我们会自己实现一个Realm.<br>所以这里使用realm: com.xxx.xxx.config.security.MyRealm配置了一个自定义的Realm。<br>loginUrl，定义了需要认证用户时，跳转到的登录页面<br>successUrl，定义登录成功后跳转的页面。通常也可以在自己登录认证方法里redirect到需要的页面。<br>unauthorizedUrl，定义未认证时显示的页面。<br>filterChainDefinitions，定义哪些路径应该做何种过滤策略。<br>anon，logout，authc这些都是shiro默认实现的过滤器filter。<br>anon表示可以匿名访问的路径，authc表示需要登录认证的路径</p>
+<p>过滤器链使用最先匹配返回策略，所以我们需要把不需要认证即可访问的路径放在前面。</p>
+<h3 id="下面是自己实现的自定义Realm：MyRealm"><a href="#下面是自己实现的自定义Realm：MyRealm" class="headerlink" title="下面是自己实现的自定义Realm：MyRealm"></a>下面是自己实现的自定义Realm：MyRealm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationToken;</span><br><span class="line">import org.apache.shiro.authc.SimpleAuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.authz.AuthorizationInfo;</span><br><span class="line">import org.apache.shiro.authz.SimpleAuthorizationInfo;</span><br><span class="line">import org.apache.shiro.realm.AuthorizingRealm;</span><br><span class="line">import org.apache.shiro.subject.PrincipalCollection;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"></span><br><span class="line">import com.xxx.model.base.UserDTO;</span><br><span class="line">import com.xxx.remote.base.UserRemote;</span><br><span class="line"></span><br><span class="line">public class MyRealm extends AuthorizingRealm &#123;</span><br><span class="line">    @Autowired UserRemote userService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) &#123;</span><br><span class="line">        UserDTO user = (UserDTO) principals.getPrimaryPrincipal();</span><br><span class="line">        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();</span><br><span class="line">        List&lt;String&gt; roles = userService.findByUserId(user.getId());</span><br><span class="line">        info.addRoles(roles);</span><br><span class="line">        return info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;</span><br><span class="line">        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;</span><br><span class="line">        String username = usernamePasswordToken.getUsername();</span><br><span class="line">        UserDTO user = userService.findUserByName(username);</span><br><span class="line">        if (null != user) &#123;</span><br><span class="line">            CredentialsInfoHolder cih = new CredentialsInfoHolder(user.getPassword(), user.getSalt());</span><br><span class="line">            return new SimpleAuthenticationInfo(user, cih, getName());</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>MyRealm集成AuthorizingRealm，需要重写AuthorizingRealm的两个方法：doGetAuthorizationInfo，doGetAuthenticationInfo。<br>AuthorizationInfo represents a single Subject’s stored authorization data (roles, permissions, etc) used during authorization (access control) checks only. </p>
+<p>doGetAuthorizationInfo方法返回一个AuthorizationInfo，AuthorizationInfo对象是一个单一的Subject对象，存储着用户的授权数据，只用于授权检查时使用。<br>doGetAuthenticationInfo方法，针对给定的用户，获取对应用户的认证数据，提供给认证用户身份时使用。</p>
+<p>例子中UserRemote userService是提供用户数据的具体service服务。</p>
+<h3 id="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"><a href="#有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器" class="headerlink" title="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"></a>有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器</h3><h4 id="springboot-shiro配置类：ShiroAutoConfig-java"><a href="#springboot-shiro配置类：ShiroAutoConfig-java" class="headerlink" title="springboot shiro配置类：ShiroAutoConfig.java"></a>springboot shiro配置类：ShiroAutoConfig.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.realm.Realm;</span><br><span class="line">import org.apache.shiro.spring.web.ShiroFilterFactoryBean;</span><br><span class="line">import org.springframework.beans.BeanUtils;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.boot.context.properties.EnableConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line">import org.springframework.context.annotation.Import;</span><br><span class="line"></span><br><span class="line">import com.xxx.xxx.config.security.MyRealm;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableConfigurationProperties(ShiroProperties.class)</span><br><span class="line">@Import(ShiroManager.class)</span><br><span class="line">public class ShiroAutoConfig &#123;</span><br><span class="line">    @Autowired private ShiroProperties properties;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;realm&quot;)</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public MyRealm realm() &#123;</span><br><span class="line">        Class&lt;?&gt; relmClass = properties.getRealm();</span><br><span class="line">        MyRealm r = (MyRealm) BeanUtils.instantiate(relmClass);</span><br><span class="line">        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();</span><br><span class="line">        credentialsMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);</span><br><span class="line">        r.setCredentialsMatcher(credentialsMatcher);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;shiroFilter&quot;)</span><br><span class="line">    @DependsOn(&quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultSecurityManager securityManager, Realm realm) &#123;</span><br><span class="line">        MyRealm myRealm = (MyRealm) realm;</span><br><span class="line">        securityManager.setRealm(myRealm);</span><br><span class="line">        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();</span><br><span class="line">        shiroFilter.setSecurityManager(securityManager);</span><br><span class="line">        shiroFilter.setLoginUrl(properties.getLoginUrl());</span><br><span class="line">        shiroFilter.setSuccessUrl(properties.getSuccessUrl());</span><br><span class="line">        shiroFilter.setUnauthorizedUrl(properties.getUnauthorizedUrl());</span><br><span class="line">        shiroFilter.setFilterChainDefinitionMap(properties.getFilterChainDefinitions());</span><br><span class="line">        return shiroFilter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里例子里说明，我们需要提供realm和shiroFilter两个bean配置给spring容器。<br>getShiroFilterFactoryBean方法返回ShiroFilterFactoryBean，将会把yml里面的配置读取到ShiroFilterFactoryBean中，然后把realm设置进securityManager。<br>yml配置有ShiroProperties类持有并提供给ShiroFilterFactoryBean。<br>当然，还需要配置几个其他配置，都在ShiroManager配置好了。</p>
+<h4 id="ShiroProperties："><a href="#ShiroProperties：" class="headerlink" title="ShiroProperties："></a>ShiroProperties：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Map;</span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">/**</span><br><span class="line"> * Configuration properties for Shiro.</span><br><span class="line"> */</span><br><span class="line">@ConfigurationProperties(prefix = &quot;shiro&quot;)</span><br><span class="line">public class ShiroProperties &#123;</span><br><span class="line">    private Class&lt;?&gt; realm;</span><br><span class="line">    private String loginUrl;</span><br><span class="line">    private String successUrl;</span><br><span class="line">    private String unauthorizedUrl;</span><br><span class="line">    private Map&lt;String, String&gt; filterChainDefinitions;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ShiroManager："><a href="#ShiroManager：" class="headerlink" title="ShiroManager："></a>ShiroManager：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.cache.CacheManager;</span><br><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.session.mgt.SessionManager;</span><br><span class="line">import org.apache.shiro.session.mgt.eis.SessionDAO;</span><br><span class="line">import org.apache.shiro.spring.LifecycleBeanPostProcessor;</span><br><span class="line">import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;</span><br><span class="line">import org.apache.shiro.web.mgt.DefaultWebSecurityManager;</span><br><span class="line">import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;</span><br><span class="line">import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shiro Config Manager.</span><br><span class="line"> */</span><br><span class="line">public class ShiroManager &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 保证实现了Shiro内部lifecycle函数的bean执行</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() &#123;</span><br><span class="line">        return new LifecycleBeanPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;defaultAdvisorAutoProxyCreator&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() &#123;</span><br><span class="line">        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();</span><br><span class="line">        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);</span><br><span class="line">        return defaultAdvisorAutoProxyCreator;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 用户授权信息Cache</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;cacheManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public CacheManager cacheManager() &#123;</span><br><span class="line">        return new MemoryConstrainedCacheManager();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public DefaultSecurityManager securityManager(CacheManager cacheManager) &#123;</span><br><span class="line">        DefaultSecurityManager sm = new DefaultWebSecurityManager();</span><br><span class="line">        sm.setCacheManager(cacheManager);</span><br><span class="line">        return sm;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) &#123;</span><br><span class="line">        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">        aasa.setSecurityManager(securityManager);</span><br><span class="line">        return new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CacheManager负责缓存，这里简单的使用默认的内存缓存管理MemoryConstrainedCacheManager。<br>如果需要ehcache，或者使用redis作为缓存，则只需要实现自己的CacheManager和SessionManager即可。</p>
+<p>至此，springboot中引入shiro就完成了，其他更多具体使用方法，根据具体而定。</p>
+<h3 id="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"><a href="#这里简单的提供一下在mvc的controller中做登录和登出怎么做。" class="headerlink" title="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"></a>这里简单的提供一下在mvc的controller中做登录和登出怎么做。</h3><p>LoginController：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">import org.apache.shiro.SecurityUtils;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.IncorrectCredentialsException;</span><br><span class="line">import org.apache.shiro.authc.UnknownAccountException;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.subject.Subject;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LoginController &#123;</span><br><span class="line">    @RequestMapping(&quot;/login&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void login(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException &#123;</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        String error = null;</span><br><span class="line">        UsernamePasswordToken token = new UsernamePasswordToken(username, password);</span><br><span class="line">        try &#123;</span><br><span class="line">            subject.login(token);</span><br><span class="line">        &#125; catch (UnknownAccountException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (IncorrectCredentialsException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (AuthenticationException e) &#123;</span><br><span class="line">            // 其他错误，比如锁定，如果想单独处理请单独catch处理</span><br><span class="line">            error = &quot;其他错误：&quot; + e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">        if (error != null) &#123;// 出错了，返回登录页面</span><br><span class="line">            req.setAttribute(&quot;error&quot;, error);</span><br><span class="line">            resp.sendRedirect(&quot;/forbidden.html&quot;);</span><br><span class="line">        &#125; else &#123;// 登录成功</span><br><span class="line">            resp.sendRedirect(&quot;/index.html&quot;);// 设置跳转的页面</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @RequestMapping(value = &quot;/logout&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line">        currentUser.logout();</span><br><span class="line">        resp.sendRedirect(&quot;/index.html&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>done!</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -934,192 +1128,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/02/java-从代码中去除if-else/" itemprop="url">
-                  [java]从代码中去除if-else
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-02-02T16:09:30+08:00" content="2016-02-02">
-              2016-02-02
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？</p>
-<p>首先要明确的是，实践而言，并不是只要有大段的if else语句就一定需要优化，在开始的时候，如果这里的逻辑比较清楚简单，而且也没有预期到一些业务逻辑会产生变动，那么其实就并不需要，起码是并不急着需要去优化这个if else语句。</p>
-<p>当判断到确实需要优化if else，方法有很多，总结如下。</p>
-<ol>
-<li>使用map.</li>
-<li>使用枚举.</li>
-<li>多态. 当然，设计模式实际上就是多态，而且理论上，大部分的设计模式都能用于优化if else，可以根据具体情况处理。<br>当if else代码段中的逻辑比较多和复杂的时候，可以适当的使用方法或者类封装好处理逻辑，然后使用反射来根据不同条件匹配对应处理方法或处理类。</li>
-</ol>
-<p>下面举例。<br>要优化的原if else语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int code;</span><br><span class="line">if(&quot;Name&quot;.equals(str))</span><br><span class="line">    code = 0;</span><br><span class="line">else if(&quot;Age&quot;.equals(str))</span><br><span class="line">    code = 1;</span><br><span class="line">else if(&quot;Address&quot;.equals(str))</span><br><span class="line">    code = 2;</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用map优化"><a href="#使用map优化" class="headerlink" title="使用map优化"></a>使用map优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final static Map map = new HashMap();  </span><br><span class="line">static &#123;  </span><br><span class="line">    map.put(&quot;Name&quot;, 0);  </span><br><span class="line">    map.put(&quot;Age&quot;, 1);</span><br><span class="line">    map.put(&quot;Address&quot;, 2);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = map.get(type);</span><br></pre></td></tr></table></figure>
-<h2 id="使用枚举优化"><a href="#使用枚举优化" class="headerlink" title="使用枚举优化"></a>使用枚举优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum Codes &#123;</span><br><span class="line">    Name(0), Age(1), Address(2);</span><br><span class="line">    public int code;</span><br><span class="line">    Codes(int code)&#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int code = Codes.valueOf(str).code;</span><br></pre></td></tr></table></figure>
-<h2 id="使用多态优化"><a href="#使用多态优化" class="headerlink" title="使用多态优化"></a>使用多态优化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ICode iCode = (ICode)Class.forName(&quot;com.xxx.&quot; + str).newInstance();</span><br><span class="line"></span><br><span class="line">int code = iCode.getCode();</span><br></pre></td></tr></table></figure>
-<h2 id="“责任链”如何优化if-else？"><a href="#“责任链”如何优化if-else？" class="headerlink" title="“责任链”如何优化if else？"></a>“责任链”如何优化if else？</h2><p>首先，既然每个if分支后面跟着一堆复杂的逻辑，每个分支里做的事情肯定不同，把它们堆在一个方法中并不妥当（如果楼主想讨论为什么不妥当，可以另外讨论，最常见的不妥当是因为各个分支的抽象层次不同导致阅读者思路混乱）。因此最好把各个分支的处理代码分别抽出来，分别形成独立的方法。这样每个分支处理都有明确的边界，而且我们可以在方法上写javadoc，形成良好的文档。</p>
-<p>好，现在你有了一个单纯含有if分支的主控方法和一堆执行处理的方法，你面临的第二个问题是每个方法上都要传入一大串参数，因为原来的复杂处理往往依赖大量的上下文状态。解决这个问题的最正统有效（未必优雅）的方法是创建一个上下文（Context）类，或者也可以叫请求（Request）类来携带传入参数。这样可以解决参数文档问题，默认值问题和参数顺序问题。但你有许多个执行方法，显然你不会傻到为每个方法都创建一个上下文，而会只创建一个上下文类，每个方法都接收这个上下文实例，只取自己真正关注的属性。毕竟既然这些执行方法都从一个if结构中抽取处理，这些属性之间逻辑上总有些关联，放在一起也不会有很大问题。</p>
-<p>现在你有了一堆参数一致，但名称不同的方法。如果你的需求变动不大，就这样就可以了。但如果你觉得需求可能会有变化，未来可能需要覆盖其中一些方法。你会发现，如果需求1需要你覆盖A，你需要创建一个子类。需求2需要你覆盖B，又要创建一个子类。需求3需要你同时具有需求A,需求B的特性，你又要创建一个子类。既然这样，何不把它们抽到独立的类中，可以分别扩展？ 抽取过程中，你发现现在每个处理类都只有一个方法，方法名和类名是重复的。而且本质上它们都是某种处理器（Handler），何不让它们实现统一的接口，方法名统一改为handle。强调一下，这一步是预期需求会有变化的情况才做，如果认为需求不太可能会变化，或者预计变化有足够时间重构，完全可以在前一步就停止。</p>
-<p>好，现在你有一个主控方法，这个方法创建一个上下文对象，再根据分支条件分别调用不同Handler子类上的handle方法，传入这个上下文。你注意到一个问题，分支条件本身和对应的处理逻辑是内聚的。如果条件发生变化，处理往往也要发生变化。反之依然。而且你读代码时，读到一个复杂的条件，往往不能轻易看出它要判断什么，这时最好的方法就是直接看看对应Handler的命名和文档，从处理方式反推这个条件对应的业务需求。既然这样，何不干脆把条件都搬到Handler里去，让每个Handler根据传入的上下文，看看在当前状态下自己是否应该执行处理。</p>
-<p>现在你得到了一个主控类，这个类持有一堆Handler实例，主控类创建一个上下文，然后把上下文依次传给各个Handler，Handler自行判断是否应该执行自己的处理。</p>
-<p>到了这一步，其实已经差不多了。不过对于某些人，他在进行前一步的重构时，就会醒悟：主控类现在已经变成了一个单纯的任务转发人（分配者）。它根本没有必要持有一个Handler的列表再分别逐个调用，还要管理该继续还是该中断等等逻辑（这些逻辑是依赖每个Handler返回的标志来决定的）。何不让Handler自己负责把控制向后分发，主控类只需要知道领头的那个Handler最终会把事情处理好就行了。这种结构还有一个好处，就是每个Handler可以自行决定是否该往下传递控制，还可以根据需要替换上下文实例的实现来影响后续的处理。（这一步与上一步是二选一，有些人喜欢在主控类中持有Handler队列，有些人喜欢链式Handler。我个人认为问题不大，两者的实现难度也没有差别，实现需求就行）</p>
-<p>最后，我们为了交流方便，把这种组合方式称为“责任链”。</p>
-<h2 id="使用状态模式优化if-else"><a href="#使用状态模式优化if-else" class="headerlink" title="使用状态模式优化if else"></a>使用状态模式优化if else</h2><p>参考：<a href="http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html" target="_blank" rel="external">http://www.blogjava.net/xzclog/archive/2006/10/16/75399.html</a></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/01/springboot-items-项目使用实践-springboot-get-started/" itemprop="url">
-                  [springboot][items][项目使用实践]springboot get started
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-02-01T17:10:18+08:00" content="2016-02-01">
-              2016-02-01
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>往后将通过一个时间记录web app项目，实践并记录spring boot的使用<br>为了快速实现，以及以后能更灵活的扩展，后台选用spring boot微服务框架。</p>
-<h3 id="1-pom-xml中添加maven依赖"><a href="#1-pom-xml中添加maven依赖" class="headerlink" title="1.pom.xml中添加maven依赖"></a>1.pom.xml中添加maven依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="2-编写项目启动入口App-java"><a href="#2-编写项目启动入口App-java" class="headerlink" title="2.编写项目启动入口App.java"></a>2.编写项目启动入口App.java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class App </span><br><span class="line">&#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        SpringApplication.run(App.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ok! done!<br>这样就已经能直接使用spring boot了.<br>启动App.java，spring boot就会使用内置的tomcat直接在本机的8080端口开启一个服务。</p>
-<h3 id="再进一步，为应用引入spring-mvc"><a href="#再进一步，为应用引入spring-mvc" class="headerlink" title="再进一步，为应用引入spring mvc"></a>再进一步，为应用引入spring mvc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class SampleController &#123;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    @RequestMapping(&quot;/&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    String home() &#123;</span><br><span class="line">        String data = &quot;&quot;;</span><br><span class="line">        return &quot;Hello World!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>启动App.java，访问localhost:8080, 即可遇见“Hello World!”</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1166,7 +1174,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1180,7 +1188,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">110</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

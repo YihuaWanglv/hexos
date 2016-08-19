@@ -179,6 +179,187 @@
 
     
     
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/06/git-git分支使用和管理/" itemprop="url">
+                  [git]git分支使用和管理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-06T17:37:36+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="git分支常用命令"><a href="#git分支常用命令" class="headerlink" title="git分支常用命令"></a>git分支常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">从master创建dev分支，并checkout dev分支：</span><br><span class="line">git checkout -b dev</span><br><span class="line">此命令相当于：</span><br><span class="line">git branch dev</span><br><span class="line">git checkout dev</span><br><span class="line"></span><br><span class="line">回到master，合并dev的更改到master：</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">合并后删除dev分支：</span><br><span class="line">git branch -d dev</span><br><span class="line"></span><br><span class="line">如果直接用git merge dev合并分支，git使用的是fast forward的模式，并不会留下commit历史，如果想要留下commit历史，就要加上--no-ff参数，并使用-m添加commit描述</span><br><span class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev</span><br></pre></td></tr></table></figure>
+<h2 id="保存临时状态"><a href="#保存临时状态" class="headerlink" title="保存临时状态"></a>保存临时状态</h2><p>当你正在dev分支进行开发，还没有开发完成能提交，此时突然有一个线上版本的bug要紧急修复，这个时候你就需要用到git stash功能，保存正在开发的dev分支的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">保存当前开发状态：</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line">查看当前已保存的stash列表：</span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line">取出之前保存的stash状态：</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
+<h2 id="多人协作的工作模式"><a href="#多人协作的工作模式" class="headerlink" title="多人协作的工作模式"></a>多人协作的工作模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">多人协作的工作模式通常是这样：</span><br><span class="line"></span><br><span class="line">首先，可以试图用git push origin branch-name推送自己的修改；</span><br><span class="line"></span><br><span class="line">如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</span><br><span class="line"></span><br><span class="line">如果合并有冲突，则解决冲突，并在本地提交；</span><br><span class="line"></span><br><span class="line">没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！</span><br><span class="line"></span><br><span class="line">如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。</span><br><span class="line"></span><br><span class="line">这就是多人协作的工作模式，一旦熟悉了，就非常简单。</span><br><span class="line"></span><br><span class="line">小结</span><br><span class="line"></span><br><span class="line">查看远程库信息，使用git remote -v；</span><br><span class="line"></span><br><span class="line">本地新建的分支如果不推送到远程，对其他人就是不可见的；</span><br><span class="line"></span><br><span class="line">从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；</span><br><span class="line"></span><br><span class="line">在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；</span><br><span class="line"></span><br><span class="line">建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；</span><br><span class="line"></span><br><span class="line">从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/04/Windows下开启React-Native征途/" itemprop="url">
+                  Windows下开启React-Native征途
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-04T09:55:48+08:00" content="2016-06-04">
+              2016-06-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。<br>不过说出来你可能不太相信，这故事的开头，来的并没有想象中的困难。</p>
+<p>以下是过程：</p>
+<h2 id="1-安装Nodejs"><a href="#1-安装Nodejs" class="headerlink" title="1. 安装Nodejs"></a>1. 安装Nodejs</h2><p>React Native要求是4.0以上。</p>
+<h2 id="2-安装react-native-cli"><a href="#2-安装react-native-cli" class="headerlink" title="2. 安装react-native-cli"></a>2. 安装react-native-cli</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g react-native-cli</span><br></pre></td></tr></table></figure>
+<h2 id="3-初始化第一个项目"><a href="#3-初始化第一个项目" class="headerlink" title="3. 初始化第一个项目"></a>3. 初始化第一个项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init TestProject</span><br></pre></td></tr></table></figure>
+<p>初始化第一个测试Demo，init的时候可能需要一点时间. 伟大的目标值的那么些耐心的等待。</p>
+<h2 id="4-设置环境变量"><a href="#4-设置环境变量" class="headerlink" title="4. 设置环境变量"></a>4. 设置环境变量</h2><p>设置环境变量ANDROID_HOME指向Android SDK的目录<br>eg:<br><img src="/images/react-001.png" alt=""></p>
+<h2 id="5-安装Genymotion模拟器"><a href="#5-安装Genymotion模拟器" class="headerlink" title="5. 安装Genymotion模拟器"></a>5. 安装Genymotion模拟器</h2><p>Genymotion官网下载安装Genymotion模拟器，并创建Android emulator。<br>创建实例后，将得到如下画面：<br><img src="/images/react-002.png" alt=""><br>Genymotion运行Android模拟实例需要VirtualBox和AndroidSdk的支持。<br>安装Genymotion后默认的VirtualBox和AndroidSdk不好使，我通过Setting设置配置好自己本地的VirtualBox和AndroidSdk。<br>设置VirtualBox<br><img src="/images/react-003.png" alt=""><br>设置sdk<br><img src="/images/react-004.png" alt=""></p>
+<p>配置好后，就把模拟的Android实例启动起来放着吧。</p>
+<h2 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h2><h3 id="1-启动React-Native-Server"><a href="#1-启动React-Native-Server" class="headerlink" title="1-启动React Native Server"></a>1-启动React Native Server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native start</span><br></pre></td></tr></table></figure>
+<p><img src="/images/react-005.png" alt=""></p>
+<h3 id="2-开一个新的命令行终端-cmd-切换到项目目录安装APP"><a href="#2-开一个新的命令行终端-cmd-切换到项目目录安装APP" class="headerlink" title="2-开一个新的命令行终端(cmd), 切换到项目目录安装APP"></a>2-开一个新的命令行终端(cmd), 切换到项目目录安装APP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd android</span><br><span class="line">gradlew.bat installDebug</span><br></pre></td></tr></table></figure>
+<p>执行gradlew.bat installDebug时，需要先正常打开Genymotion模拟器，否则build 和 install会报错。<br><img src="/images/react-006.png" alt=""><br>安装成功后，在Genymotion里手动打开APP ，正常的话，你就可以看到React-Native的欢迎画面。<br><img src="/images/react-007.png" alt=""></p>
+<p>Windows下的React Native开发环境搭建 – done.</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -918,195 +1099,6 @@ Slave_SQL_Running: Yes     //此状态必须YES
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/" itemprop="url">
-                  centos6下安装配置mysql，并开启mysql的远程登录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-04-25T21:00:38+08:00" content="2016-04-25">
-              2016-04-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><h3 id="查看是否已安装mysql："><a href="#查看是否已安装mysql：" class="headerlink" title="查看是否已安装mysql："></a>查看是否已安装mysql：</h3><p>yum list installed | grep mysql</p>
-<h3 id="如果已安装，如下一次卸载："><a href="#如果已安装，如下一次卸载：" class="headerlink" title="如果已安装，如下一次卸载："></a>如果已安装，如下一次卸载：</h3><p>yum -y remove mysql-libs.x86_64</p>
-<h3 id="查看可用mysql："><a href="#查看可用mysql：" class="headerlink" title="查看可用mysql："></a>查看可用mysql：</h3><p>yum list | grep mysql 或 yum -y list mysql*</p>
-<h3 id="安装mysql："><a href="#安装mysql：" class="headerlink" title="安装mysql："></a>安装mysql：</h3><p>yum -y install mysql-server mysql mysql-devel</p>
-<h3 id="查看已安装的mysql状态："><a href="#查看已安装的mysql状态：" class="headerlink" title="查看已安装的mysql状态："></a>查看已安装的mysql状态：</h3><p>rpm -qi mysql-server</p>
-<h3 id="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示"><a href="#安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示" class="headerlink" title="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:"></a>安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:</h3><p>mysql -u root -p<br>Enter password:<br>ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)</p>
-<h3 id="解决：方法操作很简单，如下："><a href="#解决：方法操作很简单，如下：" class="headerlink" title="解决：方法操作很简单，如下："></a>解决：方法操作很简单，如下：</h3><p>/etc/init.d/mysql stop<br>mysqld_safe –user=mysql –skip-grant-tables –skip-networking &amp;<br>mysql -u root mysql<br>mysql&gt; UPDATE user SET Password=PASSWORD(‘root’) where USER=’root’ and host=’root’ or host=’localhost’;//把空的用户密码都修改成非空的密码就行了。<br>mysql&gt; FLUSH PRIVILEGES;<br>mysql&gt; quit<br>/etc/init.d/mysqld restart<br>mysql -uroot -p<br>Enter password: &lt;输入新设的密码newpassword&gt;</p>
-<h2 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h2><h3 id="设置任意ip可以使用root账户和root密码远程登录"><a href="#设置任意ip可以使用root账户和root密码远程登录" class="headerlink" title="设置任意ip可以使用root账户和root密码远程登录"></a>设置任意ip可以使用root账户和root密码远程登录</h3><p>grant all privileges  on <em>.</em> to root@’%’ identified by “root”;</p>
-<h3 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h3><p>FLUSH PRIVILEGES;</p>
-<h3 id="重启："><a href="#重启：" class="headerlink" title="重启："></a>重启：</h3><p>service mysqld restart</p>
-<p>done！</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/" itemprop="url">
-                  [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-04-09T12:52:53+08:00" content="2016-04-09">
-              2016-04-09
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。</p>
-<p>现在开始是第一篇：在springboot项目中接入shiro</p>
-<h2 id="引入shiro的maven依赖"><a href="#引入shiro的maven依赖" class="headerlink" title="引入shiro的maven依赖"></a>引入shiro的maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-ehcache&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="程序具体实现"><a href="#程序具体实现" class="headerlink" title="程序具体实现"></a>程序具体实现</h2><h3 id="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml"><a href="#首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml" class="headerlink" title="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml"></a>首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shiro:</span><br><span class="line">  realm: com.xxx.xxx.config.security.MyRealm</span><br><span class="line">  loginUrl: /view/sign-in.html</span><br><span class="line">  successUrl: /item.html</span><br><span class="line">  unauthorizedUrl: /forbidden.html</span><br><span class="line">  filterChainDefinitions:</span><br><span class="line">    &quot;/login&quot;: anon</span><br><span class="line">    &quot;/static/**&quot;: anon</span><br><span class="line">    &quot;/bower_components/**&quot;: anon</span><br><span class="line">    &quot;/logout&quot;: logout</span><br><span class="line">    &quot;/**&quot;: authc</span><br></pre></td></tr></table></figure>
-<p>说明：<br>realm: com.xxx.xxx.config.security.MyRealm<br>Realm，在shiro中相当于数据源，shiro的其他核心组件需要获取用户和认证数据，就是从Realm获取。<br>为了获得更好的自定义功能，通常我们会自己实现一个Realm.<br>所以这里使用realm: com.xxx.xxx.config.security.MyRealm配置了一个自定义的Realm。<br>loginUrl，定义了需要认证用户时，跳转到的登录页面<br>successUrl，定义登录成功后跳转的页面。通常也可以在自己登录认证方法里redirect到需要的页面。<br>unauthorizedUrl，定义未认证时显示的页面。<br>filterChainDefinitions，定义哪些路径应该做何种过滤策略。<br>anon，logout，authc这些都是shiro默认实现的过滤器filter。<br>anon表示可以匿名访问的路径，authc表示需要登录认证的路径</p>
-<p>过滤器链使用最先匹配返回策略，所以我们需要把不需要认证即可访问的路径放在前面。</p>
-<h3 id="下面是自己实现的自定义Realm：MyRealm"><a href="#下面是自己实现的自定义Realm：MyRealm" class="headerlink" title="下面是自己实现的自定义Realm：MyRealm"></a>下面是自己实现的自定义Realm：MyRealm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationToken;</span><br><span class="line">import org.apache.shiro.authc.SimpleAuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.authz.AuthorizationInfo;</span><br><span class="line">import org.apache.shiro.authz.SimpleAuthorizationInfo;</span><br><span class="line">import org.apache.shiro.realm.AuthorizingRealm;</span><br><span class="line">import org.apache.shiro.subject.PrincipalCollection;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"></span><br><span class="line">import com.xxx.model.base.UserDTO;</span><br><span class="line">import com.xxx.remote.base.UserRemote;</span><br><span class="line"></span><br><span class="line">public class MyRealm extends AuthorizingRealm &#123;</span><br><span class="line">    @Autowired UserRemote userService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) &#123;</span><br><span class="line">        UserDTO user = (UserDTO) principals.getPrimaryPrincipal();</span><br><span class="line">        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();</span><br><span class="line">        List&lt;String&gt; roles = userService.findByUserId(user.getId());</span><br><span class="line">        info.addRoles(roles);</span><br><span class="line">        return info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;</span><br><span class="line">        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;</span><br><span class="line">        String username = usernamePasswordToken.getUsername();</span><br><span class="line">        UserDTO user = userService.findUserByName(username);</span><br><span class="line">        if (null != user) &#123;</span><br><span class="line">            CredentialsInfoHolder cih = new CredentialsInfoHolder(user.getPassword(), user.getSalt());</span><br><span class="line">            return new SimpleAuthenticationInfo(user, cih, getName());</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>MyRealm集成AuthorizingRealm，需要重写AuthorizingRealm的两个方法：doGetAuthorizationInfo，doGetAuthenticationInfo。<br>AuthorizationInfo represents a single Subject’s stored authorization data (roles, permissions, etc) used during authorization (access control) checks only. </p>
-<p>doGetAuthorizationInfo方法返回一个AuthorizationInfo，AuthorizationInfo对象是一个单一的Subject对象，存储着用户的授权数据，只用于授权检查时使用。<br>doGetAuthenticationInfo方法，针对给定的用户，获取对应用户的认证数据，提供给认证用户身份时使用。</p>
-<p>例子中UserRemote userService是提供用户数据的具体service服务。</p>
-<h3 id="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"><a href="#有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器" class="headerlink" title="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"></a>有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器</h3><h4 id="springboot-shiro配置类：ShiroAutoConfig-java"><a href="#springboot-shiro配置类：ShiroAutoConfig-java" class="headerlink" title="springboot shiro配置类：ShiroAutoConfig.java"></a>springboot shiro配置类：ShiroAutoConfig.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.realm.Realm;</span><br><span class="line">import org.apache.shiro.spring.web.ShiroFilterFactoryBean;</span><br><span class="line">import org.springframework.beans.BeanUtils;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.boot.context.properties.EnableConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line">import org.springframework.context.annotation.Import;</span><br><span class="line"></span><br><span class="line">import com.xxx.xxx.config.security.MyRealm;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableConfigurationProperties(ShiroProperties.class)</span><br><span class="line">@Import(ShiroManager.class)</span><br><span class="line">public class ShiroAutoConfig &#123;</span><br><span class="line">    @Autowired private ShiroProperties properties;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;realm&quot;)</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public MyRealm realm() &#123;</span><br><span class="line">        Class&lt;?&gt; relmClass = properties.getRealm();</span><br><span class="line">        MyRealm r = (MyRealm) BeanUtils.instantiate(relmClass);</span><br><span class="line">        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();</span><br><span class="line">        credentialsMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);</span><br><span class="line">        r.setCredentialsMatcher(credentialsMatcher);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;shiroFilter&quot;)</span><br><span class="line">    @DependsOn(&quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultSecurityManager securityManager, Realm realm) &#123;</span><br><span class="line">        MyRealm myRealm = (MyRealm) realm;</span><br><span class="line">        securityManager.setRealm(myRealm);</span><br><span class="line">        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();</span><br><span class="line">        shiroFilter.setSecurityManager(securityManager);</span><br><span class="line">        shiroFilter.setLoginUrl(properties.getLoginUrl());</span><br><span class="line">        shiroFilter.setSuccessUrl(properties.getSuccessUrl());</span><br><span class="line">        shiroFilter.setUnauthorizedUrl(properties.getUnauthorizedUrl());</span><br><span class="line">        shiroFilter.setFilterChainDefinitionMap(properties.getFilterChainDefinitions());</span><br><span class="line">        return shiroFilter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里例子里说明，我们需要提供realm和shiroFilter两个bean配置给spring容器。<br>getShiroFilterFactoryBean方法返回ShiroFilterFactoryBean，将会把yml里面的配置读取到ShiroFilterFactoryBean中，然后把realm设置进securityManager。<br>yml配置有ShiroProperties类持有并提供给ShiroFilterFactoryBean。<br>当然，还需要配置几个其他配置，都在ShiroManager配置好了。</p>
-<h4 id="ShiroProperties："><a href="#ShiroProperties：" class="headerlink" title="ShiroProperties："></a>ShiroProperties：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Map;</span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">/**</span><br><span class="line"> * Configuration properties for Shiro.</span><br><span class="line"> */</span><br><span class="line">@ConfigurationProperties(prefix = &quot;shiro&quot;)</span><br><span class="line">public class ShiroProperties &#123;</span><br><span class="line">    private Class&lt;?&gt; realm;</span><br><span class="line">    private String loginUrl;</span><br><span class="line">    private String successUrl;</span><br><span class="line">    private String unauthorizedUrl;</span><br><span class="line">    private Map&lt;String, String&gt; filterChainDefinitions;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="ShiroManager："><a href="#ShiroManager：" class="headerlink" title="ShiroManager："></a>ShiroManager：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.cache.CacheManager;</span><br><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.session.mgt.SessionManager;</span><br><span class="line">import org.apache.shiro.session.mgt.eis.SessionDAO;</span><br><span class="line">import org.apache.shiro.spring.LifecycleBeanPostProcessor;</span><br><span class="line">import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;</span><br><span class="line">import org.apache.shiro.web.mgt.DefaultWebSecurityManager;</span><br><span class="line">import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;</span><br><span class="line">import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shiro Config Manager.</span><br><span class="line"> */</span><br><span class="line">public class ShiroManager &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 保证实现了Shiro内部lifecycle函数的bean执行</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() &#123;</span><br><span class="line">        return new LifecycleBeanPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;defaultAdvisorAutoProxyCreator&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() &#123;</span><br><span class="line">        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();</span><br><span class="line">        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);</span><br><span class="line">        return defaultAdvisorAutoProxyCreator;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 用户授权信息Cache</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;cacheManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public CacheManager cacheManager() &#123;</span><br><span class="line">        return new MemoryConstrainedCacheManager();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public DefaultSecurityManager securityManager(CacheManager cacheManager) &#123;</span><br><span class="line">        DefaultSecurityManager sm = new DefaultWebSecurityManager();</span><br><span class="line">        sm.setCacheManager(cacheManager);</span><br><span class="line">        return sm;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) &#123;</span><br><span class="line">        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">        aasa.setSecurityManager(securityManager);</span><br><span class="line">        return new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>CacheManager负责缓存，这里简单的使用默认的内存缓存管理MemoryConstrainedCacheManager。<br>如果需要ehcache，或者使用redis作为缓存，则只需要实现自己的CacheManager和SessionManager即可。</p>
-<p>至此，springboot中引入shiro就完成了，其他更多具体使用方法，根据具体而定。</p>
-<h3 id="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"><a href="#这里简单的提供一下在mvc的controller中做登录和登出怎么做。" class="headerlink" title="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"></a>这里简单的提供一下在mvc的controller中做登录和登出怎么做。</h3><p>LoginController：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">import org.apache.shiro.SecurityUtils;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.IncorrectCredentialsException;</span><br><span class="line">import org.apache.shiro.authc.UnknownAccountException;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.subject.Subject;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LoginController &#123;</span><br><span class="line">    @RequestMapping(&quot;/login&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void login(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException &#123;</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        String error = null;</span><br><span class="line">        UsernamePasswordToken token = new UsernamePasswordToken(username, password);</span><br><span class="line">        try &#123;</span><br><span class="line">            subject.login(token);</span><br><span class="line">        &#125; catch (UnknownAccountException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (IncorrectCredentialsException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (AuthenticationException e) &#123;</span><br><span class="line">            // 其他错误，比如锁定，如果想单独处理请单独catch处理</span><br><span class="line">            error = &quot;其他错误：&quot; + e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">        if (error != null) &#123;// 出错了，返回登录页面</span><br><span class="line">            req.setAttribute(&quot;error&quot;, error);</span><br><span class="line">            resp.sendRedirect(&quot;/forbidden.html&quot;);</span><br><span class="line">        &#125; else &#123;// 登录成功</span><br><span class="line">            resp.sendRedirect(&quot;/index.html&quot;);// 设置跳转的页面</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @RequestMapping(value = &quot;/logout&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line">        currentUser.logout();</span><br><span class="line">        resp.sendRedirect(&quot;/index.html&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>done!</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1153,7 +1145,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1167,7 +1159,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">110</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
