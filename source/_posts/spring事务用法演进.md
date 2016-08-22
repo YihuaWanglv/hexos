@@ -567,10 +567,3 @@ https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample
 - import project into ide and run App.java or build project and run the jar
 - visit utl:http://localhost:8082/save to see saveTest
 
-
-
-### get and run demo
-- git clone https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git
-- import db script in folder "docs"
-- import project into ide and run App.java or build project and run the jar
-- visit utl:http://localhost:8082/save to see saveTest
