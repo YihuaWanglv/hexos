@@ -1,7 +1,7 @@
 ---
 title: spring事务用法演进
 date: 2016-08-18 12:13:57
-tags:
+tags: [spring, java, transaction, 事务, 分布式事务]
 ---
 # Spring事务用法演进
 
@@ -569,3 +569,8 @@ https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample
 
 
 
+### get and run demo
+- git clone https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git
+- import db script in folder "docs"
+- import project into ide and run App.java or build project and run the jar
+- visit utl:http://localhost:8082/save to see saveTest
