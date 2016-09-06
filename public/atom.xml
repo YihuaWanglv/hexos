@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-19T16:26:44.636Z</updated>
+  <updated>2016-09-06T15:52:13.802Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,185 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[dev][collect][2016-08]collect-of-dev</title>
+    <link href="http://yoursite.com/2016/09/06/dev-collect-2016-08-collect-of-dev/"/>
+    <id>http://yoursite.com/2016/09/06/dev-collect-2016-08-collect-of-dev/</id>
+    <published>2016-09-06T15:51:04.000Z</published>
+    <updated>2016-09-06T15:52:13.802Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;2016-08&quot;&gt;&lt;a href=&quot;#2016-08&quot; class=&quot;headerlink&quot; title=&quot;2016-08&quot;&gt;&lt;/a&gt;2016-08&lt;/h2&gt;&lt;h3 id=&quot;2016-08-26&quot;&gt;&lt;a href=&quot;#2016-08-26&quot; class=&quot;headerlink&quot; title=&quot;2016-08-26&quot;&gt;&lt;/a&gt;2016-08-26&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;RabbitMQ Configuration&lt;br&gt;&lt;a href=&quot;https://www.rabbitmq.com/configure.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.rabbitmq.com/configure.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RabbitMQ用户角色及权限控制&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/zyz511919766/article/details/42292655&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/zyz511919766/article/details/42292655&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RabbitMQ Installing on Windows&lt;br&gt;&lt;a href=&quot;https://www.rabbitmq.com/install-windows.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.rabbitmq.com/install-windows.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RabbitMQ Installing on RPM-based Linux (CentOS, Fedora, OpenSuse, RedHat)&lt;br&gt;&lt;a href=&quot;https://www.rabbitmq.com/install-rpm.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.rabbitmq.com/install-rpm.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CentOS6.5安装RabbitMQ&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/0d3bf6402e15&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/0d3bf6402e15&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-25&quot;&gt;&lt;a href=&quot;#2016-08-25&quot; class=&quot;headerlink&quot; title=&quot;2016-08-25&quot;&gt;&lt;/a&gt;2016-08-25&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;ELK下载&lt;br&gt;&lt;a href=&quot;https://www.elastic.co/downloads&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.elastic.co/downloads&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ELK+Kafka 企业日志收集平台(一)&lt;br&gt;&lt;a href=&quot;http://blog.sctux.com/?p=445&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.sctux.com/?p=445&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ELK+Kafka 企业日志收集平台(二)&lt;br&gt;&lt;a href=&quot;http://blog.sctux.com/?p=451&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.sctux.com/?p=451&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://www.quora.com/What-are-some-other-great-free-web-tools-like-Trello&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.quora.com/What-are-some-other-great-free-web-tools-like-Trello&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-22&quot;&gt;&lt;a href=&quot;#2016-08-22&quot; class=&quot;headerlink&quot; title=&quot;2016-08-22&quot;&gt;&lt;/a&gt;2016-08-22&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;微服务架构下的开发部署实践(1)&lt;br&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/21563604?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://zhuanlan.zhihu.com/p/21563604?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;领域驱动设计和实践&lt;br&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/cjq-ddd&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.infoq.com/cn/articles/cjq-ddd&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;教你成为全栈工程师(Full Stack Developer) 四十五-一文读懂hadoop、hbase、hive、spark分布式系统架构&lt;br&gt;&lt;a href=&quot;http://www.shareditor.com/blogshow/?blogId=96&amp;amp;hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.shareditor.com/blogshow/?blogId=96&amp;amp;hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;聊一聊排序算法&lt;br&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzAxMjA5ODQwMQ==&amp;amp;mid=2455058728&amp;amp;idx=1&amp;amp;sn=6b0e55cc9a3c34775013f39ab08a6ac7#rd&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://mp.weixin.qq.com/s?__biz=MzAxMjA5ODQwMQ==&amp;amp;mid=2455058728&amp;amp;idx=1&amp;amp;sn=6b0e55cc9a3c34775013f39ab08a6ac7#rd&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/barretlee/algorithms&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/barretlee/algorithms&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最简MVP框架&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/e0feb16105f9?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/e0feb16105f9?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/wolearn/MvpFrame&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wolearn/MvpFrame&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可用性高达五个9！支付系统高可用架构设计实战&lt;br&gt;&lt;a href=&quot;http://dbaplus.cn/news-21-591-1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://dbaplus.cn/news-21-591-1.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Gson源码分析以其所包含注解的用法&lt;br&gt;&lt;a href=&quot;http://lliuguangbo.github.io/2016/08/07/Gson-Source-Code-Analyze-One/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://lliuguangbo.github.io/2016/08/07/Gson-Source-Code-Analyze-One/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;React Native开源项目-嘎嘎商城客户端(持续更新中)&lt;br&gt;&lt;a href=&quot;http://www.lcode.org/react-native-source-gagamall/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.lcode.org/react-native-source-gagamall/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/jiangqqlmj/GaGaMall&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/jiangqqlmj/GaGaMall&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ActiveMQ高可用集群方案&lt;br&gt;&lt;a href=&quot;http://wosyingjun.iteye.com/blog/2314683&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wosyingjun.iteye.com/blog/2314683&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;gitbook Zookeeper:分布式进程协同&lt;br&gt;&lt;a href=&quot;https://www.gitbook.com/book/mymonkey110/zookeeper-distributed-process-coordination/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.gitbook.com/book/mymonkey110/zookeeper-distributed-process-coordination/details&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-16&quot;&gt;&lt;a href=&quot;#2016-08-16&quot; class=&quot;headerlink&quot; title=&quot;2016-08-16&quot;&gt;&lt;/a&gt;2016-08-16&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;全面分析 Spring 的编程式事务管理及声明式事务管理&lt;br&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/education/opensource/os-cn-spring-trans/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.ibm.com/developerworks/cn/education/opensource/os-cn-spring-trans/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-16-1&quot;&gt;&lt;a href=&quot;#2016-08-16-1&quot; class=&quot;headerlink&quot; title=&quot;2016-08-16&quot;&gt;&lt;/a&gt;2016-08-16&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Distributed transactions with multiple databases, Spring Boot, Spring Data JPA and Atomikos&lt;br&gt;&lt;a href=&quot;http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/fabiomaffioletti/mul-at&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/fabiomaffioletti/mul-at&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;JTA 深度历险 - 原理与实现&lt;br&gt;&lt;a href=&quot;http://www.ibm.com/developerworks/cn/java/j-lo-jta/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.ibm.com/developerworks/cn/java/j-lo-jta/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Java事务之八——分布式事务(Spring+JTA+Atomikos+Hibernate+JMS)&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/davenkin/archive/2013/03/19/java-tranaction-8.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/davenkin/archive/2013/03/19/java-tranaction-8.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如何实现XA式、非XA式Spring分布式事务&lt;br&gt;&lt;a href=&quot;http://www.importnew.com/15812.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.importnew.com/15812.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Java事务设计策略 微型书&lt;br&gt;&lt;a href=&quot;http://www.infoq.com/cn/minibooks/JTDS#idp_register&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.infoq.com/cn/minibooks/JTDS#idp_register&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;【转】JDBC事务和JTA （XA）事务&lt;br&gt;&lt;a href=&quot;http://kazge.com/archives/962.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://kazge.com/archives/962.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-15&quot;&gt;&lt;a href=&quot;#2016-08-15&quot; class=&quot;headerlink&quot; title=&quot;2016-08-15&quot;&gt;&lt;/a&gt;2016-08-15&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;美团点评技术团队&lt;br&gt;&lt;a href=&quot;http://tech.meituan.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tech.meituan.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;消息队列设计精要&lt;br&gt;&lt;a href=&quot;http://tech.meituan.com/mq-design.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tech.meituan.com/mq-design.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;阿里中间件团队博客&lt;br&gt;&lt;a href=&quot;http://jm.taobao.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jm.taobao.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Distributed transactions with multiple databases, Spring Boot, Spring Data JPA and Atomikos&lt;br&gt;&lt;a href=&quot;http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/fabiomaffioletti/mul-at&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/fabiomaffioletti/mul-at&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;GitHub 中国区前 100 名到底是什么样的人?&lt;br&gt;&lt;a href=&quot;http://mt.sohu.com/20160407/n443539407.shtml?qq-pf-to=pcqq.discussion&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://mt.sohu.com/20160407/n443539407.shtml?qq-pf-to=pcqq.discussion&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Spring分布式事务配置(atomikos)&lt;br&gt;&lt;a href=&quot;http://sadwxqezc.github.io/HuangHuanBlog/framework/2016/05/29/Spring%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE.html?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://sadwxqezc.github.io/HuangHuanBlog/framework/2016/05/29/Spring%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE.html?utm_source=tuicool&amp;amp;utm_medium=referral&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;基于spring boot项目的多数据源配置与分布式事务处理总结&lt;br&gt;&lt;a href=&quot;http://hungryant.github.io/java/2015/11/26/java-spring-boot-jta.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://hungryant.github.io/java/2015/11/26/java-spring-boot-jta.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-13&quot;&gt;&lt;a href=&quot;#2016-08-13&quot; class=&quot;headerlink&quot; title=&quot;2016-08-13&quot;&gt;&lt;/a&gt;2016-08-13&lt;/h3&gt;&lt;p&gt;爬虫专题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WebMagic&lt;br&gt;&lt;a href=&quot;http://webmagic.io/docs/zh/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://webmagic.io/docs/zh/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/webmagic&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/webmagic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;Maven 那点事儿&lt;br&gt;&lt;a href=&quot;http://my.oschina.net/huangyong/blog/194583&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://my.oschina.net/huangyong/blog/194583&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-12&quot;&gt;&lt;a href=&quot;#2016-08-12&quot; class=&quot;headerlink&quot; title=&quot;2016-08-12&quot;&gt;&lt;/a&gt;2016-08-12&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Base: An Acid Alternative&lt;br&gt;&lt;a href=&quot;http://queue.acm.org/detail.cfm?id=1394128&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://queue.acm.org/detail.cfm?id=1394128&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;分布式事务演进&lt;br&gt;&lt;a href=&quot;http://yongpoliu.com/distributed-tx-evolution/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://yongpoliu.com/distributed-tx-evolution/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;系统幂等以及常用实现方式&lt;br&gt;&lt;a href=&quot;http://yongpoliu.com/idempotent/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://yongpoliu.com/idempotent/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;实现maven依赖的全局排除&lt;br&gt;&lt;a href=&quot;http://maven.apache.org/enforcer/maven-enforcer-plugin/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://maven.apache.org/enforcer/maven-enforcer-plugin/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://yongpoliu.com/maven-global-exclude/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://yongpoliu.com/maven-global-exclude/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;bi分析统计工具&lt;br&gt;&lt;a href=&quot;http://www.tableau.com/zh-cn/products/cloud-bi&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.tableau.com/zh-cn/products/cloud-bi&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;如何用消息系统避免分布式事务？&lt;/strong&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/LBSer/p/4715395.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/LBSer/p/4715395.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MySQL两阶段提交&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/jesseyoung/article/details/37970271&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/jesseyoung/article/details/37970271&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-11&quot;&gt;&lt;a href=&quot;#2016-08-11&quot; class=&quot;headerlink&quot; title=&quot;2016-08-11&quot;&gt;&lt;/a&gt;2016-08-11&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Java自动化测试框架TestNG之入门篇&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/a74adec98eff&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/a74adec98eff&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Arquillian Guides&lt;br&gt;&lt;a href=&quot;http://arquillian.org/guides/getting_started/?utm_source=cta&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://arquillian.org/guides/getting_started/?utm_source=cta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;自动化单元测试实践之路&lt;br&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/road-of-automated-unit-testing-practices&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.infoq.com/cn/articles/road-of-automated-unit-testing-practices&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;8个超实用的Java测试工具和框架&lt;br&gt;&lt;a href=&quot;http://www.imooc.com/article/1154&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.imooc.com/article/1154&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用 Selenium 实现基于 Web 的自动化测试&lt;br&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/web/1209_caimin_seleniumweb/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.ibm.com/developerworks/cn/web/1209_caimin_seleniumweb/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;用 STAF+Selenium 实现并行的自动化测试框架&lt;br&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/java/j-lo-parallelautotest/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.ibm.com/developerworks/cn/java/j-lo-parallelautotest/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Java Fluent Restful API自动化测试框架&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/jinsdu/p/4606113.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/jinsdu/p/4606113.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTTP API自动化测试从手工到平台的演变&lt;br&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/http-api-automated-test-from-manual-to-platform&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.infoq.com/cn/articles/http-api-automated-test-from-manual-to-platform&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;快速入门测试驱动开发（TDD）&lt;br&gt;&lt;a href=&quot;http://wwsun.github.io/posts/tdd.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wwsun.github.io/posts/tdd.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用 REST-Assured 测试 REST API 的进阶技巧和最佳实践&lt;br&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/java/j-lo-rest-assured2/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.ibm.com/developerworks/cn/java/j-lo-rest-assured2/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-10&quot;&gt;&lt;a href=&quot;#2016-08-10&quot; class=&quot;headerlink&quot; title=&quot;2016-08-10&quot;&gt;&lt;/a&gt;2016-08-10&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sharding-JDBC&lt;br&gt;&lt;a href=&quot;http://dangdangdotcom.github.io/sharding-jdbc/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://dangdangdotcom.github.io/sharding-jdbc/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;[blog]庄周梦蝶&lt;br&gt;&lt;a href=&quot;http://fnil.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fnil.net/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Atlas是由 Qihoo 360公司Web平台部基础架构团队开发维护的一个基于MySQL协议的数据中间层项目&lt;br&gt;&lt;a href=&quot;https://github.com/Qihoo360/Atlas/blob/master/README_ZH.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Qihoo360/Atlas/blob/master/README_ZH.md&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/Qihoo360/Atlas&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Qihoo360/Atlas&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RDBMS分布式两阶段提交与Zookeeper的Paxos同步算法&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/victory0508/article/details/48003527&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/victory0508/article/details/48003527&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;分布式系统的事务处理&lt;br&gt;&lt;a href=&quot;http://coolshell.cn/articles/10910.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://coolshell.cn/articles/10910.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;分布式事务 - 最终一致性(一)&lt;br&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000005969526&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://segmentfault.com/a/1190000005969526&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;介绍下用消息队列实现分布式事务&lt;br&gt;&lt;a href=&quot;http://blog.chinaunix.net/uid-20047304-id-4515035.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.chinaunix.net/uid-20047304-id-4515035.html&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2016-08-03&quot;&gt;&lt;a href=&quot;#2016-08-03&quot; class=&quot;headerlink&quot; title=&quot;2016-08-03&quot;&gt;&lt;/a&gt;2016-08-03&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;解放程序猿（媛）的双手—iOS UI自动化测试&lt;br&gt;&lt;a href=&quot;http://tmq.qq.com/2016/06/uitestingiosautomation/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tmq.qq.com/2016/06/uitestingiosautomation/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;5小时搞定谷歌原生自动化框架UiAutomator1.0&lt;br&gt;&lt;a href=&quot;http://tmq.qq.com/2016/06/androidautotestframwork-uiautomator/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tmq.qq.com/2016/06/androidautotestframwork-uiautomator/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;有赞延迟队列设计&lt;br&gt;&lt;a href=&quot;http://tech.youzan.com/queuing_delay/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tech.youzan.com/queuing_delay/?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;2016-08&quot;&gt;&lt;a href=&quot;#2016-08&quot; class=&quot;headerlink&quot; title=&quot;2016-08&quot;&gt;&lt;/a&gt;2016-08&lt;/h2&gt;&lt;h3 id=&quot;2016-08-26&quot;&gt;&lt;a href=&quot;#2016-08-26&quot; class=&quot;head
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+      <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
+    
+      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
+    
+      <category term="collect-of-dev" scheme="http://yoursite.com/tags/collect-of-dev/"/>
+    
+  </entry>
+  
+  <entry>
     <title>spring事务用法演进</title>
     <link href="http://yoursite.com/2016/08/18/spring%E4%BA%8B%E5%8A%A1%E7%94%A8%E6%B3%95%E6%BC%94%E8%BF%9B/"/>
     <id>http://yoursite.com/2016/08/18/spring事务用法演进/</id>
     <published>2016-08-18T04:13:57.000Z</published>
-    <updated>2016-08-19T16:26:44.636Z</updated>
+    <updated>2016-09-06T15:49:04.673Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Spring事务用法演进&quot;&gt;&lt;a href=&quot;#Spring事务用法演进&quot; class=&quot;headerlink&quot; title=&quot;Spring事务用法演进&quot;&gt;&lt;/a&gt;Spring事务用法演进&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;内容&lt;/li&gt;
@@ -216,7 +390,8 @@
 &lt;li&gt;业务方法:资金在库（atomikos_one），红包在库（atomikos_two）资金账号1转10元到资金账号2；红包账号2转10元到红包账号1**&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Service&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public class StoreServiceImpl implements StoreService &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@Transactional()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public void transfer() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        CapitalAccount ca1 = capitalAccountRepository.findOne(1l);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        CapitalAccount ca2 = capitalAccountRepository.findOne(2l);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        RedPacketAccount rp1 = redPacketAccountRepository.findOne(1l);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        RedPacketAccount rp2 = redPacketAccountRepository.findOne(2l);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        BigDecimal capital = BigDecimal.TEN;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        BigDecimal red = BigDecimal.TEN;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        ca1.transferFrom(capital);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        ca2.transferTo(capital);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        capitalAccountRepository.save(ca1);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        capitalAccountRepository.save(ca2);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        rp2.transferFrom(red);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        rp1.transferTo(red);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        redPacketAccountRepository.save(rp1);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        redPacketAccountRepository.save(rp2);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&quot;get-and-run-demo&quot;&gt;&lt;a href=&quot;#get-and-run-demo&quot; class=&quot;headerlink&quot; title=&quot;get and run demo&quot;&gt;&lt;/a&gt;get and run demo&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id=&quot;get-and-run-demo：&quot;&gt;&lt;a href=&quot;#get-and-run-demo：&quot; class=&quot;headerlink&quot; title=&quot;get and run demo：&quot;&gt;&lt;/a&gt;get and run demo：&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;git clone &lt;a href=&quot;https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;import db script in folder “docs”&lt;/li&gt;
 &lt;li&gt;import project into ide and run App.java or build project and run the jar&lt;/li&gt;
@@ -1199,114 +1374,6 @@
       <category term="api_verion" scheme="http://yoursite.com/tags/api-verion/"/>
     
       <category term="spring mvc" scheme="http://yoursite.com/tags/spring-mvc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[dev][collect][2016-06-06]collect-of-im-netty-android-etc</title>
-    <link href="http://yoursite.com/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/"/>
-    <id>http://yoursite.com/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/</id>
-    <published>2016-06-06T09:42:22.000Z</published>
-    <updated>2016-06-06T13:07:42.450Z</updated>
-    
-    <content type="html">&lt;p&gt;此集合[dev][collect]汇总开发资源.&lt;br&gt;资源含文章，git code等等..&lt;/p&gt;
-&lt;h3 id=&quot;2016-06-06&quot;&gt;&lt;a href=&quot;#2016-06-06&quot; class=&quot;headerlink&quot; title=&quot;2016-06-06&quot;&gt;&lt;/a&gt;2016-06-06&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;一套仿 微信 IM系统 基于apache mina&lt;br&gt;&lt;a href=&quot;http://my.oschina.net/u/1167637/blog/411312&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://my.oschina.net/u/1167637/blog/411312&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;socketio 服务器推送&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/xtayfjpk/article/details/40948409&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/xtayfjpk/article/details/40948409&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;开放源码,基于springMVC+springSecurity3.x+Mybaits3.x的权限系统,,支持开源&lt;br&gt;&lt;a href=&quot;https://github.com/caprice/lanyuan&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/caprice/lanyuan&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Simple asynchronous non blocking chat server/client based on Netty 4&lt;br&gt;&lt;a href=&quot;https://github.com/caprice/nettychat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/caprice/nettychat&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/nettychat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/nettychat&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[5][android]A High Copy WeChat ,SNS APP (高仿微信)&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/wechat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/wechat&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;一个Android开发者博客&lt;br&gt;&lt;a href=&quot;http://blog.csdn.net/finddreams&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/finddreams&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;案例剖析：从0开始搭建一个微服务的持续交付系统&lt;br&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;amp;mid=2659597380&amp;amp;idx=1&amp;amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;amp;scene=0#wechat_redirect&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;amp;mid=2659597380&amp;amp;idx=1&amp;amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;amp;scene=0#wechat_redirect&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[5][android]这是一个可用于Android快速开发的框架，集成了很多项目中通用的东西，免去重复造轮子的麻烦，直接下载来了，修改一下就可以做为基础的框架进行开发，提高开发速度，适合当前移动互联网时代敏捷快速开发的节奏&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/Android_BaseLib&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/Android_BaseLib&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用Netty实现IMServer，方便的Entity解码编码机制，融合到二进制协议中&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/netty-chat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/netty-chat&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;仿淘宝的B2C商城项目&lt;br&gt;页面用的jsp，稍显陈旧&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/B2CWeb&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/B2CWeb&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;JavaEE项目开发脚手架&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/es&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/es&lt;/a&gt;&lt;br&gt;后端:&lt;br&gt;IoC容器 spring&lt;br&gt;web框架 springmvc&lt;br&gt;orm框架 hibernate + spring data jpa&lt;br&gt;安全框架 shiro&lt;br&gt;验证框架 hibernate validator&lt;br&gt;任务调度框架 quartz&lt;br&gt;缓存 ehcache&lt;br&gt;数据源 druid&lt;br&gt;日志 slf4j+logback&lt;br&gt;Json fastjson&lt;br&gt;日期美化 prettytime&lt;br&gt;servlet 3.0(需要支持servlet3的servlet容器，如tomcat7)&lt;br&gt;jcaptcha 验证码&lt;br&gt;jsp 模板视图&lt;br&gt;前端:&lt;br&gt;jquery js框架&lt;br&gt;jquery-ui-bootstrap界面框架&lt;br&gt;font-wesome 字体/图标框架&lt;br&gt;jquery Validation Engine 验证框架（配合spring的验证框架，页面验证简化不少）&lt;br&gt;kindeditor 编辑器&lt;br&gt;nicescroll 漂亮的滚动条&lt;br&gt;zTree 树框架&lt;br&gt;jquery blockUI 弹出框/遮罩框架&lt;br&gt;jquery-fileupload 文件上传&lt;br&gt;bootstrap-datatimepicker 日历选择&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[5][android]Collect and classify android open source projects&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/android-open-project&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/android-open-project&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Blog avec Spring MVC + spring DATA + mongodb + angularjs&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/blog_java&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/blog_java&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;dianping-api-samples&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/dianping-open-sdk&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/dianping-open-sdk&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;JeeSite 是一个企业信息管理系统基础框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、Apache Shiro、Hibernate、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/jeesite&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/jeesite&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Demos of Apache MINA User Guide《Apache MINA 2 用户指南》中文翻译，文中用到的例子源码 &lt;a href=&quot;https://github.com/waylau/apache-mina-2.x-user-guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/waylau/apache-mina-2.x-user-guide&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/waylau/apache-mina-2-user-guide-demos&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/waylau/apache-mina-2-user-guide-demos&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Spring Framework 4.x Reference Documentation 中文翻译&lt;br&gt;&lt;a href=&quot;https://www.gitbook.com/book/waylau/spring-framework-4-reference/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.gitbook.com/book/waylau/spring-framework-4-reference/details&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://github.com/waylau/spring-framework-4-reference&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/waylau/spring-framework-4-reference&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;免费的计算机编程类中文书籍&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/free-programming-books-zh_CN&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/free-programming-books-zh_CN&lt;/a&gt;&lt;br&gt;网页版：&lt;br&gt;&lt;a href=&quot;http://siberiawolf.com/free_programming/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://siberiawolf.com/free_programming/index.html&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;一个合格的程序员应该读过哪些书&lt;br&gt;&lt;a href=&quot;http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Google 全球 IP 地址库&lt;br&gt;&lt;a href=&quot;https://github.com/justjavac/Google-IPs&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/justjavac/Google-IPs&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;一份关于“资料汇总”的汇总&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Freely available programming books&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/free-programming-books&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/free-programming-books&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;RESTful API 设计参考文献列表，可帮助你更加彻底的了解REST风格的接口设计&lt;br&gt;&lt;a href=&quot;https://github.com/aisuhua/restful-api-design-references&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/aisuhua/restful-api-design-references&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ssential Netty in Action 《Netty 实战(精髓)》&lt;br&gt;&lt;a href=&quot;https://github.com/waylau/essential-netty-in-action&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/waylau/essential-netty-in-action&lt;/a&gt;&lt;br&gt;gitbook：&lt;br&gt;&lt;a href=&quot;http://waylau.com/essential-netty-in-action/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://waylau.com/essential-netty-in-action/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Gradle 2 User Guide 中文翻译《Gradle 2 用户指南》&lt;br&gt;&lt;a href=&quot;https://github.com/waylau/Gradle-2-User-Guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/waylau/Gradle-2-User-Guide&lt;/a&gt;&lt;br&gt;gitbook：&lt;br&gt;&lt;a href=&quot;https://www.gitbook.com/book/waylau/gradle-2-user-guide/details&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.gitbook.com/book/waylau/gradle-2-user-guide/details&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Netty 4.x User Guide 中文翻译《Netty 4.x 用户指南》&lt;br&gt;&lt;a href=&quot;https://github.com/waylau/netty-4-user-guide&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/waylau/netty-4-user-guide&lt;/a&gt;&lt;br&gt;gitbook：&lt;br&gt;&lt;a href=&quot;http://waylau.com/netty-4-user-guide/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://waylau.com/netty-4-user-guide/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;这是一个整理即时通讯（IM）和社交系统（SNS）优秀开源项目的文档，项目上传github欢迎提交更新&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/Perfect_IM_SNS&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/Perfect_IM_SNS&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;基于位置信息，空间时间结合的社交与分享的应用&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/Tuyi&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/Tuyi&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;SYTeamApp：基于环信平台进行开发，旨在打造的高效团队沟通的移动客户端，供企业内部协作使用、适应移动办公需要，提升企业沟通协同效率，增强企业办公管理效率。（当前仅实现了用户登入登出功能、通讯功能、投票功能。）&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/SYTeamApp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/SYTeamApp&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;MeifuGO：An open source android app by using easemob IM SDK&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/MeifuGO&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/MeifuGO&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;fangyuanshili：环信SDK,IM,geohash,lbs&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/fangyuanshili&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/fangyuanshili&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;zaina：该项目是改编自环信即时通讯云的demo改编&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/zaina&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/zaina&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;dianhua：基于react native 和 环信的实时通话的免费店话&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/dianhua&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/dianhua&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Baby：一个私密社交APP&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/Baby&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/Baby&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;MVPCommon：一个集成了众多开源项目的Android MVP框架以及应用搭建，全程博客更新。&lt;br&gt;a common Architecture and project build with blogs releasing based on MVP，integrates many Open Source Projects ,to make your developing quicker and easier.&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/MVPCommon&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/MVPCommon&lt;/a&gt;&lt;br&gt;从零开始搭建android框架系列：&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/notebooks/3767449/latest&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/notebooks/3767449/latest&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;learnCloud：&lt;br&gt;和应用服务器、存储服务器说再见&lt;br&gt;再也不用租服务器，也不用写后端代码了。LeanCloud 提供一站式后端云服务，从数据存储、实时聊天、消息推送到移动统计，涵盖应用开发的多方面后端需求。&lt;br&gt;&lt;a href=&quot;https://leancloud.cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://leancloud.cn/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;不容错过，最全的安卓架构合集【从零开始搭建android框架系列（2）】&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/1f21e1d375aa&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jianshu.com/p/1f21e1d375aa&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安卓架构文章合集（a collection of android Architecture）&lt;br&gt;&lt;a href=&quot;https://github.com/YihuaWanglv/AndroidArchitectureCollection&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/YihuaWanglv/AndroidArchitectureCollection&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;此集合[dev][collect]汇总开发资源.&lt;br&gt;资源含文章，git code等等..&lt;/p&gt;
-&lt;h3 id=&quot;2016-06-06&quot;&gt;&lt;a href=&quot;#2016-06-06&quot; class=&quot;headerlink&quot; title=&quot;2016-06-06&quot;&gt;&lt;/a&gt;20
-    
-    </summary>
-    
-    
-      <category term="collect" scheme="http://yoursite.com/tags/collect/"/>
-    
-      <category term="dev" scheme="http://yoursite.com/tags/dev/"/>
-    
-      <category term="post" scheme="http://yoursite.com/tags/post/"/>
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-      <category term="resouce" scheme="http://yoursite.com/tags/resouce/"/>
     
   </entry>
   

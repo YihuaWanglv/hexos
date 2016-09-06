@@ -207,6 +207,113 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/25/centos6环境下配置mysql主从同步/" itemprop="url">
+                  centos6环境下配置mysql主从同步
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-25T21:22:51+08:00" content="2016-04-25">
+              2016-04-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="1、主从服务器分别作以下操作："><a href="#1、主从服务器分别作以下操作：" class="headerlink" title="1、主从服务器分别作以下操作："></a>1、主从服务器分别作以下操作：</h2><p>  1.1、版本一致<br>  1.2、初始化表，并在后台启动mysql<br>  1.3、修改root的密码</p>
+<h2 id="2、修改主服务器master"><a href="#2、修改主服务器master" class="headerlink" title="2、修改主服务器master:"></a>2、修改主服务器master:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[必须]启用二进制日志<br>       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<h2 id="3、修改从服务器slave"><a href="#3、修改从服务器slave" class="headerlink" title="3、修改从服务器slave:"></a>3、修改从服务器slave:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[不是必须]启用二进制日志<br>       server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<h2 id="4、重启两台服务器的mysql"><a href="#4、重启两台服务器的mysql" class="headerlink" title="4、重启两台服务器的mysql"></a>4、重启两台服务器的mysql</h2><pre><code>/etc/init.d/mysql restart
+or：
+service mysqld restart
+</code></pre><h2 id="5、在主服务器上建立帐户并授权slave"><a href="#5、在主服务器上建立帐户并授权slave" class="headerlink" title="5、在主服务器上建立帐户并授权slave:"></a>5、在主服务器上建立帐户并授权slave:</h2><p>  #mysql -uroot -proot<br>   mysql&gt;GRANT REPLICATION SLAVE ON <em>.</em> to ‘mysync’@’%’ identified by ‘root’; //一般不用root帐号，%表示所有客户端都可能连，只要帐号，密码正确，此处可用具体客户端IP代替，如192.168.145.226，加强安全。</p>
+<h2 id="6、登录主服务器的mysql，查询master的状态"><a href="#6、登录主服务器的mysql，查询master的状态" class="headerlink" title="6、登录主服务器的mysql，查询master的状态"></a>6、登录主服务器的mysql，查询master的状态</h2><p>   mysql&gt;show master status;<br>   +——————+———-+————–+——————+<br>   | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |<br>   +——————+———-+————–+——————+<br>   | mysql-bin.000004 |      308 |              |                  |<br>   +——————+———-+————–+——————+<br>   1 row in set (0.00 sec)<br>   注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</p>
+<h2 id="7、配置从服务器Slave："><a href="#7、配置从服务器Slave：" class="headerlink" title="7、配置从服务器Slave："></a>7、配置从服务器Slave：</h2><p>   mysql&gt;change master to master_host=’192.168.145.222’,master_user=’mysync’,master_password=’root’, master_log_file=’mysql-bin.000004’,master_log_pos=308;   //注意不要断开，308数字前后无单引号。</p>
+<p>   Mysql&gt;start slave;    //启动从服务器复制功能</p>
+<h2 id="8、检查从服务器复制功能状态："><a href="#8、检查从服务器复制功能状态：" class="headerlink" title="8、检查从服务器复制功能状态："></a>8、检查从服务器复制功能状态：</h2><p>   mysql&gt; show slave status\G</p>
+<p>   <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></p>
+<pre><code>Slave_IO_State: Waiting for master to send event
+Master_Host: 192.168.2.222  //主服务器地址
+Master_User: mysync   //授权帐户名，尽量避免使用root
+Master_Port: 3306    //数据库端口，部分版本没有此行
+Connect_Retry: 60
+Master_Log_File: mysql-bin.000004
+Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
+Relay_Log_File: ddte-relay-bin.000003
+Relay_Log_Pos: 251
+Relay_Master_Log_File: mysql-bin.000004
+Slave_IO_Running: Yes    //此状态必须YES
+Slave_SQL_Running: Yes     //此状态必须YES
+      ......
+</code></pre><p>注：Slave_IO及Slave_SQL进程必须正常运行，即YES状态，否则都是错误的状态(如：其中一个NO均属错误)。</p>
+<p>以上操作过程，主从服务器配置完成。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/" itemprop="url">
                   centos6下安装配置mysql，并开启mysql的远程登录
                 </a>
@@ -1039,95 +1146,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/20/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-02-20T12:02:04+08:00" content="2016-02-20">
-              2016-02-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1174,7 +1192,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">47</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

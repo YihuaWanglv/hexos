@@ -1,0 +1,791 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,android,collect,dev,collect-of-dev," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="iyihua" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="2016-082016-08-26
+RabbitMQ Configurationhttps://www.rabbitmq.com/configure.html
+
+RabbitMQ用户角色及权限控制http://blog.csdn.net/zyz511919766/article/details/42292655
+
+RabbitMQ Installing on Windowshttps://www.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[dev][collect][2016-08]collect-of-dev">
+<meta property="og:url" content="http://yoursite.com/2016/09/06/dev-collect-2016-08-collect-of-dev/index.html">
+<meta property="og:site_name" content="iyihua">
+<meta property="og:description" content="2016-082016-08-26
+RabbitMQ Configurationhttps://www.rabbitmq.com/configure.html
+
+RabbitMQ用户角色及权限控制http://blog.csdn.net/zyz511919766/article/details/42292655
+
+RabbitMQ Installing on Windowshttps://www.">
+<meta property="og:updated_time" content="2016-09-06T15:52:13.802Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[dev][collect][2016-08]collect-of-dev">
+<meta name="twitter:description" content="2016-082016-08-26
+RabbitMQ Configurationhttps://www.rabbitmq.com/configure.html
+
+RabbitMQ用户角色及权限控制http://blog.csdn.net/zyz511919766/article/details/42292655
+
+RabbitMQ Installing on Windowshttps://www.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> [dev][collect][2016-08]collect-of-dev | iyihua </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">iyihua</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [dev][collect][2016-08]collect-of-dev
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-09-06T23:51:04+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="2016-08"><a href="#2016-08" class="headerlink" title="2016-08"></a>2016-08</h2><h3 id="2016-08-26"><a href="#2016-08-26" class="headerlink" title="2016-08-26"></a>2016-08-26</h3><ul>
+<li><p>RabbitMQ Configuration<br><a href="https://www.rabbitmq.com/configure.html" target="_blank" rel="external">https://www.rabbitmq.com/configure.html</a></p>
+</li>
+<li><p>RabbitMQ用户角色及权限控制<br><a href="http://blog.csdn.net/zyz511919766/article/details/42292655" target="_blank" rel="external">http://blog.csdn.net/zyz511919766/article/details/42292655</a></p>
+</li>
+<li><p>RabbitMQ Installing on Windows<br><a href="https://www.rabbitmq.com/install-windows.html" target="_blank" rel="external">https://www.rabbitmq.com/install-windows.html</a></p>
+</li>
+<li><p>RabbitMQ Installing on RPM-based Linux (CentOS, Fedora, OpenSuse, RedHat)<br><a href="https://www.rabbitmq.com/install-rpm.html" target="_blank" rel="external">https://www.rabbitmq.com/install-rpm.html</a></p>
+</li>
+<li><p>CentOS6.5安装RabbitMQ<br><a href="http://www.jianshu.com/p/0d3bf6402e15" target="_blank" rel="external">http://www.jianshu.com/p/0d3bf6402e15</a></p>
+</li>
+</ul>
+<h3 id="2016-08-25"><a href="#2016-08-25" class="headerlink" title="2016-08-25"></a>2016-08-25</h3><ul>
+<li><p>ELK下载<br><a href="https://www.elastic.co/downloads" target="_blank" rel="external">https://www.elastic.co/downloads</a></p>
+</li>
+<li><p>ELK+Kafka 企业日志收集平台(一)<br><a href="http://blog.sctux.com/?p=445" target="_blank" rel="external">http://blog.sctux.com/?p=445</a></p>
+</li>
+<li><p>ELK+Kafka 企业日志收集平台(二)<br><a href="http://blog.sctux.com/?p=451" target="_blank" rel="external">http://blog.sctux.com/?p=451</a></p>
+</li>
+<li><p><a href="https://www.quora.com/What-are-some-other-great-free-web-tools-like-Trello" target="_blank" rel="external">https://www.quora.com/What-are-some-other-great-free-web-tools-like-Trello</a></p>
+</li>
+</ul>
+<h3 id="2016-08-22"><a href="#2016-08-22" class="headerlink" title="2016-08-22"></a>2016-08-22</h3><ul>
+<li><p>微服务架构下的开发部署实践(1)<br><a href="https://zhuanlan.zhihu.com/p/21563604?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21563604?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
+</li>
+<li><p>领域驱动设计和实践<br><a href="http://www.infoq.com/cn/articles/cjq-ddd" target="_blank" rel="external">http://www.infoq.com/cn/articles/cjq-ddd</a></p>
+</li>
+<li><p>教你成为全栈工程师(Full Stack Developer) 四十五-一文读懂hadoop、hbase、hive、spark分布式系统架构<br><a href="http://www.shareditor.com/blogshow/?blogId=96&amp;hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://www.shareditor.com/blogshow/?blogId=96&amp;hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
+</li>
+<li><p>聊一聊排序算法<br><a href="http://mp.weixin.qq.com/s?__biz=MzAxMjA5ODQwMQ==&amp;mid=2455058728&amp;idx=1&amp;sn=6b0e55cc9a3c34775013f39ab08a6ac7#rd" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzAxMjA5ODQwMQ==&amp;mid=2455058728&amp;idx=1&amp;sn=6b0e55cc9a3c34775013f39ab08a6ac7#rd</a><br><a href="https://github.com/barretlee/algorithms" target="_blank" rel="external">https://github.com/barretlee/algorithms</a></p>
+</li>
+<li><p>最简MVP框架<br><a href="http://www.jianshu.com/p/e0feb16105f9?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://www.jianshu.com/p/e0feb16105f9?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a><br><a href="https://github.com/wolearn/MvpFrame" target="_blank" rel="external">https://github.com/wolearn/MvpFrame</a></p>
+</li>
+<li><p>可用性高达五个9！支付系统高可用架构设计实战<br><a href="http://dbaplus.cn/news-21-591-1.html" target="_blank" rel="external">http://dbaplus.cn/news-21-591-1.html</a></p>
+</li>
+<li><p>Gson源码分析以其所包含注解的用法<br><a href="http://lliuguangbo.github.io/2016/08/07/Gson-Source-Code-Analyze-One/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://lliuguangbo.github.io/2016/08/07/Gson-Source-Code-Analyze-One/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
+</li>
+<li><p>React Native开源项目-嘎嘎商城客户端(持续更新中)<br><a href="http://www.lcode.org/react-native-source-gagamall/" target="_blank" rel="external">http://www.lcode.org/react-native-source-gagamall/</a><br><a href="https://github.com/jiangqqlmj/GaGaMall" target="_blank" rel="external">https://github.com/jiangqqlmj/GaGaMall</a></p>
+</li>
+<li><p>ActiveMQ高可用集群方案<br><a href="http://wosyingjun.iteye.com/blog/2314683" target="_blank" rel="external">http://wosyingjun.iteye.com/blog/2314683</a></p>
+</li>
+<li><p>gitbook Zookeeper:分布式进程协同<br><a href="https://www.gitbook.com/book/mymonkey110/zookeeper-distributed-process-coordination/details" target="_blank" rel="external">https://www.gitbook.com/book/mymonkey110/zookeeper-distributed-process-coordination/details</a></p>
+</li>
+</ul>
+<h3 id="2016-08-16"><a href="#2016-08-16" class="headerlink" title="2016-08-16"></a>2016-08-16</h3><ul>
+<li>全面分析 Spring 的编程式事务管理及声明式事务管理<br><a href="https://www.ibm.com/developerworks/cn/education/opensource/os-cn-spring-trans/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/education/opensource/os-cn-spring-trans/</a></li>
+</ul>
+<h3 id="2016-08-16-1"><a href="#2016-08-16-1" class="headerlink" title="2016-08-16"></a>2016-08-16</h3><ul>
+<li><p>Distributed transactions with multiple databases, Spring Boot, Spring Data JPA and Atomikos<br><a href="http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/" target="_blank" rel="external">http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/</a><br><a href="https://github.com/fabiomaffioletti/mul-at" target="_blank" rel="external">https://github.com/fabiomaffioletti/mul-at</a></p>
+</li>
+<li><p>JTA 深度历险 - 原理与实现<br><a href="http://www.ibm.com/developerworks/cn/java/j-lo-jta/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-lo-jta/</a></p>
+</li>
+<li><p>Java事务之八——分布式事务(Spring+JTA+Atomikos+Hibernate+JMS)<br><a href="http://www.cnblogs.com/davenkin/archive/2013/03/19/java-tranaction-8.html" target="_blank" rel="external">http://www.cnblogs.com/davenkin/archive/2013/03/19/java-tranaction-8.html</a></p>
+</li>
+<li><p>如何实现XA式、非XA式Spring分布式事务<br><a href="http://www.importnew.com/15812.html" target="_blank" rel="external">http://www.importnew.com/15812.html</a></p>
+</li>
+<li><p>Java事务设计策略 微型书<br><a href="http://www.infoq.com/cn/minibooks/JTDS#idp_register" target="_blank" rel="external">http://www.infoq.com/cn/minibooks/JTDS#idp_register</a></p>
+</li>
+<li><p>【转】JDBC事务和JTA （XA）事务<br><a href="http://kazge.com/archives/962.html" target="_blank" rel="external">http://kazge.com/archives/962.html</a></p>
+</li>
+</ul>
+<h3 id="2016-08-15"><a href="#2016-08-15" class="headerlink" title="2016-08-15"></a>2016-08-15</h3><ul>
+<li><p>美团点评技术团队<br><a href="http://tech.meituan.com/" target="_blank" rel="external">http://tech.meituan.com/</a></p>
+</li>
+<li><p>消息队列设计精要<br><a href="http://tech.meituan.com/mq-design.html" target="_blank" rel="external">http://tech.meituan.com/mq-design.html</a></p>
+</li>
+<li><p>阿里中间件团队博客<br><a href="http://jm.taobao.org/" target="_blank" rel="external">http://jm.taobao.org/</a></p>
+</li>
+<li><p>Distributed transactions with multiple databases, Spring Boot, Spring Data JPA and Atomikos<br><a href="http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/" target="_blank" rel="external">http://fabiomaffioletti.me/blog/2014/04/15/distributed-transactions-multiple-databases-spring-boot-spring-data-jpa-atomikos/</a><br><a href="https://github.com/fabiomaffioletti/mul-at" target="_blank" rel="external">https://github.com/fabiomaffioletti/mul-at</a></p>
+</li>
+<li><p>GitHub 中国区前 100 名到底是什么样的人?<br><a href="http://mt.sohu.com/20160407/n443539407.shtml?qq-pf-to=pcqq.discussion" target="_blank" rel="external">http://mt.sohu.com/20160407/n443539407.shtml?qq-pf-to=pcqq.discussion</a></p>
+</li>
+<li><p>Spring分布式事务配置(atomikos)<br><a href="http://sadwxqezc.github.io/HuangHuanBlog/framework/2016/05/29/Spring%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://sadwxqezc.github.io/HuangHuanBlog/framework/2016/05/29/Spring%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E9%85%8D%E7%BD%AE.html?utm_source=tuicool&amp;utm_medium=referral</a></p>
+</li>
+<li><p>基于spring boot项目的多数据源配置与分布式事务处理总结<br><a href="http://hungryant.github.io/java/2015/11/26/java-spring-boot-jta.html" target="_blank" rel="external">http://hungryant.github.io/java/2015/11/26/java-spring-boot-jta.html</a></p>
+</li>
+</ul>
+<h3 id="2016-08-13"><a href="#2016-08-13" class="headerlink" title="2016-08-13"></a>2016-08-13</h3><p>爬虫专题</p>
+<ul>
+<li>WebMagic<br><a href="http://webmagic.io/docs/zh/" target="_blank" rel="external">http://webmagic.io/docs/zh/</a><br><a href="https://github.com/YihuaWanglv/webmagic" target="_blank" rel="external">https://github.com/YihuaWanglv/webmagic</a></li>
+</ul>
+<ul>
+<li>Maven 那点事儿<br><a href="http://my.oschina.net/huangyong/blog/194583" target="_blank" rel="external">http://my.oschina.net/huangyong/blog/194583</a></li>
+</ul>
+<h3 id="2016-08-12"><a href="#2016-08-12" class="headerlink" title="2016-08-12"></a>2016-08-12</h3><ul>
+<li><p>Base: An Acid Alternative<br><a href="http://queue.acm.org/detail.cfm?id=1394128" target="_blank" rel="external">http://queue.acm.org/detail.cfm?id=1394128</a></p>
+</li>
+<li><p>分布式事务演进<br><a href="http://yongpoliu.com/distributed-tx-evolution/" target="_blank" rel="external">http://yongpoliu.com/distributed-tx-evolution/</a></p>
+</li>
+<li><p>系统幂等以及常用实现方式<br><a href="http://yongpoliu.com/idempotent/" target="_blank" rel="external">http://yongpoliu.com/idempotent/</a></p>
+</li>
+<li><p>实现maven依赖的全局排除<br><a href="http://maven.apache.org/enforcer/maven-enforcer-plugin/" target="_blank" rel="external">http://maven.apache.org/enforcer/maven-enforcer-plugin/</a><br><a href="http://yongpoliu.com/maven-global-exclude/" target="_blank" rel="external">http://yongpoliu.com/maven-global-exclude/</a></p>
+</li>
+<li><p>bi分析统计工具<br><a href="http://www.tableau.com/zh-cn/products/cloud-bi" target="_blank" rel="external">http://www.tableau.com/zh-cn/products/cloud-bi</a></p>
+</li>
+<li><p><strong>如何用消息系统避免分布式事务？</strong><br><a href="http://www.cnblogs.com/LBSer/p/4715395.html" target="_blank" rel="external">http://www.cnblogs.com/LBSer/p/4715395.html</a></p>
+</li>
+<li><p>MySQL两阶段提交<br><a href="http://blog.csdn.net/jesseyoung/article/details/37970271" target="_blank" rel="external">http://blog.csdn.net/jesseyoung/article/details/37970271</a></p>
+</li>
+</ul>
+<h3 id="2016-08-11"><a href="#2016-08-11" class="headerlink" title="2016-08-11"></a>2016-08-11</h3><ul>
+<li><p>Java自动化测试框架TestNG之入门篇<br><a href="http://www.jianshu.com/p/a74adec98eff" target="_blank" rel="external">http://www.jianshu.com/p/a74adec98eff</a></p>
+</li>
+<li><p>Arquillian Guides<br><a href="http://arquillian.org/guides/getting_started/?utm_source=cta" target="_blank" rel="external">http://arquillian.org/guides/getting_started/?utm_source=cta</a></p>
+</li>
+<li><p>自动化单元测试实践之路<br><a href="http://www.infoq.com/cn/articles/road-of-automated-unit-testing-practices" target="_blank" rel="external">http://www.infoq.com/cn/articles/road-of-automated-unit-testing-practices</a></p>
+</li>
+<li><p>8个超实用的Java测试工具和框架<br><a href="http://www.imooc.com/article/1154" target="_blank" rel="external">http://www.imooc.com/article/1154</a></p>
+</li>
+<li><p>使用 Selenium 实现基于 Web 的自动化测试<br><a href="https://www.ibm.com/developerworks/cn/web/1209_caimin_seleniumweb/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/web/1209_caimin_seleniumweb/</a></p>
+</li>
+<li><p>用 STAF+Selenium 实现并行的自动化测试框架<br><a href="https://www.ibm.com/developerworks/cn/java/j-lo-parallelautotest/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-parallelautotest/</a></p>
+</li>
+<li><p>Java Fluent Restful API自动化测试框架<br><a href="http://www.cnblogs.com/jinsdu/p/4606113.html" target="_blank" rel="external">http://www.cnblogs.com/jinsdu/p/4606113.html</a></p>
+</li>
+<li><p>HTTP API自动化测试从手工到平台的演变<br><a href="http://www.infoq.com/cn/articles/http-api-automated-test-from-manual-to-platform" target="_blank" rel="external">http://www.infoq.com/cn/articles/http-api-automated-test-from-manual-to-platform</a></p>
+</li>
+<li><p>快速入门测试驱动开发（TDD）<br><a href="http://wwsun.github.io/posts/tdd.html" target="_blank" rel="external">http://wwsun.github.io/posts/tdd.html</a></p>
+</li>
+<li><p>使用 REST-Assured 测试 REST API 的进阶技巧和最佳实践<br><a href="https://www.ibm.com/developerworks/cn/java/j-lo-rest-assured2/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-rest-assured2/</a></p>
+</li>
+</ul>
+<h3 id="2016-08-10"><a href="#2016-08-10" class="headerlink" title="2016-08-10"></a>2016-08-10</h3><ul>
+<li><p>Sharding-JDBC<br><a href="http://dangdangdotcom.github.io/sharding-jdbc/" target="_blank" rel="external">http://dangdangdotcom.github.io/sharding-jdbc/</a></p>
+</li>
+<li><p>[blog]庄周梦蝶<br><a href="http://fnil.net/" target="_blank" rel="external">http://fnil.net/</a></p>
+</li>
+<li><p>Atlas是由 Qihoo 360公司Web平台部基础架构团队开发维护的一个基于MySQL协议的数据中间层项目<br><a href="https://github.com/Qihoo360/Atlas/blob/master/README_ZH.md" target="_blank" rel="external">https://github.com/Qihoo360/Atlas/blob/master/README_ZH.md</a><br><a href="https://github.com/Qihoo360/Atlas" target="_blank" rel="external">https://github.com/Qihoo360/Atlas</a></p>
+</li>
+<li><p>RDBMS分布式两阶段提交与Zookeeper的Paxos同步算法<br><a href="http://blog.csdn.net/victory0508/article/details/48003527" target="_blank" rel="external">http://blog.csdn.net/victory0508/article/details/48003527</a></p>
+</li>
+<li><p>分布式系统的事务处理<br><a href="http://coolshell.cn/articles/10910.html" target="_blank" rel="external">http://coolshell.cn/articles/10910.html</a></p>
+</li>
+<li><p>分布式事务 - 最终一致性(一)<br><a href="https://segmentfault.com/a/1190000005969526" target="_blank" rel="external">https://segmentfault.com/a/1190000005969526</a></p>
+</li>
+<li><p>介绍下用消息队列实现分布式事务<br><a href="http://blog.chinaunix.net/uid-20047304-id-4515035.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-20047304-id-4515035.html</a></p>
+</li>
+</ul>
+<h3 id="2016-08-03"><a href="#2016-08-03" class="headerlink" title="2016-08-03"></a>2016-08-03</h3><ul>
+<li><p>解放程序猿（媛）的双手—iOS UI自动化测试<br><a href="http://tmq.qq.com/2016/06/uitestingiosautomation/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://tmq.qq.com/2016/06/uitestingiosautomation/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
+</li>
+<li><p>5小时搞定谷歌原生自动化框架UiAutomator1.0<br><a href="http://tmq.qq.com/2016/06/androidautotestframwork-uiautomator/" target="_blank" rel="external">http://tmq.qq.com/2016/06/androidautotestframwork-uiautomator/</a></p>
+</li>
+<li><p>有赞延迟队列设计<br><a href="http://tech.youzan.com/queuing_delay/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://tech.youzan.com/queuing_delay/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
+</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/android/" rel="tag">#android</a>
+          
+            <a href="/tags/collect/" rel="tag">#collect</a>
+          
+            <a href="/tags/dev/" rel="tag">#dev</a>
+          
+            <a href="/tags/collect-of-dev/" rel="tag">#collect-of-dev</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/18/spring事务用法演进/" rel="next" title="spring事务用法演进">
+                <i class="fa fa-chevron-left"></i> spring事务用法演进
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Wanglv Yihua" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Wanglv Yihua</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">110</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2016-08"><span class="nav-number">1.</span> <span class="nav-text">2016-08</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-26"><span class="nav-number">1.1.</span> <span class="nav-text">2016-08-26</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-25"><span class="nav-number">1.2.</span> <span class="nav-text">2016-08-25</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-22"><span class="nav-number">1.3.</span> <span class="nav-text">2016-08-22</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-16"><span class="nav-number">1.4.</span> <span class="nav-text">2016-08-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-16-1"><span class="nav-number">1.5.</span> <span class="nav-text">2016-08-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-15"><span class="nav-number">1.6.</span> <span class="nav-text">2016-08-15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-13"><span class="nav-number">1.7.</span> <span class="nav-text">2016-08-13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-12"><span class="nav-number">1.8.</span> <span class="nav-text">2016-08-12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-11"><span class="nav-number">1.9.</span> <span class="nav-text">2016-08-11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-10"><span class="nav-number">1.10.</span> <span class="nav-text">2016-08-10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2016-08-03"><span class="nav-number">1.11.</span> <span class="nav-text">2016-08-03</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wanglv Yihua</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
