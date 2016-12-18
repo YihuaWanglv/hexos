@@ -179,15 +179,448 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/18/动态报表模块设计/" itemprop="url">
+                  动态报表模块设计
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-12-18T15:49:16+08:00" content="2016-12-18">
+              2016-12-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="动态报表模块设计"><a href="#动态报表模块设计" class="headerlink" title="动态报表模块设计"></a>动态报表模块设计</h1><h2 id="1-需求概述"><a href="#1-需求概述" class="headerlink" title="1.需求概述"></a>1.需求概述</h2><ul>
+<li>实现根据dba提供的sql语句，动态生成业务部门需要的报表展示页面</li>
+</ul>
+<h2 id="2-页面原型"><a href="#2-页面原型" class="headerlink" title="2.页面原型"></a>2.页面原型</h2><h3 id="1）报表展示和预览页面"><a href="#1）报表展示和预览页面" class="headerlink" title="1）报表展示和预览页面"></a>1）报表展示和预览页面</h3><p><img src="/images/ireport_design_ui_01.png" alt=""></p>
+<ul>
+<li>菜单栏，每个app代表一个应用，每个report代表一个具体报表</li>
+<li>“添加报表”菜单，进入添加报表页面</li>
+<li>查询框，通过’ireports_report_setting’表的’query_column’动态生成</li>
+<li>报表table，通过’ireports_report_setting’表的’table_column_mapping’动态生成</li>
+</ul>
+<h3 id="2）报表添加与设置页面"><a href="#2）报表添加与设置页面" class="headerlink" title="2）报表添加与设置页面"></a>2）报表添加与设置页面</h3><p><img src="/images/ireport_design_ui_02.png" alt=""></p>
+<ul>
+<li>查询类型有：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1, = (等于)</span><br><span class="line">2, &gt; (大于)</span><br><span class="line">3, &lt; (小于)</span><br><span class="line">4, &gt;= (大于等于)</span><br><span class="line">5, &lt;= (小于等于)</span><br><span class="line">6, time (时间区间)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-模型设计"><a href="#3-模型设计" class="headerlink" title="3.模型设计"></a>3.模型设计</h2><h3 id="1）数据库模型图"><a href="#1）数据库模型图" class="headerlink" title="1）数据库模型图"></a>1）数据库模型图</h3><p><img src="/images/ireport_design_table.png" alt=""></p>
+<h3 id="2）模型表说明"><a href="#2）模型表说明" class="headerlink" title="2）模型表说明"></a>2）模型表说明</h3><ul>
+<li><p>ireports_app(报表所属应用或模块)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `ireports_app` (</span><br><span class="line">  `aid` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `name` varchar(50) NOT NULL COMMENT &apos;应用名称&apos;,</span><br><span class="line">  `status` tinyint(4) DEFAULT &apos;0&apos; COMMENT &apos;状态&apos;,</span><br><span class="line">  PRIMARY KEY (`aid`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&apos;报表所属应用或模块&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ireports_report(报表记录表)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `ireports_report` (</span><br><span class="line">  `rid` int(11) NOT NULL AUTO_INCREMENT COMMENT &apos;报表id&apos;,</span><br><span class="line">  `rsid` int(11) DEFAULT &apos;0&apos; COMMENT &apos;报表详细设置id&apos;,</span><br><span class="line">  `report` varchar(50) NOT NULL COMMENT &apos;报表名称&apos;,</span><br><span class="line">  `sql` text NOT NULL COMMENT &apos;报表sql&apos;,</span><br><span class="line">  `type` tinyint(4) DEFAULT &apos;0&apos; COMMENT &apos;报表类型&apos;,</span><br><span class="line">  `status` tinyint(4) DEFAULT &apos;0&apos; COMMENT &apos;状态&apos;,</span><br><span class="line">  PRIMARY KEY (`rid`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&apos;报表记录表&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ireports_report_setting(报表详细设置表)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `ireports_report_setting` (</span><br><span class="line">  `rsid` int(11) NOT NULL AUTO_INCREMENT COMMENT &apos;报表设置id&apos;,</span><br><span class="line">  `is_page` tinyint(1) DEFAULT &apos;1&apos; COMMENT &apos;是否分页&apos;,</span><br><span class="line">  `table_column_mapping` longtext COMMENT &apos;报表表头字段映射&apos;,</span><br><span class="line">  `query_column` text COMMENT &apos;报表查询字段配置&apos;,</span><br><span class="line">  PRIMARY KEY (`rsid`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&apos;报表详细设置表&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ireports_query_type(查询类型表)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `ireports_query_type` (</span><br><span class="line">  `qtid` int(11) NOT NULL AUTO_INCREMENT COMMENT &apos;查询类型id&apos;,</span><br><span class="line">  `type` varchar(20) NOT NULL COMMENT &apos;查询类型&apos;,</span><br><span class="line">  PRIMARY KEY (`qtid`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=&apos;查询类型表&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-技术实现"><a href="#4-技术实现" class="headerlink" title="4.技术实现"></a>4.技术实现</h2><h3 id="1-报表数据来源与连接：2个方案"><a href="#1-报表数据来源与连接：2个方案" class="headerlink" title="1)报表数据来源与连接：2个方案"></a>1)报表数据来源与连接：2个方案</h3><ul>
+<li>只连接业务员库，每次当添加的报表需要数据时，从基础数据库中同步到业务员库</li>
+<li>业务员系统添加对基础数据库的连接，添加一个内测or公测的基础数据库</li>
+</ul>
+<h3 id="2）数据连接层"><a href="#2）数据连接层" class="headerlink" title="2）数据连接层"></a>2）数据连接层</h3><ul>
+<li>使用mybatis</li>
+</ul>
+<h3 id="3-动态报表展示"><a href="#3-动态报表展示" class="headerlink" title="3)动态报表展示"></a>3)动态报表展示</h3><ul>
+<li>使用Freemarker + Jquery</li>
+</ul>
+<p>后台读取报表配置后，使用Freemarker模板生成页面框架与页面元素。</p>
+<p>页面载入后，使用Jquery异步请求报表数据，并展现。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/08/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-12-08T23:46:29+08:00" content="2016-12-08">
+              2016-12-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/09/ELK-Kafka企业日志收集平台搭建总结/" itemprop="url">
+                  ELK+Kafka企业日志收集平台搭建总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-09-09T01:31:02+08:00" content="2016-09-09">
+              2016-09-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="3-ELK-Kafka-企业日志收集平台搭建总结"><a href="#3-ELK-Kafka-企业日志收集平台搭建总结" class="headerlink" title="3.ELK+Kafka 企业日志收集平台搭建总结"></a>3.ELK+Kafka 企业日志收集平台搭建总结</h1><h3 id="平台架构："><a href="#平台架构：" class="headerlink" title="平台架构："></a>平台架构：</h3><ul>
+<li>1台生产应用服务器：192.168.1.119</li>
+<li>3台zookeeper+kafka集群服务器：192.168.1.245, 192.168.1.246, 192.168.1.247</li>
+<li>2台es+kibana集群服务器：192.168.1.162, 192.168.1.163</li>
+<li>1台nginx服务器反向代理到kibana集群：192.168.1.244</li>
+</ul>
+<h3 id="软件选用"><a href="#软件选用" class="headerlink" title="软件选用"></a>软件选用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">elasticsearch-1.7.3.tar.gz </span><br><span class="line">Logstash-2.3.*</span><br><span class="line">kibana-4.1.2-linux-x64.tar.gz</span><br><span class="line">以上软件都可以从官网下载:https://www.elastic.co/downloads</span><br><span class="line">java-1.8.65</span><br><span class="line">nginx采用yum安装</span><br></pre></td></tr></table></figure>
+<h3 id="平台安装配置"><a href="#平台安装配置" class="headerlink" title="平台安装配置"></a>平台安装配置</h3><p>####部署步骤：<br>1.ES集群安装配置;<br>2.Logstash客户端配置(直接写入数据到ES集群，写入系统messages日志);<br>3.Kafka(zookeeper)集群配置;(Logstash写入数据到Kafka消息系统);<br>4.Kibana部署;<br>5.Nginx负载均衡Kibana请求;<br>6.案例：nginx日志收集以及MySQL慢日志收集;<br>7.Kibana报表基本使用;</p>
+<h3 id="1-ES集群安装配置"><a href="#1-ES集群安装配置" class="headerlink" title="1.ES集群安装配置;"></a>1.ES集群安装配置;</h3><ul>
+<li>需要先安装java1.8</li>
+<li><p>2.获取es软件包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.tar.gz</span><br><span class="line">tar -xf elasticsearch-1.7.3.tar.gz -C /usr/local</span><br><span class="line">ln -sv /usr/local/elasticsearch-1.7.3 /usr/local/elasticsearch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.修改配置文件</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@es1 ~]# vim /usr/local/elasticsearch/config/elasticsearch.yml </span><br><span class="line">32 cluster.name: es-cluster                         #组播的名称地址</span><br><span class="line">40 node.name: &quot;es-node1 &quot;                           #节点名称，不能和其他节点重复</span><br><span class="line">47 node.master: true                                #节点能否被选举为master</span><br><span class="line">51 node.data: true                                  #节点是否存储数据</span><br><span class="line">107 index.number_of_shards: 5                       #索引分片的个数</span><br><span class="line">111 index.number_of_replicas: 1                     #分片的副本个数</span><br><span class="line">145 path.conf: /usr/local/elasticsearch/config/     #配置文件的路径</span><br><span class="line">149 path.data: /data/es/data                        #数据目录路径</span><br><span class="line">159 path.work: /data/es/worker                      #工作目录路径</span><br><span class="line">163 path.logs:  /usr/local/elasticsearch/logs/      #日志文件路径</span><br><span class="line">167 path.plugins:  /data/es/plugins                 #插件路径</span><br><span class="line">184 bootstrap.mlockall: true                        #内存不向swap交换</span><br><span class="line">232 http.enabled: true                              #启用http</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>4.创建相关目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /data/es/&#123;data,worker,plugins&#125; -p</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5.获取es服务管理脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">​[root@es1 ~]# git clone https://github.com/elastic/elasticsearch-servicewrapper.git</span><br><span class="line">[root@es1 ~]# mv elasticsearch-servicewrapper/service /usr/local/elasticsearch/bin/</span><br><span class="line">[root@es1 ~]# /usr/local/elasticsearch/bin/service/elasticsearch install </span><br><span class="line">Detected RHEL or Fedora:</span><br><span class="line">Installing the Elasticsearch daemon..</span><br><span class="line">[root@es1 ~]#</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这时就会在/etc/init.d/目录下安装上es的管理脚本啦</p>
+<ul>
+<li><p>修改其配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@es1 ~]# </span><br><span class="line">set.default.ES_HOME=/usr/local/elasticsearch   #安装路径</span><br><span class="line">set.default.ES_HEAP_SIZE=1024</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>6.启动es ，并检查其服务是否正常<br>es启动方式是进入bin目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/elasticsearch/bin/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./elasticsearch</span><br></pre></td></tr></table></figure></p>
+<p>启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@es1 ~]# netstat -nlpt | grep -E &quot;9200|&quot;9300</span><br><span class="line">tcp        0      0 0.0.0.0:9200                0.0.0.0:*                   LISTEN      1684/java           </span><br><span class="line">tcp        0      0 0.0.0.0:9300                0.0.0.0:*                   LISTEN      1684/java</span><br></pre></td></tr></table></figure>
+<p>访问<a href="http://192.168.2.18:9200/" target="_blank" rel="external">http://192.168.2.18:9200/</a> 返回es节点信息，说明安装配置完成.</p>
+<ul>
+<li>7.复制同样的步骤和配置到es2，只需要修改node.name即可，其他都与es1相同配置</li>
+<li>8.安装es的管理插件<br>es官方提供一个用于管理es的插件，可清晰直观看到es集群的状态，以及对集群的操作管理，安装方法如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@es1 local]# /usr/local/elasticsearch/bin/plugin -i mobz/elasticsearch-head</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>安装好之后，访问方式为： <a href="http://192.168.2.18:9200/_plugin/head" target="_blank" rel="external">http://192.168.2.18:9200/_plugin/head</a></p>
+<h3 id="2-Logstash客户端安装配置"><a href="#2-Logstash客户端安装配置" class="headerlink" title="2.Logstash客户端安装配置"></a>2.Logstash客户端安装配置</h3><ul>
+<li>安装前，需要先安装java</li>
+<li>YUM方式安装Logstash</li>
+</ul>
+<p>Download and install the public signing key:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch</span><br></pre></td></tr></table></figure></p>
+<p>Add the following in your /etc/yum.repos.d/ directory in a file with a .repo suffix, for example logstash.repo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[logstash-2.3]</span><br><span class="line">name=Logstash repository for 2.3.x packages</span><br><span class="line">baseurl=https://packages.elastic.co/logstash/2.3/centos</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure></p>
+<p>And your repository is ready for use. You can install it with:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install logstash</span><br></pre></td></tr></table></figure></p>
+<p>此时logstash会安装在目录：/opt/logstash/<br>进入/opt/logstash/bin/目录<br>vim logstash.conf<br>即可对这个logstash客户端进行设置，可以设置输入和输出<br>输入定义信息来源于何处，输出定义消息发送到哪里</p>
+<ul>
+<li><p>logstash一些操作：<br>检查配置是否正确<br>/opt/logstash/bin/logstash -f logstash.conf –configtest –verbose<br>启动logstash<br>/opt/logstash/bin/logstash -f logstash.conf</p>
+</li>
+<li><p>3.Logstash 向es集群写数据<br>编写一个logstash配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@webserver1 etc]# vi logstash.conf </span><br><span class="line">input &#123;              #数据的输入从标准输入</span><br><span class="line">  stdin &#123;&#125;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;             #数据的输出我们指向了es集群</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [&quot;192.168.1.162:9200&quot;,&quot;192.168.1.163:9200&quot;]　　　＃es主机的ip及端口</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>命令/opt/logstash/bin/logstash -f logstash.conf 启动后，如果有信息产生，就会向es集群写入数据，可以在es页面中看到</p>
+</li>
+<li><p>例子：将web app的log日志写入es中，使用如下脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  file &#123;</span><br><span class="line">    path =&gt; &quot;/usr/local/log.log&quot;</span><br><span class="line">    start_position =&gt; &quot;beginning&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [&quot;192.168.1.162:9200&quot;,&quot;192.168.1.163:9200&quot;]</span><br><span class="line">    index =&gt; &quot;web-app-%&#123;+YYYY-MM&#125;&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-Kafka-zookeeper-集群配置-Logstash写入数据到Kafka消息系统"><a href="#3-Kafka-zookeeper-集群配置-Logstash写入数据到Kafka消息系统" class="headerlink" title="3.Kafka(zookeeper)集群配置;(Logstash写入数据到Kafka消息系统);"></a>3.Kafka(zookeeper)集群配置;(Logstash写入数据到Kafka消息系统);</h3><p>kafka的软件包中自带zookeeper，并且是解压即可使用。可以官网下载上传服务器，也可直接服务器下载</p>
+<ul>
+<li><p>1.获取软件包.官网：<a href="http://kafka.apache.org" target="_blank" rel="external">http://kafka.apache.org</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1 ~]# wget http://mirror.rise.ph/apache/kafka/0.8.2.1/kafka_2.11-0.8.2.1.tgz</span><br><span class="line">[root@kafka1 ~]# tar -xf kafka_2.11-0.8.2.1.tgz -C /usr/local/</span><br><span class="line">[root@kafka1 ~]# cd /usr/local/</span><br><span class="line">[root@kafka1 local]# ln -sv kafka_2.11-0.8.2.1 kafka</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.配置zookeeper集群，修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1 ~]# vim /usr/local/kafka/config/zookeeper.propertie</span><br><span class="line">dataDir=/data/zookeeper</span><br><span class="line">clienrtPort=2181</span><br><span class="line">tickTime=2000</span><br><span class="line">initLimit=20</span><br><span class="line">syncLimit=10</span><br><span class="line">server.2=192.168.1.245:2888:3888</span><br><span class="line">server.3=192.168.1.246:2888:3888</span><br><span class="line">server.4=192.168.1.247:2888:3888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.创建zookeeper所需要的目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1 ~]# mkdir /data/zookeeper</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4.在/data/zookeeper目录下创建myid文件，里面的内容为数字，用于标识主机，如果这个文件没有的话，zookeeper是没法启动的哦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1 ~]# echo 2 &gt; /data/zookeeper/myid</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以上就是zookeeper集群的配置，下面等我配置好kafka之后直接复制到其他两个节点即可</p>
+<ul>
+<li><p>5.kafka配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1 ~]# vim /usr/local/kafka/config/server.properties </span><br><span class="line">broker.id=2    　　　　    ＃　唯一，填数字，本文中分别为2/3/4</span><br><span class="line">prot=9092　　　　　　　     ＃　这个broker监听的端口　</span><br><span class="line">host.name=192.168.2.22　  ＃　唯一，填服务器IP</span><br><span class="line">log.dir=/data/kafka-logs  #  该目录可以不用提前创建，在启动时自己会创建</span><br><span class="line">zookeeper.connect=192.168.2.22:2181,192.168.2.23:2181,192.168.2.24:2181　　＃这个就是zookeeper的ip及端口</span><br><span class="line">num.partitions=16         # 需要配置较大 分片影响读写速度</span><br><span class="line">log.dirs=/data/kafka-logs # 数据目录也要单独配置磁盘较大的地方</span><br><span class="line">log.retention.hours=168   # 时间按需求保留过期时间 避免磁盘满</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>6.将kafka(zookeeper)的程序目录全部拷贝至其他两个节点</p>
+</li>
+<li><p>7.修改两个借点的配置，注意这里除了以下两点不同外，都是相同的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）zookeeper的配置</span><br><span class="line">mkdir /data/zookeeper</span><br><span class="line">echo &quot;x&quot; &gt; /data/zookeeper/myid</span><br><span class="line">（2）kafka的配置</span><br><span class="line">broker.id=2</span><br><span class="line">host.name=192.168.2.22</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>8.修改完毕配置之后我们就可以启动了，这里先要启动zookeeper集群，才能启动kafka</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1 ~]# /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties &amp;   #zookeeper启动命令</span><br><span class="line">[root@kafka1 ~]# /usr/local/kafka/bin/zookeeper-server-stop.sh                                                   #zookeeper停止的命令</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>9.zookeeper服务检查</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1~]#  netstat -nlpt | grep -E &quot;2181|2888|3888&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>ok.  这时候zookeeper集群已经启动起来了，下面启动kafka，也是依次按照顺序启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@kafka1 ~]# nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties &amp;   #kafka启动的命令</span><br><span class="line">[root@kafka1 ~]#  /usr/local/kafka/bin/kafka-server-stop.sh                                                         #kafka停止的命令</span><br></pre></td></tr></table></figure></p>
+<p>注意，跟zookeeper服务一样，如果kafka有问题 nohup的日志文件会非常大,把磁盘占满，这个kafka服务同样可以通过自己些服务脚本来管理服务的启动与关闭。</p>
+<ul>
+<li><p>10，下面我们将webs app上面的logstash的输出改到kafka上面，将数据写入到kafka中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">input &#123;             #这里的输入还是定义的是从日志文件输入</span><br><span class="line">  file &#123;</span><br><span class="line">    type =&gt; &quot;web-app&quot; </span><br><span class="line">    path =&gt; &quot;/usr/local/log.log&quot;</span><br><span class="line">    start_position =&gt; &quot;beginning&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">    #stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    kafka &#123;</span><br><span class="line">      bootstrap_servers =&gt; &quot;192.168.1.245:9092,192.168.1.246:9092,192.168.1.247:9092&quot;</span><br><span class="line">      topic_id =&gt; &quot;web-app-message&quot;</span><br><span class="line">      compression_type =&gt; &quot;snappy&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后再每台kafka上安装logstash，把kafka的消息发送到es<br>使用logstash脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">    kafka &#123;</span><br><span class="line">        zk_connect =&gt; &quot;192.168.1.245:2181,192.168.1.246:2181,192.168.1.247:2181&quot;</span><br><span class="line">        topic_id =&gt; &quot;web-app-message&quot;</span><br><span class="line">        codec =&gt; plain</span><br><span class="line">        reset_beginning =&gt; false</span><br><span class="line">        consumer_threads =&gt; 5</span><br><span class="line">        decorate_events =&gt; true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">      hosts =&gt; [&quot;192.168.1.162:9200&quot;,&quot;192.168.1.163:9200&quot;]</span><br><span class="line">      index =&gt; &quot;test-web-app-message-%&#123;+YYYY-MM&#125;&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-Kibana部署"><a href="#4-Kibana部署" class="headerlink" title="4.Kibana部署;"></a>4.Kibana部署;</h3><p>我们在两台es上面搭建两套kibana</p>
+<ul>
+<li><p>1.获取kibana软件包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@es1 ~]# wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz</span><br><span class="line">[root@es1 ~]# tar -xf kibana-4.2.0-linux-x64.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@es1 ~]# cd /usr/local/</span><br><span class="line">[root@es1 local]# ln -sv kibana-4.1.2-linux-x64 kibana</span><br><span class="line">`kibana&apos; -&gt; `kibana-4.2.0-linux-x64&apos;</span><br><span class="line">[root@es1 local]# cd kibana</span><br><span class="line"></span><br><span class="line">[root@es1 kibana]# vim config/kibana.yml</span><br><span class="line">server.port: 5601      #默认端口可以修改的</span><br><span class="line">server.host: &quot;0.0.0.0&quot; #kibana监听的ip</span><br><span class="line">elasticsearch.url: &quot;http://localhost:9200&quot; #由于es在本地主机上面，所以这个选项打开注释即可</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>kibana安装后，直接进入kibana的安装目录<br>/user/local/kibana/bin<br>运行<br>./kibana<br>启动</p>
+</li>
+<li><p>5.服务检查</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@es1 config]# ss -tunl | grep &quot;5601&quot;</span><br><span class="line">tcp    LISTEN     0      511                    *:5601                  *:*</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此时访问es1主机的5601端口，即可看见kibana的页面：<br><a href="http://192.168.1.163:5601" target="_blank" rel="external">http://192.168.1.163:5601</a></p>
+<ul>
+<li>6.es2上的kibana与es1一样</li>
+</ul>
+<h3 id="5-Nginx负载均衡Kibana请求"><a href="#5-Nginx负载均衡Kibana请求" class="headerlink" title="5.Nginx负载均衡Kibana请求;"></a>5.Nginx负载均衡Kibana请求;</h3><ul>
+<li><p>1.在nginx-proxy上面yum安装nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nignx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.编写配置文件es.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@saltstack-node1 conf.d]# pwd </span><br><span class="line">/etc/nginx/conf.d</span><br><span class="line">[root@saltstack-node1 conf.d]# cat es.conf </span><br><span class="line">upstream es &#123;</span><br><span class="line">    server 192.168.2.18:5601 max_fails=3 fail_timeout=30s;</span><br><span class="line">    server 192.168.2.19:5601 max_fails=3 fail_timeout=30s;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"> </span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://es/;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">        #auth</span><br><span class="line">        auth_basic &quot;ELK Private&quot;;</span><br><span class="line">        auth_basic_user_file /etc/nginx/.htpasswd;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>3.创建认证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@saltstack-node1 conf.d]# htpasswd -cm /etc/nginx/.htpasswd elk</span><br><span class="line">New password: </span><br><span class="line">Re-type new password: </span><br><span class="line">Adding password for user elk-user</span><br><span class="line">[root@saltstack-node1 conf.d]# /etc/init.d/nginx restart</span><br><span class="line">Stopping nginx:                                            [  OK  ]</span><br><span class="line">Starting nginx:                                            [  OK  ]</span><br><span class="line">[root@saltstack-node1 conf.d]#</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>4.直接输入认证用户及密码就可访问啦<a href="http://192.168.1.244/" target="_blank" rel="external">http://192.168.1.244/</a></li>
+</ul>
+<h3 id="6-案例：nginx日志收集以及MySQL慢日志收集"><a href="#6-案例：nginx日志收集以及MySQL慢日志收集" class="headerlink" title="6.案例：nginx日志收集以及MySQL慢日志收集;"></a>6.案例：nginx日志收集以及MySQL慢日志收集;</h3><ul>
+<li><p>先在web app服务器上安装nginx和mysql</p>
+</li>
+<li><p>1.为了方便nginx日志的统计搜索，这里设置nginx访问日志格式为json</p>
+</li>
+</ul>
+<p>(1)修改nginx主配置文件</p>
+<p>说明：如果想实现日志的报表展示，最好将业务日志直接以json格式输出，这样可以极大减轻cpu负载，也省得运维需要写负载的filter过滤正则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@webserver1 nginx]# vim nginx.conf</span><br><span class="line">log_format json &apos;&#123;&quot;@timestamp&quot;:&quot;$time_iso8601&quot;,&apos;</span><br><span class="line">                &apos;&quot;@version&quot;:&quot;1&quot;,&apos;</span><br><span class="line">                &apos;&quot;client&quot;:&quot;$remote_addr&quot;,&apos;</span><br><span class="line">                &apos;&quot;url&quot;:&quot;$uri&quot;,&apos;</span><br><span class="line">                &apos;&quot;status&quot;:&quot;$status&quot;,&apos;</span><br><span class="line">                &apos;&quot;domain&quot;:&quot;$host&quot;,&apos;</span><br><span class="line">                &apos;&quot;host&quot;:&quot;$server_addr&quot;,&apos;</span><br><span class="line">                &apos;&quot;size&quot;:$body_bytes_sent,&apos;</span><br><span class="line">                &apos;&quot;responsetime&quot;:$request_time,&apos;</span><br><span class="line">                &apos;&quot;referer&quot;: &quot;$http_referer&quot;,&apos;</span><br><span class="line">                &apos;&quot;ua&quot;: &quot;$http_user_agent&quot;&apos;</span><br><span class="line">                &apos;&#125;&apos;;</span><br><span class="line">  access_log  /var/log/access_json.log  json;</span><br></pre></td></tr></table></figure>
+<p>(2)收集nginx日志和MySQL日志到消息队列中；这个文件我们是定义在客户端，即生产服务器上面的Logstash文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">  file &#123;</span><br><span class="line">    type =&gt; &quot;web-app&quot;</span><br><span class="line">    path =&gt; &quot;/usr/local/log.log&quot;</span><br><span class="line">    start_position =&gt; &quot;beginning&quot;</span><br><span class="line">  &#125;</span><br><span class="line">  file &#123;</span><br><span class="line">    type =&gt; &quot;nginx-access&quot;</span><br><span class="line">    path =&gt; &quot;/var/log/nginx/access.log&quot;</span><br><span class="line">    start_position =&gt; &quot;beginning&quot;</span><br><span class="line">    codec =&gt; &quot;json&quot;</span><br><span class="line">  &#125;</span><br><span class="line">  file &#123;</span><br><span class="line">   type =&gt; &quot;slow-mysql&quot;</span><br><span class="line">   path =&gt; &quot;/var/run/mysqld/mysqld-slow.log&quot;</span><br><span class="line">   start_position =&gt; &quot;beginning&quot;</span><br><span class="line">   codec =&gt; multiline &#123;</span><br><span class="line">     pattern =&gt; &quot;^# User@Host&quot;</span><br><span class="line">     negate =&gt; true</span><br><span class="line">     what =&gt; &quot;previous&quot;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  if [type] == &quot;nginx-access&quot; &#123;</span><br><span class="line">    kafka &#123;</span><br><span class="line">      bootstrap_servers =&gt; &quot;192.168.1.245:9092,192.168.1.246:9092,192.168.1.247:9092&quot;</span><br><span class="line">      topic_id =&gt; &quot;nginx-access&quot;</span><br><span class="line">      compression_type =&gt; &quot;snappy&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  if [type] == &quot;slow-mysql&quot; &#123;</span><br><span class="line">    kafka &#123;</span><br><span class="line">      bootstrap_servers =&gt; &quot;192.168.1.245:9092,192.168.1.246:9092,192.168.1.247:9092&quot;</span><br><span class="line">      topic_id =&gt; &quot;slow-mysql&quot;</span><br><span class="line">      compression_type =&gt; &quot;snappy&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  if [type] == &quot;web-app&quot; &#123;</span><br><span class="line">    kafka &#123;</span><br><span class="line">      bootstrap_servers =&gt; &quot;192.168.1.245:9092,192.168.1.246:9092,192.168.1.247:9092&quot;</span><br><span class="line">      topic_id =&gt; &quot;web-app-message&quot;</span><br><span class="line">      compression_type =&gt; &quot;snappy&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>/opt/logstash/bin/logstash -f logstash.conf –configtest –verbose</p>
+<p>/opt/logstash/bin/logstash -f logstash.conf</p>
+<p>(3)Logstash 从kafka集群中读取日志存储到es中，这里的定义logstash文件是在三台kafka服务器上面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">    kafka &#123;</span><br><span class="line">        zk_connect =&gt; &quot;192.168.1.245:2181,192.168.1.246:2181,192.168.1.247:2181&quot;</span><br><span class="line">        topic_id =&gt; &quot;web-app-message&quot;</span><br><span class="line">        codec =&gt; plain</span><br><span class="line">        reset_beginning =&gt; false</span><br><span class="line">        consumer_threads =&gt; 5</span><br><span class="line">        decorate_events =&gt; true</span><br><span class="line">    &#125;</span><br><span class="line">    kafka &#123;</span><br><span class="line">        zk_connect =&gt; &quot;192.168.1.245:2181,192.168.1.246:2181,192.168.1.247:2181&quot;</span><br><span class="line">        type =&gt; &quot;nginx-access&quot;</span><br><span class="line">        topic_id =&gt; &quot;nginx-access&quot;</span><br><span class="line">        codec =&gt; plain</span><br><span class="line">        reset_beginning =&gt; false</span><br><span class="line">        consumer_threads =&gt; 5</span><br><span class="line">        decorate_events =&gt; true</span><br><span class="line">    &#125;</span><br><span class="line">    kafka &#123;</span><br><span class="line">        zk_connect =&gt; &quot;192.168.1.245:2181,192.168.1.246:2181,192.168.1.247:2181&quot;</span><br><span class="line">        type =&gt; &quot;slow-mysql&quot;</span><br><span class="line">        topic_id =&gt; &quot;slow-mysql&quot;</span><br><span class="line">        codec =&gt; plain</span><br><span class="line">        reset_beginning =&gt; false</span><br><span class="line">        consumer_threads =&gt; 5</span><br><span class="line">        decorate_events =&gt; true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">    if [type] == &quot;nginx-access&quot; &#123;</span><br><span class="line">         elasticsearch &#123;</span><br><span class="line">                hosts =&gt; [&quot;192.168.1.162:9200&quot;,&quot;192.168.1.163:9200&quot;]</span><br><span class="line">                 index =&gt; &quot;nginx-access-%&#123;+YYYY-MM&#125;&quot;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if [type] == &quot;slow-mysql&quot; &#123;</span><br><span class="line">         elasticsearch &#123;</span><br><span class="line">                hosts =&gt; [&quot;192.168.1.162:9200&quot;,&quot;192.168.1.163:9200&quot;]</span><br><span class="line">                index =&gt; &quot;slow-mysql-%&#123;+YYYY-MM&#125;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if [type] == &quot;web-app-message&quot; &#123;</span><br><span class="line">         elasticsearch &#123;</span><br><span class="line">                hosts =&gt; [&quot;192.168.1.162:9200&quot;,&quot;192.168.1.163:9200&quot;]</span><br><span class="line">                index =&gt; &quot;test-web-app-message-%&#123;+YYYY-MM&#125;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>(4)创建nginx-access 日志索引<br>(5)创建MySQL慢日志索引</p>
+<p>这两个都是在kibana的页面上创建配置</p>
+<h3 id="7-Kibana报表基本使用"><a href="#7-Kibana报表基本使用" class="headerlink" title="7.Kibana报表基本使用;"></a>7.Kibana报表基本使用;</h3>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1205,416 +1638,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/04/Java-中int和Integer的区别/" itemprop="url">
-                  Java 中int和Integer的区别
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-08-04T11:41:57+08:00" content="2016-08-04">
-              2016-08-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="Java中int和Integer的区别"><a href="#Java中int和Integer的区别" class="headerlink" title="Java中int和Integer的区别"></a>Java中int和Integer的区别</h1><h2 id="Java各种数据类型详细介绍及其区别"><a href="#Java各种数据类型详细介绍及其区别" class="headerlink" title="Java各种数据类型详细介绍及其区别"></a>Java各种数据类型详细介绍及其区别</h2><ul>
-<li>基本类型，或者叫做内置类型，是JAVA中不同于类的特殊类型。</li>
-</ul>
-<p>Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：</p>
-<p>实数：double、float</p>
-<p>整数：byte、short、int、long</p>
-<p>字符：char</p>
-<p>布尔值：boolean</p>
-<p>复杂类型和基本类型的内存模型本质上是不一样的，简单数据类型的存储原理是这样的：所有的简单数据类型不存在“引用”的概念，简单数据类型都是直接存储在内存中的内存栈上的，数据本身的值就是存储在栈空间里面，而Java语言里面只有这八种数据类型是这种存储模型；而其他的只要是继承于Object类的复杂数据类型都是按照Java里面存储对象的内存模型来进行数据存储的，使用Java内存堆和内存栈来进行这种类型的数据存储，简单地讲，“引用”是存储在有序的内存栈上的，而对象本身的值存储在内存堆上的。</p>
-<ul>
-<li>Java的简单数据讲解列表如下：</li>
-</ul>
-<p>int：int为整数类型，在存储的时候，用4个字节存储，范围为-2,147,483,648到2,147,483,647，在变量初始化的时候，int类型的默认值为0。</p>
-<p>short：short也属于整数类型，在存储的时候，用2个字节存储，范围为-32,768到32,767，在变量初始化的时候，short类型的默认值为0，一般情况下，因为Java本身转型的原因，可以直接写为0。</p>
-<p>long：long也属于整数类型，在存储的时候，用8个字节存储，范围为-9,223,372,036,854,775,808到9,223,372,036, 854,775,807，在变量初始化的时候，long类型的默认值为0L或0l，也可直接写为0。</p>
-<p>byte：byte同样属于整数类型，在存储的时候，用1个字节来存储，范围为-128到127，在变量初始化的时候，byte类型的默认值也为0。</p>
-<p>float：float属于实数类型，在存储的时候，用4个字节来存储，范围为32位IEEEE 754单精度范围，在变量初始化的时候，float的默认值为0.0f或0.0F，在初始化的时候可以写0.0。</p>
-<p>double：double同样属于实数类型，在存储的时候，用8个字节来存储，范围为64位IEEE 754双精度范围，在变量初始化的时候，double的默认值为0.0。</p>
-<p>char：char属于字符类型，在存储的时候用2个字节来存储，因为Java本身的字符集不是用ASCII码来进行存储，是使用的16位Unicode字符集，它的字符范围即是Unicode的字符范围，在变量初始化的时候，char类型的默认值为’u0000’。</p>
-<p>boolean：boolean属于布尔类型，在存储的时候不使用字节，仅仅使用1位来存储，范围仅仅为0和1，其字面量为true和false，而boolean变量在初始化的时候变量的默认值为false。</p>
-<p>Integer是int的封装类，里面有很多进行处理的静态方法</p>
-<p>Integer是对象而int不是，内存的分配位置也不一样</p>
-<p>Integer的属性和其他类一样的！在方法里都是引用传递，而原始类型是值传递！</p>
-<p>jdk1.5以后可以从int自动装箱Integer类。</p>
-<p>int是为了兼容以前的编程语言使用的基本类型，目的是让程序效率更高，以为它是直接分配到栈上的。所以它不是对象，不能有类似 int.operation()的操作。</p>
-<p>Integer是java中一切都是对象这个大前提下的int的包装类型，可以使用方法，是个对象，是用new分配到堆上的。</p>
-<p>jdk1.5后，引入了类似c#中的自动装、拆箱，使得Integer i = 1；这样的表达直接可行。</p>
-<p>int是一种基本数据类型，而Integer是相应于int的类类型，称为对象包装。</p>
-<p>实现这种对象包装的目的主要是因为类能够提供必要的方法，用于实现基本数据类型的数值与可打印字符串之间的转换，以及一些其他的实用程序方法；</p>
-<p>另外，有些数据结构库类只能操作对象，而不支持基本数据类型的变量，包装类提供一种便利的方式，能够把基本数据类型转换成等价的对象，从而可以利用数据结构库类进行处理。</p>
-<p>int 是基本类型，(int)(Math.Random()*100)就是一个数，可以进行加见乘除。 Integer是class ,那么 new Integer(temp)就是一个对象了，可以用到Integer这个class的方法，例如用intvalue()可以返回这个int的值。int a=1;这是基本数据类型是能参与运算的.而Integer b= new Integer(1);c=b.floatvalue;Float a= new Float(null);是可以的用Float初始化一个对象这个a有很多方法而float a;就没有因为原始没有引用类，java 提供两种不同的类型：引用类型（或者封装类型，Warpper）和原始类型（或内置类型，Primitive）。Int是java的原始数据类型，Integer是java为int提供的封装类。Java为每个原始类型提供了封装类。</p>
-<ul>
-<li>原始类型 封装类</li>
-</ul>
-<p>boolean Boolean</p>
-<p>char Character</p>
-<p>byte Byte</p>
-<p>short Short</p>
-<p>int Integer</p>
-<p>long Long</p>
-<p>float Float</p>
-<p>double Double</p>
-<p>引用类型和原始类型的行为完全不同，并且它们具有不同的语义。引用类型和原始类型具有不同的特征和用法，它们包括：大小和速度问题，这种类型以哪种类型的数据结构存储，当引用类型和原始类型用作某个类的实例数据时所指定的缺省值。对象引用实例变量的缺省值为 null，而原始类型实例变量的缺省值与它们的类型有关。</p>
-<h2 id="1-、Boolean-VS-boolean"><a href="#1-、Boolean-VS-boolean" class="headerlink" title="1 、Boolean VS boolean"></a>1 、Boolean VS boolean</h2><p>public final class Boolean extends Object  implementsSerializable,Comparable</p>
-<p>Boolean 类将基本类型为boolean的值包装在一个对象中。一个Boolean类型的对象只包含一个类型为boolean的字段。此外，此类还为boolean和String的相互转换提供了许多方法，并提供了处理 boolean时非常有用的其他一些常量和方法。</p>
-<h2 id="2、-Byte-VS-byte"><a href="#2、-Byte-VS-byte" class="headerlink" title="2、 Byte VS byte"></a>2、 Byte VS byte</h2><p>public final class Byte extends Number implements Comparable Byte类将基本类型 byte的值包装在一个对象中。一个Byte类型的对象只包含一个类型为 byte的字段。此外，该类还为 byte和 String的相互转换提供了几种方法，并提供了处理 byte时非常有用的其他一些常量和方法。</p>
-<h2 id="3、-Character-VS-char"><a href="#3、-Character-VS-char" class="headerlink" title="3、 Character VS char"></a>3、 Character VS char</h2><p>public final class Character extends Object  implements Serializable, Comparable</p>
-<p>Character类在对象中包装一个基本类型char的值。</p>
-<p>Character类型的对象包含类型为char的单个字段。此外，该类提供了几种方法，以确定字符的类别（小写字母，数字，等等），并将字符从大写转换成小写，反之亦然。</p>
-<h2 id="4-、Double-VS-double"><a href="#4-、Double-VS-double" class="headerlink" title="4 、Double VS double"></a>4 、Double VS double</h2><p>public final class Double extends Number implements Comparable Double类在对象中包装了一个基本类型double的值。每个Double类型的对象都包含一个double类型的字段。此外，该类还提供了多个方法，可以将double转换为String，将String转换为double，还提供了其他一些处理double时有用的常量和方法。</p>
-<h2 id="5、-Float-VS-float"><a href="#5、-Float-VS-float" class="headerlink" title="5、 Float VS float"></a>5、 Float VS float</h2><p>public final class Float extends Number implements Comparable</p>
-<p>Float类在对象中包装了一个float基本类型的值。Float类型的对象包含一个float类型的字段。此外，此类提供了几种方法，可在float类型和String类型之间互相转换，并且还提供了处理float类型时非常有用的其他一些常量和方法。</p>
-<h2 id="6、-Integer-VS-int"><a href="#6、-Integer-VS-int" class="headerlink" title="6、 Integer VS int"></a>6、 Integer VS int</h2><p>public final class Integer extends Number implements Comparable</p>
-<p>Integer类在对象中包装了一个基本类型int的值。Integer类型的对象包含一个int类型的字段。</p>
-<p>此外，该类提供了多个方法，能在int类型和String类型之间互相转换，还提供了处理int类型时非常有用的其他一些常量和方法。</p>
-<h2 id="7-Long-VS-long"><a href="#7-Long-VS-long" class="headerlink" title="7 Long VS long"></a>7 Long VS long</h2><p>public final class Long extends Number implements Comparable</p>
-<p>Long类在对象中封装了基本类型long的值。每个Long类型的对象都包含一个long类型的字段。</p>
-<p>此外，该类提供了多个方法，可以将long转换为String，将String转换为long，除此之外，还提供了其他一些处理long时有用的常量和方法。</p>
-<h2 id="8、-Short-VS-short"><a href="#8、-Short-VS-short" class="headerlink" title="8、 Short VS short"></a>8、 Short VS short</h2><p>public final class Short extends Number implements Comparable</p>
-<p>Short类在对象中包装基本类型short的值。一个Short类型的对象只包含一个short类型的字段。另外，该类提供了多个方法，可以将short转换为String，将String转换为short，同时还提供了其他一些处理short时有用的常量和方法。</p>
-<h2 id="9、public-final-class-Voidextends-Object"><a href="#9、public-final-class-Voidextends-Object" class="headerlink" title="9、public final class Voidextends Object"></a>9、public final class Voidextends Object</h2><p>Void 类是一个不可实例化的占位符类，它保持一个对代表 Java 关键字 void 的 Class 对象的引用。</p>
-<p>类的对象才能为null，不能把null赋值给一个变量不能，如int m=null;但可以String s=null;因为String是个类。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/03/dev-collect-2016-07-collect-of-dev/" itemprop="url">
-                  [dev][collect][2016-07]collect-of-dev
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-08-03T13:21:52+08:00" content="2016-08-03">
-              2016-08-03
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="2016-07"><a href="#2016-07" class="headerlink" title="2016-07"></a>2016-07</h2><h3 id="2016-07-29"><a href="#2016-07-29" class="headerlink" title="2016-07-29"></a>2016-07-29</h3><ul>
-<li>搭建ElasticSearch-2.x Logstash-2.x Kibana-4.5.x Kafka为消息中心的ELK日志平台<br><a href="https://www.iamle.com/archives/2058.html" target="_blank" rel="external">https://www.iamle.com/archives/2058.html</a></li>
-</ul>
-<h3 id="2016-07-23"><a href="#2016-07-23" class="headerlink" title="2016-07-23"></a>2016-07-23</h3><ul>
-<li><p>discover meteor<br><a href="http://zh.discovermeteor.com/chapters/introduction/" target="_blank" rel="external">http://zh.discovermeteor.com/chapters/introduction/</a></p>
-</li>
-<li><p>webpack gitbook<br><a href="https://hulufei.gitbooks.io/react-tutorial/content/webpack.html" target="_blank" rel="external">https://hulufei.gitbooks.io/react-tutorial/content/webpack.html</a></p>
-</li>
-</ul>
-<h3 id="2016-07-22"><a href="#2016-07-22" class="headerlink" title="2016-07-22"></a>2016-07-22</h3><ul>
-<li><p>Spring Boot应用的测试——Mockito<br><a href="http://www.jianshu.com/p/972cd6b93206" target="_blank" rel="external">http://www.jianshu.com/p/972cd6b93206</a></p>
-</li>
-<li><p>利用Mockito模拟DB<br><a href="http://www.jianshu.com/p/c1c495f231ea" target="_blank" rel="external">http://www.jianshu.com/p/c1c495f231ea</a></p>
-</li>
-<li><p>在Spring Boot项目中使用Spock框架<br><a href="http://www.jianshu.com/p/f1e354d382cd" target="_blank" rel="external">http://www.jianshu.com/p/f1e354d382cd</a></p>
-</li>
-<li><p>Spring Boot Testing<br><a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html" target="_blank" rel="external">http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html</a></p>
-</li>
-<li><p>Integration Testing a Spring Boot Application<br><a href="https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/" target="_blank" rel="external">https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/</a></p>
-</li>
-</ul>
-<h3 id="2016-07-21"><a href="#2016-07-21" class="headerlink" title="2016-07-21"></a>2016-07-21</h3><ul>
-<li>Growth: 全栈增长工程师指南<br><a href="http://growth.phodal.com/#" target="_blank" rel="external">http://growth.phodal.com/#</a></li>
-</ul>
-<h3 id="2016-07-19"><a href="#2016-07-19" class="headerlink" title="2016-07-19"></a>2016-07-19</h3><ul>
-<li>微服务架构的分布式事务解决方案<br><a href="http://www.roncoo.com/details?cid=7ae3d7eddc4742f78b0548aa8bd9ccdb" target="_blank" rel="external">http://www.roncoo.com/details?cid=7ae3d7eddc4742f78b0548aa8bd9ccdb</a></li>
-</ul>
-<h3 id="2016-07-16"><a href="#2016-07-16" class="headerlink" title="2016-07-16"></a>2016-07-16</h3><ul>
-<li><p>使用 Vaadin 实现全堆栈 Java Web 开发<br><a href="http://www.ibm.com/developerworks/cn/java/j-full-stack-java-web-dev-vaadin/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-full-stack-java-web-dev-vaadin/</a></p>
-</li>
-<li><p>Creating CRUD UI with Vaadin<br><a href="https://spring.io/guides/gs/crud-with-vaadin/" target="_blank" rel="external">https://spring.io/guides/gs/crud-with-vaadin/</a><br>git clone <a href="https://github.com/spring-guides/gs-crud-with-vaadin.git" target="_blank" rel="external">https://github.com/spring-guides/gs-crud-with-vaadin.git</a></p>
-</li>
-<li><p>当当网开源Dubbox，扩展Dubbo服务框架支持REST风格远程调用<br><a href="http://www.infoq.com/cn/news/2014/10/dubbox-open-source" target="_blank" rel="external">http://www.infoq.com/cn/news/2014/10/dubbox-open-source</a></p>
-</li>
-<li><p>在Dubbo中开发REST风格的远程调用（RESTful Remoting）<br><a href="http://dangdangdotcom.github.io/dubbox/rest.html" target="_blank" rel="external">http://dangdangdotcom.github.io/dubbox/rest.html</a></p>
-</li>
-<li><p>使用JavaConfig方式配置dubbox<br><a href="http://dangdangdotcom.github.io/dubbox/java-config.html" target="_blank" rel="external">http://dangdangdotcom.github.io/dubbox/java-config.html</a></p>
-</li>
-<li><p>Microservices with Spring<br><a href="https://spring.io/blog/2015/07/14/microservices-with-spring" target="_blank" rel="external">https://spring.io/blog/2015/07/14/microservices-with-spring</a></p>
-</li>
-</ul>
-<h3 id="2016-07-14"><a href="#2016-07-14" class="headerlink" title="2016-07-14"></a>2016-07-14</h3><ul>
-<li>Import/Read excel file 2003 or 2007 with Spring MVC<br><a href="http://lvtutorial.com/spring-mvc/read-excel-file-2003-or-2007-with-spring-mvc.html" target="_blank" rel="external">http://lvtutorial.com/spring-mvc/read-excel-file-2003-or-2007-with-spring-mvc.html</a></li>
-<li>SPRING BOOT FILE UPLOAD WITH AJAX<br><a href="http://blog.netgloo.com/2015/02/08/spring-boot-file-upload-with-ajax/" target="_blank" rel="external">http://blog.netgloo.com/2015/02/08/spring-boot-file-upload-with-ajax/</a><br><a href="https://github.com/netgloo/spring-boot-samples" target="_blank" rel="external">https://github.com/netgloo/spring-boot-samples</a></li>
-</ul>
-<h3 id="2016-07-13"><a href="#2016-07-13" class="headerlink" title="2016-07-13"></a>2016-07-13</h3><ul>
-<li><p>cSphere Docker 实训课程<br><a href="http://git.oschina.net/dockerf/docker-training" target="_blank" rel="external">http://git.oschina.net/dockerf/docker-training</a></p>
-</li>
-<li><p>Spring Cloud方面的博客<br><a href="http://blog.didispace.com/" target="_blank" rel="external">http://blog.didispace.com/</a></p>
-</li>
-<li><p>白话 IT 之浅谈 ELK 日志系统<br><a href="https://mp.weixin.qq.com/s?__biz=MzA4ODgwNjk1MQ==&amp;mid=2653788351&amp;idx=1&amp;sn=a38a0b95b63186b789423195fa09f91d&amp;scene=0&amp;key=77421cf58af4a653195d70dcdaaed6e78c06fe4711f95c19349f5ca630c1e7f8481f6f21ba392beedcc329dbcc331cc8&amp;ascene=0&amp;uin=MTM4NTI5NTI4Mg%3D%3D&amp;devicetype=iMac+MacBookAir6%2C2+OSX+OSX+10.9.5+build(13F1808)&amp;version=11020201&amp;pass_ticket=MxW0cGHvKj7WTMRpzBpE%2FND%2BPkUf91pVVetULpXmjhLbsP9btRTYFt3DF6QSZ5Ct" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzA4ODgwNjk1MQ==&amp;mid=2653788351&amp;idx=1&amp;sn=a38a0b95b63186b789423195fa09f91d&amp;scene=0&amp;key=77421cf58af4a653195d70dcdaaed6e78c06fe4711f95c19349f5ca630c1e7f8481f6f21ba392beedcc329dbcc331cc8&amp;ascene=0&amp;uin=MTM4NTI5NTI4Mg%3D%3D&amp;devicetype=iMac+MacBookAir6%2C2+OSX+OSX+10.9.5+build(13F1808)&amp;version=11020201&amp;pass_ticket=MxW0cGHvKj7WTMRpzBpE%2FND%2BPkUf91pVVetULpXmjhLbsP9btRTYFt3DF6QSZ5Ct</a></p>
-</li>
-<li><p>用户行为分析项目<br><a href="https://github.com/YihuaWanglv/piwik" target="_blank" rel="external">https://github.com/YihuaWanglv/piwik</a></p>
-</li>
-</ul>
-<h3 id="2016-07-12"><a href="#2016-07-12" class="headerlink" title="2016-07-12"></a>2016-07-12</h3><ul>
-<li><p>使用API网关构建微服务<br><a href="http://www.infoq.com/cn/articles/construct-micro-service-using-api-gateway" target="_blank" rel="external">http://www.infoq.com/cn/articles/construct-micro-service-using-api-gateway</a></p>
-</li>
-<li><p>使用Spring Cloud和Docker构建微服务<br><a href="http://www.dockone.io/article/510" target="_blank" rel="external">http://www.dockone.io/article/510</a><br>原文链接：<br><a href="http://www.kennybastani.com/2015/07/spring-cloud-docker-microservices.html?mkt_tok=3RkMMJWWfF9wsRonuqTMZKXonjHpfsX57ukoWaC0lMI%2F0ER3fOvrPUfGjI4ATcdqI%2BSLDwEYGJlv6SgFQ7LMMaZq1rgMXBk%3D" target="_blank" rel="external">http://www.kennybastani.com/2015/07/spring-cloud-docker-microservices.html?mkt_tok=3RkMMJWWfF9wsRonuqTMZKXonjHpfsX57ukoWaC0lMI%2F0ER3fOvrPUfGjI4ATcdqI%2BSLDwEYGJlv6SgFQ7LMMaZq1rgMXBk%3D</a></p>
-</li>
-<li><p>The API Gateway Pattern: Angular JS and Spring Security Part IV<br><a href="https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" target="_blank" rel="external">https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv</a></p>
-</li>
-<li><p>git demo for spring-boot-microservices<br><a href="https://github.com/YihuaWanglv/spring-boot-microservices" target="_blank" rel="external">https://github.com/YihuaWanglv/spring-boot-microservices</a><br><a href="https://github.com/YihuaWanglv/spring-cloud-microservice-example" target="_blank" rel="external">https://github.com/YihuaWanglv/spring-cloud-microservice-example</a></p>
-</li>
-<li><p>Implementing Netflix Zuul in Spring Cloud<br><a href="http://kubecloud.io/apigatewaypattern/" target="_blank" rel="external">http://kubecloud.io/apigatewaypattern/</a><br><a href="http://start.spring.io/" target="_blank" rel="external">http://start.spring.io/</a></p>
-</li>
-</ul>
-<h3 id="2016-07-11"><a href="#2016-07-11" class="headerlink" title="2016-07-11"></a>2016-07-11</h3><ul>
-<li><p>使用 Vuex + Vue.js 构建单页应用<br><a href="https://segmentfault.com/a/1190000005891026" target="_blank" rel="external">https://segmentfault.com/a/1190000005891026</a><br><a href="https://github.com/lichenbuliren/vuex-notes-app" target="_blank" rel="external">https://github.com/lichenbuliren/vuex-notes-app</a></p>
-</li>
-<li><p>两篇关于微服务api gateway的著名文章<br><a href="http://microservices.io/patterns/apigateway.html" target="_blank" rel="external">http://microservices.io/patterns/apigateway.html</a><br><a href="https://www.nginx.com/blog/building-microservices-using-an-api-gateway/" target="_blank" rel="external">https://www.nginx.com/blog/building-microservices-using-an-api-gateway/</a></p>
-</li>
-</ul>
-<h3 id="2016-07-08"><a href="#2016-07-08" class="headerlink" title="2016-07-08"></a>2016-07-08</h3><ul>
-<li><p>使用spring boot和thrift、zookeeper建立微服务<br><a href="http://www.cnblogs.com/skyblog/p/5535418.html" target="_blank" rel="external">http://www.cnblogs.com/skyblog/p/5535418.html</a></p>
-</li>
-<li><p>Jenkins+Docker搭建持续集成测试环境<br><a href="http://www.dockone.io/article/1464" target="_blank" rel="external">http://www.dockone.io/article/1464</a></p>
-</li>
-<li><p>spring boot+spring cloud服务化系列博客<br><a href="http://www.cnblogs.com/skyblog/category/774535.html" target="_blank" rel="external">http://www.cnblogs.com/skyblog/category/774535.html</a></p>
-</li>
-</ul>
-<h3 id="2016-07-06"><a href="#2016-07-06" class="headerlink" title="2016-07-06"></a>2016-07-06</h3><ul>
-<li><p>使用Jenkins搭建iOS/Android持续集成打包平台<br><a href="http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins" target="_blank" rel="external">http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins</a></p>
-</li>
-<li><p>React-Native For Android 环境搭建及踩坑<br><a href="http://www.imbeta.cn/react-native-for-android-huan-jing-da-jian-ji-cai-keng.html" target="_blank" rel="external">http://www.imbeta.cn/react-native-for-android-huan-jing-da-jian-ji-cai-keng.html</a></p>
-</li>
-<li><p>React Native 开发培训免费书<br><a href="https://unbug.gitbooks.io/react-native-training/content/" target="_blank" rel="external">https://unbug.gitbooks.io/react-native-training/content/</a></p>
-</li>
-<li><p>Android Studio插件整理<br><a href="https://ydmmocoo.github.io/2016/06/28/Android-Studio%E6%8F%92%E4%BB%B6%E6%95%B4%E7%90%86/" target="_blank" rel="external">https://ydmmocoo.github.io/2016/06/28/Android-Studio%E6%8F%92%E4%BB%B6%E6%95%B4%E7%90%86/</a></p>
-</li>
-<li><p>FastDFS + Nginx 反向代理缓存 安装与配置<br><a href="http://www.linux178.com/storage/fastdfs-nginx-cache.html" target="_blank" rel="external">http://www.linux178.com/storage/fastdfs-nginx-cache.html</a></p>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/28/How-to-synchronize-ArrayList-in-java-with-example/" itemprop="url">
-                  How to synchronize ArrayList in java with example
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-07-28T13:21:15+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="There-are-two-ways-to-synchronize-explicitly"><a href="#There-are-two-ways-to-synchronize-explicitly" class="headerlink" title="There are two ways to synchronize explicitly:"></a>There are two ways to synchronize explicitly:</h2><ul>
-<li>Using Collections.synchronizedList() method</li>
-<li>Using thread-safe variant of ArrayList: CopyOnWriteArrayList</li>
-</ul>
-<h2 id="Example-1-Collections-synchronizedList-method-for-Synchronizing-ArrayList"><a href="#Example-1-Collections-synchronizedList-method-for-Synchronizing-ArrayList" class="headerlink" title="Example 1: Collections.synchronizedList() method for Synchronizing ArrayList"></a>Example 1: Collections.synchronizedList() method for Synchronizing ArrayList</h2><p>In this example we are using Collections.synchronizedList() method. The important point to note here is that iterator should be in synchronized block in this type of synchronization as shown in the below example.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package beginnersbook.com;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class Details &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String a[])&#123;</span><br><span class="line">       List&lt;String&gt; syncal = </span><br><span class="line">         Collections.synchronizedList(new ArrayList&lt;String&gt;());</span><br><span class="line"></span><br><span class="line">       //Adding elements to synchronized ArrayList</span><br><span class="line">       syncal.add(&quot;Pen&quot;);</span><br><span class="line">       syncal.add(&quot;NoteBook&quot;);</span><br><span class="line">       syncal.add(&quot;Ink&quot;);</span><br><span class="line"></span><br><span class="line">       System.out.println(&quot;Iterating synchronized ArrayList:&quot;);</span><br><span class="line">       synchronized(syncal) &#123;</span><br><span class="line">       Iterator&lt;String&gt; iterator = syncal.iterator(); </span><br><span class="line">       while (iterator.hasNext())</span><br><span class="line">          System.out.println(iterator.next());</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Output:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterating synchronized ArrayList:</span><br><span class="line">Pen</span><br><span class="line">NoteBook</span><br><span class="line">Ink</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Method-2-Using-CopyOnWriteArrayList"><a href="#Method-2-Using-CopyOnWriteArrayList" class="headerlink" title="Method 2: Using CopyOnWriteArrayList"></a>Method 2: Using CopyOnWriteArrayList</h2><p>CopyOnWriteArrayList is a thread-safe variant of ArrayList.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package beginnersbook.com;</span><br><span class="line">import java.util.concurrent.CopyOnWriteArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">public class Details &#123;</span><br><span class="line"></span><br><span class="line"> public static void main(String a[])&#123;</span><br><span class="line">    CopyOnWriteArrayList&lt;String&gt; al = new CopyOnWriteArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">    //Adding elements to synchronized ArrayList</span><br><span class="line">    al.add(&quot;Pen&quot;);</span><br><span class="line">    al.add(&quot;NoteBook&quot;);</span><br><span class="line">    al.add(&quot;Ink&quot;);</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;Displaying synchronized ArrayList Elements:&quot;);</span><br><span class="line">    //Synchronized block is not required in this method</span><br><span class="line">    Iterator&lt;String&gt; iterator = al.iterator(); </span><br><span class="line">    while (iterator.hasNext())</span><br><span class="line">       System.out.println(iterator.next());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Output:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Displaying synchronized ArrayList Elements:</span><br><span class="line">Pen</span><br><span class="line">NoteBook</span><br><span class="line">Ink</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1661,7 +1684,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1675,7 +1698,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">110</span>
+              <span class="site-state-item-count">118</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

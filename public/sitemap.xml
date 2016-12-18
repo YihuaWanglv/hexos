@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/12/18/%E5%8A%A8%E6%80%81%E6%8A%A5%E8%A1%A8%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/</loc>
+    
+    <lastmod>2016-12-18T07:50:16.673Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/09/09/ELK-Kafka%E4%BC%81%E4%B8%9A%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/</loc>
+    
+    <lastmod>2016-12-18T05:14:10.660Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2016/09/06/dev-collect-2016-08-collect-of-dev/</loc>
     
     <lastmod>2016-09-06T15:52:13.802Z</lastmod>
@@ -324,7 +338,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/02/20/hello-world/</loc>
+    <loc>http://yoursite.com/2016/12/08/hello-world/</loc>
     
     <lastmod>2016-02-20T04:02:04.711Z</lastmod>
     
