@@ -1,6 +1,6 @@
 module.exports = function(hljs) {
   var PROMPT = {
-    className: 'prompt',  begin: /^(>>>|\.\.\.) /
+    className: 'meta',  begin: /^(>>>|\.\.\.) /
   };
   var STRING = {
     className: 'string',
@@ -57,7 +57,7 @@ module.exports = function(hljs) {
       built_in:
         'Ellipsis NotImplemented'
     },
-    illegal: /(<\/|->|\?)/,
+    illegal: /(<\/|->|\?)|=>/,
     contains: [
       PROMPT,
       NUMBER,
@@ -65,15 +65,22 @@ module.exports = function(hljs) {
       hljs.HASH_COMMENT_MODE,
       {
         variants: [
-          {className: 'function', beginKeywords: 'def', relevance: 10},
+          {className: 'function', beginKeywords: 'def'},
           {className: 'class', beginKeywords: 'class'}
         ],
         end: /:/,
         illegal: /[${=;\n,]/,
-        contains: [hljs.UNDERSCORE_TITLE_MODE, PARAMS]
+        contains: [
+          hljs.UNDERSCORE_TITLE_MODE,
+          PARAMS,
+          {
+            begin: /->/, endsWithParent: true,
+            keywords: 'None'
+          }
+        ]
       },
       {
-        className: 'decorator',
+        className: 'meta',
         begin: /^[\t ]*@/, end: /$/
       },
       {
