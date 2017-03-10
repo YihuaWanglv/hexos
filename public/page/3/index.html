@@ -207,6 +207,112 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/08/使用RAP作为接口管理和调试的工具/" itemprop="url">
+                  使用RAP作为接口管理和调试的工具
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-08T14:06:27+08:00" content="2016-07-08">
+              2016-07-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="一、为什么使用RAP？"><a href="#一、为什么使用RAP？" class="headerlink" title="一、为什么使用RAP？"></a>一、为什么使用RAP？</h2><ul>
+<li><p>接口定义和管理，传统的方式是使用word文档。但word文档管理接口文档有不少问题。<br>比如，word文档在相互传递的过程中，可能会导致彼此文档版本不一致；word文档难以结构化的集中维护各项目的文档，而且编写麻烦；word文档的接口定义功能单一，仅仅提供文档功能。</p>
+</li>
+<li><p>而是用RAP作为接口文档定义管理的工具，则为我们提供了以下功能：<br>1.可以按团队和项目结构化的管理接口文档。<br>2.提供统一方便的接口定义方式。<br>3.为前端提供mock数据，以便在后端没有开发好后端接口前，提前根据接口进行开发。<br>4.校验后端提供的接口的数据格式和字段是否符合要求。</p>
+</li>
+</ul>
+<p><strong>虽然RAP在自动化测试方面功能还有欠缺，仍不失为接口管理一个十分方便的工具。</strong></p>
+<h2 id="二、RAP安装部署"><a href="#二、RAP安装部署" class="headerlink" title="二、RAP安装部署"></a>二、RAP安装部署</h2><h3 id="1-下载RAP"><a href="#1-下载RAP" class="headerlink" title="1.下载RAP"></a>1.下载RAP</h3><p>在RAP的github主页上下载最新版本war包</p>
+<h3 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2.环境准备"></a>2.环境准备</h3><p>需要tomcat和mysql</p>
+<h3 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h3><p>RAP在tomcat中要使用ROOT的方式部署。</p>
+<ul>
+<li>把下载好的war包放入tomcat的webapps目录下，然后删除tomcat中webapps目录下原先的ROOT文件夹，重命名war包为ROOT.war</li>
+<li>在mysql中建立rap_db数据库，导入RAPgithub代码中提供的sql脚本初始化数据库</li>
+<li>启动tomcat</li>
+<li>访问<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></li>
+</ul>
+<h2 id="三、RAP的使用"><a href="#三、RAP的使用" class="headerlink" title="三、RAP的使用"></a>三、RAP的使用</h2><h3 id="1-注册账号"><a href="#1-注册账号" class="headerlink" title="1.注册账号"></a>1.注册账号</h3><p>RAP自带账号管理和登陆功能，使用前先注册账号，登陆即可</p>
+<h3 id="2-添加团队、项目产品线等。"><a href="#2-添加团队、项目产品线等。" class="headerlink" title="2.添加团队、项目产品线等。"></a>2.添加团队、项目产品线等。</h3><ul>
+<li>创建团队<br><img src="/images/rap-001.png" alt=""></li>
+<li>创建产品线<br><img src="/images/rap-002.png" alt=""><br><img src="/images/rap-003.png" alt=""></li>
+</ul>
+<h3 id="3-分组和项目管理"><a href="#3-分组和项目管理" class="headerlink" title="3.分组和项目管理"></a>3.分组和项目管理</h3><p><img src="/images/rap-004.png" alt=""><br><img src="/images/rap-009.png" alt=""></p>
+<h3 id="4-添加模块和页面"><a href="#4-添加模块和页面" class="headerlink" title="4.添加模块和页面"></a>4.添加模块和页面</h3><p><img src="/images/rap-005.png" alt=""></p>
+<h3 id="5-添加接口"><a href="#5-添加接口" class="headerlink" title="5.添加接口"></a>5.添加接口</h3><p><img src="/images/rap-006.png" alt=""></p>
+<h3 id="6-为返回值字段设置自定义的mock数据"><a href="#6-为返回值字段设置自定义的mock数据" class="headerlink" title="6.为返回值字段设置自定义的mock数据"></a>6.为返回值字段设置自定义的mock数据</h3><p><img src="/images/rap-007.png" alt=""><br>我们可以为不同的字段自定义不同的mock数据，已适应实际需要。</p>
+<h3 id="7-前端使用接口mock数据提前进行开发"><a href="#7-前端使用接口mock数据提前进行开发" class="headerlink" title="7.前端使用接口mock数据提前进行开发"></a>7.前端使用接口mock数据提前进行开发</h3><p><img src="/images/rap-008.png" alt=""><br>这个例子中的“项目根路径”：localhost:8080/mockjs/1<br>就是这个mock服务的模拟服务路径<br>前端访问：<a href="http://localhost:8080/mockjs/1/client/machine/activate?drive_id=sfd&amp;activate_code=sdf&amp;mac_address=sdf" target="_blank" rel="external">http://localhost:8080/mockjs/1/client/machine/activate?drive_id=sfd&amp;activate_code=sdf&amp;mac_address=sdf</a><br>就是访问我们模拟的接口地址: /client/machine/activate</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/07/dev-collect-2016-06-collect-of-dev/" itemprop="url">
                   [dev][collect][2016-06]collect-of-dev
                 </a>
@@ -1153,103 +1259,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/09/java-static-关键字总结/" itemprop="url">
-                  java static 关键字总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-05-09T00:11:19+08:00" content="2016-05-09">
-              2016-05-09
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><p>修饰方法时，表示该方法是静态方法，表示该类的该方法可以不产生实例而直接通过类名加方法名的方法去执行该静态方法；</p>
-<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><p>修饰变量时，表示该变量是静态变量，在java里可以理解为静态变量全局变量。<br>该类的所有实例共享此静态变量，类装载时，只会分配一块存储空间，所有此类对象可以操作此块存储空间。<br>也就是说，static修饰的静态变量也是可以直接通过类名加变量名直接使用的</p>
-<h3 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h3><p>普通类不允许被声明为静态的，只有一个内部类可以。<br>被声明为静态的内部类，可以直接作为一个普通类来使用，而不需要一个外部类了。</p>
-<h2 id="详述："><a href="#详述：" class="headerlink" title="详述："></a>详述：</h2><h3 id="1-1"><a href="#1-1" class="headerlink" title="1."></a>1.</h3><p> static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法，也可以形成静态static代码块，但是Java语言中没有全局变量的概念。 </p>
-<p>　被static修饰的成员变量和成员方法独立于该类的任何对象。也就是说，它不依赖类特定的实例，被类的所有实例共享。只要这个类被加载，Java虚拟机就能根据类名在运行时数据区的方法区内定找到他们。因此，static对象可以在它的任何对象创建之前访问，无需引用任何对象。 </p>
-<p>　用public修饰的static成员变量和成员方法本质是全局变量和全局方法，当声明它类的对象时，不生成static变量的副本，而是类的所有实例共享同一个static变量。 </p>
-<p>　static 变量前可以有private修饰，表示这个变量可以在类的静态代码块中，或者类的其他静态成员方法中使用（当然也可以在非静态成员方法中使用–废话），但是不能在其他类中通过类名来直接引用，这一点很重要。实际上你需要搞明白，private是访问权限限定，static表示不要实例化就可以使用，这样就容易理解多了。static前面加上其它访问权限关键字的效果也以此类推。 </p>
-<p>　static修饰的成员变量和成员方法习惯上称为静态变量和静态方法，可以直接通过类名来访问，访问语法为：<br>类名.静态方法名(参数列表…)<br>类名.静态变量名 </p>
-<p>　用static修饰的代码块表示静态代码块，当Java虚拟机（JVM）加载类时，就会执行该代码块（用处非常大，呵呵）。 </p>
-<h3 id="2-static变量"><a href="#2-static变量" class="headerlink" title="2.static变量"></a>2.static变量</h3><p>　按照是否静态的对类成员变量进行分类可分两种：一种是被static修饰的变量，叫静态变量或类变量；另一种是没有被static修饰的变量，叫实例变量。两者的区别是：<br>　对于静态变量在内存中只有一个拷贝（节省内存），JVM只为静态分配一次内存，在加载类的过程中完成静态变量的内存分配，可用类名直接访问（方便），当然也可以通过对象来访问（但是这是不推荐的）。<br>　对于实例变量，没创建一个实例，就会为实例变量分配一次内存，实例变量可以在内存中有多个拷贝，互不影响（灵活）。 </p>
-<h3 id="3-static方法"><a href="#3-static方法" class="headerlink" title="3.static方法"></a>3.static方法</h3><p>　静态方法可以直接通过类名调用，任何的实例也都可以调用，因此静态方法中不能用this和super关键字，不能直接访问所属类的实例变量和实例方法 (就是不带static的成员变量和成员成员方法)，只能访问所属类的静态成员变量和成员方法。因为实例成员与特定的对象关联！这个需要去理解，想明白其中的道理，不是记忆！！！<br>　因为static方法独立于任何实例，因此static方法必须被实现，而不能是抽象的abstract。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1290,7 +1305,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1304,7 +1319,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">121</span>
+              <span class="site-state-item-count">124</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-10T14:49:43.170Z</updated>
+  <updated>2017-03-10T16:11:13.863Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Nginx作为简单的图片服务器</title>
+    <link href="http://yoursite.com/2017/03/10/%E4%BD%BF%E7%94%A8Nginx%E4%BD%9C%E4%B8%BA%E7%AE%80%E5%8D%95%E7%9A%84%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://yoursite.com/2017/03/10/使用Nginx作为简单的图片服务器/</id>
+    <published>2017-03-10T15:59:19.000Z</published>
+    <updated>2017-03-10T16:11:13.863Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h2><ul>
+<li>为什么要用Nginx代理静态图片？</li>
+</ul>
+<p>图片服务器是我们经常要用到的，在开始的时候，当还没用上阿里云oss，并且觉得FastDFS略微重量级的时候，就可以使用Nginx作为简单的图片服务器。</p>
+<p>一下就是Nginx的conf配置文件例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">        location /images &#123;</span><br><span class="line">            root   /data/icms;</span><br><span class="line">            add_header &apos;Access-Control-Allow-Origin&apos; *;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">            charset utf-8;</span><br><span class="line">        &#125;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>所有<a href="http://domain/image/xxx.png" target="_blank" rel="external">http://domain/image/xxx.png</a> 的图片都会请求到服务器/data/icms/images内对应的图片。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;说明：&quot;&gt;&lt;a href=&quot;#说明：&quot; class=&quot;headerlink&quot; title=&quot;说明：&quot;&gt;&lt;/a&gt;说明：&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;为什么要用Nginx代理静态图片？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;图片服务器是我们经常要用到的，在开始的时候，当还没用上阿
+    
+    </summary>
+    
+    
+      <category term="ngnix" scheme="http://yoursite.com/tags/ngnix/"/>
+    
+      <category term="picture" scheme="http://yoursite.com/tags/picture/"/>
+    
+      <category term="server" scheme="http://yoursite.com/tags/server/"/>
+    
+  </entry>
   
   <entry>
     <title>使用java收集github-trending页面中感兴趣的语言的新动态并归档到自己的repository</title>
@@ -1409,57 +1444,6 @@
       <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
       <category term="使用spring-boot+spring-cloud一步步搭建微服务架构" scheme="http://yoursite.com/tags/%E4%BD%BF%E7%94%A8spring-boot-spring-cloud%E4%B8%80%E6%AD%A5%E6%AD%A5%E6%90%AD%E5%BB%BA%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用RAP作为接口管理和调试的工具</title>
-    <link href="http://yoursite.com/2016/07/08/%E4%BD%BF%E7%94%A8RAP%E4%BD%9C%E4%B8%BA%E6%8E%A5%E5%8F%A3%E7%AE%A1%E7%90%86%E5%92%8C%E8%B0%83%E8%AF%95%E7%9A%84%E5%B7%A5%E5%85%B7/"/>
-    <id>http://yoursite.com/2016/07/08/使用RAP作为接口管理和调试的工具/</id>
-    <published>2016-07-08T06:06:27.000Z</published>
-    <updated>2016-07-11T12:08:57.865Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="一、为什么使用RAP？"><a href="#一、为什么使用RAP？" class="headerlink" title="一、为什么使用RAP？"></a>一、为什么使用RAP？</h2><ul>
-<li><p>接口定义和管理，传统的方式是使用word文档。但word文档管理接口文档有不少问题。<br>比如，word文档在相互传递的过程中，可能会导致彼此文档版本不一致；word文档难以结构化的集中维护各项目的文档，而且编写麻烦；word文档的接口定义功能单一，仅仅提供文档功能。</p>
-</li>
-<li><p>而是用RAP作为接口文档定义管理的工具，则为我们提供了以下功能：<br>1.可以按团队和项目结构化的管理接口文档。<br>2.提供统一方便的接口定义方式。<br>3.为前端提供mock数据，以便在后端没有开发好后端接口前，提前根据接口进行开发。<br>4.校验后端提供的接口的数据格式和字段是否符合要求。</p>
-</li>
-</ul>
-<p><strong>虽然RAP在自动化测试方面功能还有欠缺，仍不失为接口管理一个十分方便的工具。</strong></p>
-<h2 id="二、RAP安装部署"><a href="#二、RAP安装部署" class="headerlink" title="二、RAP安装部署"></a>二、RAP安装部署</h2><h3 id="1-下载RAP"><a href="#1-下载RAP" class="headerlink" title="1.下载RAP"></a>1.下载RAP</h3><p>在RAP的github主页上下载最新版本war包</p>
-<h3 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2.环境准备"></a>2.环境准备</h3><p>需要tomcat和mysql</p>
-<h3 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h3><p>RAP在tomcat中要使用ROOT的方式部署。</p>
-<ul>
-<li>把下载好的war包放入tomcat的webapps目录下，然后删除tomcat中webapps目录下原先的ROOT文件夹，重命名war包为ROOT.war</li>
-<li>在mysql中建立rap_db数据库，导入RAPgithub代码中提供的sql脚本初始化数据库</li>
-<li>启动tomcat</li>
-<li>访问<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></li>
-</ul>
-<h2 id="三、RAP的使用"><a href="#三、RAP的使用" class="headerlink" title="三、RAP的使用"></a>三、RAP的使用</h2><h3 id="1-注册账号"><a href="#1-注册账号" class="headerlink" title="1.注册账号"></a>1.注册账号</h3><p>RAP自带账号管理和登陆功能，使用前先注册账号，登陆即可</p>
-<h3 id="2-添加团队、项目产品线等。"><a href="#2-添加团队、项目产品线等。" class="headerlink" title="2.添加团队、项目产品线等。"></a>2.添加团队、项目产品线等。</h3><ul>
-<li>创建团队<br><img src="/images/rap-001.png" alt=""></li>
-<li>创建产品线<br><img src="/images/rap-002.png" alt=""><br><img src="/images/rap-003.png" alt=""></li>
-</ul>
-<h3 id="3-分组和项目管理"><a href="#3-分组和项目管理" class="headerlink" title="3.分组和项目管理"></a>3.分组和项目管理</h3><p><img src="/images/rap-004.png" alt=""><br><img src="/images/rap-009.png" alt=""></p>
-<h3 id="4-添加模块和页面"><a href="#4-添加模块和页面" class="headerlink" title="4.添加模块和页面"></a>4.添加模块和页面</h3><p><img src="/images/rap-005.png" alt=""></p>
-<h3 id="5-添加接口"><a href="#5-添加接口" class="headerlink" title="5.添加接口"></a>5.添加接口</h3><p><img src="/images/rap-006.png" alt=""></p>
-<h3 id="6-为返回值字段设置自定义的mock数据"><a href="#6-为返回值字段设置自定义的mock数据" class="headerlink" title="6.为返回值字段设置自定义的mock数据"></a>6.为返回值字段设置自定义的mock数据</h3><p><img src="/images/rap-007.png" alt=""><br>我们可以为不同的字段自定义不同的mock数据，已适应实际需要。</p>
-<h3 id="7-前端使用接口mock数据提前进行开发"><a href="#7-前端使用接口mock数据提前进行开发" class="headerlink" title="7.前端使用接口mock数据提前进行开发"></a>7.前端使用接口mock数据提前进行开发</h3><p><img src="/images/rap-008.png" alt=""><br>这个例子中的“项目根路径”：localhost:8080/mockjs/1<br>就是这个mock服务的模拟服务路径<br>前端访问：<a href="http://localhost:8080/mockjs/1/client/machine/activate?drive_id=sfd&amp;activate_code=sdf&amp;mac_address=sdf" target="_blank" rel="external">http://localhost:8080/mockjs/1/client/machine/activate?drive_id=sfd&amp;activate_code=sdf&amp;mac_address=sdf</a><br>就是访问我们模拟的接口地址: /client/machine/activate</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;一、为什么使用RAP？&quot;&gt;&lt;a href=&quot;#一、为什么使用RAP？&quot; class=&quot;headerlink&quot; title=&quot;一、为什么使用RAP？&quot;&gt;&lt;/a&gt;一、为什么使用RAP？&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;接口定义和管理，传统的方式是使用word文档。但w
-    
-    </summary>
-    
-    
-      <category term="接口文档" scheme="http://yoursite.com/tags/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/"/>
-    
-      <category term="RAP" scheme="http://yoursite.com/tags/RAP/"/>
-    
-      <category term="mock" scheme="http://yoursite.com/tags/mock/"/>
     
   </entry>
   
