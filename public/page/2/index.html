@@ -179,6 +179,112 @@
 
     
     
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/08/What-s-the-simplest-way-to-print-a-Java-array/" itemprop="url">
+                  What's the simplest way to print a Java array?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-08-08T18:24:43+08:00" content="2016-08-08">
+              2016-08-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>Examples:</p>
+<ul>
+<li>Simple Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String[] array = new String[] &#123;&quot;John&quot;, &quot;Mary&quot;, &quot;Bob&quot;&#125;;</span><br><span class="line">System.out.println(Arrays.toString(array));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[John, Mary, Bob]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Nested Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[][] deepArray = new String[][] &#123;&#123;&quot;John&quot;, &quot;Mary&quot;&#125;, &#123;&quot;Alice&quot;, &quot;Bob&quot;&#125;&#125;;</span><br><span class="line">System.out.println(Arrays.toString(deepArray));</span><br><span class="line">//output: [[Ljava.lang.String;@106d69c, [Ljava.lang.String;@52e922]</span><br><span class="line">System.out.println(Arrays.deepToString(deepArray));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[John, Mary], [Alice, Bob]]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>double Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double[] doubleArray = &#123; 7.0, 9.0, 5.0, 1.0, 3.0 &#125;;</span><br><span class="line">System.out.println(Arrays.toString(doubleArray));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[7.0, 9.0, 5.0, 1.0, 3.0 ]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>int Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int[] intArray = &#123; 7, 9, 5, 1, 3 &#125;;</span><br><span class="line">System.out.println(Arrays.toString(intArray));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[7, 9, 5, 1, 3 ]</span><br></pre></td></tr></table></figure></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1157,132 +1263,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/07/dev-collect-2016-06-collect-of-dev/" itemprop="url">
-                  [dev][collect][2016-06]collect-of-dev
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-07-07T11:08:24+08:00" content="2016-07-07">
-              2016-07-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="2016-06"><a href="#2016-06" class="headerlink" title="2016-06"></a>2016-06</h2><h3 id="2016-06-24"><a href="#2016-06-24" class="headerlink" title="2016-06-24"></a>2016-06-24</h3><ul>
-<li><p>【直播全文记录】 从零开始搭建高可用IM系统<br><a href="http://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&amp;mid=206924771&amp;idx=1&amp;sn=4705b832c410765a3c89acfa1300b0b6&amp;scene=21#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&amp;mid=206924771&amp;idx=1&amp;sn=4705b832c410765a3c89acfa1300b0b6&amp;scene=21#wechat_redirect</a></p>
-</li>
-<li><p>如何设计类似微信的多终端数据同步协议 | Grouk实践分享<br><a href="http://chuansong.me/n/1718596" target="_blank" rel="external">http://chuansong.me/n/1718596</a></p>
-</li>
-</ul>
-<h3 id="2016-06-22"><a href="#2016-06-22" class="headerlink" title="2016-06-22"></a>2016-06-22</h3><ul>
-<li><p>基于Dubbo框架构建分布式服务<br><a href="http://shiyanjun.cn/archives/1075.html" target="_blank" rel="external">http://shiyanjun.cn/archives/1075.html</a></p>
-</li>
-<li><p>高并发性能调试经验分享<br><a href="https://zhuanlan.zhihu.com/p/21348220" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21348220</a></p>
-</li>
-<li><p>Java进阶（三）多线程开发关键技术<br><a href="http://www.jasongj.com/java/multi_thread/" target="_blank" rel="external">http://www.jasongj.com/java/multi_thread/</a></p>
-</li>
-<li><p>blog kafka<br><a href="http://www.jasongj.com/tags/Kafka/" target="_blank" rel="external">http://www.jasongj.com/tags/Kafka/</a></p>
-</li>
-<li><p>如何构建Android MVVM应用程序<br><a href="http://www.jianshu.com/p/2fc41a310f79" target="_blank" rel="external">http://www.jianshu.com/p/2fc41a310f79</a></p>
-</li>
-<li><p>超详细React Native实现微信好友/朋友圈分享功能-Android/iOS双平台通用<br><a href="http://www.lcode.org/%E8%B6%85%E8%AF%A6%E7%BB%86react-native%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E6%9C%8B%E5%8F%8B%E5%9C%88%E5%88%86%E4%BA%AB%E5%8A%9F%E8%83%BD-androidios%E5%8F%8C%E5%B9%B3%E5%8F%B0/" target="_blank" rel="external">http://www.lcode.org/%E8%B6%85%E8%AF%A6%E7%BB%86react-native%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E5%A5%BD%E5%8F%8B%E6%9C%8B%E5%8F%8B%E5%9C%88%E5%88%86%E4%BA%AB%E5%8A%9F%E8%83%BD-androidios%E5%8F%8C%E5%B9%B3%E5%8F%B0/</a></p>
-</li>
-<li><p>SHELL编程之常用技巧<br><a href="http://mp.weixin.qq.com/s?__biz=MzIxNDMyODgyMA==&amp;mid=2247483698&amp;idx=1&amp;sn=3b52493d202362aae0bf511002e63d52" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzIxNDMyODgyMA==&amp;mid=2247483698&amp;idx=1&amp;sn=3b52493d202362aae0bf511002e63d52</a></p>
-</li>
-<li><p>让你爱上写作的 11 款 Markdown 工具<br><a href="http://www.ifanr.com/app/665209" target="_blank" rel="external">http://www.ifanr.com/app/665209</a></p>
-</li>
-<li><p>基于Docker搭建Hadoop集群之升级版<br><a href="http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/" target="_blank" rel="external">http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/</a></p>
-</li>
-<li><p>Kafka设计解析（一）- Kafka背景及架构介绍<br><a href="http://www.jasongj.com/2015/03/10/KafkaColumn1/" target="_blank" rel="external">http://www.jasongj.com/2015/03/10/KafkaColumn1/</a></p>
-</li>
-</ul>
-<h3 id="2016-06-15"><a href="#2016-06-15" class="headerlink" title="2016-06-15"></a>2016-06-15</h3><ul>
-<li><p>淘拍拍前端架构2.0-简介<br><a href="http://www.w3cfuns.com/notes/25101/33114eae47bbda0c50fb67eeb4a7fd6c.html" target="_blank" rel="external">http://www.w3cfuns.com/notes/25101/33114eae47bbda0c50fb67eeb4a7fd6c.html</a></p>
-</li>
-<li><p>轻松监控上万台服务器：企业运维监控平台架构设计与实践指南<br><a href="http://dbaplus.cn/news-21-466-1.html" target="_blank" rel="external">http://dbaplus.cn/news-21-466-1.html</a></p>
-</li>
-<li><p>Mesos+Zookeeper+Marathon+Docker分布式集群管理最佳实践<br><a href="http://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&amp;mid=2650755658&amp;idx=1&amp;sn=9f5e4831b2c27d66e4296c49ffcd3d7c&amp;scene=21#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&amp;mid=2650755658&amp;idx=1&amp;sn=9f5e4831b2c27d66e4296c49ffcd3d7c&amp;scene=21#wechat_redirect</a></p>
-</li>
-<li><p>网易蜂巢微服务架构：用RabbitMQ实现轻量级通信<br><a href="http://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&amp;mid=2650755639&amp;idx=2&amp;sn=0e43c1b7168dbcd60582326fb20f2f19&amp;scene=21#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&amp;mid=2650755639&amp;idx=2&amp;sn=0e43c1b7168dbcd60582326fb20f2f19&amp;scene=21#wechat_redirect</a></p>
-</li>
-<li><p>使用Vue.js从零构建GitHub项目浏览器<br><a href="http://xlbd.me/vue-demo-github-file-explorer/" target="_blank" rel="external">http://xlbd.me/vue-demo-github-file-explorer/</a></p>
-</li>
-</ul>
-<h3 id="2016-06-07"><a href="#2016-06-07" class="headerlink" title="2016-06-07"></a>2016-06-07</h3><ul>
-<li><p>搭建Git服务器<br><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000</a></p>
-</li>
-<li><p>gitlab centos一键安装<br><a href="http://blog.csdn.net/asd131531/article/details/42374285" target="_blank" rel="external">http://blog.csdn.net/asd131531/article/details/42374285</a><br><a href="http://www.linuxidc.com/Linux/2014-08/105137.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2014-08/105137.htm</a></p>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1329,7 +1309,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1343,7 +1323,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">118</span>
+              <span class="site-state-item-count">121</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
