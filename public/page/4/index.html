@@ -202,6 +202,657 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/07/在单服务器上安装部署FastDFS-Nginx/" itemprop="url">
+                  在单服务器上安装部署FastDFS+Nginx
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-07T10:54:21+08:00" content="2016-07-07">
+              2016-07-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="在单服务器上安装部署FastDFS-Nginx"><a href="#在单服务器上安装部署FastDFS-Nginx" class="headerlink" title="在单服务器上安装部署FastDFS+Nginx"></a>在单服务器上安装部署FastDFS+Nginx</h1><p>那么多服务器和软件安装配置中，FastDFS算是比较复杂的一个了。<br>这个例子storage和tracker均部署在同一台服务器（ip：192.168.1.134）<br>我部署的服务系版本是centos6.7</p>
+<h2 id="FastDFS安装配置"><a href="#FastDFS安装配置" class="headerlink" title="FastDFS安装配置"></a>FastDFS安装配置</h2><h3 id="Tracker的安装及配置"><a href="#Tracker的安装及配置" class="headerlink" title="Tracker的安装及配置"></a>Tracker的安装及配置</h3><h4 id="1-安装编译器"><a href="#1-安装编译器" class="headerlink" title="1.安装编译器"></a>1.安装编译器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc gcc-c++</span><br></pre></td></tr></table></figure>
+<h4 id="2-下载安装libevent"><a href="#2-下载安装libevent" class="headerlink" title="2.下载安装libevent"></a>2.下载安装libevent</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://sourceforge.net/projects/levent/files/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz</span><br><span class="line">tar xvzf libevent-2.0.22-stable.tar.gz</span><br><span class="line">cd libevent-2.0.22-stable</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h4 id="3-下载安装fastDFS"><a href="#3-下载安装fastDFS" class="headerlink" title="3.下载安装fastDFS"></a>3.下载安装fastDFS</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://code.google.com/p/fastdfs/downloads/detail?name=FastDFS_v4.06.tar.gz</span><br><span class="line">（code.google.com已无法访问，可以自己手动下载再上传到服务器）</span><br><span class="line">tar -xvzf FastDFS_v4.06.tar.gz</span><br><span class="line">cd FastDFS</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br></pre></td></tr></table></figure>
+<p>安装成功后/usr/local/bin下会出现一系列fastDFS命令</p>
+<h4 id="4-配置tracker"><a href="#4-配置tracker" class="headerlink" title="4.配置tracker"></a>4.配置tracker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/fdfs/tracker.conf</span><br></pre></td></tr></table></figure>
+<p>修改base_path以存储tracker信息（这里不做修改，使用默认路径/home/yuqing/fastdfs，需要先行创建目录）</p>
+<h4 id="5-启动tracker"><a href="#5-启动tracker" class="headerlink" title="5.启动tracker"></a>5.启动tracker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf</span><br></pre></td></tr></table></figure>
+<h3 id="Storage配置-gt-Storage1配置"><a href="#Storage配置-gt-Storage1配置" class="headerlink" title="Storage配置 -&gt; Storage1配置"></a>Storage配置 -&gt; Storage1配置</h3><p>正常情况下storage1部署一个服务器，storage2部署一个服务器，tracker部署一个服务器。<br>我这里只部署一个storage一个tracker，并部署在同一个服务器</p>
+<h4 id="1-3：参考Tracker安装步骤"><a href="#1-3：参考Tracker安装步骤" class="headerlink" title="1~3：参考Tracker安装步骤"></a>1~3：参考Tracker安装步骤</h4><h4 id="4-配置storage"><a href="#4-配置storage" class="headerlink" title="4.配置storage"></a>4.配置storage</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/fdfs/storage.conf</span><br></pre></td></tr></table></figure>
+<p>修改tracker_server=192.168.1.134:22122<br>修改base_path以存储storage信息（这里不做修改，使用默认路径/home/yuqing/fastdfs，需要先行创建目录）<br>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">group_name=group1</span><br><span class="line">base_path=/home/yuqing/fastdfs</span><br><span class="line">store_path0=/home/yuqing/fastdfs</span><br><span class="line">tracker_server=192.168.1.134:22122</span><br><span class="line">http.server_port=8080      #web server的端口改成8080（与nginx 端口一致）</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-启动storage"><a href="#5-启动storage" class="headerlink" title="5.启动storage"></a>5.启动storage</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf</span><br></pre></td></tr></table></figure>
+<p>启动过程中，fastDFS会在base_path下的data目录中创建一系列文件夹，以存储数据</p>
+<h3 id="安装nginx以及fastdfs-nginx-module模块"><a href="#安装nginx以及fastdfs-nginx-module模块" class="headerlink" title="安装nginx以及fastdfs-nginx-module模块"></a>安装nginx以及fastdfs-nginx-module模块</h3><p>nginx的rewrite模块和cache模块需要先安装pcre和openssl</p>
+<h4 id="安装pcre"><a href="#安装pcre" class="headerlink" title="安装pcre"></a>安装pcre</h4><p>下载pcre<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf pcre-8.12.tar.gz</span><br><span class="line">cd pcre-8.12</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<h4 id="安装openssl"><a href="#安装openssl" class="headerlink" title="安装openssl"></a>安装openssl</h4><p>centos下解决办法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install openssl openssl-devel</span><br></pre></td></tr></table></figure></p>
+<h4 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /home/yihua</span><br><span class="line">wget http://nginx.org/download/nginx-0.8.55.tar.gz</span><br><span class="line">tar zxvf nginx-0.8.55.tar.gz</span><br><span class="line">cd nginx-0.8.55</span><br><span class="line">./configure --prefix=/opt/nginx --with-http_stub_status_module</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h4 id="安装fastdfs-nginx-module"><a href="#安装fastdfs-nginx-module" class="headerlink" title="安装fastdfs-nginx-module"></a>安装fastdfs-nginx-module</h4><p>下载并上传fastdfs-nginx-module_v1.15.tar.gz<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar xzf fastdfs-nginx-module_v1.15.tar.gz</span><br><span class="line">cd /home/yihua/nginx-0.8.55 </span><br><span class="line">./configure --add-module=/home/yihua/fastdfs-nginx-module/src</span><br><span class="line">make; make install</span><br></pre></td></tr></table></figure></p>
+<h4 id="配置nginx和fastdfs-nginx-module"><a href="#配置nginx和fastdfs-nginx-module" class="headerlink" title="配置nginx和fastdfs-nginx-module"></a>配置nginx和fastdfs-nginx-module</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /home/yihua/fastdfs-nginx-module/src/mod_fastdfs.conf /etc/fdfs</span><br><span class="line">vim /etc/fdfs/mod_fastdfs.conf</span><br></pre></td></tr></table></figure>
+<p>修改 fastdfs的nginx模块的配置文件 mod_fastdfs.conf<br>一般只需改动以下几个参数即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">base_path=/home/yuqing/fastdfs      #保存日志目录</span><br><span class="line">tracker_server=192.168.1.134:22122    #tracker 服务器的 IP 地址以及端口号</span><br><span class="line">storage_server_port=23000            #storage 服务器的端口号</span><br><span class="line">group_name=group1                    #当前服务器的 group 名</span><br><span class="line">url_have_group_name = true           #文件 url 中是否有 group 名</span><br><span class="line">store_path_count=1                   #存储路径个数，需要和 store_path 个数匹配</span><br><span class="line">store_path0=/home/yuqing/fastdfs    #存储路径</span><br><span class="line">http.need_find_content_type=true     # 从文件 扩展 名查 找 文件 类型 （ nginx 时 为true）</span><br><span class="line">group_count = 1                      #设置组的个数</span><br></pre></td></tr></table></figure></p>
+<p>然后在末尾添加分组信息，目前只有一个分组，就只写一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[group1]</span><br><span class="line">group_name=group1</span><br><span class="line">storage_server_port=23000</span><br><span class="line">store_path_count=1</span><br><span class="line">store_path0=/home/yuqing/fastdfs</span><br></pre></td></tr></table></figure></p>
+<p>建立 M00 至存储目录的符号连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /home/yuqing/fastdfs/data /home/yuqing/fastdfs/data/M00</span><br></pre></td></tr></table></figure></p>
+<p>将 server 段中的 listen 端口号改为 8080：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/nginx/conf/nginx.conf</span><br><span class="line">listen       8080;</span><br></pre></td></tr></table></figure></p>
+<p>在 server 段中添加fastdfs的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /group1/M00 &#123;</span><br><span class="line">       root   /home/yuqing/fastdfs/data;</span><br><span class="line">       ngx_fastdfs_module;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="准备nginx启动脚本"><a href="#准备nginx启动脚本" class="headerlink" title="准备nginx启动脚本"></a>准备nginx启动脚本</h4><p>编辑 /etc/init.d/nginx，如下内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># nginx Startup script for the Nginx HTTP Server</span><br><span class="line"># it is v.1.4.7 version.</span><br><span class="line"># chkconfig: - 85 15</span><br><span class="line"># description: Nginx is a high-performance web and proxy server.</span><br><span class="line"># It has a lot of features, but it&apos;s not for everyone.</span><br><span class="line"># processname: nginx</span><br><span class="line"> </span><br><span class="line"># pidfile: /usr/local/nginx/logs/nginx.pid</span><br><span class="line"># config: /usr/local/nginx/conf/nginx.conf</span><br><span class="line"> </span><br><span class="line">nginxd=/usr/local/nginx/sbin/nginx</span><br><span class="line">nginx_config=/usr/local/nginx/conf/nginx.conf</span><br><span class="line">nginx_pid=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">nginx_lock=/var/lock/subsys/nginx</span><br><span class="line">RETVAL=0</span><br><span class="line">prog=&quot;nginx&quot;</span><br><span class="line"> </span><br><span class="line"># Source function library.</span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"> </span><br><span class="line"># Source networking configuration.</span><br><span class="line">. /etc/sysconfig/network</span><br><span class="line"> </span><br><span class="line"># Check that networking is up.</span><br><span class="line">[ $&#123;NETWORKING&#125; = &quot;no&quot; ] &amp;&amp; exit 0</span><br><span class="line">[ -x $nginxd ] || exit 0</span><br><span class="line"> </span><br><span class="line"># Start nginx daemons functions.</span><br><span class="line">start() &#123;</span><br><span class="line">    nginx_is_run=`ps -ef | egrep &apos;nginx:\s*(worker|master)\s*process&apos; | wc -l`</span><br><span class="line">    if [ $&#123;nginx_is_run&#125; -gt 0 ];then</span><br><span class="line">        echo &quot;nginx already running....&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    fi</span><br><span class="line">    echo -n $&quot;Starting $prog: &quot;</span><br><span class="line">    daemon $nginxd -c $&#123;nginx_config&#125;</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $RETVAL = 0 ] &amp;&amp; touch $&#123;nginx_lock&#125;</span><br><span class="line">    return $RETVAL</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"># Stop nginx daemons functions.</span><br><span class="line">stop() &#123;</span><br><span class="line">    echo -n $&quot;Stopping $prog: &quot;</span><br><span class="line">    killproc $nginxd</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $RETVAL = 0 ] &amp;&amp; rm -f $&#123;nginx_lock&#125; $&#123;nginx_pid&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"># Reload nginx config file</span><br><span class="line">reload() &#123;</span><br><span class="line">    echo -n $&quot;Reloading $prog: &quot;</span><br><span class="line">    #kill -HUP `cat $&#123;nginx_pid&#125;`</span><br><span class="line">    killproc $nginxd -HUP</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"># See how we were called.</span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start)</span><br><span class="line">        start</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        stop</span><br><span class="line">        ;;</span><br><span class="line">    reload)</span><br><span class="line">        reload</span><br><span class="line">        ;;</span><br><span class="line">    restart)</span><br><span class="line">          stop</span><br><span class="line">        start</span><br><span class="line">        ;;</span><br><span class="line">    status)</span><br><span class="line">        status $prog</span><br><span class="line">        RETVAL=$?</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo $&quot;Usage: $prog &#123;start|stop|restart|reload|status|help&#125;&quot;</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br></pre></td></tr></table></figure></p>
+<p>Nginx启动提示找不到libpcre.so.1解决方法<br>如果是32位系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/lib/libpcre.so.1 /lib</span><br></pre></td></tr></table></figure></p>
+<p>如果是64位系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/lib/libpcre.so.1 /lib64</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># chmod u+x /etc/init.d/nginx</span><br><span class="line"># chkconfig --add nginx</span><br><span class="line"># chkconfig nginx on</span><br><span class="line"># service nginx start</span><br><span class="line">正在启动 nginx：                                           [确定]</span><br><span class="line"># service nginx status</span><br><span class="line">nginx (pid 26500) 正在运行...</span><br></pre></td></tr></table></figure>
+<p>查看nginx的日志 错误日志logs/error.log 看是否有问题</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="启动nginx，tracker和storage"><a href="#启动nginx，tracker和storage" class="headerlink" title="启动nginx，tracker和storage"></a>启动nginx，tracker和storage</h4><p>重启tracker：<br>/usr/local/bin/restart.sh /usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf<br>重启storage：<br>/usr/local/bin/restart.sh /usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf<br>启动nginx：<br>/usr/local/nginx/sbin/nginx<br>检查nginx状态：<br>/usr/local/nginx/sbin/nginx -t<br>重启nginx：<br>/usr/local/nginx/sbin/nginx -s reload</p>
+<h4 id="tracker运行"><a href="#tracker运行" class="headerlink" title="tracker运行"></a>tracker运行</h4><p>直接使用 fdfs_trackerd 来启动tracker进程，然后使用netstat 查看端口是否起来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@tracker fdfs]# fdfs_trackerd /etc/fdfs/tracker.conf restart</span><br><span class="line">[root@tracker fdfs]# netstat -antp | grep trackerd</span><br><span class="line">tcp        0      0 0.0.0.0:22122               0.0.0.0:*                   LISTEN      14520/fdfs_trackerd </span><br><span class="line">[root@tracker fdfs]#</span><br></pre></td></tr></table></figure></p>
+<h4 id="storage运行"><a href="#storage运行" class="headerlink" title="storage运行"></a>storage运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># fdfs_storaged /etc/fdfs/storage.conf restart</span><br><span class="line">查看端口是否起来</span><br><span class="line"># netstat -antp | grep storage</span><br><span class="line">tcp        0      0 0.0.0.0:23000               0.0.0.0:*                   LISTEN      10316/fdfs_storaged</span><br></pre></td></tr></table></figure>
+<p>也可以以下命令来监控服务器的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># fdfs_monitor /etc/fdfs/client.conf</span><br></pre></td></tr></table></figure></p>
+<p>看到ACTIVE,就说明已经成功注册到了tracker。</p>
+<h4 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h4><p>设置tracker开机自动启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@tracker tracker]# echo &quot;/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart&quot; &gt;&gt; /etc/rc.local</span><br><span class="line">[root@tracker tracker]# cat /etc/rc.local</span><br><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># This script will be executed *after* all the other init scripts.</span><br><span class="line"># You can put your own initialization stuff in here if you don&apos;t</span><br><span class="line"># want to do the full Sys V style init stuff.</span><br><span class="line">touch /var/lock/subsys/local</span><br><span class="line">/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart</span><br><span class="line">[root@tracker tracker]#</span><br></pre></td></tr></table></figure></p>
+<p>设置storage开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 fdfs]# echo &quot;/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart&quot; &gt;&gt; /etc/rc.local</span><br><span class="line">[root@server1 fdfs]# cat /etc/rc.local</span><br><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># This script will be executed *after* all the other init scripts.</span><br><span class="line"># You can put your own initialization stuff in here if you don&apos;t</span><br><span class="line"># want to do the full Sys V style init stuff.</span><br><span class="line">touch /var/lock/subsys/local</span><br><span class="line">/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用client测试文件上传"><a href="#使用client测试文件上传" class="headerlink" title="使用client测试文件上传"></a>使用client测试文件上传</h3><p>先配置一下client<br>vi /etc/fdfs/client.conf<br>保证一下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">base_path=/home/yuqing/fastdfs</span><br><span class="line">tracker_server=192.168.1.134:22122</span><br><span class="line">http.tracker_server_port=8080</span><br></pre></td></tr></table></figure></p>
+<p>vi test.txt</p>
+<p>/usr/local/bin/fdfs_test /etc/fdfs/client.conf  upload  test.txt<br>得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">This is FastDFS client test program v4.06</span><br><span class="line"></span><br><span class="line">Copyright (C) 2008, Happy Fish / YuQing</span><br><span class="line"></span><br><span class="line">FastDFS may be copied only under the terms of the GNU General</span><br><span class="line">Public License V3, which may be found in the FastDFS source kit.</span><br><span class="line">Please visit the FastDFS Home Page http://www.csource.org/</span><br><span class="line">for more detail.</span><br><span class="line"></span><br><span class="line">[2016-07-06 07:31:57] DEBUG - base_path=/home/yuqing/fastdfs, connect_timeout=30, network_timeout=60, tracker_server_count=1, anti_steal_token=0, anti_steal_secret_key length=0, use_connection_pool=0, g_connection_pool_max_idle_time=3600s, use_storage_id=0, storage server id count: 0</span><br><span class="line"></span><br><span class="line">tracker_query_storage_store_list_without_group:</span><br><span class="line">        server 1. group_name=, ip_addr=192.168.1.134, port=23000</span><br><span class="line"></span><br><span class="line">group_name=group1, ip_addr=192.168.1.134, port=23000</span><br><span class="line">storage_upload_by_filename</span><br><span class="line">group_name=group1, remote_filename=M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt</span><br><span class="line">source ip address: 192.168.1.134</span><br><span class="line">file timestamp=2016-07-06 07:31:57</span><br><span class="line">file size=7</span><br><span class="line">file crc32=3651826635</span><br><span class="line">file url: http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt</span><br><span class="line">storage_upload_slave_by_filename</span><br><span class="line">group_name=group1, remote_filename=M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085_big.txt</span><br><span class="line">source ip address: 192.168.1.134</span><br><span class="line">file timestamp=2016-07-06 07:31:57</span><br><span class="line">file size=7</span><br><span class="line">file crc32=3651826635</span><br><span class="line">file url: http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085_big.txt</span><br><span class="line">[root@localhost yihua]# This is FastDFS client test program v4.06</span><br><span class="line">-bash: This: command not found</span><br><span class="line">Copyright (C) 2008, Happy Fish / YuQing</span><br></pre></td></tr></table></figure></p>
+<p>在浏览器打开<a href="http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt" target="_blank" rel="external">http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt</a><br>可以看见你的文件。那么就成功了。</p>
+<p>done.</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/01/项目管理建议/" itemprop="url">
+                  项目管理建议
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-01T19:14:00+08:00" content="2016-07-01">
+              2016-07-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="对项目管理制度的一些看法和建议"><a href="#对项目管理制度的一些看法和建议" class="headerlink" title="对项目管理制度的一些看法和建议"></a>对项目管理制度的一些看法和建议</h1><h2 id="当前存在的问题"><a href="#当前存在的问题" class="headerlink" title="当前存在的问题"></a>当前存在的问题</h2><ol>
+<li><p>技术工程师反映，技术人员与业务隔离，技术人员难以熟悉第一手业务需求，对工程师开发出契合业务部分需求的产品造成一定的理解障碍。</p>
+</li>
+<li><p>安卓、iOS、H5、后端、测试等各部门分而治之，缺乏一个强而有力的统筹推进，虽然增加了项目经理角色，但目前这个角色只能在各部门之间协调，仍然难以有力推动各部门按时按量完成进度。</p>
+</li>
+<li><p>从业务到产品到开发到测试上线，这个流程还可以有优化的地方。</p>
+</li>
+</ol>
+<h2 id="分析和改进建议"><a href="#分析和改进建议" class="headerlink" title="分析和改进建议"></a>分析和改进建议</h2><h3 id="针对问题1。"><a href="#针对问题1。" class="headerlink" title="针对问题1。"></a>针对问题1。</h3><p>使用尝试让项目经理或者技术经理在产需求研和产品评审阶段就参与介入，能够一定程度的和业务部分做到沟通，让技术人员更熟悉业务。即使只是旁听也好</p>
+<h3 id="针对问题2。"><a href="#针对问题2。" class="headerlink" title="针对问题2。"></a>针对问题2。</h3><p>程序界有一句话，“没有完美的模型，但有一些能用。”<br>既然目前公司的情况是各部分分而治之，各施其职，那么可以考虑这样一个构思，产品对业务负责，提供产品的产出;测试则对产品负责，提供项目和模块完成情况；技术经理对项目经理负责，提供项目模块开发时间评估，以及开发产出；各开发工程师对技术经理负责，按时按量完成技术经理制定的模块开发计划。而项目经理则对项目的进度和协调负责，应该要有渠道能对接所有相关部门，跟进项目的进度，协调各方遇到的问题，并协助解决。<br><strong>这样，明确各部门应该对谁负责，各部门遇到项目开发相关问题，也就能明确的找到相应的人员，得到反馈，部门之间也能够相互推动。</strong></p>
+<p><strong>这里推荐使用一个团队协作管理的工具：“Worktile”。</strong><br>Worktile可以在一个看板中看到所有在做、已完成、在测试等等所有流程中的任务和完成情况。<br>例如，技术经理可以列出所有需要完成的模块和任务，为之分配负责人。负责人开发完成后，勾选完成，管理人员就可以拖动任务进入测试流程。<br>如此一个可视化简单的团队协作管理。<br>当然这个功能，像禅道也能部分实现。但是禅道的这个功能并不好用，从实践经验来说，使用的人积极性并不高。而Worktile这类工具如果推动成功，开发的管理效率将会得到提高。</p>
+<p><strong>各状态任务完成情况一览：</strong><br><img src="/images/project-002.jpg" alt=""><br><strong>完成任务，推动到另一状态：</strong><br><img src="/images/project-003.png" alt=""><br><strong>报表：</strong><br><img src="/images/project-004.jpg" alt=""><br><strong>团队日历：每个时间点要完成的任务也会在此显示</strong><br><img src="/images/project-005.png" alt=""></p>
+<h3 id="针对问题3"><a href="#针对问题3" class="headerlink" title="针对问题3."></a>针对问题3.</h3><p>以门店收银机为例，发现存在一些流程上的问题。<br><strong>首先，说接口，有两个问题。</strong><br>一，客户端和服务端接口文档，用的是word文档沟通，各个人员直接相互传递，很可能导致相互之间接口文档不同步，也就会造成开发期间关于接口的一些扯皮。<br>二，虽然接口文档有了，但是客户端还是要等服务端出接口后，才能进行接口接入后的相关开发，这样前端的进度就要依赖于后端的产出。<br>既然有这样的问题，那么有没有改进办法呢？有的，这里推荐使用阿里开源的“RAP”接口管理工具进行接口管理。<br>RAP对我们接口开发的帮助有：<br>1）可视化结构化的接口编辑和管理。这样接口只有服务器上的一份，并且管理简单。<br>2）生成Mock数据、校验真实接口的正确性。有了Mock功能，前端可以在后端提供接口之前，利用rap提供的模拟接口数据，提前进行接口接入的开发，提高前端开发速度。最重要的是，前后端接口开发解耦。<br><img src="/images/project-001.jpg" alt=""></p>
+<p><strong>其次，说说测试和螺旋式开发。</strong><br>测试本身是一个发现细节的过程，有些问题测试到细节的地方，就会出现值得推敲和不断调试的情况。而我们项目留给测试的时间太少了。而前期，没完成之前，测试在等待开发，同时，最后所有模块大致完成才提测，又一股脑挤在后期测试和迭代，时间难免太紧，很容易导致进度延误。<br><strong>这里的建议是，开发应该在项目开始时就梳理出模块间的依赖情况，前后端协调好应该先开发哪些模块，只要有一个模块开发完成，就马上提测。</strong>如此让测试尽早介入测试，达到项目螺旋式迭代推荐的目的。同时，也能让测试的时间合理分配，避免延误。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/28/api-version-4种在springmvc中进行api版本控制的处理方法/" itemprop="url">
+                  [api_version]4种在springmvc中进行api版本控制的处理方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-28T15:31:54+08:00" content="2016-06-28">
+              2016-06-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p><a href="https://github.com/mindhaq/restapi-versioning-spring.git" target="_blank" rel="external">https://github.com/mindhaq/restapi-versioning-spring.git</a><br><a href="https://github.com/augusto/restVersioning.git" target="_blank" rel="external">https://github.com/augusto/restVersioning.git</a></p>
+<p>这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法，你们看怎么样，能否不使用冗余部署的方式。</p>
+<ol>
+<li><p>/api/v1/xxx<br>controller中的方法注解写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(value = &quot;/apiurl/&#123;version&#125;/hello&quot;, method = GET, produces = APPLICATION_JSON_VALUE)</span><br><span class="line">public Hello sayHelloWorldUrl(@PathVariable final ValidVersion version) &#123;</span><br><span class="line">    return new Hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/api/xxx<br>在header中添加”X-API-Version”:”v1”来进行版本请求的区别<br>controller中的方法注解写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(value = &quot;/apiheader/hello&quot;, method = GET, produces = APPLICATION_JSON_VALUE)</span><br><span class="line">public Hello sayHelloWorldHeader(@RequestHeader(&quot;X-API-Version&quot;) final ValidVersion version) &#123;</span><br><span class="line">    return new Hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller中的方法注解写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(</span><br><span class="line">    value = &quot;/apiaccept/hello&quot;, method = GET,</span><br><span class="line">    produces = &#123;&quot;application/vnd.company.app-v1+json&quot;, &quot;application/vnd.company.app-v2+json&quot;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller写法：<br>```<br>@Controller<br>@VersionedResource(media = “application/vnd.app.resource”)<br>public class TestController {</p>
+<p> @RequestMapping(value = {“/resource”}, method = RequestMethod.GET)<br> @VersionedResource(from = “1.0”, to = “1.0”)<br> @ResponseBody<br> public Resource getResource_v1() {</p>
+<pre><code>return new Resource(&quot;1.0&quot;);
+</code></pre><p> }</p>
+<p> @RequestMapping(value = {“/resource”}, method = RequestMethod.GET)<br> @VersionedResource(from = “2.0”)<br> @ResponseBody<br> public Resource getResource_v2_onwards() {</p>
+<pre><code>return new Resource(&quot;2.0&quot;);
+</code></pre><p> }<br>}</p>
+</li>
+</ol>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/" itemprop="url">
+                  [dev][collect][2016-06-06]collect-of-im-netty-android-etc
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-06T17:42:22+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>此集合[dev][collect]汇总开发资源.<br>资源含文章，git code等等..</p>
+<h3 id="2016-06-06"><a href="#2016-06-06" class="headerlink" title="2016-06-06"></a>2016-06-06</h3><ul>
+<li><p>一套仿 微信 IM系统 基于apache mina<br><a href="http://my.oschina.net/u/1167637/blog/411312" target="_blank" rel="external">http://my.oschina.net/u/1167637/blog/411312</a></p>
+</li>
+<li><p>socketio 服务器推送<br><a href="http://blog.csdn.net/xtayfjpk/article/details/40948409" target="_blank" rel="external">http://blog.csdn.net/xtayfjpk/article/details/40948409</a></p>
+</li>
+<li><p>开放源码,基于springMVC+springSecurity3.x+Mybaits3.x的权限系统,,支持开源<br><a href="https://github.com/caprice/lanyuan" target="_blank" rel="external">https://github.com/caprice/lanyuan</a></p>
+</li>
+<li><p>Simple asynchronous non blocking chat server/client based on Netty 4<br><a href="https://github.com/caprice/nettychat" target="_blank" rel="external">https://github.com/caprice/nettychat</a><br><a href="https://github.com/YihuaWanglv/nettychat" target="_blank" rel="external">https://github.com/YihuaWanglv/nettychat</a></p>
+</li>
+<li><p>[5][android]A High Copy WeChat ,SNS APP (高仿微信)<br><a href="https://github.com/YihuaWanglv/wechat" target="_blank" rel="external">https://github.com/YihuaWanglv/wechat</a></p>
+</li>
+<li><p>一个Android开发者博客<br><a href="http://blog.csdn.net/finddreams" target="_blank" rel="external">http://blog.csdn.net/finddreams</a></p>
+</li>
+<li><p>案例剖析：从0开始搭建一个微服务的持续交付系统<br><a href="http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect</a></p>
+</li>
+<li><p>[5][android]这是一个可用于Android快速开发的框架，集成了很多项目中通用的东西，免去重复造轮子的麻烦，直接下载来了，修改一下就可以做为基础的框架进行开发，提高开发速度，适合当前移动互联网时代敏捷快速开发的节奏<br><a href="https://github.com/YihuaWanglv/Android_BaseLib" target="_blank" rel="external">https://github.com/YihuaWanglv/Android_BaseLib</a></p>
+</li>
+<li><p>使用Netty实现IMServer，方便的Entity解码编码机制，融合到二进制协议中<br><a href="https://github.com/YihuaWanglv/netty-chat" target="_blank" rel="external">https://github.com/YihuaWanglv/netty-chat</a></p>
+</li>
+<li><p>仿淘宝的B2C商城项目<br>页面用的jsp，稍显陈旧<br><a href="https://github.com/YihuaWanglv/B2CWeb" target="_blank" rel="external">https://github.com/YihuaWanglv/B2CWeb</a></p>
+</li>
+<li><p>JavaEE项目开发脚手架<br><a href="https://github.com/YihuaWanglv/es" target="_blank" rel="external">https://github.com/YihuaWanglv/es</a><br>后端:<br>IoC容器 spring<br>web框架 springmvc<br>orm框架 hibernate + spring data jpa<br>安全框架 shiro<br>验证框架 hibernate validator<br>任务调度框架 quartz<br>缓存 ehcache<br>数据源 druid<br>日志 slf4j+logback<br>Json fastjson<br>日期美化 prettytime<br>servlet 3.0(需要支持servlet3的servlet容器，如tomcat7)<br>jcaptcha 验证码<br>jsp 模板视图<br>前端:<br>jquery js框架<br>jquery-ui-bootstrap界面框架<br>font-wesome 字体/图标框架<br>jquery Validation Engine 验证框架（配合spring的验证框架，页面验证简化不少）<br>kindeditor 编辑器<br>nicescroll 漂亮的滚动条<br>zTree 树框架<br>jquery blockUI 弹出框/遮罩框架<br>jquery-fileupload 文件上传<br>bootstrap-datatimepicker 日历选择</p>
+</li>
+<li><p>[5][android]Collect and classify android open source projects<br><a href="https://github.com/YihuaWanglv/android-open-project" target="_blank" rel="external">https://github.com/YihuaWanglv/android-open-project</a></p>
+</li>
+<li><p>Blog avec Spring MVC + spring DATA + mongodb + angularjs<br><a href="https://github.com/YihuaWanglv/blog_java" target="_blank" rel="external">https://github.com/YihuaWanglv/blog_java</a></p>
+</li>
+<li><p>dianping-api-samples<br><a href="https://github.com/YihuaWanglv/dianping-open-sdk" target="_blank" rel="external">https://github.com/YihuaWanglv/dianping-open-sdk</a></p>
+</li>
+<li><p>JeeSite 是一个企业信息管理系统基础框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、Apache Shiro、Hibernate、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。<br><a href="https://github.com/YihuaWanglv/jeesite" target="_blank" rel="external">https://github.com/YihuaWanglv/jeesite</a></p>
+</li>
+<li><p>Demos of Apache MINA User Guide《Apache MINA 2 用户指南》中文翻译，文中用到的例子源码 <a href="https://github.com/waylau/apache-mina-2.x-user-guide" target="_blank" rel="external">https://github.com/waylau/apache-mina-2.x-user-guide</a><br><a href="https://github.com/waylau/apache-mina-2-user-guide-demos" target="_blank" rel="external">https://github.com/waylau/apache-mina-2-user-guide-demos</a></p>
+</li>
+<li><p>Spring Framework 4.x Reference Documentation 中文翻译<br><a href="https://www.gitbook.com/book/waylau/spring-framework-4-reference/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/spring-framework-4-reference/details</a><br><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">https://github.com/waylau/spring-framework-4-reference</a></p>
+</li>
+<li><p>免费的计算机编程类中文书籍<br><a href="https://github.com/YihuaWanglv/free-programming-books-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books-zh_CN</a><br>网页版：<br><a href="http://siberiawolf.com/free_programming/index.html" target="_blank" rel="external">http://siberiawolf.com/free_programming/index.html</a></p>
+</li>
+<li><p>一个合格的程序员应该读过哪些书<br><a href="http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html" target="_blank" rel="external">http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html</a></p>
+</li>
+<li><p>Google 全球 IP 地址库<br><a href="https://github.com/justjavac/Google-IPs" target="_blank" rel="external">https://github.com/justjavac/Google-IPs</a></p>
+</li>
+<li><p>一份关于“资料汇总”的汇总<br><a href="https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN</a></p>
+</li>
+<li><p>Freely available programming books<br><a href="https://github.com/YihuaWanglv/free-programming-books" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books</a></p>
+</li>
+<li><p>RESTful API 设计参考文献列表，可帮助你更加彻底的了解REST风格的接口设计<br><a href="https://github.com/aisuhua/restful-api-design-references" target="_blank" rel="external">https://github.com/aisuhua/restful-api-design-references</a></p>
+</li>
+<li><p>ssential Netty in Action 《Netty 实战(精髓)》<br><a href="https://github.com/waylau/essential-netty-in-action" target="_blank" rel="external">https://github.com/waylau/essential-netty-in-action</a><br>gitbook：<br><a href="http://waylau.com/essential-netty-in-action/" target="_blank" rel="external">http://waylau.com/essential-netty-in-action/</a></p>
+</li>
+<li><p>Gradle 2 User Guide 中文翻译《Gradle 2 用户指南》<br><a href="https://github.com/waylau/Gradle-2-User-Guide" target="_blank" rel="external">https://github.com/waylau/Gradle-2-User-Guide</a><br>gitbook：<br><a href="https://www.gitbook.com/book/waylau/gradle-2-user-guide/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/gradle-2-user-guide/details</a></p>
+</li>
+<li><p>Netty 4.x User Guide 中文翻译《Netty 4.x 用户指南》<br><a href="https://github.com/waylau/netty-4-user-guide" target="_blank" rel="external">https://github.com/waylau/netty-4-user-guide</a><br>gitbook：<br><a href="http://waylau.com/netty-4-user-guide/" target="_blank" rel="external">http://waylau.com/netty-4-user-guide/</a></p>
+</li>
+<li><p>这是一个整理即时通讯（IM）和社交系统（SNS）优秀开源项目的文档，项目上传github欢迎提交更新<br><a href="https://github.com/YihuaWanglv/Perfect_IM_SNS" target="_blank" rel="external">https://github.com/YihuaWanglv/Perfect_IM_SNS</a></p>
+</li>
+<li><p>基于位置信息，空间时间结合的社交与分享的应用<br><a href="https://github.com/YihuaWanglv/Tuyi" target="_blank" rel="external">https://github.com/YihuaWanglv/Tuyi</a></p>
+</li>
+<li><p>SYTeamApp：基于环信平台进行开发，旨在打造的高效团队沟通的移动客户端，供企业内部协作使用、适应移动办公需要，提升企业沟通协同效率，增强企业办公管理效率。（当前仅实现了用户登入登出功能、通讯功能、投票功能。）<br><a href="https://github.com/YihuaWanglv/SYTeamApp" target="_blank" rel="external">https://github.com/YihuaWanglv/SYTeamApp</a></p>
+</li>
+<li><p>MeifuGO：An open source android app by using easemob IM SDK<br><a href="https://github.com/YihuaWanglv/MeifuGO" target="_blank" rel="external">https://github.com/YihuaWanglv/MeifuGO</a></p>
+</li>
+<li><p>fangyuanshili：环信SDK,IM,geohash,lbs<br><a href="https://github.com/YihuaWanglv/fangyuanshili" target="_blank" rel="external">https://github.com/YihuaWanglv/fangyuanshili</a></p>
+</li>
+<li><p>zaina：该项目是改编自环信即时通讯云的demo改编<br><a href="https://github.com/YihuaWanglv/zaina" target="_blank" rel="external">https://github.com/YihuaWanglv/zaina</a></p>
+</li>
+<li><p>dianhua：基于react native 和 环信的实时通话的免费店话<br><a href="https://github.com/YihuaWanglv/dianhua" target="_blank" rel="external">https://github.com/YihuaWanglv/dianhua</a></p>
+</li>
+<li><p>Baby：一个私密社交APP<br><a href="https://github.com/YihuaWanglv/Baby" target="_blank" rel="external">https://github.com/YihuaWanglv/Baby</a></p>
+</li>
+<li><p>MVPCommon：一个集成了众多开源项目的Android MVP框架以及应用搭建，全程博客更新。<br>a common Architecture and project build with blogs releasing based on MVP，integrates many Open Source Projects ,to make your developing quicker and easier.<br><a href="https://github.com/YihuaWanglv/MVPCommon" target="_blank" rel="external">https://github.com/YihuaWanglv/MVPCommon</a><br>从零开始搭建android框架系列：<br><a href="http://www.jianshu.com/notebooks/3767449/latest" target="_blank" rel="external">http://www.jianshu.com/notebooks/3767449/latest</a></p>
+</li>
+<li><p>learnCloud：<br>和应用服务器、存储服务器说再见<br>再也不用租服务器，也不用写后端代码了。LeanCloud 提供一站式后端云服务，从数据存储、实时聊天、消息推送到移动统计，涵盖应用开发的多方面后端需求。<br><a href="https://leancloud.cn/" target="_blank" rel="external">https://leancloud.cn/</a></p>
+</li>
+<li><p>不容错过，最全的安卓架构合集【从零开始搭建android框架系列（2）】<br><a href="http://www.jianshu.com/p/1f21e1d375aa" target="_blank" rel="external">http://www.jianshu.com/p/1f21e1d375aa</a></p>
+</li>
+<li><p>安卓架构文章合集（a collection of android Architecture）<br><a href="https://github.com/YihuaWanglv/AndroidArchitectureCollection" target="_blank" rel="external">https://github.com/YihuaWanglv/AndroidArchitectureCollection</a></p>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/06/git-git分支使用和管理/" itemprop="url">
+                  [git]git分支使用和管理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-06T17:37:36+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="git分支常用命令"><a href="#git分支常用命令" class="headerlink" title="git分支常用命令"></a>git分支常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">从master创建dev分支，并checkout dev分支：</span><br><span class="line">git checkout -b dev</span><br><span class="line">此命令相当于：</span><br><span class="line">git branch dev</span><br><span class="line">git checkout dev</span><br><span class="line"></span><br><span class="line">回到master，合并dev的更改到master：</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">合并后删除dev分支：</span><br><span class="line">git branch -d dev</span><br><span class="line"></span><br><span class="line">如果直接用git merge dev合并分支，git使用的是fast forward的模式，并不会留下commit历史，如果想要留下commit历史，就要加上--no-ff参数，并使用-m添加commit描述</span><br><span class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev</span><br></pre></td></tr></table></figure>
+<h2 id="保存临时状态"><a href="#保存临时状态" class="headerlink" title="保存临时状态"></a>保存临时状态</h2><p>当你正在dev分支进行开发，还没有开发完成能提交，此时突然有一个线上版本的bug要紧急修复，这个时候你就需要用到git stash功能，保存正在开发的dev分支的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">保存当前开发状态：</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line">查看当前已保存的stash列表：</span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line">取出之前保存的stash状态：</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
+<h2 id="多人协作的工作模式"><a href="#多人协作的工作模式" class="headerlink" title="多人协作的工作模式"></a>多人协作的工作模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">多人协作的工作模式通常是这样：</span><br><span class="line"></span><br><span class="line">首先，可以试图用git push origin branch-name推送自己的修改；</span><br><span class="line"></span><br><span class="line">如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</span><br><span class="line"></span><br><span class="line">如果合并有冲突，则解决冲突，并在本地提交；</span><br><span class="line"></span><br><span class="line">没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！</span><br><span class="line"></span><br><span class="line">如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。</span><br><span class="line"></span><br><span class="line">这就是多人协作的工作模式，一旦熟悉了，就非常简单。</span><br><span class="line"></span><br><span class="line">小结</span><br><span class="line"></span><br><span class="line">查看远程库信息，使用git remote -v；</span><br><span class="line"></span><br><span class="line">本地新建的分支如果不推送到远程，对其他人就是不可见的；</span><br><span class="line"></span><br><span class="line">从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；</span><br><span class="line"></span><br><span class="line">在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；</span><br><span class="line"></span><br><span class="line">建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；</span><br><span class="line"></span><br><span class="line">从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/04/Windows下开启React-Native征途/" itemprop="url">
+                  Windows下开启React-Native征途
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-06-04T09:55:48+08:00" content="2016-06-04">
+              2016-06-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。<br>不过说出来你可能不太相信，这故事的开头，来的并没有想象中的困难。</p>
+<p>以下是过程：</p>
+<h2 id="1-安装Nodejs"><a href="#1-安装Nodejs" class="headerlink" title="1. 安装Nodejs"></a>1. 安装Nodejs</h2><p>React Native要求是4.0以上。</p>
+<h2 id="2-安装react-native-cli"><a href="#2-安装react-native-cli" class="headerlink" title="2. 安装react-native-cli"></a>2. 安装react-native-cli</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g react-native-cli</span><br></pre></td></tr></table></figure>
+<h2 id="3-初始化第一个项目"><a href="#3-初始化第一个项目" class="headerlink" title="3. 初始化第一个项目"></a>3. 初始化第一个项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init TestProject</span><br></pre></td></tr></table></figure>
+<p>初始化第一个测试Demo，init的时候可能需要一点时间. 伟大的目标值的那么些耐心的等待。</p>
+<h2 id="4-设置环境变量"><a href="#4-设置环境变量" class="headerlink" title="4. 设置环境变量"></a>4. 设置环境变量</h2><p>设置环境变量ANDROID_HOME指向Android SDK的目录<br>eg:<br><img src="/images/react-001.png" alt=""></p>
+<h2 id="5-安装Genymotion模拟器"><a href="#5-安装Genymotion模拟器" class="headerlink" title="5. 安装Genymotion模拟器"></a>5. 安装Genymotion模拟器</h2><p>Genymotion官网下载安装Genymotion模拟器，并创建Android emulator。<br>创建实例后，将得到如下画面：<br><img src="/images/react-002.png" alt=""><br>Genymotion运行Android模拟实例需要VirtualBox和AndroidSdk的支持。<br>安装Genymotion后默认的VirtualBox和AndroidSdk不好使，我通过Setting设置配置好自己本地的VirtualBox和AndroidSdk。<br>设置VirtualBox<br><img src="/images/react-003.png" alt=""><br>设置sdk<br><img src="/images/react-004.png" alt=""></p>
+<p>配置好后，就把模拟的Android实例启动起来放着吧。</p>
+<h2 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h2><h3 id="1-启动React-Native-Server"><a href="#1-启动React-Native-Server" class="headerlink" title="1-启动React Native Server"></a>1-启动React Native Server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native start</span><br></pre></td></tr></table></figure>
+<p><img src="/images/react-005.png" alt=""></p>
+<h3 id="2-开一个新的命令行终端-cmd-切换到项目目录安装APP"><a href="#2-开一个新的命令行终端-cmd-切换到项目目录安装APP" class="headerlink" title="2-开一个新的命令行终端(cmd), 切换到项目目录安装APP"></a>2-开一个新的命令行终端(cmd), 切换到项目目录安装APP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd android</span><br><span class="line">gradlew.bat installDebug</span><br></pre></td></tr></table></figure>
+<p>执行gradlew.bat installDebug时，需要先正常打开Genymotion模拟器，否则build 和 install会报错。<br><img src="/images/react-006.png" alt=""><br>安装成功后，在Genymotion里手动打开APP ，正常的话，你就可以看到React-Native的欢迎画面。<br><img src="/images/react-007.png" alt=""></p>
+<p>Windows下的React Native开发环境搭建 – done.</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/01/Jenkins自动化部署实践-Jenkins多环境部署git托管的springboot项目/" itemprop="url">
                   [Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目
                 </a>
@@ -544,569 +1195,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/08/java-design-pattern-java设计模式之Builder模式/" itemprop="url">
-                  [java][design-pattern]java设计模式之Builder模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-05-08T16:58:38+08:00" content="2016-05-08">
-              2016-05-08
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="java设计模式之Builder模式"><a href="#java设计模式之Builder模式" class="headerlink" title="java设计模式之Builder模式"></a>java设计模式之Builder模式</h2><p>设计模式模式很多，实际常用的很少。<br>《Effective Java》这本书里提到过的一种模式builder模式，个人认为非常值得推荐。<br>假设有一个entity(Entity)，有id，name两个字段，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package demo;</span><br><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>为了不用每次初始化的时候，要一个一个的setxxx设置字段值，通常我们会创建构造函数，通过构造函数直接传入字段，初始化。<br>加入构造函数的实体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    public Entity() &#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line">    public Entity(int id, String name) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.id = id;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后需要初始化实体的时候，我们这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &quot;name&quot;);</span><br></pre></td></tr></table></figure></p>
-<p>这种用法很常用，但是问题来了。<br>当实体Entity的字段需要增加变化的时候怎么办呢？<br>比如增加字段descr，这样构造函数和客户端初始化都需要更新：<br>实体增加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">private String descr;</span><br><span class="line">public String getDescr() &#123;</span><br><span class="line">    return descr;</span><br><span class="line">&#125;</span><br><span class="line">public void setDescr(String descr) &#123;</span><br><span class="line">    this.descr = descr;</span><br><span class="line">&#125;</span><br><span class="line">public Entity(int id, String name, String descr) &#123;</span><br><span class="line">    super();</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.descr = descr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后原来调用构造函数初始化的代码也需要改动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1, &quot;name&quot;, &quot;descr&quot;);</span><br></pre></td></tr></table></figure></p>
-<p>如果你的class是不确定的参数，后续可能经常变动，那么你的构造函数可能需要很多个，并且不停的变动，而且，构造函数参数多的时候，参数也很不容易记住。</p>
-<p>而Effective Java中则推荐一种builder模式来进行实体初始化<br>如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Entity &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String descr;</span><br><span class="line">    public static class Builder &#123;</span><br><span class="line">        private int id;</span><br><span class="line">        private String name;</span><br><span class="line">        private String descr;</span><br><span class="line">        public Builder(int id) &#123;</span><br><span class="line">            this.id = id;</span><br><span class="line">        &#125;</span><br><span class="line">        public Builder name(String name) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line">        public Builder descr(String descr) &#123;</span><br><span class="line">            this.descr = descr;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line">        public Entity build() &#123;</span><br><span class="line">            return new Entity(this);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private Entity(Builder b) &#123;</span><br><span class="line">        this.id = b.id;</span><br><span class="line">        this.name = b.name;</span><br><span class="line">        this.descr = b.descr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>初始化实例的时候，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity.Builder(10).name(&quot;name&quot;).descr(&quot;descr&quot;).build();</span><br></pre></td></tr></table></figure></p>
-<p>这样的写法，好处是，假如实体Entity以后变化很大，加入很多字段，不会影响到之前客户端初始化的代码，而且，这个初始化的过程非常清晰简单。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/04/java-web知识体系/" itemprop="url">
-                  java-web知识体系
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-05-04T23:05:21+08:00" content="2016-05-04">
-              2016-05-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="一张java-web知识体系思维导图"><a href="#一张java-web知识体系思维导图" class="headerlink" title="一张java web知识体系思维导图"></a>一张java web知识体系思维导图</h2><p>就是稍微旧了点</p>
-<p><img src="/images/java-web.png" alt=""></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/03/springmvc-rest-api-versioning/" itemprop="url">
-                  springmvc rest api versioning
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-05-03T23:34:35+08:00" content="2016-05-03">
-              2016-05-03
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p><a href="https://github.com/mindhaq/restapi-versioning-spring.git" target="_blank" rel="external">https://github.com/mindhaq/restapi-versioning-spring.git</a><br><a href="https://github.com/augusto/restVersioning.git" target="_blank" rel="external">https://github.com/augusto/restVersioning.git</a></p>
-<p>这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法。</p>
-<ol>
-<li><p>/api/v1/xxx<br>controller中的方法注解写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(value = &quot;/apiurl/&#123;version&#125;/hello&quot;, method = GET, produces = APPLICATION_JSON_VALUE)</span><br><span class="line">public Hello sayHelloWorldUrl(@PathVariable final ValidVersion version) &#123;</span><br><span class="line">    return new Hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>/api/xxx<br>在header中添加”X-API-Version”:”v1”来进行版本请求的区别<br>controller中的方法注解写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(value = &quot;/apiheader/hello&quot;, method = GET, produces = APPLICATION_JSON_VALUE)</span><br><span class="line">public Hello sayHelloWorldHeader(@RequestHeader(&quot;X-API-Version&quot;) final ValidVersion version) &#123;</span><br><span class="line">    return new Hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller中的方法注解写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(</span><br><span class="line">    value = &quot;/apiaccept/hello&quot;, method = GET,</span><br><span class="line">    produces = &#123;&quot;application/vnd.company.app-v1+json&quot;, &quot;application/vnd.company.app-v2+json&quot;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@VersionedResource(media = &quot;application/vnd.app.resource&quot;)</span><br><span class="line">public class TestController &#123;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &#123;&quot;/resource&quot;&#125;, method = RequestMethod.GET)</span><br><span class="line">    @VersionedResource(from = &quot;1.0&quot;, to = &quot;1.0&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public Resource getResource_v1() &#123;</span><br><span class="line">        return new Resource(&quot;1.0&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &#123;&quot;/resource&quot;&#125;, method = RequestMethod.GET)</span><br><span class="line">    @VersionedResource(from = &quot;2.0&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public Resource getResource_v2_onwards() &#123;</span><br><span class="line">        return new Resource(&quot;2.0&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/25/centos6环境下配置mysql主从同步/" itemprop="url">
-                  centos6环境下配置mysql主从同步
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-04-25T21:22:51+08:00" content="2016-04-25">
-              2016-04-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="1、主从服务器分别作以下操作："><a href="#1、主从服务器分别作以下操作：" class="headerlink" title="1、主从服务器分别作以下操作："></a>1、主从服务器分别作以下操作：</h2><p>  1.1、版本一致<br>  1.2、初始化表，并在后台启动mysql<br>  1.3、修改root的密码</p>
-<h2 id="2、修改主服务器master"><a href="#2、修改主服务器master" class="headerlink" title="2、修改主服务器master:"></a>2、修改主服务器master:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[必须]启用二进制日志<br>       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
-<h2 id="3、修改从服务器slave"><a href="#3、修改从服务器slave" class="headerlink" title="3、修改从服务器slave:"></a>3、修改从服务器slave:</h2><p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[不是必须]启用二进制日志<br>       server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
-<h2 id="4、重启两台服务器的mysql"><a href="#4、重启两台服务器的mysql" class="headerlink" title="4、重启两台服务器的mysql"></a>4、重启两台服务器的mysql</h2><pre><code>/etc/init.d/mysql restart
-or：
-service mysqld restart
-</code></pre><h2 id="5、在主服务器上建立帐户并授权slave"><a href="#5、在主服务器上建立帐户并授权slave" class="headerlink" title="5、在主服务器上建立帐户并授权slave:"></a>5、在主服务器上建立帐户并授权slave:</h2><p>  #mysql -uroot -proot<br>   mysql&gt;GRANT REPLICATION SLAVE ON <em>.</em> to ‘mysync’@’%’ identified by ‘root’; //一般不用root帐号，%表示所有客户端都可能连，只要帐号，密码正确，此处可用具体客户端IP代替，如192.168.145.226，加强安全。</p>
-<h2 id="6、登录主服务器的mysql，查询master的状态"><a href="#6、登录主服务器的mysql，查询master的状态" class="headerlink" title="6、登录主服务器的mysql，查询master的状态"></a>6、登录主服务器的mysql，查询master的状态</h2><p>   mysql&gt;show master status;<br>   +——————+———-+————–+——————+<br>   | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |<br>   +——————+———-+————–+——————+<br>   | mysql-bin.000004 |      308 |              |                  |<br>   +——————+———-+————–+——————+<br>   1 row in set (0.00 sec)<br>   注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</p>
-<h2 id="7、配置从服务器Slave："><a href="#7、配置从服务器Slave：" class="headerlink" title="7、配置从服务器Slave："></a>7、配置从服务器Slave：</h2><p>   mysql&gt;change master to master_host=’192.168.145.222’,master_user=’mysync’,master_password=’root’, master_log_file=’mysql-bin.000004’,master_log_pos=308;   //注意不要断开，308数字前后无单引号。</p>
-<p>   Mysql&gt;start slave;    //启动从服务器复制功能</p>
-<h2 id="8、检查从服务器复制功能状态："><a href="#8、检查从服务器复制功能状态：" class="headerlink" title="8、检查从服务器复制功能状态："></a>8、检查从服务器复制功能状态：</h2><p>   mysql&gt; show slave status\G</p>
-<p>   <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong></p>
-<pre><code>Slave_IO_State: Waiting for master to send event
-Master_Host: 192.168.2.222  //主服务器地址
-Master_User: mysync   //授权帐户名，尽量避免使用root
-Master_Port: 3306    //数据库端口，部分版本没有此行
-Connect_Retry: 60
-Master_Log_File: mysql-bin.000004
-Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
-Relay_Log_File: ddte-relay-bin.000003
-Relay_Log_Pos: 251
-Relay_Master_Log_File: mysql-bin.000004
-Slave_IO_Running: Yes    //此状态必须YES
-Slave_SQL_Running: Yes     //此状态必须YES
-      ......
-</code></pre><p>注：Slave_IO及Slave_SQL进程必须正常运行，即YES状态，否则都是错误的状态(如：其中一个NO均属错误)。</p>
-<p>以上操作过程，主从服务器配置完成。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/25/centos6下安装配置mysql，并开启mysql的远程登录/" itemprop="url">
-                  centos6下安装配置mysql，并开启mysql的远程登录
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-04-25T21:00:38+08:00" content="2016-04-25">
-              2016-04-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><h3 id="查看是否已安装mysql："><a href="#查看是否已安装mysql：" class="headerlink" title="查看是否已安装mysql："></a>查看是否已安装mysql：</h3><p>yum list installed | grep mysql</p>
-<h3 id="如果已安装，如下一次卸载："><a href="#如果已安装，如下一次卸载：" class="headerlink" title="如果已安装，如下一次卸载："></a>如果已安装，如下一次卸载：</h3><p>yum -y remove mysql-libs.x86_64</p>
-<h3 id="查看可用mysql："><a href="#查看可用mysql：" class="headerlink" title="查看可用mysql："></a>查看可用mysql：</h3><p>yum list | grep mysql 或 yum -y list mysql*</p>
-<h3 id="安装mysql："><a href="#安装mysql：" class="headerlink" title="安装mysql："></a>安装mysql：</h3><p>yum -y install mysql-server mysql mysql-devel</p>
-<h3 id="查看已安装的mysql状态："><a href="#查看已安装的mysql状态：" class="headerlink" title="查看已安装的mysql状态："></a>查看已安装的mysql状态：</h3><p>rpm -qi mysql-server</p>
-<h3 id="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示"><a href="#安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示" class="headerlink" title="安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:"></a>安装后一开始登陆不上的问题：在进入mysql工具时，总是有错误提示:</h3><p>mysql -u root -p<br>Enter password:<br>ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)</p>
-<h3 id="解决：方法操作很简单，如下："><a href="#解决：方法操作很简单，如下：" class="headerlink" title="解决：方法操作很简单，如下："></a>解决：方法操作很简单，如下：</h3><p>/etc/init.d/mysql stop<br>mysqld_safe –user=mysql –skip-grant-tables –skip-networking &amp;<br>mysql -u root mysql<br>mysql&gt; UPDATE user SET Password=PASSWORD(‘root’) where USER=’root’ and host=’root’ or host=’localhost’;//把空的用户密码都修改成非空的密码就行了。<br>mysql&gt; FLUSH PRIVILEGES;<br>mysql&gt; quit<br>/etc/init.d/mysqld restart<br>mysql -uroot -p<br>Enter password: &lt;输入新设的密码newpassword&gt;</p>
-<h2 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h2><h3 id="设置任意ip可以使用root账户和root密码远程登录"><a href="#设置任意ip可以使用root账户和root密码远程登录" class="headerlink" title="设置任意ip可以使用root账户和root密码远程登录"></a>设置任意ip可以使用root账户和root密码远程登录</h3><p>grant all privileges  on <em>.</em> to root@’%’ identified by “root”;</p>
-<h3 id="刷新"><a href="#刷新" class="headerlink" title="刷新"></a>刷新</h3><p>FLUSH PRIVILEGES;</p>
-<h3 id="重启："><a href="#重启：" class="headerlink" title="重启："></a>重启：</h3><p>service mysqld restart</p>
-<p>done！</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/" itemprop="url">
-                  [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-04-09T12:52:53+08:00" content="2016-04-09">
-              2016-04-09
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。</p>
-<p>现在开始是第一篇：在springboot项目中接入shiro</p>
-<h2 id="引入shiro的maven依赖"><a href="#引入shiro的maven依赖" class="headerlink" title="引入shiro的maven依赖"></a>引入shiro的maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-ehcache&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="程序具体实现"><a href="#程序具体实现" class="headerlink" title="程序具体实现"></a>程序具体实现</h2><h3 id="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml"><a href="#首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml" class="headerlink" title="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml"></a>首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shiro:</span><br><span class="line">  realm: com.xxx.xxx.config.security.MyRealm</span><br><span class="line">  loginUrl: /view/sign-in.html</span><br><span class="line">  successUrl: /item.html</span><br><span class="line">  unauthorizedUrl: /forbidden.html</span><br><span class="line">  filterChainDefinitions:</span><br><span class="line">    &quot;/login&quot;: anon</span><br><span class="line">    &quot;/static/**&quot;: anon</span><br><span class="line">    &quot;/bower_components/**&quot;: anon</span><br><span class="line">    &quot;/logout&quot;: logout</span><br><span class="line">    &quot;/**&quot;: authc</span><br></pre></td></tr></table></figure>
-<p>说明：<br>realm: com.xxx.xxx.config.security.MyRealm<br>Realm，在shiro中相当于数据源，shiro的其他核心组件需要获取用户和认证数据，就是从Realm获取。<br>为了获得更好的自定义功能，通常我们会自己实现一个Realm.<br>所以这里使用realm: com.xxx.xxx.config.security.MyRealm配置了一个自定义的Realm。<br>loginUrl，定义了需要认证用户时，跳转到的登录页面<br>successUrl，定义登录成功后跳转的页面。通常也可以在自己登录认证方法里redirect到需要的页面。<br>unauthorizedUrl，定义未认证时显示的页面。<br>filterChainDefinitions，定义哪些路径应该做何种过滤策略。<br>anon，logout，authc这些都是shiro默认实现的过滤器filter。<br>anon表示可以匿名访问的路径，authc表示需要登录认证的路径</p>
-<p>过滤器链使用最先匹配返回策略，所以我们需要把不需要认证即可访问的路径放在前面。</p>
-<h3 id="下面是自己实现的自定义Realm：MyRealm"><a href="#下面是自己实现的自定义Realm：MyRealm" class="headerlink" title="下面是自己实现的自定义Realm：MyRealm"></a>下面是自己实现的自定义Realm：MyRealm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationToken;</span><br><span class="line">import org.apache.shiro.authc.SimpleAuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.authz.AuthorizationInfo;</span><br><span class="line">import org.apache.shiro.authz.SimpleAuthorizationInfo;</span><br><span class="line">import org.apache.shiro.realm.AuthorizingRealm;</span><br><span class="line">import org.apache.shiro.subject.PrincipalCollection;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"></span><br><span class="line">import com.xxx.model.base.UserDTO;</span><br><span class="line">import com.xxx.remote.base.UserRemote;</span><br><span class="line"></span><br><span class="line">public class MyRealm extends AuthorizingRealm &#123;</span><br><span class="line">    @Autowired UserRemote userService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) &#123;</span><br><span class="line">        UserDTO user = (UserDTO) principals.getPrimaryPrincipal();</span><br><span class="line">        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();</span><br><span class="line">        List&lt;String&gt; roles = userService.findByUserId(user.getId());</span><br><span class="line">        info.addRoles(roles);</span><br><span class="line">        return info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;</span><br><span class="line">        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;</span><br><span class="line">        String username = usernamePasswordToken.getUsername();</span><br><span class="line">        UserDTO user = userService.findUserByName(username);</span><br><span class="line">        if (null != user) &#123;</span><br><span class="line">            CredentialsInfoHolder cih = new CredentialsInfoHolder(user.getPassword(), user.getSalt());</span><br><span class="line">            return new SimpleAuthenticationInfo(user, cih, getName());</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>MyRealm集成AuthorizingRealm，需要重写AuthorizingRealm的两个方法：doGetAuthorizationInfo，doGetAuthenticationInfo。<br>AuthorizationInfo represents a single Subject’s stored authorization data (roles, permissions, etc) used during authorization (access control) checks only. </p>
-<p>doGetAuthorizationInfo方法返回一个AuthorizationInfo，AuthorizationInfo对象是一个单一的Subject对象，存储着用户的授权数据，只用于授权检查时使用。<br>doGetAuthenticationInfo方法，针对给定的用户，获取对应用户的认证数据，提供给认证用户身份时使用。</p>
-<p>例子中UserRemote userService是提供用户数据的具体service服务。</p>
-<h3 id="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"><a href="#有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器" class="headerlink" title="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"></a>有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器</h3><h4 id="springboot-shiro配置类：ShiroAutoConfig-java"><a href="#springboot-shiro配置类：ShiroAutoConfig-java" class="headerlink" title="springboot shiro配置类：ShiroAutoConfig.java"></a>springboot shiro配置类：ShiroAutoConfig.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.realm.Realm;</span><br><span class="line">import org.apache.shiro.spring.web.ShiroFilterFactoryBean;</span><br><span class="line">import org.springframework.beans.BeanUtils;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.boot.context.properties.EnableConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line">import org.springframework.context.annotation.Import;</span><br><span class="line"></span><br><span class="line">import com.xxx.xxx.config.security.MyRealm;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableConfigurationProperties(ShiroProperties.class)</span><br><span class="line">@Import(ShiroManager.class)</span><br><span class="line">public class ShiroAutoConfig &#123;</span><br><span class="line">    @Autowired private ShiroProperties properties;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;realm&quot;)</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public MyRealm realm() &#123;</span><br><span class="line">        Class&lt;?&gt; relmClass = properties.getRealm();</span><br><span class="line">        MyRealm r = (MyRealm) BeanUtils.instantiate(relmClass);</span><br><span class="line">        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();</span><br><span class="line">        credentialsMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);</span><br><span class="line">        r.setCredentialsMatcher(credentialsMatcher);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;shiroFilter&quot;)</span><br><span class="line">    @DependsOn(&quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultSecurityManager securityManager, Realm realm) &#123;</span><br><span class="line">        MyRealm myRealm = (MyRealm) realm;</span><br><span class="line">        securityManager.setRealm(myRealm);</span><br><span class="line">        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();</span><br><span class="line">        shiroFilter.setSecurityManager(securityManager);</span><br><span class="line">        shiroFilter.setLoginUrl(properties.getLoginUrl());</span><br><span class="line">        shiroFilter.setSuccessUrl(properties.getSuccessUrl());</span><br><span class="line">        shiroFilter.setUnauthorizedUrl(properties.getUnauthorizedUrl());</span><br><span class="line">        shiroFilter.setFilterChainDefinitionMap(properties.getFilterChainDefinitions());</span><br><span class="line">        return shiroFilter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里例子里说明，我们需要提供realm和shiroFilter两个bean配置给spring容器。<br>getShiroFilterFactoryBean方法返回ShiroFilterFactoryBean，将会把yml里面的配置读取到ShiroFilterFactoryBean中，然后把realm设置进securityManager。<br>yml配置有ShiroProperties类持有并提供给ShiroFilterFactoryBean。<br>当然，还需要配置几个其他配置，都在ShiroManager配置好了。</p>
-<h4 id="ShiroProperties："><a href="#ShiroProperties：" class="headerlink" title="ShiroProperties："></a>ShiroProperties：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Map;</span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">/**</span><br><span class="line"> * Configuration properties for Shiro.</span><br><span class="line"> */</span><br><span class="line">@ConfigurationProperties(prefix = &quot;shiro&quot;)</span><br><span class="line">public class ShiroProperties &#123;</span><br><span class="line">    private Class&lt;?&gt; realm;</span><br><span class="line">    private String loginUrl;</span><br><span class="line">    private String successUrl;</span><br><span class="line">    private String unauthorizedUrl;</span><br><span class="line">    private Map&lt;String, String&gt; filterChainDefinitions;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="ShiroManager："><a href="#ShiroManager：" class="headerlink" title="ShiroManager："></a>ShiroManager：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.cache.CacheManager;</span><br><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.session.mgt.SessionManager;</span><br><span class="line">import org.apache.shiro.session.mgt.eis.SessionDAO;</span><br><span class="line">import org.apache.shiro.spring.LifecycleBeanPostProcessor;</span><br><span class="line">import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;</span><br><span class="line">import org.apache.shiro.web.mgt.DefaultWebSecurityManager;</span><br><span class="line">import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;</span><br><span class="line">import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shiro Config Manager.</span><br><span class="line"> */</span><br><span class="line">public class ShiroManager &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 保证实现了Shiro内部lifecycle函数的bean执行</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() &#123;</span><br><span class="line">        return new LifecycleBeanPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;defaultAdvisorAutoProxyCreator&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() &#123;</span><br><span class="line">        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();</span><br><span class="line">        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);</span><br><span class="line">        return defaultAdvisorAutoProxyCreator;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 用户授权信息Cache</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;cacheManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public CacheManager cacheManager() &#123;</span><br><span class="line">        return new MemoryConstrainedCacheManager();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public DefaultSecurityManager securityManager(CacheManager cacheManager) &#123;</span><br><span class="line">        DefaultSecurityManager sm = new DefaultWebSecurityManager();</span><br><span class="line">        sm.setCacheManager(cacheManager);</span><br><span class="line">        return sm;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) &#123;</span><br><span class="line">        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">        aasa.setSecurityManager(securityManager);</span><br><span class="line">        return new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>CacheManager负责缓存，这里简单的使用默认的内存缓存管理MemoryConstrainedCacheManager。<br>如果需要ehcache，或者使用redis作为缓存，则只需要实现自己的CacheManager和SessionManager即可。</p>
-<p>至此，springboot中引入shiro就完成了，其他更多具体使用方法，根据具体而定。</p>
-<h3 id="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"><a href="#这里简单的提供一下在mvc的controller中做登录和登出怎么做。" class="headerlink" title="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"></a>这里简单的提供一下在mvc的controller中做登录和登出怎么做。</h3><p>LoginController：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">import org.apache.shiro.SecurityUtils;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.IncorrectCredentialsException;</span><br><span class="line">import org.apache.shiro.authc.UnknownAccountException;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.subject.Subject;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LoginController &#123;</span><br><span class="line">    @RequestMapping(&quot;/login&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void login(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException &#123;</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        String error = null;</span><br><span class="line">        UsernamePasswordToken token = new UsernamePasswordToken(username, password);</span><br><span class="line">        try &#123;</span><br><span class="line">            subject.login(token);</span><br><span class="line">        &#125; catch (UnknownAccountException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (IncorrectCredentialsException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (AuthenticationException e) &#123;</span><br><span class="line">            // 其他错误，比如锁定，如果想单独处理请单独catch处理</span><br><span class="line">            error = &quot;其他错误：&quot; + e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">        if (error != null) &#123;// 出错了，返回登录页面</span><br><span class="line">            req.setAttribute(&quot;error&quot;, error);</span><br><span class="line">            resp.sendRedirect(&quot;/forbidden.html&quot;);</span><br><span class="line">        &#125; else &#123;// 登录成功</span><br><span class="line">            resp.sendRedirect(&quot;/index.html&quot;);// 设置跳转的页面</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @RequestMapping(value = &quot;/logout&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line">        currentUser.logout();</span><br><span class="line">        resp.sendRedirect(&quot;/index.html&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>done!</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1153,7 +1241,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1167,7 +1255,7 @@ Slave_SQL_Running: Yes     //此状态必须YES
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">128</span>
+              <span class="site-state-item-count">141</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

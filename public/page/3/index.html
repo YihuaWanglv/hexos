@@ -202,6 +202,685 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/04/Java-中int和Integer的区别/" itemprop="url">
+                  Java 中int和Integer的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-08-04T11:41:57+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="Java中int和Integer的区别"><a href="#Java中int和Integer的区别" class="headerlink" title="Java中int和Integer的区别"></a>Java中int和Integer的区别</h1><h2 id="Java各种数据类型详细介绍及其区别"><a href="#Java各种数据类型详细介绍及其区别" class="headerlink" title="Java各种数据类型详细介绍及其区别"></a>Java各种数据类型详细介绍及其区别</h2><ul>
+<li>基本类型，或者叫做内置类型，是JAVA中不同于类的特殊类型。</li>
+</ul>
+<p>Java中的简单类型从概念上分为四种：实数、整数、字符、布尔值。但是有一点需要说明的是，Java里面只有八种原始类型，其列表如下：</p>
+<p>实数：double、float</p>
+<p>整数：byte、short、int、long</p>
+<p>字符：char</p>
+<p>布尔值：boolean</p>
+<p>复杂类型和基本类型的内存模型本质上是不一样的，简单数据类型的存储原理是这样的：所有的简单数据类型不存在“引用”的概念，简单数据类型都是直接存储在内存中的内存栈上的，数据本身的值就是存储在栈空间里面，而Java语言里面只有这八种数据类型是这种存储模型；而其他的只要是继承于Object类的复杂数据类型都是按照Java里面存储对象的内存模型来进行数据存储的，使用Java内存堆和内存栈来进行这种类型的数据存储，简单地讲，“引用”是存储在有序的内存栈上的，而对象本身的值存储在内存堆上的。</p>
+<ul>
+<li>Java的简单数据讲解列表如下：</li>
+</ul>
+<p>int：int为整数类型，在存储的时候，用4个字节存储，范围为-2,147,483,648到2,147,483,647，在变量初始化的时候，int类型的默认值为0。</p>
+<p>short：short也属于整数类型，在存储的时候，用2个字节存储，范围为-32,768到32,767，在变量初始化的时候，short类型的默认值为0，一般情况下，因为Java本身转型的原因，可以直接写为0。</p>
+<p>long：long也属于整数类型，在存储的时候，用8个字节存储，范围为-9,223,372,036,854,775,808到9,223,372,036, 854,775,807，在变量初始化的时候，long类型的默认值为0L或0l，也可直接写为0。</p>
+<p>byte：byte同样属于整数类型，在存储的时候，用1个字节来存储，范围为-128到127，在变量初始化的时候，byte类型的默认值也为0。</p>
+<p>float：float属于实数类型，在存储的时候，用4个字节来存储，范围为32位IEEEE 754单精度范围，在变量初始化的时候，float的默认值为0.0f或0.0F，在初始化的时候可以写0.0。</p>
+<p>double：double同样属于实数类型，在存储的时候，用8个字节来存储，范围为64位IEEE 754双精度范围，在变量初始化的时候，double的默认值为0.0。</p>
+<p>char：char属于字符类型，在存储的时候用2个字节来存储，因为Java本身的字符集不是用ASCII码来进行存储，是使用的16位Unicode字符集，它的字符范围即是Unicode的字符范围，在变量初始化的时候，char类型的默认值为’u0000’。</p>
+<p>boolean：boolean属于布尔类型，在存储的时候不使用字节，仅仅使用1位来存储，范围仅仅为0和1，其字面量为true和false，而boolean变量在初始化的时候变量的默认值为false。</p>
+<p>Integer是int的封装类，里面有很多进行处理的静态方法</p>
+<p>Integer是对象而int不是，内存的分配位置也不一样</p>
+<p>Integer的属性和其他类一样的！在方法里都是引用传递，而原始类型是值传递！</p>
+<p>jdk1.5以后可以从int自动装箱Integer类。</p>
+<p>int是为了兼容以前的编程语言使用的基本类型，目的是让程序效率更高，以为它是直接分配到栈上的。所以它不是对象，不能有类似 int.operation()的操作。</p>
+<p>Integer是java中一切都是对象这个大前提下的int的包装类型，可以使用方法，是个对象，是用new分配到堆上的。</p>
+<p>jdk1.5后，引入了类似c#中的自动装、拆箱，使得Integer i = 1；这样的表达直接可行。</p>
+<p>int是一种基本数据类型，而Integer是相应于int的类类型，称为对象包装。</p>
+<p>实现这种对象包装的目的主要是因为类能够提供必要的方法，用于实现基本数据类型的数值与可打印字符串之间的转换，以及一些其他的实用程序方法；</p>
+<p>另外，有些数据结构库类只能操作对象，而不支持基本数据类型的变量，包装类提供一种便利的方式，能够把基本数据类型转换成等价的对象，从而可以利用数据结构库类进行处理。</p>
+<p>int 是基本类型，(int)(Math.Random()*100)就是一个数，可以进行加见乘除。 Integer是class ,那么 new Integer(temp)就是一个对象了，可以用到Integer这个class的方法，例如用intvalue()可以返回这个int的值。int a=1;这是基本数据类型是能参与运算的.而Integer b= new Integer(1);c=b.floatvalue;Float a= new Float(null);是可以的用Float初始化一个对象这个a有很多方法而float a;就没有因为原始没有引用类，java 提供两种不同的类型：引用类型（或者封装类型，Warpper）和原始类型（或内置类型，Primitive）。Int是java的原始数据类型，Integer是java为int提供的封装类。Java为每个原始类型提供了封装类。</p>
+<ul>
+<li>原始类型 封装类</li>
+</ul>
+<p>boolean Boolean</p>
+<p>char Character</p>
+<p>byte Byte</p>
+<p>short Short</p>
+<p>int Integer</p>
+<p>long Long</p>
+<p>float Float</p>
+<p>double Double</p>
+<p>引用类型和原始类型的行为完全不同，并且它们具有不同的语义。引用类型和原始类型具有不同的特征和用法，它们包括：大小和速度问题，这种类型以哪种类型的数据结构存储，当引用类型和原始类型用作某个类的实例数据时所指定的缺省值。对象引用实例变量的缺省值为 null，而原始类型实例变量的缺省值与它们的类型有关。</p>
+<h2 id="1-、Boolean-VS-boolean"><a href="#1-、Boolean-VS-boolean" class="headerlink" title="1 、Boolean VS boolean"></a>1 、Boolean VS boolean</h2><p>public final class Boolean extends Object  implementsSerializable,Comparable</p>
+<p>Boolean 类将基本类型为boolean的值包装在一个对象中。一个Boolean类型的对象只包含一个类型为boolean的字段。此外，此类还为boolean和String的相互转换提供了许多方法，并提供了处理 boolean时非常有用的其他一些常量和方法。</p>
+<h2 id="2、-Byte-VS-byte"><a href="#2、-Byte-VS-byte" class="headerlink" title="2、 Byte VS byte"></a>2、 Byte VS byte</h2><p>public final class Byte extends Number implements Comparable Byte类将基本类型 byte的值包装在一个对象中。一个Byte类型的对象只包含一个类型为 byte的字段。此外，该类还为 byte和 String的相互转换提供了几种方法，并提供了处理 byte时非常有用的其他一些常量和方法。</p>
+<h2 id="3、-Character-VS-char"><a href="#3、-Character-VS-char" class="headerlink" title="3、 Character VS char"></a>3、 Character VS char</h2><p>public final class Character extends Object  implements Serializable, Comparable</p>
+<p>Character类在对象中包装一个基本类型char的值。</p>
+<p>Character类型的对象包含类型为char的单个字段。此外，该类提供了几种方法，以确定字符的类别（小写字母，数字，等等），并将字符从大写转换成小写，反之亦然。</p>
+<h2 id="4-、Double-VS-double"><a href="#4-、Double-VS-double" class="headerlink" title="4 、Double VS double"></a>4 、Double VS double</h2><p>public final class Double extends Number implements Comparable Double类在对象中包装了一个基本类型double的值。每个Double类型的对象都包含一个double类型的字段。此外，该类还提供了多个方法，可以将double转换为String，将String转换为double，还提供了其他一些处理double时有用的常量和方法。</p>
+<h2 id="5、-Float-VS-float"><a href="#5、-Float-VS-float" class="headerlink" title="5、 Float VS float"></a>5、 Float VS float</h2><p>public final class Float extends Number implements Comparable</p>
+<p>Float类在对象中包装了一个float基本类型的值。Float类型的对象包含一个float类型的字段。此外，此类提供了几种方法，可在float类型和String类型之间互相转换，并且还提供了处理float类型时非常有用的其他一些常量和方法。</p>
+<h2 id="6、-Integer-VS-int"><a href="#6、-Integer-VS-int" class="headerlink" title="6、 Integer VS int"></a>6、 Integer VS int</h2><p>public final class Integer extends Number implements Comparable</p>
+<p>Integer类在对象中包装了一个基本类型int的值。Integer类型的对象包含一个int类型的字段。</p>
+<p>此外，该类提供了多个方法，能在int类型和String类型之间互相转换，还提供了处理int类型时非常有用的其他一些常量和方法。</p>
+<h2 id="7-Long-VS-long"><a href="#7-Long-VS-long" class="headerlink" title="7 Long VS long"></a>7 Long VS long</h2><p>public final class Long extends Number implements Comparable</p>
+<p>Long类在对象中封装了基本类型long的值。每个Long类型的对象都包含一个long类型的字段。</p>
+<p>此外，该类提供了多个方法，可以将long转换为String，将String转换为long，除此之外，还提供了其他一些处理long时有用的常量和方法。</p>
+<h2 id="8、-Short-VS-short"><a href="#8、-Short-VS-short" class="headerlink" title="8、 Short VS short"></a>8、 Short VS short</h2><p>public final class Short extends Number implements Comparable</p>
+<p>Short类在对象中包装基本类型short的值。一个Short类型的对象只包含一个short类型的字段。另外，该类提供了多个方法，可以将short转换为String，将String转换为short，同时还提供了其他一些处理short时有用的常量和方法。</p>
+<h2 id="9、public-final-class-Voidextends-Object"><a href="#9、public-final-class-Voidextends-Object" class="headerlink" title="9、public final class Voidextends Object"></a>9、public final class Voidextends Object</h2><p>Void 类是一个不可实例化的占位符类，它保持一个对代表 Java 关键字 void 的 Class 对象的引用。</p>
+<p>类的对象才能为null，不能把null赋值给一个变量不能，如int m=null;但可以String s=null;因为String是个类。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/03/dev-collect-2016-07-collect-of-dev/" itemprop="url">
+                  [dev][collect][2016-07]collect-of-dev
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-08-03T13:21:52+08:00" content="2016-08-03">
+              2016-08-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="2016-07"><a href="#2016-07" class="headerlink" title="2016-07"></a>2016-07</h2><h3 id="2016-07-29"><a href="#2016-07-29" class="headerlink" title="2016-07-29"></a>2016-07-29</h3><ul>
+<li>搭建ElasticSearch-2.x Logstash-2.x Kibana-4.5.x Kafka为消息中心的ELK日志平台<br><a href="https://www.iamle.com/archives/2058.html" target="_blank" rel="external">https://www.iamle.com/archives/2058.html</a></li>
+</ul>
+<h3 id="2016-07-23"><a href="#2016-07-23" class="headerlink" title="2016-07-23"></a>2016-07-23</h3><ul>
+<li><p>discover meteor<br><a href="http://zh.discovermeteor.com/chapters/introduction/" target="_blank" rel="external">http://zh.discovermeteor.com/chapters/introduction/</a></p>
+</li>
+<li><p>webpack gitbook<br><a href="https://hulufei.gitbooks.io/react-tutorial/content/webpack.html" target="_blank" rel="external">https://hulufei.gitbooks.io/react-tutorial/content/webpack.html</a></p>
+</li>
+</ul>
+<h3 id="2016-07-22"><a href="#2016-07-22" class="headerlink" title="2016-07-22"></a>2016-07-22</h3><ul>
+<li><p>Spring Boot应用的测试——Mockito<br><a href="http://www.jianshu.com/p/972cd6b93206" target="_blank" rel="external">http://www.jianshu.com/p/972cd6b93206</a></p>
+</li>
+<li><p>利用Mockito模拟DB<br><a href="http://www.jianshu.com/p/c1c495f231ea" target="_blank" rel="external">http://www.jianshu.com/p/c1c495f231ea</a></p>
+</li>
+<li><p>在Spring Boot项目中使用Spock框架<br><a href="http://www.jianshu.com/p/f1e354d382cd" target="_blank" rel="external">http://www.jianshu.com/p/f1e354d382cd</a></p>
+</li>
+<li><p>Spring Boot Testing<br><a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html" target="_blank" rel="external">http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html</a></p>
+</li>
+<li><p>Integration Testing a Spring Boot Application<br><a href="https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/" target="_blank" rel="external">https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/</a></p>
+</li>
+</ul>
+<h3 id="2016-07-21"><a href="#2016-07-21" class="headerlink" title="2016-07-21"></a>2016-07-21</h3><ul>
+<li>Growth: 全栈增长工程师指南<br><a href="http://growth.phodal.com/#" target="_blank" rel="external">http://growth.phodal.com/#</a></li>
+</ul>
+<h3 id="2016-07-19"><a href="#2016-07-19" class="headerlink" title="2016-07-19"></a>2016-07-19</h3><ul>
+<li>微服务架构的分布式事务解决方案<br><a href="http://www.roncoo.com/details?cid=7ae3d7eddc4742f78b0548aa8bd9ccdb" target="_blank" rel="external">http://www.roncoo.com/details?cid=7ae3d7eddc4742f78b0548aa8bd9ccdb</a></li>
+</ul>
+<h3 id="2016-07-16"><a href="#2016-07-16" class="headerlink" title="2016-07-16"></a>2016-07-16</h3><ul>
+<li><p>使用 Vaadin 实现全堆栈 Java Web 开发<br><a href="http://www.ibm.com/developerworks/cn/java/j-full-stack-java-web-dev-vaadin/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-full-stack-java-web-dev-vaadin/</a></p>
+</li>
+<li><p>Creating CRUD UI with Vaadin<br><a href="https://spring.io/guides/gs/crud-with-vaadin/" target="_blank" rel="external">https://spring.io/guides/gs/crud-with-vaadin/</a><br>git clone <a href="https://github.com/spring-guides/gs-crud-with-vaadin.git" target="_blank" rel="external">https://github.com/spring-guides/gs-crud-with-vaadin.git</a></p>
+</li>
+<li><p>当当网开源Dubbox，扩展Dubbo服务框架支持REST风格远程调用<br><a href="http://www.infoq.com/cn/news/2014/10/dubbox-open-source" target="_blank" rel="external">http://www.infoq.com/cn/news/2014/10/dubbox-open-source</a></p>
+</li>
+<li><p>在Dubbo中开发REST风格的远程调用（RESTful Remoting）<br><a href="http://dangdangdotcom.github.io/dubbox/rest.html" target="_blank" rel="external">http://dangdangdotcom.github.io/dubbox/rest.html</a></p>
+</li>
+<li><p>使用JavaConfig方式配置dubbox<br><a href="http://dangdangdotcom.github.io/dubbox/java-config.html" target="_blank" rel="external">http://dangdangdotcom.github.io/dubbox/java-config.html</a></p>
+</li>
+<li><p>Microservices with Spring<br><a href="https://spring.io/blog/2015/07/14/microservices-with-spring" target="_blank" rel="external">https://spring.io/blog/2015/07/14/microservices-with-spring</a></p>
+</li>
+</ul>
+<h3 id="2016-07-14"><a href="#2016-07-14" class="headerlink" title="2016-07-14"></a>2016-07-14</h3><ul>
+<li>Import/Read excel file 2003 or 2007 with Spring MVC<br><a href="http://lvtutorial.com/spring-mvc/read-excel-file-2003-or-2007-with-spring-mvc.html" target="_blank" rel="external">http://lvtutorial.com/spring-mvc/read-excel-file-2003-or-2007-with-spring-mvc.html</a></li>
+<li>SPRING BOOT FILE UPLOAD WITH AJAX<br><a href="http://blog.netgloo.com/2015/02/08/spring-boot-file-upload-with-ajax/" target="_blank" rel="external">http://blog.netgloo.com/2015/02/08/spring-boot-file-upload-with-ajax/</a><br><a href="https://github.com/netgloo/spring-boot-samples" target="_blank" rel="external">https://github.com/netgloo/spring-boot-samples</a></li>
+</ul>
+<h3 id="2016-07-13"><a href="#2016-07-13" class="headerlink" title="2016-07-13"></a>2016-07-13</h3><ul>
+<li><p>cSphere Docker 实训课程<br><a href="http://git.oschina.net/dockerf/docker-training" target="_blank" rel="external">http://git.oschina.net/dockerf/docker-training</a></p>
+</li>
+<li><p>Spring Cloud方面的博客<br><a href="http://blog.didispace.com/" target="_blank" rel="external">http://blog.didispace.com/</a></p>
+</li>
+<li><p>白话 IT 之浅谈 ELK 日志系统<br><a href="https://mp.weixin.qq.com/s?__biz=MzA4ODgwNjk1MQ==&amp;mid=2653788351&amp;idx=1&amp;sn=a38a0b95b63186b789423195fa09f91d&amp;scene=0&amp;key=77421cf58af4a653195d70dcdaaed6e78c06fe4711f95c19349f5ca630c1e7f8481f6f21ba392beedcc329dbcc331cc8&amp;ascene=0&amp;uin=MTM4NTI5NTI4Mg%3D%3D&amp;devicetype=iMac+MacBookAir6%2C2+OSX+OSX+10.9.5+build(13F1808)&amp;version=11020201&amp;pass_ticket=MxW0cGHvKj7WTMRpzBpE%2FND%2BPkUf91pVVetULpXmjhLbsP9btRTYFt3DF6QSZ5Ct" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzA4ODgwNjk1MQ==&amp;mid=2653788351&amp;idx=1&amp;sn=a38a0b95b63186b789423195fa09f91d&amp;scene=0&amp;key=77421cf58af4a653195d70dcdaaed6e78c06fe4711f95c19349f5ca630c1e7f8481f6f21ba392beedcc329dbcc331cc8&amp;ascene=0&amp;uin=MTM4NTI5NTI4Mg%3D%3D&amp;devicetype=iMac+MacBookAir6%2C2+OSX+OSX+10.9.5+build(13F1808)&amp;version=11020201&amp;pass_ticket=MxW0cGHvKj7WTMRpzBpE%2FND%2BPkUf91pVVetULpXmjhLbsP9btRTYFt3DF6QSZ5Ct</a></p>
+</li>
+<li><p>用户行为分析项目<br><a href="https://github.com/YihuaWanglv/piwik" target="_blank" rel="external">https://github.com/YihuaWanglv/piwik</a></p>
+</li>
+</ul>
+<h3 id="2016-07-12"><a href="#2016-07-12" class="headerlink" title="2016-07-12"></a>2016-07-12</h3><ul>
+<li><p>使用API网关构建微服务<br><a href="http://www.infoq.com/cn/articles/construct-micro-service-using-api-gateway" target="_blank" rel="external">http://www.infoq.com/cn/articles/construct-micro-service-using-api-gateway</a></p>
+</li>
+<li><p>使用Spring Cloud和Docker构建微服务<br><a href="http://www.dockone.io/article/510" target="_blank" rel="external">http://www.dockone.io/article/510</a><br>原文链接：<br><a href="http://www.kennybastani.com/2015/07/spring-cloud-docker-microservices.html?mkt_tok=3RkMMJWWfF9wsRonuqTMZKXonjHpfsX57ukoWaC0lMI%2F0ER3fOvrPUfGjI4ATcdqI%2BSLDwEYGJlv6SgFQ7LMMaZq1rgMXBk%3D" target="_blank" rel="external">http://www.kennybastani.com/2015/07/spring-cloud-docker-microservices.html?mkt_tok=3RkMMJWWfF9wsRonuqTMZKXonjHpfsX57ukoWaC0lMI%2F0ER3fOvrPUfGjI4ATcdqI%2BSLDwEYGJlv6SgFQ7LMMaZq1rgMXBk%3D</a></p>
+</li>
+<li><p>The API Gateway Pattern: Angular JS and Spring Security Part IV<br><a href="https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" target="_blank" rel="external">https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv</a></p>
+</li>
+<li><p>git demo for spring-boot-microservices<br><a href="https://github.com/YihuaWanglv/spring-boot-microservices" target="_blank" rel="external">https://github.com/YihuaWanglv/spring-boot-microservices</a><br><a href="https://github.com/YihuaWanglv/spring-cloud-microservice-example" target="_blank" rel="external">https://github.com/YihuaWanglv/spring-cloud-microservice-example</a></p>
+</li>
+<li><p>Implementing Netflix Zuul in Spring Cloud<br><a href="http://kubecloud.io/apigatewaypattern/" target="_blank" rel="external">http://kubecloud.io/apigatewaypattern/</a><br><a href="http://start.spring.io/" target="_blank" rel="external">http://start.spring.io/</a></p>
+</li>
+</ul>
+<h3 id="2016-07-11"><a href="#2016-07-11" class="headerlink" title="2016-07-11"></a>2016-07-11</h3><ul>
+<li><p>使用 Vuex + Vue.js 构建单页应用<br><a href="https://segmentfault.com/a/1190000005891026" target="_blank" rel="external">https://segmentfault.com/a/1190000005891026</a><br><a href="https://github.com/lichenbuliren/vuex-notes-app" target="_blank" rel="external">https://github.com/lichenbuliren/vuex-notes-app</a></p>
+</li>
+<li><p>两篇关于微服务api gateway的著名文章<br><a href="http://microservices.io/patterns/apigateway.html" target="_blank" rel="external">http://microservices.io/patterns/apigateway.html</a><br><a href="https://www.nginx.com/blog/building-microservices-using-an-api-gateway/" target="_blank" rel="external">https://www.nginx.com/blog/building-microservices-using-an-api-gateway/</a></p>
+</li>
+</ul>
+<h3 id="2016-07-08"><a href="#2016-07-08" class="headerlink" title="2016-07-08"></a>2016-07-08</h3><ul>
+<li><p>使用spring boot和thrift、zookeeper建立微服务<br><a href="http://www.cnblogs.com/skyblog/p/5535418.html" target="_blank" rel="external">http://www.cnblogs.com/skyblog/p/5535418.html</a></p>
+</li>
+<li><p>Jenkins+Docker搭建持续集成测试环境<br><a href="http://www.dockone.io/article/1464" target="_blank" rel="external">http://www.dockone.io/article/1464</a></p>
+</li>
+<li><p>spring boot+spring cloud服务化系列博客<br><a href="http://www.cnblogs.com/skyblog/category/774535.html" target="_blank" rel="external">http://www.cnblogs.com/skyblog/category/774535.html</a></p>
+</li>
+</ul>
+<h3 id="2016-07-06"><a href="#2016-07-06" class="headerlink" title="2016-07-06"></a>2016-07-06</h3><ul>
+<li><p>使用Jenkins搭建iOS/Android持续集成打包平台<br><a href="http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins" target="_blank" rel="external">http://debugtalk.com/post/iOS-Android-Packing-with-Jenkins</a></p>
+</li>
+<li><p>React-Native For Android 环境搭建及踩坑<br><a href="http://www.imbeta.cn/react-native-for-android-huan-jing-da-jian-ji-cai-keng.html" target="_blank" rel="external">http://www.imbeta.cn/react-native-for-android-huan-jing-da-jian-ji-cai-keng.html</a></p>
+</li>
+<li><p>React Native 开发培训免费书<br><a href="https://unbug.gitbooks.io/react-native-training/content/" target="_blank" rel="external">https://unbug.gitbooks.io/react-native-training/content/</a></p>
+</li>
+<li><p>Android Studio插件整理<br><a href="https://ydmmocoo.github.io/2016/06/28/Android-Studio%E6%8F%92%E4%BB%B6%E6%95%B4%E7%90%86/" target="_blank" rel="external">https://ydmmocoo.github.io/2016/06/28/Android-Studio%E6%8F%92%E4%BB%B6%E6%95%B4%E7%90%86/</a></p>
+</li>
+<li><p>FastDFS + Nginx 反向代理缓存 安装与配置<br><a href="http://www.linux178.com/storage/fastdfs-nginx-cache.html" target="_blank" rel="external">http://www.linux178.com/storage/fastdfs-nginx-cache.html</a></p>
+</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/28/How-to-synchronize-ArrayList-in-java-with-example/" itemprop="url">
+                  How to synchronize ArrayList in java with example
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-28T13:21:15+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="There-are-two-ways-to-synchronize-explicitly"><a href="#There-are-two-ways-to-synchronize-explicitly" class="headerlink" title="There are two ways to synchronize explicitly:"></a>There are two ways to synchronize explicitly:</h2><ul>
+<li>Using Collections.synchronizedList() method</li>
+<li>Using thread-safe variant of ArrayList: CopyOnWriteArrayList</li>
+</ul>
+<h2 id="Example-1-Collections-synchronizedList-method-for-Synchronizing-ArrayList"><a href="#Example-1-Collections-synchronizedList-method-for-Synchronizing-ArrayList" class="headerlink" title="Example 1: Collections.synchronizedList() method for Synchronizing ArrayList"></a>Example 1: Collections.synchronizedList() method for Synchronizing ArrayList</h2><p>In this example we are using Collections.synchronizedList() method. The important point to note here is that iterator should be in synchronized block in this type of synchronization as shown in the below example.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package beginnersbook.com;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Collections;</span><br><span class="line"></span><br><span class="line">public class Details &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String a[])&#123;</span><br><span class="line">       List&lt;String&gt; syncal = </span><br><span class="line">         Collections.synchronizedList(new ArrayList&lt;String&gt;());</span><br><span class="line"></span><br><span class="line">       //Adding elements to synchronized ArrayList</span><br><span class="line">       syncal.add(&quot;Pen&quot;);</span><br><span class="line">       syncal.add(&quot;NoteBook&quot;);</span><br><span class="line">       syncal.add(&quot;Ink&quot;);</span><br><span class="line"></span><br><span class="line">       System.out.println(&quot;Iterating synchronized ArrayList:&quot;);</span><br><span class="line">       synchronized(syncal) &#123;</span><br><span class="line">       Iterator&lt;String&gt; iterator = syncal.iterator(); </span><br><span class="line">       while (iterator.hasNext())</span><br><span class="line">          System.out.println(iterator.next());</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Output:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterating synchronized ArrayList:</span><br><span class="line">Pen</span><br><span class="line">NoteBook</span><br><span class="line">Ink</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Method-2-Using-CopyOnWriteArrayList"><a href="#Method-2-Using-CopyOnWriteArrayList" class="headerlink" title="Method 2: Using CopyOnWriteArrayList"></a>Method 2: Using CopyOnWriteArrayList</h2><p>CopyOnWriteArrayList is a thread-safe variant of ArrayList.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package beginnersbook.com;</span><br><span class="line">import java.util.concurrent.CopyOnWriteArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">public class Details &#123;</span><br><span class="line"></span><br><span class="line"> public static void main(String a[])&#123;</span><br><span class="line">    CopyOnWriteArrayList&lt;String&gt; al = new CopyOnWriteArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">    //Adding elements to synchronized ArrayList</span><br><span class="line">    al.add(&quot;Pen&quot;);</span><br><span class="line">    al.add(&quot;NoteBook&quot;);</span><br><span class="line">    al.add(&quot;Ink&quot;);</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;Displaying synchronized ArrayList Elements:&quot;);</span><br><span class="line">    //Synchronized block is not required in this method</span><br><span class="line">    Iterator&lt;String&gt; iterator = al.iterator(); </span><br><span class="line">    while (iterator.hasNext())</span><br><span class="line">       System.out.println(iterator.next());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Output:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Displaying synchronized ArrayList Elements:</span><br><span class="line">Pen</span><br><span class="line">NoteBook</span><br><span class="line">Ink</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/26/多版本部署如何使用nginx根据url参数api-version值进行路由/" itemprop="url">
+                  多版本部署如何使用nginx根据url参数api_version值进行路由
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-26T18:53:07+08:00" content="2016-07-26">
+              2016-07-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。"><a href="#目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api-version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。" class="headerlink" title="目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api_version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。"></a>目标：实现多版本部署，并且使用nginx根据HTTP请求中的url参数’api_version’来进行请求的路由，将对应版本的请求分发到目标版本实例当中。</h2><h2 id="实际测试场景："><a href="#实际测试场景：" class="headerlink" title="实际测试场景："></a>实际测试场景：</h2><p>tomcat部署启动了2个实例：</p>
+<ul>
+<li>127.0.0.1:8080</li>
+<li>127.0.0.1:8081</li>
+</ul>
+<p>本地部署一个nginx服务器，对所有请求进行代理和路由。<br>部署的nginx简单配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    gzip  on;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        location /client &#123;</span><br><span class="line">            if ( $arg_api_version = &apos;1.0.0&apos; )&#123;</span><br><span class="line">                proxy_pass http://localhost:8080;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            if ( $arg_api_version = &apos;1.0.1&apos; )&#123;</span><br><span class="line">                proxy_pass http://localhost:8081;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">        location / &#123;</span><br><span class="line">             proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>预先配置好本地host，以便直接使用域名访问。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 local.xxx.com</span><br></pre></td></tr></table></figure></p>
+<h2 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h2><ul>
+<li>1.“listen       80;”配置nginx监听80端口，接收所有请求。</li>
+<li>2.“location /client { … }”部分将会匹配到所有以“/client”开头的请求</li>
+<li>3.“location /client { … }”部分，通过$http_api_version获取到url中字段名为’api_version’的参数值，用if判断版本值，做相应的路由。最后如果都没有匹配到，就会匹配最后一行“proxy_pass <a href="http://localhost:8080;”走8080实例。" target="_blank" rel="external">http://localhost:8080;”走8080实例。</a></li>
+<li>4.“location / { … }” 部分将会匹配其余的所有请求，路由到“<a href="http://localhost:8080”。这样，除“/client”前缀开头的请求外，都会默认匹配到一个固定的实例。别的请求都不会受到多版本路由配置的影响。" target="_blank" rel="external">http://localhost:8080”。这样，除“/client”前缀开头的请求外，都会默认匹配到一个固定的实例。别的请求都不会受到多版本路由配置的影响。</a></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/23/Transform-objects-with-guava-使用Guava库转换对象/" itemprop="url">
+                  Transform objects with guava(使用Guava库转换对象)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-23T13:03:29+08:00" content="2016-07-23">
+              2016-07-23
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="Transform-objects-with-guava"><a href="#Transform-objects-with-guava" class="headerlink" title="Transform objects with guava"></a>Transform objects with guava</h1><p>All the function is a specific type of class that has an apply method that can be overridden. In the example, the apply method accepts a string as a parameter and returns an integer or the length of the string. Scrolling a bit further in the documentation, the most common use of functions is transforming collections.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String, Integer&gt; lengthFunction = new Function&lt;String, Integer&gt;() &#123;</span><br><span class="line">  public Integer apply(String string) &#123;</span><br><span class="line">    return string.length();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-string-to-Enum"><a href="#Convert-string-to-Enum" class="headerlink" title="Convert string to Enum"></a>Convert string to Enum</h2><p>I have seeded some data so we can get right to the examples and you don’t have to watch me type. The first example to show is transforming a string to Enum. Enums are quite popular and you may want to transform as it might be stored as a string in a database or some value.</p>
+<p>Taking a look at the Day enum we created, it is a simple class that represents the days of the week:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public enum Day &#123;</span><br><span class="line"></span><br><span class="line">    SUNDAY, MONDAY, TUESDAY, WEDNESDAY,</span><br><span class="line">    THURSDAY, FRIDAY, SATURDAY;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>We may have a list of strings with various strings representing days, Wednesday, Sunday, Monday… What we want to do is convert the list of strings to enums. There is a function in the Enum utility class in guava valueOfFunction that allows you to pass in the enum you want to convert to. In our case, Day.Class. Since we just upgraded to Guava 16.0, the valueOfFunction has been deprecated in preference of stringConverter. The stringConverter will return a function that converts a string to an Enum. Now we have a function that can be passed to guava utilities, in this case Iterables utility class by calling the transform method which will convert each string of list to a day enum.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void transform_string_to_enum () &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;String&gt; days = Lists.newArrayList(</span><br><span class="line">            &quot;WEDNESDAY&quot;, </span><br><span class="line">            &quot;SUNDAY&quot;, </span><br><span class="line">            &quot;MONDAY&quot;, </span><br><span class="line">            &quot;WEDNESDAY&quot;);</span><br><span class="line">    </span><br><span class="line">    Function&lt;String, Day&gt; stringToDayEnum = Enums.stringConverter(Day.class);</span><br><span class="line">    </span><br><span class="line">    Iterable&lt;Day&gt; daysAsEnum = Iterables.transform(days, stringToDayEnum);</span><br><span class="line">    </span><br><span class="line">    for (Day day : daysAsEnum) &#123;</span><br><span class="line">        System.out.println(day);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WEDNESDAY</span><br><span class="line">SUNDAY</span><br><span class="line">MONDAY</span><br><span class="line">WEDNESDAY</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-from-one-object-to-another"><a href="#Convert-from-one-object-to-another" class="headerlink" title="Convert from one object to another"></a>Convert from one object to another</h2><p>The next example will look at is how to convert one object to another. Quite often we need to go to a legacy system to get data and populate a new set of domains for our new system. Or we may get data from a web service or whatever it may be. For this example, I created two objects. ETradeInvestment and TdAmeritradeInvestment which contain similar attributes of different types.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class ETradeInvestment &#123;</span><br><span class="line">    </span><br><span class="line">    private String key;</span><br><span class="line">    private String name;</span><br><span class="line">    private BigDecimal price;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TdAmeritradeInvestment &#123;</span><br><span class="line">    </span><br><span class="line">    private int investmentKey;</span><br><span class="line">    private String investmentName;</span><br><span class="line">    private double investmentPrice;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>There is a number of other utilities such as BeanUtils.copyProperties in apache commons or written your own if statements and have made it work that way. If we don’t have a list of objects, we can call a method on function that will return a just a single object. We want to create the function that will map the TdAmeritradeInvestment to ETradeInvestment. If you ever get lost, you can use code assist or just remember the <f, t=""> just means from object, to object. For each iteration of the list, a new ETradeInvestment object will be created while mapping the TdAmeritradeInvestment to it. For the key, we will use the Ints.stringConverter which allows us to convert from a string to an int.</f,></p>
+<p>If we want to get some reuse out of this function, we could extract it outside this method or we can just use it inline. We will use the Lists utility to transform the list, above we use Iterables and there is also FluentIterables and Collections2. There is a lot of different ways which guava provides to use a function. If we run this code, we have EtradeInvestment object with the key, name and price. As a disclosure, I don’t own any of these investments and were pulled from Google home page under the trending section. That did it, we converted from the TdAmeritradeInvestment to ETradeInvestment.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void convert_tdinvestment_etradeinvestment () &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;TdAmeritradeInvestment&gt; tdInvestments = Lists.newArrayList();</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(555, &quot;Facebook Inc&quot;, 57.51));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(123, &quot;Micron Technology, Inc.&quot;, 21.29));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(456, &quot;Ford Motor Company&quot;, 15.31));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(236, &quot;Sirius XM Holdings Inc&quot;, 3.60));</span><br><span class="line">    </span><br><span class="line">    // convert a list of objects</span><br><span class="line">    Function&lt;TdAmeritradeInvestment, ETradeInvestment&gt; tdToEtradeFunction = new Function&lt;TdAmeritradeInvestment, ETradeInvestment&gt;() &#123;</span><br><span class="line"></span><br><span class="line">        public ETradeInvestment apply(TdAmeritradeInvestment input) &#123;</span><br><span class="line">            ETradeInvestment investment = new ETradeInvestment();</span><br><span class="line">            investment.setKey(Ints.stringConverter().reverse()</span><br><span class="line">                    .convert(input.getInvestmentKey()));</span><br><span class="line">            investment.setName(input.getInvestmentName());</span><br><span class="line">            investment.setPrice(new BigDecimal(input.getInvestmentPrice()));</span><br><span class="line">            return investment;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    List&lt;ETradeInvestment&gt; etradeInvestments = Lists.transform(tdInvestments, tdToEtradeFunction);</span><br><span class="line">    </span><br><span class="line">    System.out.println(etradeInvestments);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">ETradeInvestment&#123;key=555, name=Facebook Inc, price=57.50&#125;,</span><br><span class="line">ETradeInvestment&#123;key=123, name=Micron Technology, Inc., price=21.28&#125;, </span><br><span class="line">ETradeInvestment&#123;key=456, name=Ford Motor Company, price=15.31&#125;, </span><br><span class="line">ETradeInvestment&#123;key=236, name=Sirius XM Holdings Inc, price=3.60&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-an-object"><a href="#Convert-an-object" class="headerlink" title="Convert an object"></a>Convert an object</h2><p>If you have one single investment or object you want to convert, you can call the apply method directly on the function that will do the conversion.</p>
+<p>ETradeInvestment faceBookInvestment = tdToEtradeFunction<br>                .apply(new TdAmeritradeInvestment(555, “Facebook Inc”, 57.51));<br>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETradeInvestment&#123;key=555, name=Facebook Inc, price=57.50&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-list-to-map"><a href="#Convert-list-to-map" class="headerlink" title="Convert list to map"></a>Convert list to map</h2><p>One other really neat way to use function convert a list to a map. You may want to look up an object based on some object property. In this example, we want to create a map of TdAmeritradeInvestment based on the investment key. Taking a look we can use the Maps utility calling the uniqueIndex method which accepts a list and a function. The function, or the keyfunction, is used to produce the key for each value in the iterable. In this instance, the function will map from a TdAmeritradeInvestment and return an integer which will represent the key in the map.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void transform_list_to_map () &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;TdAmeritradeInvestment&gt; tdInvestments = Lists.newArrayList();</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(555, &quot;Facebook Inc&quot;, 57.51));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(123, &quot;Micron Technology, Inc.&quot;, 21.29));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(456, &quot;Ford Motor Company&quot;, 15.31));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(236, &quot;Sirius XM Holdings Inc&quot;, 3.60));</span><br><span class="line">    </span><br><span class="line">    ImmutableMap&lt;Integer, TdAmeritradeInvestment&gt; investmentMap = Maps</span><br><span class="line">            .uniqueIndex(tdInvestments,</span><br><span class="line">                    new Function&lt;TdAmeritradeInvestment, Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">                        public Integer apply(TdAmeritradeInvestment input) &#123;</span><br><span class="line">                            return new Integer(input.getInvestmentKey());</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">    </span><br><span class="line">    System.out.println(investmentMap);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">555=TdAmeritradeInvestment&#123;key=555, name=Facebook Inc, price=57.51&#125;, </span><br><span class="line">123=TdAmeritradeInvestment&#123;key=123, name=Micron Technology, Inc., price=21.29&#125;, </span><br><span class="line">456=TdAmeritradeInvestment&#123;key=456, name=Ford Motor Company, price=15.31&#125;, </span><br><span class="line">236=TdAmeritradeInvestment&#123;key=236, name=Sirius XM Holdings Inc, price=3.6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>原地址：<a href="http://www.leveluplunch.com/java/tutorials/002-transform-objects-with-guava/" target="_blank" rel="external">http://www.leveluplunch.com/java/tutorials/002-transform-objects-with-guava/</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/23/Springboot应用中如何针对springmvc的controller写单元测试/" itemprop="url">
+                  Springboot应用中如何针对springmvc的controller写单元测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-23T12:54:56+08:00" content="2016-07-23">
+              2016-07-23
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="An-example-test-for-your-controller-can-be-something-as-simple-as"><a href="#An-example-test-for-your-controller-can-be-something-as-simple-as" class="headerlink" title="An example test for your controller can be something as simple as"></a>An example test for your controller can be something as simple as</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class DemoApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">    final String BASE_URL = &quot;http://localhost:8080/&quot;;</span><br><span class="line">    private MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    public void setup() &#123;</span><br><span class="line">        this.mockMvc = standaloneSetup(new HelloWorld()).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testSayHelloWorld() throws Exception &#123;</span><br><span class="line">        this.mockMvc.perform(get(&quot;/&quot;).accept(MediaType.parseMediaType(&quot;application/json;charset=UTF-8&quot;)))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().contentType(&quot;application/json&quot;));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="The-new-testing-improvements-that-debuted-in-Spring-Boot-1-4-M2-can-help-reduce-the-amount-of-code-you-need-to-write-situation-such-as-these"><a href="#The-new-testing-improvements-that-debuted-in-Spring-Boot-1-4-M2-can-help-reduce-the-amount-of-code-you-need-to-write-situation-such-as-these" class="headerlink" title="The new testing improvements that debuted in Spring Boot 1.4.M2 can help reduce the amount of code you need to write situation such as these."></a>The new testing improvements that debuted in Spring Boot 1.4.M2 can help reduce the amount of code you need to write situation such as these.</h2><p>The test would look like so:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@WebMvcTest(HelloWorld.class)</span><br><span class="line">public class UserVehicleControllerTests &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testSayHelloWorld() throws Exception &#123;</span><br><span class="line">        this.mockMvc.perform(get(&quot;/&quot;).accept(MediaType.parseMediaType(&quot;application/json;charset=UTF-8&quot;)))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().contentType(&quot;application/json&quot;));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="还有一种方式是使用TestRestTemplate"><a href="#还有一种方式是使用TestRestTemplate" class="headerlink" title="还有一种方式是使用TestRestTemplate"></a>还有一种方式是使用TestRestTemplate</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package controller;</span><br><span class="line"></span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.boot.test.SpringApplicationConfiguration;</span><br><span class="line">import org.springframework.boot.test.TestRestTemplate;</span><br><span class="line">import org.springframework.boot.test.WebIntegrationTest;</span><br><span class="line">import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</span><br><span class="line">import org.springframework.web.client.RestTemplate;</span><br><span class="line"></span><br><span class="line">import ipicture.service.post.AppServicePost;</span><br><span class="line">import ipicture.service.post.model.JsonObject;</span><br><span class="line">import ipicture.service.post.model.Subject;</span><br><span class="line"></span><br><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@SpringApplicationConfiguration(classes = AppServicePost.class)</span><br><span class="line">@WebIntegrationTest(&quot;server.port:8083&quot;)// 使用0表示端口号随机，也可以具体指定如8888这样的固定端口</span><br><span class="line">public class SubjectControllerTest &#123;</span><br><span class="line"></span><br><span class="line">    private RestTemplate template = new TestRestTemplate();</span><br><span class="line">    @Value(&quot;$&#123;server.port&#125;&quot;)// 注入端口号</span><br><span class="line">    private int port;</span><br><span class="line">    </span><br><span class="line">    private String getBaseUrl() &#123;</span><br><span class="line">        return &quot;http://localhost:&quot; + port;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test </span><br><span class="line">    public void test() &#123;</span><br><span class="line">        Subject s = new Subject();</span><br><span class="line">        s.setCreator(1l);</span><br><span class="line">        s.setCreated(new Date());</span><br><span class="line">        s.setSubjectName(&quot;test5&quot;);</span><br><span class="line">        s.setDescr(&quot;test subject&quot;);</span><br><span class="line">        s.setDeleted(0);</span><br><span class="line">        s.setParent_id(0);</span><br><span class="line">        s.setStatus(0);</span><br><span class="line">        s.setType(0);</span><br><span class="line">        String url = getBaseUrl() + &quot;/subject/save&quot;;</span><br><span class="line">        String result = template.postForObject(url, s, String.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/22/关于java项目中如何读取配置文件/" itemprop="url">
                   关于java项目中如何读取配置文件
                 </a>
@@ -604,657 +1283,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/07/在单服务器上安装部署FastDFS-Nginx/" itemprop="url">
-                  在单服务器上安装部署FastDFS+Nginx
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-07-07T10:54:21+08:00" content="2016-07-07">
-              2016-07-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="在单服务器上安装部署FastDFS-Nginx"><a href="#在单服务器上安装部署FastDFS-Nginx" class="headerlink" title="在单服务器上安装部署FastDFS+Nginx"></a>在单服务器上安装部署FastDFS+Nginx</h1><p>那么多服务器和软件安装配置中，FastDFS算是比较复杂的一个了。<br>这个例子storage和tracker均部署在同一台服务器（ip：192.168.1.134）<br>我部署的服务系版本是centos6.7</p>
-<h2 id="FastDFS安装配置"><a href="#FastDFS安装配置" class="headerlink" title="FastDFS安装配置"></a>FastDFS安装配置</h2><h3 id="Tracker的安装及配置"><a href="#Tracker的安装及配置" class="headerlink" title="Tracker的安装及配置"></a>Tracker的安装及配置</h3><h4 id="1-安装编译器"><a href="#1-安装编译器" class="headerlink" title="1.安装编译器"></a>1.安装编译器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc gcc-c++</span><br></pre></td></tr></table></figure>
-<h4 id="2-下载安装libevent"><a href="#2-下载安装libevent" class="headerlink" title="2.下载安装libevent"></a>2.下载安装libevent</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://sourceforge.net/projects/levent/files/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz</span><br><span class="line">tar xvzf libevent-2.0.22-stable.tar.gz</span><br><span class="line">cd libevent-2.0.22-stable</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<h4 id="3-下载安装fastDFS"><a href="#3-下载安装fastDFS" class="headerlink" title="3.下载安装fastDFS"></a>3.下载安装fastDFS</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://code.google.com/p/fastdfs/downloads/detail?name=FastDFS_v4.06.tar.gz</span><br><span class="line">（code.google.com已无法访问，可以自己手动下载再上传到服务器）</span><br><span class="line">tar -xvzf FastDFS_v4.06.tar.gz</span><br><span class="line">cd FastDFS</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br></pre></td></tr></table></figure>
-<p>安装成功后/usr/local/bin下会出现一系列fastDFS命令</p>
-<h4 id="4-配置tracker"><a href="#4-配置tracker" class="headerlink" title="4.配置tracker"></a>4.配置tracker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/fdfs/tracker.conf</span><br></pre></td></tr></table></figure>
-<p>修改base_path以存储tracker信息（这里不做修改，使用默认路径/home/yuqing/fastdfs，需要先行创建目录）</p>
-<h4 id="5-启动tracker"><a href="#5-启动tracker" class="headerlink" title="5.启动tracker"></a>5.启动tracker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf</span><br></pre></td></tr></table></figure>
-<h3 id="Storage配置-gt-Storage1配置"><a href="#Storage配置-gt-Storage1配置" class="headerlink" title="Storage配置 -&gt; Storage1配置"></a>Storage配置 -&gt; Storage1配置</h3><p>正常情况下storage1部署一个服务器，storage2部署一个服务器，tracker部署一个服务器。<br>我这里只部署一个storage一个tracker，并部署在同一个服务器</p>
-<h4 id="1-3：参考Tracker安装步骤"><a href="#1-3：参考Tracker安装步骤" class="headerlink" title="1~3：参考Tracker安装步骤"></a>1~3：参考Tracker安装步骤</h4><h4 id="4-配置storage"><a href="#4-配置storage" class="headerlink" title="4.配置storage"></a>4.配置storage</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/fdfs/storage.conf</span><br></pre></td></tr></table></figure>
-<p>修改tracker_server=192.168.1.134:22122<br>修改base_path以存储storage信息（这里不做修改，使用默认路径/home/yuqing/fastdfs，需要先行创建目录）<br>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">group_name=group1</span><br><span class="line">base_path=/home/yuqing/fastdfs</span><br><span class="line">store_path0=/home/yuqing/fastdfs</span><br><span class="line">tracker_server=192.168.1.134:22122</span><br><span class="line">http.server_port=8080      #web server的端口改成8080（与nginx 端口一致）</span><br></pre></td></tr></table></figure></p>
-<h4 id="5-启动storage"><a href="#5-启动storage" class="headerlink" title="5.启动storage"></a>5.启动storage</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf</span><br></pre></td></tr></table></figure>
-<p>启动过程中，fastDFS会在base_path下的data目录中创建一系列文件夹，以存储数据</p>
-<h3 id="安装nginx以及fastdfs-nginx-module模块"><a href="#安装nginx以及fastdfs-nginx-module模块" class="headerlink" title="安装nginx以及fastdfs-nginx-module模块"></a>安装nginx以及fastdfs-nginx-module模块</h3><p>nginx的rewrite模块和cache模块需要先安装pcre和openssl</p>
-<h4 id="安装pcre"><a href="#安装pcre" class="headerlink" title="安装pcre"></a>安装pcre</h4><p>下载pcre<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf pcre-8.12.tar.gz</span><br><span class="line">cd pcre-8.12</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
-<h4 id="安装openssl"><a href="#安装openssl" class="headerlink" title="安装openssl"></a>安装openssl</h4><p>centos下解决办法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install openssl openssl-devel</span><br></pre></td></tr></table></figure></p>
-<h4 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /home/yihua</span><br><span class="line">wget http://nginx.org/download/nginx-0.8.55.tar.gz</span><br><span class="line">tar zxvf nginx-0.8.55.tar.gz</span><br><span class="line">cd nginx-0.8.55</span><br><span class="line">./configure --prefix=/opt/nginx --with-http_stub_status_module</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<h4 id="安装fastdfs-nginx-module"><a href="#安装fastdfs-nginx-module" class="headerlink" title="安装fastdfs-nginx-module"></a>安装fastdfs-nginx-module</h4><p>下载并上传fastdfs-nginx-module_v1.15.tar.gz<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar xzf fastdfs-nginx-module_v1.15.tar.gz</span><br><span class="line">cd /home/yihua/nginx-0.8.55 </span><br><span class="line">./configure --add-module=/home/yihua/fastdfs-nginx-module/src</span><br><span class="line">make; make install</span><br></pre></td></tr></table></figure></p>
-<h4 id="配置nginx和fastdfs-nginx-module"><a href="#配置nginx和fastdfs-nginx-module" class="headerlink" title="配置nginx和fastdfs-nginx-module"></a>配置nginx和fastdfs-nginx-module</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /home/yihua/fastdfs-nginx-module/src/mod_fastdfs.conf /etc/fdfs</span><br><span class="line">vim /etc/fdfs/mod_fastdfs.conf</span><br></pre></td></tr></table></figure>
-<p>修改 fastdfs的nginx模块的配置文件 mod_fastdfs.conf<br>一般只需改动以下几个参数即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">base_path=/home/yuqing/fastdfs      #保存日志目录</span><br><span class="line">tracker_server=192.168.1.134:22122    #tracker 服务器的 IP 地址以及端口号</span><br><span class="line">storage_server_port=23000            #storage 服务器的端口号</span><br><span class="line">group_name=group1                    #当前服务器的 group 名</span><br><span class="line">url_have_group_name = true           #文件 url 中是否有 group 名</span><br><span class="line">store_path_count=1                   #存储路径个数，需要和 store_path 个数匹配</span><br><span class="line">store_path0=/home/yuqing/fastdfs    #存储路径</span><br><span class="line">http.need_find_content_type=true     # 从文件 扩展 名查 找 文件 类型 （ nginx 时 为true）</span><br><span class="line">group_count = 1                      #设置组的个数</span><br></pre></td></tr></table></figure></p>
-<p>然后在末尾添加分组信息，目前只有一个分组，就只写一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[group1]</span><br><span class="line">group_name=group1</span><br><span class="line">storage_server_port=23000</span><br><span class="line">store_path_count=1</span><br><span class="line">store_path0=/home/yuqing/fastdfs</span><br></pre></td></tr></table></figure></p>
-<p>建立 M00 至存储目录的符号连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /home/yuqing/fastdfs/data /home/yuqing/fastdfs/data/M00</span><br></pre></td></tr></table></figure></p>
-<p>将 server 段中的 listen 端口号改为 8080：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/nginx/conf/nginx.conf</span><br><span class="line">listen       8080;</span><br></pre></td></tr></table></figure></p>
-<p>在 server 段中添加fastdfs的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /group1/M00 &#123;</span><br><span class="line">       root   /home/yuqing/fastdfs/data;</span><br><span class="line">       ngx_fastdfs_module;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="准备nginx启动脚本"><a href="#准备nginx启动脚本" class="headerlink" title="准备nginx启动脚本"></a>准备nginx启动脚本</h4><p>编辑 /etc/init.d/nginx，如下内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># nginx Startup script for the Nginx HTTP Server</span><br><span class="line"># it is v.1.4.7 version.</span><br><span class="line"># chkconfig: - 85 15</span><br><span class="line"># description: Nginx is a high-performance web and proxy server.</span><br><span class="line"># It has a lot of features, but it&apos;s not for everyone.</span><br><span class="line"># processname: nginx</span><br><span class="line"> </span><br><span class="line"># pidfile: /usr/local/nginx/logs/nginx.pid</span><br><span class="line"># config: /usr/local/nginx/conf/nginx.conf</span><br><span class="line"> </span><br><span class="line">nginxd=/usr/local/nginx/sbin/nginx</span><br><span class="line">nginx_config=/usr/local/nginx/conf/nginx.conf</span><br><span class="line">nginx_pid=/usr/local/nginx/logs/nginx.pid</span><br><span class="line">nginx_lock=/var/lock/subsys/nginx</span><br><span class="line">RETVAL=0</span><br><span class="line">prog=&quot;nginx&quot;</span><br><span class="line"> </span><br><span class="line"># Source function library.</span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"> </span><br><span class="line"># Source networking configuration.</span><br><span class="line">. /etc/sysconfig/network</span><br><span class="line"> </span><br><span class="line"># Check that networking is up.</span><br><span class="line">[ $&#123;NETWORKING&#125; = &quot;no&quot; ] &amp;&amp; exit 0</span><br><span class="line">[ -x $nginxd ] || exit 0</span><br><span class="line"> </span><br><span class="line"># Start nginx daemons functions.</span><br><span class="line">start() &#123;</span><br><span class="line">    nginx_is_run=`ps -ef | egrep &apos;nginx:\s*(worker|master)\s*process&apos; | wc -l`</span><br><span class="line">    if [ $&#123;nginx_is_run&#125; -gt 0 ];then</span><br><span class="line">        echo &quot;nginx already running....&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    fi</span><br><span class="line">    echo -n $&quot;Starting $prog: &quot;</span><br><span class="line">    daemon $nginxd -c $&#123;nginx_config&#125;</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $RETVAL = 0 ] &amp;&amp; touch $&#123;nginx_lock&#125;</span><br><span class="line">    return $RETVAL</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"># Stop nginx daemons functions.</span><br><span class="line">stop() &#123;</span><br><span class="line">    echo -n $&quot;Stopping $prog: &quot;</span><br><span class="line">    killproc $nginxd</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $RETVAL = 0 ] &amp;&amp; rm -f $&#123;nginx_lock&#125; $&#123;nginx_pid&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"># Reload nginx config file</span><br><span class="line">reload() &#123;</span><br><span class="line">    echo -n $&quot;Reloading $prog: &quot;</span><br><span class="line">    #kill -HUP `cat $&#123;nginx_pid&#125;`</span><br><span class="line">    killproc $nginxd -HUP</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"># See how we were called.</span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start)</span><br><span class="line">        start</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        stop</span><br><span class="line">        ;;</span><br><span class="line">    reload)</span><br><span class="line">        reload</span><br><span class="line">        ;;</span><br><span class="line">    restart)</span><br><span class="line">          stop</span><br><span class="line">        start</span><br><span class="line">        ;;</span><br><span class="line">    status)</span><br><span class="line">        status $prog</span><br><span class="line">        RETVAL=$?</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo $&quot;Usage: $prog &#123;start|stop|restart|reload|status|help&#125;&quot;</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br></pre></td></tr></table></figure></p>
-<p>Nginx启动提示找不到libpcre.so.1解决方法<br>如果是32位系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/lib/libpcre.so.1 /lib</span><br></pre></td></tr></table></figure></p>
-<p>如果是64位系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/lib/libpcre.so.1 /lib64</span><br></pre></td></tr></table></figure></p>
-<h3 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># chmod u+x /etc/init.d/nginx</span><br><span class="line"># chkconfig --add nginx</span><br><span class="line"># chkconfig nginx on</span><br><span class="line"># service nginx start</span><br><span class="line">正在启动 nginx：                                           [确定]</span><br><span class="line"># service nginx status</span><br><span class="line">nginx (pid 26500) 正在运行...</span><br></pre></td></tr></table></figure>
-<p>查看nginx的日志 错误日志logs/error.log 看是否有问题</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="启动nginx，tracker和storage"><a href="#启动nginx，tracker和storage" class="headerlink" title="启动nginx，tracker和storage"></a>启动nginx，tracker和storage</h4><p>重启tracker：<br>/usr/local/bin/restart.sh /usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf<br>重启storage：<br>/usr/local/bin/restart.sh /usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf<br>启动nginx：<br>/usr/local/nginx/sbin/nginx<br>检查nginx状态：<br>/usr/local/nginx/sbin/nginx -t<br>重启nginx：<br>/usr/local/nginx/sbin/nginx -s reload</p>
-<h4 id="tracker运行"><a href="#tracker运行" class="headerlink" title="tracker运行"></a>tracker运行</h4><p>直接使用 fdfs_trackerd 来启动tracker进程，然后使用netstat 查看端口是否起来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@tracker fdfs]# fdfs_trackerd /etc/fdfs/tracker.conf restart</span><br><span class="line">[root@tracker fdfs]# netstat -antp | grep trackerd</span><br><span class="line">tcp        0      0 0.0.0.0:22122               0.0.0.0:*                   LISTEN      14520/fdfs_trackerd </span><br><span class="line">[root@tracker fdfs]#</span><br></pre></td></tr></table></figure></p>
-<h4 id="storage运行"><a href="#storage运行" class="headerlink" title="storage运行"></a>storage运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># fdfs_storaged /etc/fdfs/storage.conf restart</span><br><span class="line">查看端口是否起来</span><br><span class="line"># netstat -antp | grep storage</span><br><span class="line">tcp        0      0 0.0.0.0:23000               0.0.0.0:*                   LISTEN      10316/fdfs_storaged</span><br></pre></td></tr></table></figure>
-<p>也可以以下命令来监控服务器的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># fdfs_monitor /etc/fdfs/client.conf</span><br></pre></td></tr></table></figure></p>
-<p>看到ACTIVE,就说明已经成功注册到了tracker。</p>
-<h4 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h4><p>设置tracker开机自动启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@tracker tracker]# echo &quot;/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart&quot; &gt;&gt; /etc/rc.local</span><br><span class="line">[root@tracker tracker]# cat /etc/rc.local</span><br><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># This script will be executed *after* all the other init scripts.</span><br><span class="line"># You can put your own initialization stuff in here if you don&apos;t</span><br><span class="line"># want to do the full Sys V style init stuff.</span><br><span class="line">touch /var/lock/subsys/local</span><br><span class="line">/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart</span><br><span class="line">[root@tracker tracker]#</span><br></pre></td></tr></table></figure></p>
-<p>设置storage开机启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 fdfs]# echo &quot;/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart&quot; &gt;&gt; /etc/rc.local</span><br><span class="line">[root@server1 fdfs]# cat /etc/rc.local</span><br><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># This script will be executed *after* all the other init scripts.</span><br><span class="line"># You can put your own initialization stuff in here if you don&apos;t</span><br><span class="line"># want to do the full Sys V style init stuff.</span><br><span class="line">touch /var/lock/subsys/local</span><br><span class="line">/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart</span><br></pre></td></tr></table></figure></p>
-<h3 id="使用client测试文件上传"><a href="#使用client测试文件上传" class="headerlink" title="使用client测试文件上传"></a>使用client测试文件上传</h3><p>先配置一下client<br>vi /etc/fdfs/client.conf<br>保证一下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">base_path=/home/yuqing/fastdfs</span><br><span class="line">tracker_server=192.168.1.134:22122</span><br><span class="line">http.tracker_server_port=8080</span><br></pre></td></tr></table></figure></p>
-<p>vi test.txt</p>
-<p>/usr/local/bin/fdfs_test /etc/fdfs/client.conf  upload  test.txt<br>得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">This is FastDFS client test program v4.06</span><br><span class="line"></span><br><span class="line">Copyright (C) 2008, Happy Fish / YuQing</span><br><span class="line"></span><br><span class="line">FastDFS may be copied only under the terms of the GNU General</span><br><span class="line">Public License V3, which may be found in the FastDFS source kit.</span><br><span class="line">Please visit the FastDFS Home Page http://www.csource.org/</span><br><span class="line">for more detail.</span><br><span class="line"></span><br><span class="line">[2016-07-06 07:31:57] DEBUG - base_path=/home/yuqing/fastdfs, connect_timeout=30, network_timeout=60, tracker_server_count=1, anti_steal_token=0, anti_steal_secret_key length=0, use_connection_pool=0, g_connection_pool_max_idle_time=3600s, use_storage_id=0, storage server id count: 0</span><br><span class="line"></span><br><span class="line">tracker_query_storage_store_list_without_group:</span><br><span class="line">        server 1. group_name=, ip_addr=192.168.1.134, port=23000</span><br><span class="line"></span><br><span class="line">group_name=group1, ip_addr=192.168.1.134, port=23000</span><br><span class="line">storage_upload_by_filename</span><br><span class="line">group_name=group1, remote_filename=M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt</span><br><span class="line">source ip address: 192.168.1.134</span><br><span class="line">file timestamp=2016-07-06 07:31:57</span><br><span class="line">file size=7</span><br><span class="line">file crc32=3651826635</span><br><span class="line">file url: http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt</span><br><span class="line">storage_upload_slave_by_filename</span><br><span class="line">group_name=group1, remote_filename=M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085_big.txt</span><br><span class="line">source ip address: 192.168.1.134</span><br><span class="line">file timestamp=2016-07-06 07:31:57</span><br><span class="line">file size=7</span><br><span class="line">file crc32=3651826635</span><br><span class="line">file url: http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085_big.txt</span><br><span class="line">[root@localhost yihua]# This is FastDFS client test program v4.06</span><br><span class="line">-bash: This: command not found</span><br><span class="line">Copyright (C) 2008, Happy Fish / YuQing</span><br></pre></td></tr></table></figure></p>
-<p>在浏览器打开<a href="http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt" target="_blank" rel="external">http://192.168.1.134:8080/group1/M00/00/00/wKgBhld9Fl2ATSOYAAAAB9mqc8s085.txt</a><br>可以看见你的文件。那么就成功了。</p>
-<p>done.</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/01/项目管理建议/" itemprop="url">
-                  项目管理建议
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-07-01T19:14:00+08:00" content="2016-07-01">
-              2016-07-01
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="对项目管理制度的一些看法和建议"><a href="#对项目管理制度的一些看法和建议" class="headerlink" title="对项目管理制度的一些看法和建议"></a>对项目管理制度的一些看法和建议</h1><h2 id="当前存在的问题"><a href="#当前存在的问题" class="headerlink" title="当前存在的问题"></a>当前存在的问题</h2><ol>
-<li><p>技术工程师反映，技术人员与业务隔离，技术人员难以熟悉第一手业务需求，对工程师开发出契合业务部分需求的产品造成一定的理解障碍。</p>
-</li>
-<li><p>安卓、iOS、H5、后端、测试等各部门分而治之，缺乏一个强而有力的统筹推进，虽然增加了项目经理角色，但目前这个角色只能在各部门之间协调，仍然难以有力推动各部门按时按量完成进度。</p>
-</li>
-<li><p>从业务到产品到开发到测试上线，这个流程还可以有优化的地方。</p>
-</li>
-</ol>
-<h2 id="分析和改进建议"><a href="#分析和改进建议" class="headerlink" title="分析和改进建议"></a>分析和改进建议</h2><h3 id="针对问题1。"><a href="#针对问题1。" class="headerlink" title="针对问题1。"></a>针对问题1。</h3><p>使用尝试让项目经理或者技术经理在产需求研和产品评审阶段就参与介入，能够一定程度的和业务部分做到沟通，让技术人员更熟悉业务。即使只是旁听也好</p>
-<h3 id="针对问题2。"><a href="#针对问题2。" class="headerlink" title="针对问题2。"></a>针对问题2。</h3><p>程序界有一句话，“没有完美的模型，但有一些能用。”<br>既然目前公司的情况是各部分分而治之，各施其职，那么可以考虑这样一个构思，产品对业务负责，提供产品的产出;测试则对产品负责，提供项目和模块完成情况；技术经理对项目经理负责，提供项目模块开发时间评估，以及开发产出；各开发工程师对技术经理负责，按时按量完成技术经理制定的模块开发计划。而项目经理则对项目的进度和协调负责，应该要有渠道能对接所有相关部门，跟进项目的进度，协调各方遇到的问题，并协助解决。<br><strong>这样，明确各部门应该对谁负责，各部门遇到项目开发相关问题，也就能明确的找到相应的人员，得到反馈，部门之间也能够相互推动。</strong></p>
-<p><strong>这里推荐使用一个团队协作管理的工具：“Worktile”。</strong><br>Worktile可以在一个看板中看到所有在做、已完成、在测试等等所有流程中的任务和完成情况。<br>例如，技术经理可以列出所有需要完成的模块和任务，为之分配负责人。负责人开发完成后，勾选完成，管理人员就可以拖动任务进入测试流程。<br>如此一个可视化简单的团队协作管理。<br>当然这个功能，像禅道也能部分实现。但是禅道的这个功能并不好用，从实践经验来说，使用的人积极性并不高。而Worktile这类工具如果推动成功，开发的管理效率将会得到提高。</p>
-<p><strong>各状态任务完成情况一览：</strong><br><img src="/images/project-002.jpg" alt=""><br><strong>完成任务，推动到另一状态：</strong><br><img src="/images/project-003.png" alt=""><br><strong>报表：</strong><br><img src="/images/project-004.jpg" alt=""><br><strong>团队日历：每个时间点要完成的任务也会在此显示</strong><br><img src="/images/project-005.png" alt=""></p>
-<h3 id="针对问题3"><a href="#针对问题3" class="headerlink" title="针对问题3."></a>针对问题3.</h3><p>以门店收银机为例，发现存在一些流程上的问题。<br><strong>首先，说接口，有两个问题。</strong><br>一，客户端和服务端接口文档，用的是word文档沟通，各个人员直接相互传递，很可能导致相互之间接口文档不同步，也就会造成开发期间关于接口的一些扯皮。<br>二，虽然接口文档有了，但是客户端还是要等服务端出接口后，才能进行接口接入后的相关开发，这样前端的进度就要依赖于后端的产出。<br>既然有这样的问题，那么有没有改进办法呢？有的，这里推荐使用阿里开源的“RAP”接口管理工具进行接口管理。<br>RAP对我们接口开发的帮助有：<br>1）可视化结构化的接口编辑和管理。这样接口只有服务器上的一份，并且管理简单。<br>2）生成Mock数据、校验真实接口的正确性。有了Mock功能，前端可以在后端提供接口之前，利用rap提供的模拟接口数据，提前进行接口接入的开发，提高前端开发速度。最重要的是，前后端接口开发解耦。<br><img src="/images/project-001.jpg" alt=""></p>
-<p><strong>其次，说说测试和螺旋式开发。</strong><br>测试本身是一个发现细节的过程，有些问题测试到细节的地方，就会出现值得推敲和不断调试的情况。而我们项目留给测试的时间太少了。而前期，没完成之前，测试在等待开发，同时，最后所有模块大致完成才提测，又一股脑挤在后期测试和迭代，时间难免太紧，很容易导致进度延误。<br><strong>这里的建议是，开发应该在项目开始时就梳理出模块间的依赖情况，前后端协调好应该先开发哪些模块，只要有一个模块开发完成，就马上提测。</strong>如此让测试尽早介入测试，达到项目螺旋式迭代推荐的目的。同时，也能让测试的时间合理分配，避免延误。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/28/api-version-4种在springmvc中进行api版本控制的处理方法/" itemprop="url">
-                  [api_version]4种在springmvc中进行api版本控制的处理方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-06-28T15:31:54+08:00" content="2016-06-28">
-              2016-06-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p><a href="https://github.com/mindhaq/restapi-versioning-spring.git" target="_blank" rel="external">https://github.com/mindhaq/restapi-versioning-spring.git</a><br><a href="https://github.com/augusto/restVersioning.git" target="_blank" rel="external">https://github.com/augusto/restVersioning.git</a></p>
-<p>这两个git项目里提供了4种在springmvc中进行api版本控制的处理方法，你们看怎么样，能否不使用冗余部署的方式。</p>
-<ol>
-<li><p>/api/v1/xxx<br>controller中的方法注解写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(value = &quot;/apiurl/&#123;version&#125;/hello&quot;, method = GET, produces = APPLICATION_JSON_VALUE)</span><br><span class="line">public Hello sayHelloWorldUrl(@PathVariable final ValidVersion version) &#123;</span><br><span class="line">    return new Hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>/api/xxx<br>在header中添加”X-API-Version”:”v1”来进行版本请求的区别<br>controller中的方法注解写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(value = &quot;/apiheader/hello&quot;, method = GET, produces = APPLICATION_JSON_VALUE)</span><br><span class="line">public Hello sayHelloWorldHeader(@RequestHeader(&quot;X-API-Version&quot;) final ValidVersion version) &#123;</span><br><span class="line">    return new Hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller中的方法注解写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(</span><br><span class="line">    value = &quot;/apiaccept/hello&quot;, method = GET,</span><br><span class="line">    produces = &#123;&quot;application/vnd.company.app-v1+json&quot;, &quot;application/vnd.company.app-v2+json&quot;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>/api/xxx<br>在header中添加Accept: “application/vnd.company.app-v1+json”来进行版本区别<br>controller写法：<br>```<br>@Controller<br>@VersionedResource(media = “application/vnd.app.resource”)<br>public class TestController {</p>
-<p> @RequestMapping(value = {“/resource”}, method = RequestMethod.GET)<br> @VersionedResource(from = “1.0”, to = “1.0”)<br> @ResponseBody<br> public Resource getResource_v1() {</p>
-<pre><code>return new Resource(&quot;1.0&quot;);
-</code></pre><p> }</p>
-<p> @RequestMapping(value = {“/resource”}, method = RequestMethod.GET)<br> @VersionedResource(from = “2.0”)<br> @ResponseBody<br> public Resource getResource_v2_onwards() {</p>
-<pre><code>return new Resource(&quot;2.0&quot;);
-</code></pre><p> }<br>}</p>
-</li>
-</ol>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/06/dev-collect-2016-06-06-collect-of-im-netty-android-etc/" itemprop="url">
-                  [dev][collect][2016-06-06]collect-of-im-netty-android-etc
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-06-06T17:42:22+08:00" content="2016-06-06">
-              2016-06-06
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>此集合[dev][collect]汇总开发资源.<br>资源含文章，git code等等..</p>
-<h3 id="2016-06-06"><a href="#2016-06-06" class="headerlink" title="2016-06-06"></a>2016-06-06</h3><ul>
-<li><p>一套仿 微信 IM系统 基于apache mina<br><a href="http://my.oschina.net/u/1167637/blog/411312" target="_blank" rel="external">http://my.oschina.net/u/1167637/blog/411312</a></p>
-</li>
-<li><p>socketio 服务器推送<br><a href="http://blog.csdn.net/xtayfjpk/article/details/40948409" target="_blank" rel="external">http://blog.csdn.net/xtayfjpk/article/details/40948409</a></p>
-</li>
-<li><p>开放源码,基于springMVC+springSecurity3.x+Mybaits3.x的权限系统,,支持开源<br><a href="https://github.com/caprice/lanyuan" target="_blank" rel="external">https://github.com/caprice/lanyuan</a></p>
-</li>
-<li><p>Simple asynchronous non blocking chat server/client based on Netty 4<br><a href="https://github.com/caprice/nettychat" target="_blank" rel="external">https://github.com/caprice/nettychat</a><br><a href="https://github.com/YihuaWanglv/nettychat" target="_blank" rel="external">https://github.com/YihuaWanglv/nettychat</a></p>
-</li>
-<li><p>[5][android]A High Copy WeChat ,SNS APP (高仿微信)<br><a href="https://github.com/YihuaWanglv/wechat" target="_blank" rel="external">https://github.com/YihuaWanglv/wechat</a></p>
-</li>
-<li><p>一个Android开发者博客<br><a href="http://blog.csdn.net/finddreams" target="_blank" rel="external">http://blog.csdn.net/finddreams</a></p>
-</li>
-<li><p>案例剖析：从0开始搭建一个微服务的持续交付系统<br><a href="http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzA5Nzc4OTA1Mw==&amp;mid=2659597380&amp;idx=1&amp;sn=e0087759e6b65df0ba30126c1e3af915&amp;scene=0#wechat_redirect</a></p>
-</li>
-<li><p>[5][android]这是一个可用于Android快速开发的框架，集成了很多项目中通用的东西，免去重复造轮子的麻烦，直接下载来了，修改一下就可以做为基础的框架进行开发，提高开发速度，适合当前移动互联网时代敏捷快速开发的节奏<br><a href="https://github.com/YihuaWanglv/Android_BaseLib" target="_blank" rel="external">https://github.com/YihuaWanglv/Android_BaseLib</a></p>
-</li>
-<li><p>使用Netty实现IMServer，方便的Entity解码编码机制，融合到二进制协议中<br><a href="https://github.com/YihuaWanglv/netty-chat" target="_blank" rel="external">https://github.com/YihuaWanglv/netty-chat</a></p>
-</li>
-<li><p>仿淘宝的B2C商城项目<br>页面用的jsp，稍显陈旧<br><a href="https://github.com/YihuaWanglv/B2CWeb" target="_blank" rel="external">https://github.com/YihuaWanglv/B2CWeb</a></p>
-</li>
-<li><p>JavaEE项目开发脚手架<br><a href="https://github.com/YihuaWanglv/es" target="_blank" rel="external">https://github.com/YihuaWanglv/es</a><br>后端:<br>IoC容器 spring<br>web框架 springmvc<br>orm框架 hibernate + spring data jpa<br>安全框架 shiro<br>验证框架 hibernate validator<br>任务调度框架 quartz<br>缓存 ehcache<br>数据源 druid<br>日志 slf4j+logback<br>Json fastjson<br>日期美化 prettytime<br>servlet 3.0(需要支持servlet3的servlet容器，如tomcat7)<br>jcaptcha 验证码<br>jsp 模板视图<br>前端:<br>jquery js框架<br>jquery-ui-bootstrap界面框架<br>font-wesome 字体/图标框架<br>jquery Validation Engine 验证框架（配合spring的验证框架，页面验证简化不少）<br>kindeditor 编辑器<br>nicescroll 漂亮的滚动条<br>zTree 树框架<br>jquery blockUI 弹出框/遮罩框架<br>jquery-fileupload 文件上传<br>bootstrap-datatimepicker 日历选择</p>
-</li>
-<li><p>[5][android]Collect and classify android open source projects<br><a href="https://github.com/YihuaWanglv/android-open-project" target="_blank" rel="external">https://github.com/YihuaWanglv/android-open-project</a></p>
-</li>
-<li><p>Blog avec Spring MVC + spring DATA + mongodb + angularjs<br><a href="https://github.com/YihuaWanglv/blog_java" target="_blank" rel="external">https://github.com/YihuaWanglv/blog_java</a></p>
-</li>
-<li><p>dianping-api-samples<br><a href="https://github.com/YihuaWanglv/dianping-open-sdk" target="_blank" rel="external">https://github.com/YihuaWanglv/dianping-open-sdk</a></p>
-</li>
-<li><p>JeeSite 是一个企业信息管理系统基础框架，Java EE（J2EE）快速开发框架，使用经典技术组合（Spring、Spring MVC、Apache Shiro、Hibernate、Bootstrap UI），包括核心模块如：组织机构、用户、权限授权、内容管理、工作流等。<br><a href="https://github.com/YihuaWanglv/jeesite" target="_blank" rel="external">https://github.com/YihuaWanglv/jeesite</a></p>
-</li>
-<li><p>Demos of Apache MINA User Guide《Apache MINA 2 用户指南》中文翻译，文中用到的例子源码 <a href="https://github.com/waylau/apache-mina-2.x-user-guide" target="_blank" rel="external">https://github.com/waylau/apache-mina-2.x-user-guide</a><br><a href="https://github.com/waylau/apache-mina-2-user-guide-demos" target="_blank" rel="external">https://github.com/waylau/apache-mina-2-user-guide-demos</a></p>
-</li>
-<li><p>Spring Framework 4.x Reference Documentation 中文翻译<br><a href="https://www.gitbook.com/book/waylau/spring-framework-4-reference/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/spring-framework-4-reference/details</a><br><a href="https://github.com/waylau/spring-framework-4-reference" target="_blank" rel="external">https://github.com/waylau/spring-framework-4-reference</a></p>
-</li>
-<li><p>免费的计算机编程类中文书籍<br><a href="https://github.com/YihuaWanglv/free-programming-books-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books-zh_CN</a><br>网页版：<br><a href="http://siberiawolf.com/free_programming/index.html" target="_blank" rel="external">http://siberiawolf.com/free_programming/index.html</a></p>
-</li>
-<li><p>一个合格的程序员应该读过哪些书<br><a href="http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html" target="_blank" rel="external">http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html</a></p>
-</li>
-<li><p>Google 全球 IP 地址库<br><a href="https://github.com/justjavac/Google-IPs" target="_blank" rel="external">https://github.com/justjavac/Google-IPs</a></p>
-</li>
-<li><p>一份关于“资料汇总”的汇总<br><a href="https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN" target="_blank" rel="external">https://github.com/YihuaWanglv/awesome-awesomeness-zh_CN</a></p>
-</li>
-<li><p>Freely available programming books<br><a href="https://github.com/YihuaWanglv/free-programming-books" target="_blank" rel="external">https://github.com/YihuaWanglv/free-programming-books</a></p>
-</li>
-<li><p>RESTful API 设计参考文献列表，可帮助你更加彻底的了解REST风格的接口设计<br><a href="https://github.com/aisuhua/restful-api-design-references" target="_blank" rel="external">https://github.com/aisuhua/restful-api-design-references</a></p>
-</li>
-<li><p>ssential Netty in Action 《Netty 实战(精髓)》<br><a href="https://github.com/waylau/essential-netty-in-action" target="_blank" rel="external">https://github.com/waylau/essential-netty-in-action</a><br>gitbook：<br><a href="http://waylau.com/essential-netty-in-action/" target="_blank" rel="external">http://waylau.com/essential-netty-in-action/</a></p>
-</li>
-<li><p>Gradle 2 User Guide 中文翻译《Gradle 2 用户指南》<br><a href="https://github.com/waylau/Gradle-2-User-Guide" target="_blank" rel="external">https://github.com/waylau/Gradle-2-User-Guide</a><br>gitbook：<br><a href="https://www.gitbook.com/book/waylau/gradle-2-user-guide/details" target="_blank" rel="external">https://www.gitbook.com/book/waylau/gradle-2-user-guide/details</a></p>
-</li>
-<li><p>Netty 4.x User Guide 中文翻译《Netty 4.x 用户指南》<br><a href="https://github.com/waylau/netty-4-user-guide" target="_blank" rel="external">https://github.com/waylau/netty-4-user-guide</a><br>gitbook：<br><a href="http://waylau.com/netty-4-user-guide/" target="_blank" rel="external">http://waylau.com/netty-4-user-guide/</a></p>
-</li>
-<li><p>这是一个整理即时通讯（IM）和社交系统（SNS）优秀开源项目的文档，项目上传github欢迎提交更新<br><a href="https://github.com/YihuaWanglv/Perfect_IM_SNS" target="_blank" rel="external">https://github.com/YihuaWanglv/Perfect_IM_SNS</a></p>
-</li>
-<li><p>基于位置信息，空间时间结合的社交与分享的应用<br><a href="https://github.com/YihuaWanglv/Tuyi" target="_blank" rel="external">https://github.com/YihuaWanglv/Tuyi</a></p>
-</li>
-<li><p>SYTeamApp：基于环信平台进行开发，旨在打造的高效团队沟通的移动客户端，供企业内部协作使用、适应移动办公需要，提升企业沟通协同效率，增强企业办公管理效率。（当前仅实现了用户登入登出功能、通讯功能、投票功能。）<br><a href="https://github.com/YihuaWanglv/SYTeamApp" target="_blank" rel="external">https://github.com/YihuaWanglv/SYTeamApp</a></p>
-</li>
-<li><p>MeifuGO：An open source android app by using easemob IM SDK<br><a href="https://github.com/YihuaWanglv/MeifuGO" target="_blank" rel="external">https://github.com/YihuaWanglv/MeifuGO</a></p>
-</li>
-<li><p>fangyuanshili：环信SDK,IM,geohash,lbs<br><a href="https://github.com/YihuaWanglv/fangyuanshili" target="_blank" rel="external">https://github.com/YihuaWanglv/fangyuanshili</a></p>
-</li>
-<li><p>zaina：该项目是改编自环信即时通讯云的demo改编<br><a href="https://github.com/YihuaWanglv/zaina" target="_blank" rel="external">https://github.com/YihuaWanglv/zaina</a></p>
-</li>
-<li><p>dianhua：基于react native 和 环信的实时通话的免费店话<br><a href="https://github.com/YihuaWanglv/dianhua" target="_blank" rel="external">https://github.com/YihuaWanglv/dianhua</a></p>
-</li>
-<li><p>Baby：一个私密社交APP<br><a href="https://github.com/YihuaWanglv/Baby" target="_blank" rel="external">https://github.com/YihuaWanglv/Baby</a></p>
-</li>
-<li><p>MVPCommon：一个集成了众多开源项目的Android MVP框架以及应用搭建，全程博客更新。<br>a common Architecture and project build with blogs releasing based on MVP，integrates many Open Source Projects ,to make your developing quicker and easier.<br><a href="https://github.com/YihuaWanglv/MVPCommon" target="_blank" rel="external">https://github.com/YihuaWanglv/MVPCommon</a><br>从零开始搭建android框架系列：<br><a href="http://www.jianshu.com/notebooks/3767449/latest" target="_blank" rel="external">http://www.jianshu.com/notebooks/3767449/latest</a></p>
-</li>
-<li><p>learnCloud：<br>和应用服务器、存储服务器说再见<br>再也不用租服务器，也不用写后端代码了。LeanCloud 提供一站式后端云服务，从数据存储、实时聊天、消息推送到移动统计，涵盖应用开发的多方面后端需求。<br><a href="https://leancloud.cn/" target="_blank" rel="external">https://leancloud.cn/</a></p>
-</li>
-<li><p>不容错过，最全的安卓架构合集【从零开始搭建android框架系列（2）】<br><a href="http://www.jianshu.com/p/1f21e1d375aa" target="_blank" rel="external">http://www.jianshu.com/p/1f21e1d375aa</a></p>
-</li>
-<li><p>安卓架构文章合集（a collection of android Architecture）<br><a href="https://github.com/YihuaWanglv/AndroidArchitectureCollection" target="_blank" rel="external">https://github.com/YihuaWanglv/AndroidArchitectureCollection</a></p>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/06/git-git分支使用和管理/" itemprop="url">
-                  [git]git分支使用和管理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-06-06T17:37:36+08:00" content="2016-06-06">
-              2016-06-06
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="git分支常用命令"><a href="#git分支常用命令" class="headerlink" title="git分支常用命令"></a>git分支常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">从master创建dev分支，并checkout dev分支：</span><br><span class="line">git checkout -b dev</span><br><span class="line">此命令相当于：</span><br><span class="line">git branch dev</span><br><span class="line">git checkout dev</span><br><span class="line"></span><br><span class="line">回到master，合并dev的更改到master：</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">合并后删除dev分支：</span><br><span class="line">git branch -d dev</span><br><span class="line"></span><br><span class="line">如果直接用git merge dev合并分支，git使用的是fast forward的模式，并不会留下commit历史，如果想要留下commit历史，就要加上--no-ff参数，并使用-m添加commit描述</span><br><span class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev</span><br></pre></td></tr></table></figure>
-<h2 id="保存临时状态"><a href="#保存临时状态" class="headerlink" title="保存临时状态"></a>保存临时状态</h2><p>当你正在dev分支进行开发，还没有开发完成能提交，此时突然有一个线上版本的bug要紧急修复，这个时候你就需要用到git stash功能，保存正在开发的dev分支的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">保存当前开发状态：</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line">查看当前已保存的stash列表：</span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line">取出之前保存的stash状态：</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
-<h2 id="多人协作的工作模式"><a href="#多人协作的工作模式" class="headerlink" title="多人协作的工作模式"></a>多人协作的工作模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">多人协作的工作模式通常是这样：</span><br><span class="line"></span><br><span class="line">首先，可以试图用git push origin branch-name推送自己的修改；</span><br><span class="line"></span><br><span class="line">如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</span><br><span class="line"></span><br><span class="line">如果合并有冲突，则解决冲突，并在本地提交；</span><br><span class="line"></span><br><span class="line">没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！</span><br><span class="line"></span><br><span class="line">如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。</span><br><span class="line"></span><br><span class="line">这就是多人协作的工作模式，一旦熟悉了，就非常简单。</span><br><span class="line"></span><br><span class="line">小结</span><br><span class="line"></span><br><span class="line">查看远程库信息，使用git remote -v；</span><br><span class="line"></span><br><span class="line">本地新建的分支如果不推送到远程，对其他人就是不可见的；</span><br><span class="line"></span><br><span class="line">从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；</span><br><span class="line"></span><br><span class="line">在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；</span><br><span class="line"></span><br><span class="line">建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；</span><br><span class="line"></span><br><span class="line">从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/04/Windows下开启React-Native征途/" itemprop="url">
-                  Windows下开启React-Native征途
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-06-04T09:55:48+08:00" content="2016-06-04">
-              2016-06-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。<br>不过说出来你可能不太相信，这故事的开头，来的并没有想象中的困难。</p>
-<p>以下是过程：</p>
-<h2 id="1-安装Nodejs"><a href="#1-安装Nodejs" class="headerlink" title="1. 安装Nodejs"></a>1. 安装Nodejs</h2><p>React Native要求是4.0以上。</p>
-<h2 id="2-安装react-native-cli"><a href="#2-安装react-native-cli" class="headerlink" title="2. 安装react-native-cli"></a>2. 安装react-native-cli</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g react-native-cli</span><br></pre></td></tr></table></figure>
-<h2 id="3-初始化第一个项目"><a href="#3-初始化第一个项目" class="headerlink" title="3. 初始化第一个项目"></a>3. 初始化第一个项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init TestProject</span><br></pre></td></tr></table></figure>
-<p>初始化第一个测试Demo，init的时候可能需要一点时间. 伟大的目标值的那么些耐心的等待。</p>
-<h2 id="4-设置环境变量"><a href="#4-设置环境变量" class="headerlink" title="4. 设置环境变量"></a>4. 设置环境变量</h2><p>设置环境变量ANDROID_HOME指向Android SDK的目录<br>eg:<br><img src="/images/react-001.png" alt=""></p>
-<h2 id="5-安装Genymotion模拟器"><a href="#5-安装Genymotion模拟器" class="headerlink" title="5. 安装Genymotion模拟器"></a>5. 安装Genymotion模拟器</h2><p>Genymotion官网下载安装Genymotion模拟器，并创建Android emulator。<br>创建实例后，将得到如下画面：<br><img src="/images/react-002.png" alt=""><br>Genymotion运行Android模拟实例需要VirtualBox和AndroidSdk的支持。<br>安装Genymotion后默认的VirtualBox和AndroidSdk不好使，我通过Setting设置配置好自己本地的VirtualBox和AndroidSdk。<br>设置VirtualBox<br><img src="/images/react-003.png" alt=""><br>设置sdk<br><img src="/images/react-004.png" alt=""></p>
-<p>配置好后，就把模拟的Android实例启动起来放着吧。</p>
-<h2 id="6-启动"><a href="#6-启动" class="headerlink" title="6. 启动"></a>6. 启动</h2><h3 id="1-启动React-Native-Server"><a href="#1-启动React-Native-Server" class="headerlink" title="1-启动React Native Server"></a>1-启动React Native Server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native start</span><br></pre></td></tr></table></figure>
-<p><img src="/images/react-005.png" alt=""></p>
-<h3 id="2-开一个新的命令行终端-cmd-切换到项目目录安装APP"><a href="#2-开一个新的命令行终端-cmd-切换到项目目录安装APP" class="headerlink" title="2-开一个新的命令行终端(cmd), 切换到项目目录安装APP"></a>2-开一个新的命令行终端(cmd), 切换到项目目录安装APP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd android</span><br><span class="line">gradlew.bat installDebug</span><br></pre></td></tr></table></figure>
-<p>执行gradlew.bat installDebug时，需要先正常打开Genymotion模拟器，否则build 和 install会报错。<br><img src="/images/react-006.png" alt=""><br>安装成功后，在Genymotion里手动打开APP ，正常的话，你就可以看到React-Native的欢迎画面。<br><img src="/images/react-007.png" alt=""></p>
-<p>Windows下的React Native开发环境搭建 – done.</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1301,7 +1329,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">59</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1315,7 +1343,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">128</span>
+              <span class="site-state-item-count">141</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
