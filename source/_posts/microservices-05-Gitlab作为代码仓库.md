@@ -6,6 +6,7 @@ tags: [microservices,gitlab,git,代码仓库,docker]
 
 # [microservices]05-Gitlab作为代码仓库
 
+- github项目地址： [microservices](https://github.com/YihuaWanglv/microservices)
 
 ## 1. Gitlab的Docker安装
 

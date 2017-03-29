@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-29T13:33:59.369Z</updated>
+  <updated>2017-03-29T13:43:43.110Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,12 @@
     <link href="http://yoursite.com/2017/03/29/microservices-01-Spring-boot%E5%BC%80%E5%8F%91%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     <id>http://yoursite.com/2017/03/29/microservices-01-Spring-boot开发微服务/</id>
     <published>2017-03-29T13:33:23.000Z</published>
-    <updated>2017-03-29T13:33:59.369Z</updated>
+    <updated>2017-03-29T13:43:43.110Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Spring-boot开发微服务"><a href="#Spring-boot开发微服务" class="headerlink" title="Spring boot开发微服务"></a>Spring boot开发微服务</h1><h2 id="1-为什么使用spring-boot？"><a href="#1-为什么使用spring-boot？" class="headerlink" title="1. 为什么使用spring boot？"></a>1. 为什么使用spring boot？</h2><ul>
+    <content type="html"><![CDATA[<h1 id="Spring-boot开发微服务"><a href="#Spring-boot开发微服务" class="headerlink" title="Spring boot开发微服务"></a>Spring boot开发微服务</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-为什么使用spring-boot？"><a href="#1-为什么使用spring-boot？" class="headerlink" title="1. 为什么使用spring boot？"></a>1. 为什么使用spring boot？</h2><ul>
 <li>1) spring boot有pivotal和netfix背书，是一套完整的企业级应用的开发方案，天然集成分布式云架构spring-cloud。</li>
 <li>2) spring-boot的完全抛弃以往java项目配置文件过多的“陋习”，开启一个项目只需几行代码。</li>
 <li>3) Sprinboot允许项目使用内嵌的tomcat像启动普通java程序一样启动一个web项目.由于有了这个特性，项目不再需要打war包部署到tomcat，而是打成jar包，直接使用java -jar命令启动.</li>
@@ -37,7 +40,8 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Spring-boot开发微服务&quot;&gt;&lt;a href=&quot;#Spring-boot开发微服务&quot; class=&quot;headerlink&quot; title=&quot;Spring boot开发微服务&quot;&gt;&lt;/a&gt;Spring boot开发微服务&lt;/h1&gt;&lt;h2 id=&quot;1-为什么使用sp
+      &lt;h1 id=&quot;Spring-boot开发微服务&quot;&gt;&lt;a href=&quot;#Spring-boot开发微服务&quot; class=&quot;headerlink&quot; title=&quot;Spring boot开发微服务&quot;&gt;&lt;/a&gt;Spring boot开发微服务&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;github项目
     
     </summary>
     
@@ -55,9 +59,12 @@
     <link href="http://yoursite.com/2017/03/29/microservices-06-Jenkins%E6%89%A7%E8%A1%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E6%9E%84%E5%BB%BA/"/>
     <id>http://yoursite.com/2017/03/29/microservices-06-Jenkins执行自动化的构建/</id>
     <published>2017-03-29T13:01:58.000Z</published>
-    <updated>2017-03-29T13:09:28.534Z</updated>
+    <updated>2017-03-29T13:44:18.611Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="microservices-06-Jenkins执行自动化的构建"><a href="#microservices-06-Jenkins执行自动化的构建" class="headerlink" title="[microservices]06-Jenkins执行自动化的构建"></a>[microservices]06-Jenkins执行自动化的构建</h1><h2 id="1-Jenkins安装运行"><a href="#1-Jenkins安装运行" class="headerlink" title="1. Jenkins安装运行"></a>1. Jenkins安装运行</h2><h3 id="1-1-docker方式安装运行"><a href="#1-1-docker方式安装运行" class="headerlink" title="1.1 docker方式安装运行"></a>1.1 docker方式安装运行</h3><p>docker拉取镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkinsci/jenkings</span><br></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h1 id="microservices-06-Jenkins执行自动化的构建"><a href="#microservices-06-Jenkins执行自动化的构建" class="headerlink" title="[microservices]06-Jenkins执行自动化的构建"></a>[microservices]06-Jenkins执行自动化的构建</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-Jenkins安装运行"><a href="#1-Jenkins安装运行" class="headerlink" title="1. Jenkins安装运行"></a>1. Jenkins安装运行</h2><h3 id="1-1-docker方式安装运行"><a href="#1-1-docker方式安装运行" class="headerlink" title="1.1 docker方式安装运行"></a>1.1 docker方式安装运行</h3><p>docker拉取镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkinsci/jenkings</span><br></pre></td></tr></table></figure></p>
 <p>启动容器的方式运行jenkins：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -u root -m 500m -p 8080:8080 -v ~/jenkins:/var/jenkins_home --name jenkins jenkinsci/jenkins</span><br></pre></td></tr></table></figure></p>
 <p>后台查看jenkins日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f jenkins</span><br></pre></td></tr></table></figure></p>
 <p>会看到一条解锁jenkins的key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unlock jenkins:c1bbf6aaa7aa4bd99cfcc0fb4a56ec83</span><br></pre></td></tr></table></figure></p>
@@ -119,9 +126,12 @@
     <link href="http://yoursite.com/2017/03/29/microservices-05-Gitlab%E4%BD%9C%E4%B8%BA%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/"/>
     <id>http://yoursite.com/2017/03/29/microservices-05-Gitlab作为代码仓库/</id>
     <published>2017-03-29T13:01:26.000Z</published>
-    <updated>2017-03-29T13:04:19.259Z</updated>
+    <updated>2017-03-29T13:44:11.015Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="microservices-05-Gitlab作为代码仓库"><a href="#microservices-05-Gitlab作为代码仓库" class="headerlink" title="[microservices]05-Gitlab作为代码仓库"></a>[microservices]05-Gitlab作为代码仓库</h1><h2 id="1-Gitlab的Docker安装"><a href="#1-Gitlab的Docker安装" class="headerlink" title="1. Gitlab的Docker安装"></a>1. Gitlab的Docker安装</h2><p>gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。</p>
+    <content type="html"><![CDATA[<h1 id="microservices-05-Gitlab作为代码仓库"><a href="#microservices-05-Gitlab作为代码仓库" class="headerlink" title="[microservices]05-Gitlab作为代码仓库"></a>[microservices]05-Gitlab作为代码仓库</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-Gitlab的Docker安装"><a href="#1-Gitlab的Docker安装" class="headerlink" title="1. Gitlab的Docker安装"></a>1. Gitlab的Docker安装</h2><p>gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。</p>
 <p>下载镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull gitlab/gitlab-ce</span><br></pre></td></tr></table></figure></p>
 <p>下载镜像，并启动容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -m 512m -h gitlab.iyihua.com -p 22:22 -p 80:80 -v ~/gitlab/etc:/etc/gitlab -v ~/gitlab/log:/var/log/gitlab -v ~/gitlab/opt:/var/opt/gitlab --name gitlab gitlab/gitlab-ce</span><br></pre></td></tr></table></figure></p>
 <p>说明：<br>(1) -h， 设置gitlab访问域名<br>(2) -p， 指定映射端口，22表示ssh端口,80表示http端口，<br>(3) -m， 指定目录映射<br>(4) -v， 指定分配多少内存来运行容器</p>
@@ -157,9 +167,12 @@
     <link href="http://yoursite.com/2017/03/29/microservices-04-Docker%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8/"/>
     <id>http://yoursite.com/2017/03/29/microservices-04-Docker作为服务运行容器/</id>
     <published>2017-03-29T13:01:01.000Z</published>
-    <updated>2017-03-29T13:06:03.353Z</updated>
+    <updated>2017-03-29T13:44:06.957Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="microservices-04-Docker作为服务运行容器"><a href="#microservices-04-Docker作为服务运行容器" class="headerlink" title="[microservices]04-Docker作为服务运行容器"></a>[microservices]04-Docker作为服务运行容器</h1><h2 id="1-docker运行环境"><a href="#1-docker运行环境" class="headerlink" title="1. docker运行环境"></a>1. docker运行环境</h2><h3 id="1-1-操作系统选择"><a href="#1-1-操作系统选择" class="headerlink" title="1.1 操作系统选择"></a>1.1 操作系统选择</h3><p>对于linux系统，Docker 需要安装在 64 位的平台，并且内核版本不低于 3.10。 CentOS 7 满足最低内核的要求.<br>这里选用centos7系统作为docker的运行环境.</p>
+    <content type="html"><![CDATA[<h1 id="microservices-04-Docker作为服务运行容器"><a href="#microservices-04-Docker作为服务运行容器" class="headerlink" title="[microservices]04-Docker作为服务运行容器"></a>[microservices]04-Docker作为服务运行容器</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-docker运行环境"><a href="#1-docker运行环境" class="headerlink" title="1. docker运行环境"></a>1. docker运行环境</h2><h3 id="1-1-操作系统选择"><a href="#1-1-操作系统选择" class="headerlink" title="1.1 操作系统选择"></a>1.1 操作系统选择</h3><p>对于linux系统，Docker 需要安装在 64 位的平台，并且内核版本不低于 3.10。 CentOS 7 满足最低内核的要求.<br>这里选用centos7系统作为docker的运行环境.</p>
 <p>在windows系统下，可以使用vm虚拟机虚拟centos7，运行docker.</p>
 <h3 id="1-2-linux操作系统配置"><a href="#1-2-linux操作系统配置" class="headerlink" title="1.2 linux操作系统配置"></a>1.2 linux操作系统配置</h3><h4 id="1-2-1-防火墙"><a href="#1-2-1-防火墙" class="headerlink" title="1.2.1 防火墙"></a>1.2.1 防火墙</h4><p>centos7使用firewall作为防火墙，docker向外提供服务，需要开通必要端口。<br>firewall开放端口命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#开放8080端口</span><br><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent</span><br><span class="line">#重启防火墙</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure></p>
 <p>当然，如果习惯于iptables防火墙，也可以关闭firewall，启用iptables防火墙：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#1、关闭firewall：</span><br><span class="line">systemctl stop firewalld.service #停止firewall</span><br><span class="line">systemctl disable firewalld.service #禁止firewall开机启动</span><br><span class="line">#查看默认防火墙状态（关闭后显示notrunning，开启后显示running）</span><br><span class="line">firewall-cmd --state </span><br><span class="line"></span><br><span class="line">#2、iptables防火墙（这里iptables已经安装，下面进行配置）</span><br><span class="line">$ vi /etc/sysconfig/iptables #编辑防火墙配置文件</span><br><span class="line"></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [0:0]</span><br><span class="line">:FORWARD ACCEPT[0:0]</span><br><span class="line">:OUTPUT ACCEPT[0:0]</span><br><span class="line">-A INPUT -m state--state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -jACCEPT</span><br><span class="line">-A INPUT -i lo -jACCEPT</span><br><span class="line">-A INPUT -p tcp -mstate --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -jACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080-j ACCEPT</span><br><span class="line">-A INPUT -j REJECT--reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -jREJECT --reject-with icmp-host-prohibited</span><br><span class="line">COMMIT</span><br><span class="line">:wq! #保存退出</span><br></pre></td></tr></table></figure></p>
@@ -277,9 +290,12 @@
     <link href="http://yoursite.com/2017/03/29/microservices-03-Zookeeper%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E6%9C%8D%E5%8A%A1/"/>
     <id>http://yoursite.com/2017/03/29/microservices-03-Zookeeper注册发现服务/</id>
     <published>2017-03-29T13:00:37.000Z</published>
-    <updated>2017-03-29T13:09:38.014Z</updated>
+    <updated>2017-03-29T13:44:00.364Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="microservices-03-Zookeeper注册发现服务"><a href="#microservices-03-Zookeeper注册发现服务" class="headerlink" title="[microservices]03-Zookeeper注册发现服务"></a>[microservices]03-Zookeeper注册发现服务</h1><h2 id="1-zookeeper原理介绍"><a href="#1-zookeeper原理介绍" class="headerlink" title="1. zookeeper原理介绍"></a>1. zookeeper原理介绍</h2><ul>
+    <content type="html"><![CDATA[<h1 id="microservices-03-Zookeeper注册发现服务"><a href="#microservices-03-Zookeeper注册发现服务" class="headerlink" title="[microservices]03-Zookeeper注册发现服务"></a>[microservices]03-Zookeeper注册发现服务</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-zookeeper原理介绍"><a href="#1-zookeeper原理介绍" class="headerlink" title="1. zookeeper原理介绍"></a>1. zookeeper原理介绍</h2><ul>
 <li><a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/" target="_blank" rel="external">分布式服务框架 Zookeeper – 管理分布式环境中的数据</a></li>
 </ul>
 <h2 id="2-基础微服务简单架构与demo说明"><a href="#2-基础微服务简单架构与demo说明" class="headerlink" title="2. 基础微服务简单架构与demo说明"></a>2. 基础微服务简单架构与demo说明</h2><p><img src="/images/framework-microservices.png" alt=""></p>
@@ -329,9 +345,12 @@
     <link href="http://yoursite.com/2017/03/29/microservices-02-Nodejs-Express%E4%BD%9C%E4%B8%BA%E5%BE%AE%E6%9C%8D%E5%8A%A1api%E7%BD%91%E5%85%B3/"/>
     <id>http://yoursite.com/2017/03/29/microservices-02-Nodejs-Express作为微服务api网关/</id>
     <published>2017-03-29T12:54:07.000Z</published>
-    <updated>2017-03-29T12:57:45.110Z</updated>
+    <updated>2017-03-29T13:43:52.072Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="microservices-02-Nodejs-amp-Express作为微服务api网关"><a href="#microservices-02-Nodejs-amp-Express作为微服务api网关" class="headerlink" title="[microservices]02-Nodejs&amp;Express作为微服务api网关"></a>[microservices]02-Nodejs&amp;Express作为微服务api网关</h1><h2 id="1-安装Node、NPM和Express"><a href="#1-安装Node、NPM和Express" class="headerlink" title="1. 安装Node、NPM和Express"></a>1. 安装Node、NPM和Express</h2><p>安装Nodejs后，npm会一起安装，然后npm install express安装Express.</p>
+    <content type="html"><![CDATA[<h1 id="microservices-02-Nodejs-amp-Express作为微服务api网关"><a href="#microservices-02-Nodejs-amp-Express作为微服务api网关" class="headerlink" title="[microservices]02-Nodejs&amp;Express作为微服务api网关"></a>[microservices]02-Nodejs&amp;Express作为微服务api网关</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-安装Node、NPM和Express"><a href="#1-安装Node、NPM和Express" class="headerlink" title="1. 安装Node、NPM和Express"></a>1. 安装Node、NPM和Express</h2><p>安装Nodejs后，npm会一起安装，然后npm install express安装Express.</p>
 <h2 id="2-使用Express框架开发web应用"><a href="#2-使用Express框架开发web应用" class="headerlink" title="2. 使用Express框架开发web应用"></a>2. 使用Express框架开发web应用</h2><p>express使用例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var port = 1234;</span><br><span class="line">var app = express();</span><br><span class="line">app.use(express.static(&apos;.&apos;));</span><br><span class="line">app.listen(port, function()&#123;</span><br><span class="line">    console.log(&apos;server is running at %d&apos;, port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>express进行简易路由：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/hello&apos;, function(req, res)&#123;</span><br><span class="line">    res.send(&apos;Hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <h2 id="3-搭建Nodejs集群环境"><a href="#3-搭建Nodejs集群环境" class="headerlink" title="3. 搭建Nodejs集群环境"></a>3. 搭建Nodejs集群环境</h2><p>利用服务器的多核CPU，让每个CPU都运行一个Node.js进程，例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var cluster = require(&apos;cluster&apos;);  </span><br><span class="line">var express = require(&apos;express&apos;);  </span><br><span class="line">var numCPUs = require(&apos;os&apos;).cpus().length;</span><br><span class="line"></span><br><span class="line">if (cluster.isMaster) &#123;  </span><br><span class="line">    for (var i = 0; i &lt; numCPUs; i++) &#123;</span><br><span class="line">        // Create a worker</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    // Workers share the TCP connection in this server</span><br><span class="line">    var app = express();</span><br><span class="line"></span><br><span class="line">    app.get(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">        res.send(&apos;Hello World!&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // All workers use this port</span><br><span class="line">    app.listen(8080);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>

@@ -53,22 +53,31 @@
 
 
 
-<meta name="description" content="[microservices]05-Gitlab作为代码仓库1. Gitlab的Docker安装gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。
+<meta name="description" content="[microservices]05-Gitlab作为代码仓库
+github项目地址： microservices
+
+1. Gitlab的Docker安装gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。
 下载镜像：1docker pull gitlab/gitlab-ce
-下载镜像，并启动容器：1docker run -d -m 512m -h gitlab.iyihua.com -p 22:22 -p 80:80 -v ~">
+下载镜像，并启动容器：1docker run -d -m 512m -h gitlab.iyihu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[microservices]05-Gitlab作为代码仓库">
 <meta property="og:url" content="http://yoursite.com/2017/03/29/microservices-05-Gitlab作为代码仓库/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="[microservices]05-Gitlab作为代码仓库1. Gitlab的Docker安装gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。
+<meta property="og:description" content="[microservices]05-Gitlab作为代码仓库
+github项目地址： microservices
+
+1. Gitlab的Docker安装gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。
 下载镜像：1docker pull gitlab/gitlab-ce
-下载镜像，并启动容器：1docker run -d -m 512m -h gitlab.iyihua.com -p 22:22 -p 80:80 -v ~">
-<meta property="og:updated_time" content="2017-03-29T13:04:19.259Z">
+下载镜像，并启动容器：1docker run -d -m 512m -h gitlab.iyihu">
+<meta property="og:updated_time" content="2017-03-29T13:44:11.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[microservices]05-Gitlab作为代码仓库">
-<meta name="twitter:description" content="[microservices]05-Gitlab作为代码仓库1. Gitlab的Docker安装gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。
+<meta name="twitter:description" content="[microservices]05-Gitlab作为代码仓库
+github项目地址： microservices
+
+1. Gitlab的Docker安装gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。
 下载镜像：1docker pull gitlab/gitlab-ce
-下载镜像，并启动容器：1docker run -d -m 512m -h gitlab.iyihua.com -p 22:22 -p 80:80 -v ~">
+下载镜像，并启动容器：1docker run -d -m 512m -h gitlab.iyihu">
 
 
 
@@ -233,7 +242,10 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="microservices-05-Gitlab作为代码仓库"><a href="#microservices-05-Gitlab作为代码仓库" class="headerlink" title="[microservices]05-Gitlab作为代码仓库"></a>[microservices]05-Gitlab作为代码仓库</h1><h2 id="1-Gitlab的Docker安装"><a href="#1-Gitlab的Docker安装" class="headerlink" title="1. Gitlab的Docker安装"></a>1. Gitlab的Docker安装</h2><p>gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。</p>
+        <span itemprop="articleBody"><h1 id="microservices-05-Gitlab作为代码仓库"><a href="#microservices-05-Gitlab作为代码仓库" class="headerlink" title="[microservices]05-Gitlab作为代码仓库"></a>[microservices]05-Gitlab作为代码仓库</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-Gitlab的Docker安装"><a href="#1-Gitlab的Docker安装" class="headerlink" title="1. Gitlab的Docker安装"></a>1. Gitlab的Docker安装</h2><p>gitlab安装的过程稍微麻烦，但如果使用docker安装的话，就会非常简单。</p>
 <p>下载镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull gitlab/gitlab-ce</span><br></pre></td></tr></table></figure></p>
 <p>下载镜像，并启动容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -m 512m -h gitlab.iyihua.com -p 22:22 -p 80:80 -v ~/gitlab/etc:/etc/gitlab -v ~/gitlab/log:/var/log/gitlab -v ~/gitlab/opt:/var/opt/gitlab --name gitlab gitlab/gitlab-ce</span><br></pre></td></tr></table></figure></p>
 <p>说明：<br>(1) -h， 设置gitlab访问域名<br>(2) -p， 指定映射端口，22表示ssh端口,80表示http端口，<br>(3) -m， 指定目录映射<br>(4) -v， 指定分配多少内存来运行容器</p>

@@ -6,6 +6,7 @@ tags: [microservices,jenkins,java,自动化,构建,docker]
 
 # [microservices]06-Jenkins执行自动化的构建
 
+- github项目地址： [microservices](https://github.com/YihuaWanglv/microservices)
 
 ## 1. Jenkins安装运行
 

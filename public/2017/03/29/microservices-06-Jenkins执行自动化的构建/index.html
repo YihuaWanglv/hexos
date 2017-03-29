@@ -53,14 +53,20 @@
 
 
 
-<meta name="description" content="[microservices]06-Jenkins执行自动化的构建1. Jenkins安装运行1.1 docker方式安装运行docker拉取镜像：1docker pull jenkinsci/jenkings
-启动容器的方式运行jenkins：1docker run -d -u root -m 500m -p 8080:8080 -v ~/jenkins:/var/jenkins_home --">
+<meta name="description" content="[microservices]06-Jenkins执行自动化的构建
+github项目地址： microservices
+
+1. Jenkins安装运行1.1 docker方式安装运行docker拉取镜像：1docker pull jenkinsci/jenkings
+启动容器的方式运行jenkins：1docker run -d -u root -m 500m -p 8080:8080 -v ~/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[microservices]06-Jenkins执行自动化的构建">
 <meta property="og:url" content="http://yoursite.com/2017/03/29/microservices-06-Jenkins执行自动化的构建/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="[microservices]06-Jenkins执行自动化的构建1. Jenkins安装运行1.1 docker方式安装运行docker拉取镜像：1docker pull jenkinsci/jenkings
-启动容器的方式运行jenkins：1docker run -d -u root -m 500m -p 8080:8080 -v ~/jenkins:/var/jenkins_home --">
+<meta property="og:description" content="[microservices]06-Jenkins执行自动化的构建
+github项目地址： microservices
+
+1. Jenkins安装运行1.1 docker方式安装运行docker拉取镜像：1docker pull jenkinsci/jenkings
+启动容器的方式运行jenkins：1docker run -d -u root -m 500m -p 8080:8080 -v ~/">
 <meta property="og:image" content="http://yoursite.com/images/microservice-jenkins-01.png">
 <meta property="og:image" content="http://yoursite.com/images/microservice-jenkins-02.png">
 <meta property="og:image" content="http://yoursite.com/images/microservice-jenkins-03.png">
@@ -73,11 +79,14 @@
 <meta property="og:image" content="http://yoursite.com/images/microservice-jenkins-10.png">
 <meta property="og:image" content="http://yoursite.com/images/microservice-jenkins-11.png">
 <meta property="og:image" content="http://yoursite.com/images/microservice-jenkins-12.png">
-<meta property="og:updated_time" content="2017-03-29T13:09:28.534Z">
+<meta property="og:updated_time" content="2017-03-29T13:44:18.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[microservices]06-Jenkins执行自动化的构建">
-<meta name="twitter:description" content="[microservices]06-Jenkins执行自动化的构建1. Jenkins安装运行1.1 docker方式安装运行docker拉取镜像：1docker pull jenkinsci/jenkings
-启动容器的方式运行jenkins：1docker run -d -u root -m 500m -p 8080:8080 -v ~/jenkins:/var/jenkins_home --">
+<meta name="twitter:description" content="[microservices]06-Jenkins执行自动化的构建
+github项目地址： microservices
+
+1. Jenkins安装运行1.1 docker方式安装运行docker拉取镜像：1docker pull jenkinsci/jenkings
+启动容器的方式运行jenkins：1docker run -d -u root -m 500m -p 8080:8080 -v ~/">
 <meta name="twitter:image" content="http://yoursite.com/images/microservice-jenkins-01.png">
 
 
@@ -243,7 +252,10 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="microservices-06-Jenkins执行自动化的构建"><a href="#microservices-06-Jenkins执行自动化的构建" class="headerlink" title="[microservices]06-Jenkins执行自动化的构建"></a>[microservices]06-Jenkins执行自动化的构建</h1><h2 id="1-Jenkins安装运行"><a href="#1-Jenkins安装运行" class="headerlink" title="1. Jenkins安装运行"></a>1. Jenkins安装运行</h2><h3 id="1-1-docker方式安装运行"><a href="#1-1-docker方式安装运行" class="headerlink" title="1.1 docker方式安装运行"></a>1.1 docker方式安装运行</h3><p>docker拉取镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkinsci/jenkings</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h1 id="microservices-06-Jenkins执行自动化的构建"><a href="#microservices-06-Jenkins执行自动化的构建" class="headerlink" title="[microservices]06-Jenkins执行自动化的构建"></a>[microservices]06-Jenkins执行自动化的构建</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-Jenkins安装运行"><a href="#1-Jenkins安装运行" class="headerlink" title="1. Jenkins安装运行"></a>1. Jenkins安装运行</h2><h3 id="1-1-docker方式安装运行"><a href="#1-1-docker方式安装运行" class="headerlink" title="1.1 docker方式安装运行"></a>1.1 docker方式安装运行</h3><p>docker拉取镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkinsci/jenkings</span><br></pre></td></tr></table></figure></p>
 <p>启动容器的方式运行jenkins：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -u root -m 500m -p 8080:8080 -v ~/jenkins:/var/jenkins_home --name jenkins jenkinsci/jenkins</span><br></pre></td></tr></table></figure></p>
 <p>后台查看jenkins日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f jenkins</span><br></pre></td></tr></table></figure></p>
 <p>会看到一条解锁jenkins的key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unlock jenkins:c1bbf6aaa7aa4bd99cfcc0fb4a56ec83</span><br></pre></td></tr></table></figure></p>

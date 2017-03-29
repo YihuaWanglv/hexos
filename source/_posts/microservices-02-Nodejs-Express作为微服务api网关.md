@@ -6,6 +6,7 @@ tags: [microservices,Node.js,Express,微服务,api网关,api-gateway,zookeeper]
 
 # [microservices]02-Nodejs&Express作为微服务api网关
 
+- github项目地址： [microservices](https://github.com/YihuaWanglv/microservices)
 
 ## 1. 安装Node、NPM和Express
 

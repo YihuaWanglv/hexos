@@ -53,19 +53,28 @@
 
 
 
-<meta name="description" content="[microservices]02-Nodejs&amp;amp;Express作为微服务api网关1. 安装Node、NPM和Express安装Nodejs后，npm会一起安装，然后npm install express安装Express.
-2. 使用Express框架开发web应用express使用例子：1234567var express = require(&amp;apos;express&amp;apos;)">
+<meta name="description" content="[microservices]02-Nodejs&amp;amp;Express作为微服务api网关
+github项目地址： microservices
+
+1. 安装Node、NPM和Express安装Nodejs后，npm会一起安装，然后npm install express安装Express.
+2. 使用Express框架开发web应用express使用例子：1234567var express =">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[microservices]02-Nodejs&Express作为微服务api网关">
 <meta property="og:url" content="http://yoursite.com/2017/03/29/microservices-02-Nodejs-Express作为微服务api网关/index.html">
 <meta property="og:site_name" content="iyihua">
-<meta property="og:description" content="[microservices]02-Nodejs&amp;amp;Express作为微服务api网关1. 安装Node、NPM和Express安装Nodejs后，npm会一起安装，然后npm install express安装Express.
-2. 使用Express框架开发web应用express使用例子：1234567var express = require(&amp;apos;express&amp;apos;)">
-<meta property="og:updated_time" content="2017-03-29T12:57:45.110Z">
+<meta property="og:description" content="[microservices]02-Nodejs&amp;amp;Express作为微服务api网关
+github项目地址： microservices
+
+1. 安装Node、NPM和Express安装Nodejs后，npm会一起安装，然后npm install express安装Express.
+2. 使用Express框架开发web应用express使用例子：1234567var express =">
+<meta property="og:updated_time" content="2017-03-29T13:43:52.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[microservices]02-Nodejs&Express作为微服务api网关">
-<meta name="twitter:description" content="[microservices]02-Nodejs&amp;amp;Express作为微服务api网关1. 安装Node、NPM和Express安装Nodejs后，npm会一起安装，然后npm install express安装Express.
-2. 使用Express框架开发web应用express使用例子：1234567var express = require(&amp;apos;express&amp;apos;)">
+<meta name="twitter:description" content="[microservices]02-Nodejs&amp;amp;Express作为微服务api网关
+github项目地址： microservices
+
+1. 安装Node、NPM和Express安装Nodejs后，npm会一起安装，然后npm install express安装Express.
+2. 使用Express框架开发web应用express使用例子：1234567var express =">
 
 
 
@@ -230,7 +239,10 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="microservices-02-Nodejs-amp-Express作为微服务api网关"><a href="#microservices-02-Nodejs-amp-Express作为微服务api网关" class="headerlink" title="[microservices]02-Nodejs&amp;Express作为微服务api网关"></a>[microservices]02-Nodejs&amp;Express作为微服务api网关</h1><h2 id="1-安装Node、NPM和Express"><a href="#1-安装Node、NPM和Express" class="headerlink" title="1. 安装Node、NPM和Express"></a>1. 安装Node、NPM和Express</h2><p>安装Nodejs后，npm会一起安装，然后npm install express安装Express.</p>
+        <span itemprop="articleBody"><h1 id="microservices-02-Nodejs-amp-Express作为微服务api网关"><a href="#microservices-02-Nodejs-amp-Express作为微服务api网关" class="headerlink" title="[microservices]02-Nodejs&amp;Express作为微服务api网关"></a>[microservices]02-Nodejs&amp;Express作为微服务api网关</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-安装Node、NPM和Express"><a href="#1-安装Node、NPM和Express" class="headerlink" title="1. 安装Node、NPM和Express"></a>1. 安装Node、NPM和Express</h2><p>安装Nodejs后，npm会一起安装，然后npm install express安装Express.</p>
 <h2 id="2-使用Express框架开发web应用"><a href="#2-使用Express框架开发web应用" class="headerlink" title="2. 使用Express框架开发web应用"></a>2. 使用Express框架开发web应用</h2><p>express使用例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var port = 1234;</span><br><span class="line">var app = express();</span><br><span class="line">app.use(express.static(&apos;.&apos;));</span><br><span class="line">app.listen(port, function()&#123;</span><br><span class="line">    console.log(&apos;server is running at %d&apos;, port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>express进行简易路由：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/hello&apos;, function(req, res)&#123;</span><br><span class="line">    res.send(&apos;Hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <h2 id="3-搭建Nodejs集群环境"><a href="#3-搭建Nodejs集群环境" class="headerlink" title="3. 搭建Nodejs集群环境"></a>3. 搭建Nodejs集群环境</h2><p>利用服务器的多核CPU，让每个CPU都运行一个Node.js进程，例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var cluster = require(&apos;cluster&apos;);  </span><br><span class="line">var express = require(&apos;express&apos;);  </span><br><span class="line">var numCPUs = require(&apos;os&apos;).cpus().length;</span><br><span class="line"></span><br><span class="line">if (cluster.isMaster) &#123;  </span><br><span class="line">    for (var i = 0; i &lt; numCPUs; i++) &#123;</span><br><span class="line">        // Create a worker</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    // Workers share the TCP connection in this server</span><br><span class="line">    var app = express();</span><br><span class="line"></span><br><span class="line">    app.get(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">        res.send(&apos;Hello World!&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // All workers use this port</span><br><span class="line">    app.listen(8080);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>

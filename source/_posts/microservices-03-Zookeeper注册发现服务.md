@@ -6,6 +6,8 @@ tags: [microservices,zookeeper,微服务,服务注册,服务发现]
 
 # [microservices]03-Zookeeper注册发现服务
 
+- github项目地址： [microservices](https://github.com/YihuaWanglv/microservices)
+
 ## 1. zookeeper原理介绍
 
 - [分布式服务框架 Zookeeper -- 管理分布式环境中的数据](https://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/)
