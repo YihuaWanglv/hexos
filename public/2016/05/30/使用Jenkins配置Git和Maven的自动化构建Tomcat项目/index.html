@@ -57,19 +57,19 @@
 1 - 部署Jenkins官网下载http://jenkins-ci.org/我下载的是最新的2.5版本下载得到一个jenkins.war的wa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Jenkins配置Git和Maven的自动化构建Tomcat项目">
-<meta property="og:url" content="http://yoursite.com/2016/05/30/使用Jenkins配置Git和Maven的自动化构建Tomcat项目/index.html">
+<meta property="og:url" content="http://localhost:4000/2016/05/30/使用Jenkins配置Git和Maven的自动化构建Tomcat项目/index.html">
 <meta property="og:site_name" content="iyihua">
 <meta property="og:description" content="0- 前置条件安装jdk和tomcat我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenkins的容器，另外一个tomcat作为简单mvc项目的部署服务器。Jenkins服务器使用8080端口，mvc项目tomcat使用8081端口。
 1 - 部署Jenkins官网下载http://jenkins-ci.org/我下载的是最新的2.5版本下载得到一个jenkins.war的wa">
-<meta property="og:image" content="http://yoursite.com/images/jenkins-001.png">
-<meta property="og:image" content="http://yoursite.com/images/jenkins-002.png">
-<meta property="og:image" content="http://yoursite.com/images/jenkins-003.png">
+<meta property="og:image" content="http://localhost:4000/images/jenkins-001.png">
+<meta property="og:image" content="http://localhost:4000/images/jenkins-002.png">
+<meta property="og:image" content="http://localhost:4000/images/jenkins-003.png">
 <meta property="og:updated_time" content="2016-05-30T15:05:26.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Jenkins配置Git和Maven的自动化构建Tomcat项目">
 <meta name="twitter:description" content="0- 前置条件安装jdk和tomcat我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenkins的容器，另外一个tomcat作为简单mvc项目的部署服务器。Jenkins服务器使用8080端口，mvc项目tomcat使用8081端口。
 1 - 部署Jenkins官网下载http://jenkins-ci.org/我下载的是最新的2.5版本下载得到一个jenkins.war的wa">
-<meta name="twitter:image" content="http://yoursite.com/images/jenkins-001.png">
+<meta name="twitter:image" content="http://localhost:4000/images/jenkins-001.png">
 
 
 
@@ -235,7 +235,7 @@
 
       
         <span itemprop="articleBody"><h3 id="0-前置条件"><a href="#0-前置条件" class="headerlink" title="0- 前置条件"></a>0- 前置条件</h3><p>安装jdk和tomcat<br>我这里选择同一台服务器安装两个tomcat，一个tomcat作为Jenkins的容器，另外一个tomcat作为简单mvc项目的部署服务器。<br>Jenkins服务器使用8080端口，mvc项目tomcat使用8081端口。</p>
-<h3 id="1-部署Jenkins"><a href="#1-部署Jenkins" class="headerlink" title="1 - 部署Jenkins"></a>1 - 部署Jenkins</h3><p>官网下载<a href="http://jenkins-ci.org/" target="_blank" rel="external">http://jenkins-ci.org/</a><br>我下载的是最新的2.5版本<br>下载得到一个jenkins.war的war包<br>可以直接使用java -j jenkins.war运行，或者把war包放到tomcat运行<br>我这里是放到tomcat，启动tomcat即可.<br>启动后可以在<a href="http://localhost:8080/jenkins/，看到Jenkins已经在运行" target="_blank" rel="external">http://localhost:8080/jenkins/，看到Jenkins已经在运行</a><br>第一次进入，需要你输入一个key,会提示您在/root/.jenkins/…某个路径下找到<br>进入后会提示你安装一些插件，根据需要安装即可，或者直接安装它提供的一键建议安装.</p>
+<h3 id="1-部署Jenkins"><a href="#1-部署Jenkins" class="headerlink" title="1 - 部署Jenkins"></a>1 - 部署Jenkins</h3><p>官网下载<a href="http://jenkins-ci.org/" target="_blank" rel="external">http://jenkins-ci.org/</a><br>我下载的是最新的2.5版本<br>下载得到一个jenkins.war的war包<br>可以直接使用java -j jenkins.war运行，或者把war包放到tomcat运行<br>我这里是放到tomcat，启动tomcat即可.<br>启动后可以在<a href="http://localhost:8080/jenkins/，看到Jenkins已经在运行">http://localhost:8080/jenkins/，看到Jenkins已经在运行</a><br>第一次进入，需要你输入一个key,会提示您在/root/.jenkins/…某个路径下找到<br>进入后会提示你安装一些插件，根据需要安装即可，或者直接安装它提供的一键建议安装.</p>
 <h3 id="2-安装相关插件"><a href="#2-安装相关插件" class="headerlink" title="2 - 安装相关插件"></a>2 - 安装相关插件</h3><p>我这里需要git plugin和maven plugin，可以在插件管理处搜索安装。<br>这两个基本是默认安装好了的.</p>
 <h3 id="3-安装git和maven"><a href="#3-安装git和maven" class="headerlink" title="3 - 安装git和maven"></a>3 - 安装git和maven</h3><p>安装git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure></p>
 <p>安装maven<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">1、官网找到最新版的安装包：</span><br><span class="line">http://maven.apache.org/download.cgi</span><br><span class="line"></span><br><span class="line">拷贝文件名为 *-bin.tar.gz 的链接地址；</span><br><span class="line"></span><br><span class="line">2、下载</span><br><span class="line"># wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz</span><br><span class="line"></span><br><span class="line">3、解压</span><br><span class="line"># tar xvf apache-maven-3.3.3-bin.tar.gz</span><br><span class="line"></span><br><span class="line">如果需要：移动到其他目录</span><br><span class="line">建立软连接：# ln -s apache-maven-3.3.3 maven</span><br><span class="line"></span><br><span class="line">4、配置环境变量</span><br><span class="line"># vi /etc/profile</span><br><span class="line">export M2_HOME=/usr/local/apache-maven</span><br><span class="line">export PATH=$PATH:$M2_HOME/bin</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br><span class="line"></span><br><span class="line">5、验证是否安装成功</span><br><span class="line"># mvn -version</span><br><span class="line">Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:37+08:00)</span><br><span class="line">Maven home: /opt/app/maven</span><br><span class="line">Java version: 1.8.0_51, vendor: Oracle Corporation</span><br><span class="line">Java home: /usr/java/jdk1.8.0_51/jre</span><br><span class="line">Default locale: zh_CN, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;linux&quot;, version: &quot;3.10.0-229.el7.x86_64&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;</span><br></pre></td></tr></table></figure></p>
@@ -349,7 +349,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -363,7 +363,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">143</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

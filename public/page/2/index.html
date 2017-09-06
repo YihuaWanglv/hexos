@@ -56,7 +56,7 @@
 <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="iyihua">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="http://localhost:4000/page/2/index.html">
 <meta property="og:site_name" content="iyihua">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -179,6 +179,98 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/10/使用java收集github-trending页面中感兴趣的语言的新动态并归档到自己的repository/" itemprop="url">
+                  使用java收集github-trending页面中感兴趣的语言的新动态并归档到自己的repository
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2017-03-10T22:00:02+08:00" content="2017-03-10">
+              2017-03-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="java-github-trending"><a href="#java-github-trending" class="headerlink" title="java-github-trending"></a>java-github-trending</h1><h2 id="what-is-this"><a href="#what-is-this" class="headerlink" title="what is this?"></a>what is this?</h2><p><a href="https://github.com/trending" target="_blank" rel="external">github-trending</a> 展示了每天趋势较好的一些github项目。<br>java-github-trending项目的目的就是每天定时拉取github-trending页面中感兴趣的语言的流行项目，并以日期为分组归档到markdown文件里面，最后提交到github的repository。</p>
+<ul>
+<li>我的项目github地址：<a href="https://github.com/YihuaWanglv/github-trending" target="_blank" rel="external">github-trending</a></li>
+</ul>
+<h2 id="how-to-use"><a href="#how-to-use" class="headerlink" title="how to use?"></a>how to use?</h2><ul>
+<li>@Before<br>首先要有一个github账号，然后要准备一个运行应用的环境.</li>
+</ul>
+<h3 id="在你的运行环境中生成一个ssh-key，-然后保存到github的key列表中"><a href="#在你的运行环境中生成一个ssh-key，-然后保存到github的key列表中" class="headerlink" title="在你的运行环境中生成一个ssh key， 然后保存到github的key列表中."></a>在你的运行环境中生成一个ssh key， 然后保存到github的key列表中.</h3><h3 id="git-clone-project"><a href="#git-clone-project" class="headerlink" title="git clone project"></a>git clone project</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:YihuaWanglv/github-trending.git</span><br></pre></td></tr></table></figure>
+<h3 id="maven-package"><a href="#maven-package" class="headerlink" title="maven package"></a>maven package</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd github-trending</span><br><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+<h3 id="move-github-trending-jar-to-project-root-path"><a href="#move-github-trending-jar-to-project-root-path" class="headerlink" title="move github-trending.jar to project root path"></a>move github-trending.jar to project root path</h3><h3 id="将jar和sh脚本设置为可执行，然后nohu-run-github-trending-jar"><a href="#将jar和sh脚本设置为可执行，然后nohu-run-github-trending-jar" class="headerlink" title="将jar和sh脚本设置为可执行，然后nohu  run github-trending.jar"></a>将jar和sh脚本设置为可执行，然后nohu  run github-trending.jar</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x rungit.sh</span><br><span class="line">chmon +x github-trending.jar</span><br><span class="line">nohup java -jar github-trending.jar &lt; /dev/null &gt; /data/logs/github-trending.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="how-it-works"><a href="#how-it-works" class="headerlink" title="how it works?"></a>how it works?</h2><p>using spring @Scheduled as daily task.<br>using Jsoup lib to get and parse page content<br>use java.io lib to create markdown file and append content to md file.<br>use java Runtime class to run a shell to commit and push to github.</p>
+<p>tips: 这个功能本身使用简单的java application，再配合linux的cron定时执行shell，即可更简单的做到，但由于一些原因，我使用spring boot来构建这个程序。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1107,7 +1199,7 @@
 <li>git clone <a href="https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git" target="_blank" rel="external">https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git</a></li>
 <li>import db script in folder “docs”</li>
 <li>import project into ide and run App.java or build project and run the jar</li>
-<li>visit utl:<a href="http://localhost:8082/save" target="_blank" rel="external">http://localhost:8082/save</a> to see saveTest</li>
+<li>visit utl:<a href="http://localhost:8082/save">http://localhost:8082/save</a> to see saveTest</li>
 </ul>
 
             
@@ -1537,107 +1629,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/08/What-s-the-simplest-way-to-print-a-Java-array/" itemprop="url">
-                  What's the simplest way to print a Java array?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-08-08T18:24:43+08:00" content="2016-08-08">
-              2016-08-08
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>Examples:</p>
-<ul>
-<li>Simple Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String[] array = new String[] &#123;&quot;John&quot;, &quot;Mary&quot;, &quot;Bob&quot;&#125;;</span><br><span class="line">System.out.println(Arrays.toString(array));</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[John, Mary, Bob]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>Nested Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[][] deepArray = new String[][] &#123;&#123;&quot;John&quot;, &quot;Mary&quot;&#125;, &#123;&quot;Alice&quot;, &quot;Bob&quot;&#125;&#125;;</span><br><span class="line">System.out.println(Arrays.toString(deepArray));</span><br><span class="line">//output: [[Ljava.lang.String;@106d69c, [Ljava.lang.String;@52e922]</span><br><span class="line">System.out.println(Arrays.deepToString(deepArray));</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[John, Mary], [Alice, Bob]]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>double Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double[] doubleArray = &#123; 7.0, 9.0, 5.0, 1.0, 3.0 &#125;;</span><br><span class="line">System.out.println(Arrays.toString(doubleArray));</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[7.0, 9.0, 5.0, 1.0, 3.0 ]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>int Array:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int[] intArray = &#123; 7, 9, 5, 1, 3 &#125;;</span><br><span class="line">System.out.println(Arrays.toString(intArray));</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>Output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[7, 9, 5, 1, 3 ]</span><br></pre></td></tr></table></figure></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1684,7 +1675,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1698,7 +1689,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">141</span>
+              <span class="site-state-item-count">143</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
