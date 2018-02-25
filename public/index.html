@@ -202,6 +202,194 @@
             
               
                 
+                <a class="post-title-link" href="/2018/02/25/事务管理-spring事务使用注意点、数据库事务的隔离级别与锁/" itemprop="url">
+                  事务管理-spring事务使用注意点、数据库事务的隔离级别与锁
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2018-02-25T10:43:01+08:00" content="2018-02-25">
+              2018-02-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="1-spring事务-Transactional的注意点"><a href="#1-spring事务-Transactional的注意点" class="headerlink" title="1. spring事务@Transactional的注意点"></a>1. spring事务@Transactional的注意点</h1><p>@Transactional注解可以标注在类和方法上，也可以标注在定义的接口和接口方法上。<br>如果我们在接口上标注@Transactional注解，会留下这样的隐患：因为注解不能被继承，所以业务接口中标注的@Transactional注解不会被业务实现类继承。所以可能会出现不启动事务的情况。所以，spring建议我们将@Transaction注解在实现类上。<br>在方法上的@Transactional注解会覆盖掉类上的@Transactional。</p>
+<p>注意：</p>
+<p>　　@Transactional 可以作用于接口、接口方法、类以及类方法上。当作用于类上时，该类的所有 public 方法将都具有该类型的事务属性，同时，我们也可以在方法级别使用该标注来覆盖类级别的定义。</p>
+<p>　　虽然 @Transactional 注解可以作用于接口、接口方法、类以及类方法上，但是 Spring 建议不要在接口或者接口方法上使用该注解，因为这只有在使用基于接口的代理时它才会生效。另外， @Transactional 注解应该只被应用到 public 方法上，这是由 Spring AOP 的本质决定的。如果你在 protected、private 或者默认可见性的方法上使用 @Transactional 注解，这将被忽略，也不会抛出任何异常。</p>
+<p>　　默认情况下，只有来自外部的方法调用才会被AOP代理捕获，也就是，类内部方法调用本类内部的其他方法并不会引起事务行为，即使被调用方法使用@Transactional注解进行修饰。</p>
+<h1 id="2-数据库事务中的隔离级别和锁"><a href="#2-数据库事务中的隔离级别和锁" class="headerlink" title="2. 数据库事务中的隔离级别和锁"></a>2. 数据库事务中的隔离级别和锁</h1><p>数据库事务在后端开发中占非常重要的地位，如何确保数据读取的正确性、安全性也是我们需要研究的问题。</p>
+<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><p>首先总结一下数据库事务正确执行的四个要素（ACID）：</p>
+<p>原子性（Atomicity）：即事务是不可分割的最小工作单元，事务内的操作要么全做，要么全不做，不能只做一部分；<br>一致性（Consistency）：在事务执行前数据库的数据处于正确的状态，而事务执行完成后数据库的数据还是处于正确的状态，即数据完整性约束没有被破坏；比如我们做银行转账的相关业务，A转账给B，要求A转的钱B一定要收到。如果A转了钱而B没有收到，那么数据库数据的一致性就得不到保障，在做高并发业务时要注意合理的设计。<br>隔离性（Isolation）：并发事务执行之间无影响，在一个事务内部的操作对其他事务是不产生影响，这需要事务隔离级别来指定隔离性；<br>持久性（Durability）：事务一旦执行成功，它对数据库的数据的改变必须是永久的，不会因各种异常导致数据不一致或丢失。<br>事务隔离级别<br>大部分数据库事务操作都是并发执行的，这就可能遇到下面的几种问题：</p>
+<p>丢失更新：两个事务同时更新一行数据，最后一个事务的更新会覆盖掉第一个事务的更新，从而导致第一个事务更新的数据丢失，后果比较严重。一般是由于没加锁的原因造成的。<br>脏读（Dirty reads）：一个事务A读取到了另一个事务B还没有提交的数据，并在此基础上进行操作。如果B事务rollback，那么A事务所读取到的数据就是不正确的，会带来问题。<br>不可重复读（Non-repeatable reads）：在同一事务范围内读取两次相同的数据，所返回的结果不同。比如事务B第一次读数据后，事务A更新数据并commit，那么事务B第二次读取的数据就与第一次是不一样的。<br>幻读（Phantom reads）：一个事务A读取到了另一个事务B新提交的数据。比如，事务A对一个表中所有行的数据按照某规则进行修改（整表操作），同时，事务B向表中插入了一行原始数据，那么后面事务A再对表进行操作时，会发现表中居然还有一行数据没有被修改，就像发生了幻觉，飘飘欲仙一样。<br>注意：不可重复读和幻读的区别是，不可重复读对应的表的操作是更改(UPDATE)，而幻读对应的表的操作是插入(INSERT)，两种的应对策略不一样。对于不可重复读，只需要采用行级锁防止该记录被更新即可，而对于幻读必须加个表级锁，防止在表中插入数据。有关锁的问题，下面会讨论。</p>
+<p>为了处理这几种问题，SQL定义了下面的4个等级的事务隔离级别：</p>
+<p>未提交读（READ UNCOMMITTED ）：最低隔离级别，一个事务能读取到别的事务未提交的更新数据，很不安全，可能出现丢失更新、脏读、不可重复读、幻读；<br>提交读（READ COMMITTED）：一个事务能读取到别的事务提交的更新数据，不能看到未提交的更新数据，不会出现丢失更新、脏读，但可能出现不可重复读、幻读；<br>可重复读（REPEATABLE READ）：保证同一事务中先后执行的多次查询将返回同一结果，不受其他事务影响，不可能出现丢失更新、脏读、不可重复读，但可能出现幻读；<br>序列化（SERIALIZABLE）：最高隔离级别，不允许事务并发执行，而必须串行化执行，最安全，不可能出现更新、脏读、不可重复读、幻读，但是效率最低。<br>隔离级别越高，数据库事务并发执行性能越差，能处理的操作越少。所以一般地，推荐使用REPEATABLE READ级别保证数据的读一致性。对于幻读的问题，可以通过加锁来防止。<br>MySQL支持这四种事务等级，默认事务隔离级别是REPEATABLE READ。Oracle数据库支持READ COMMITTED 和 SERIALIZABLE这两种事务隔离级别，所以Oracle数据库不支持脏读。Oracle数据库默认的事务隔离级别是READ COMMITTED。</p>
+<h2 id="各种锁"><a href="#各种锁" class="headerlink" title="各种锁"></a>各种锁</h2><p>下面总结一下MySQL中的锁，有好几种分类。其它RDBMS也差不多是这样。</p>
+<h3 id="首先最重要的分类就是乐观锁-Optimistic-Lock-和悲观锁-Pessimistic-Lock-，这实际上是两种锁策略。"><a href="#首先最重要的分类就是乐观锁-Optimistic-Lock-和悲观锁-Pessimistic-Lock-，这实际上是两种锁策略。" class="headerlink" title="首先最重要的分类就是乐观锁(Optimistic Lock)和悲观锁(Pessimistic Lock)，这实际上是两种锁策略。"></a>首先最重要的分类就是乐观锁(Optimistic Lock)和悲观锁(Pessimistic Lock)，这实际上是两种锁策略。</h3><p>乐观锁，顾名思义就是非常乐观，非常相信真善美，每次去读数据都认为其它事务没有在写数据，所以就不上锁，快乐的读取数据，而只在提交数据的时候判断其它事务是否搞过这个数据了，如果搞过就rollback。乐观锁相当于一种检测冲突的手段，可通过为记录添加版本或添加时间戳来实现。</p>
+<p>悲观锁，对其它事务抱有保守的态度，每次去读数据都认为其它事务想要作祟，所以每次读数据的时候都会上锁，直到取出数据。悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性，但随之而来的是各种开销。悲观锁相当于一种避免冲突的手段。<br>选择标准：如果并发量不大，或数据冲突的后果不严重，则可以使用乐观锁；而如果并发量大或数据冲突后果比较严重（对用户不友好），那么就使用悲观锁。</p>
+<h3 id="从读写角度，分共享锁（S锁，Shared-Lock）和排他锁（X锁，Exclusive-Lock），也叫读锁（Read-Lock）和写锁（Write-Lock）。"><a href="#从读写角度，分共享锁（S锁，Shared-Lock）和排他锁（X锁，Exclusive-Lock），也叫读锁（Read-Lock）和写锁（Write-Lock）。" class="headerlink" title="从读写角度，分共享锁（S锁，Shared Lock）和排他锁（X锁，Exclusive Lock），也叫读锁（Read Lock）和写锁（Write Lock）。"></a>从读写角度，分共享锁（S锁，Shared Lock）和排他锁（X锁，Exclusive Lock），也叫读锁（Read Lock）和写锁（Write Lock）。</h3><p>理解：</p>
+<p>持有S锁的事务只读不可写。如果事务A对数据D加上S锁后，其它事务只能对D加上S锁而不能加X锁。<br>持有X锁的事务可读可写。如果事务A对数据D加上X锁后，其它事务不能再对D加锁，直到A对D的锁解除。<br>从锁的粒度角度，主要分为表级锁（Table Lock）和行级锁（Row Lock）。<br>表级锁将整个表加锁，性能开销最小。用户可以同时进行读操作。当一个用户对表进行写操作时，用户可以获得一个写锁，写锁禁止其他的用户读写操作。写锁比读锁的优先级更高，即使有读操作已排在队列中，一个被申请的写锁仍可以排在所队列的前列。<br>行级锁仅对指定的记录进行加锁，这样其它进程可以对同一个表中的其它记录进行读写操作。行级锁粒度最小，开销大，能够支持高并发，可能会出现死锁。</p>
+<h3 id="MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。"><a href="#MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。" class="headerlink" title="MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。"></a>MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。</h3><p>还有BDB引擎使用页级锁，即一次锁定一组记录，并发性介于行级锁和表级锁之间。</p>
+<h3 id="三级锁协议"><a href="#三级锁协议" class="headerlink" title="三级锁协议"></a>三级锁协议</h3><p>三级加锁协议是为了保证正确的事务并发操作，事务在读、写数据库对象是需要遵循的加锁规则。</p>
+<p>一级封锁协议：事务T在修改数据R之前必须对它加X锁，直到事务结束方可释放。而若事务T只是读数据，不进行修改，则不需加锁，因此一级加锁协议下可能会出现脏读和不可重复读。<br>二级加锁协议：在一级加锁协议的基础上，加上这样一条规则——事务T在读取数据R之前必须对它加S锁，直到读取完毕以后释放。二级加锁协议下可能会出现不可重复读。<br>三级加锁协议：在一级加锁协议的基础上，加上这样一条规则——事务T在读取数据R之前必须对它加X锁，直到事务结束方可释放。三级加锁协议避免了脏读和不可重复读的问题。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/02/07/hello-world/" itemprop="url">
+                  Hello World
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2018-02-07T16:54:40+08:00" content="2018-02-07">
+              2018-02-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/09/06/java并发学习-一/" itemprop="url">
                   java并发学习(一)
                 </a>
@@ -1150,218 +1338,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/11/git如何使用-记一些常用的git使用方法/" itemprop="url">
-                  git如何使用-记一些常用的git使用方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2017-03-11T15:47:31+08:00" content="2017-03-11">
-              2017-03-11
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <ol>
-<li><p>git如何提交修改到远程仓库？</p>
-<ul>
-<li>$ git commit –m “desc..”  //对你更新或修改了哪些内容做一个描述</li>
-<li>$ git remote add origin <a href="https://github.com/YihuaWanglv/post.git" target="_blank" rel="external">https://github.com/YihuaWanglv/post.git</a><br>//如果你是第一次提交项目，这一句非常重要，这是你本地的当前的项目与远程的哪个仓库建立连接。</li>
-<li>$ git push -u origin master  //将本地的项目提交到远程仓库中</li>
-</ul>
-</li>
-<li><p>如果你是第一次想把github上面的项目克隆到本地或者要克隆别人的项目到地。</p>
-<ul>
-<li>$ git clone git@github.com:defnngj/hibernate-demo.git  //在git下面切换到想存放此项目的文件目录下，运行这条命令就可以将项目克隆下来。</li>
-</ul>
-</li>
-<li><p>假如本地已经存在了这个项目，而仓库中又有一新的更新，如何把更的合并到本地的项目中？</p>
-<ul>
-<li>$ git fetch origin    //取得远程更新，这里可以看做是准备要取了</li>
-<li>$ git merge origin/master  //把更新的内容合并到本地分支/master</li>
-</ul>
-</li>
-<li><p>添加和提交</p>
-<ul>
-<li>git add *</li>
-<li>git commit -m “代码提交信息”</li>
-<li>git push origin master</li>
-<li>输入用户名密码</li>
-<li>如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加：</li>
-<li>git remote add origin <server></server></li>
-</ul>
-</li>
-<li>重装系统后，git项目如何恢复？<ul>
-<li>本地先进入原项目路径，git clone [path of project], 连接上</li>
-<li>然后告诉git全局配置你是谁，输入你的邮箱和名称</li>
-<li>git config –global user.email “you@example.com”</li>
-<li>git config –global user.name “Your Name”</li>
-<li>然后该干嘛干嘛</li>
-</ul>
-</li>
-</ol>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/10/使用Nginx作为简单的图片服务器/" itemprop="url">
-                  使用Nginx作为简单的图片服务器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2017-03-10T23:59:19+08:00" content="2017-03-10">
-              2017-03-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h2><ul>
-<li>为什么要用Nginx代理静态图片？</li>
-</ul>
-<p>图片服务器是我们经常要用到的，在开始的时候，当还没用上阿里云oss，并且觉得FastDFS略微重量级的时候，就可以使用Nginx作为简单的图片服务器。</p>
-<p>一下就是Nginx的conf配置文件例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">        location /images &#123;</span><br><span class="line">            root   /data/icms;</span><br><span class="line">            add_header &apos;Access-Control-Allow-Origin&apos; *;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">            charset utf-8;</span><br><span class="line">        &#125;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>所有<a href="http://domain/image/xxx.png" target="_blank" rel="external">http://domain/image/xxx.png</a> 的图片都会请求到服务器/data/icms/images内对应的图片。</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1402,7 +1384,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1416,7 +1398,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">143</span>
+              <span class="site-state-item-count">147</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -1459,7 +1441,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>

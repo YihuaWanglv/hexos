@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://localhost:4000/"/>
-  <updated>2017-09-06T15:41:11.628Z</updated>
+  <updated>2018-02-25T02:47:02.959Z</updated>
   <id>http://localhost:4000/</id>
   
   <author>
@@ -16,11 +16,85 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>事务管理-spring事务使用注意点、数据库事务的隔离级别与锁</title>
+    <link href="http://localhost:4000/2018/02/25/%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86-spring%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E7%82%B9%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E9%94%81/"/>
+    <id>http://localhost:4000/2018/02/25/事务管理-spring事务使用注意点、数据库事务的隔离级别与锁/</id>
+    <published>2018-02-25T02:43:01.000Z</published>
+    <updated>2018-02-25T02:47:02.959Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-spring事务-Transactional的注意点"><a href="#1-spring事务-Transactional的注意点" class="headerlink" title="1. spring事务@Transactional的注意点"></a>1. spring事务@Transactional的注意点</h1><p>@Transactional注解可以标注在类和方法上，也可以标注在定义的接口和接口方法上。<br>如果我们在接口上标注@Transactional注解，会留下这样的隐患：因为注解不能被继承，所以业务接口中标注的@Transactional注解不会被业务实现类继承。所以可能会出现不启动事务的情况。所以，spring建议我们将@Transaction注解在实现类上。<br>在方法上的@Transactional注解会覆盖掉类上的@Transactional。</p>
+<p>注意：</p>
+<p>　　@Transactional 可以作用于接口、接口方法、类以及类方法上。当作用于类上时，该类的所有 public 方法将都具有该类型的事务属性，同时，我们也可以在方法级别使用该标注来覆盖类级别的定义。</p>
+<p>　　虽然 @Transactional 注解可以作用于接口、接口方法、类以及类方法上，但是 Spring 建议不要在接口或者接口方法上使用该注解，因为这只有在使用基于接口的代理时它才会生效。另外， @Transactional 注解应该只被应用到 public 方法上，这是由 Spring AOP 的本质决定的。如果你在 protected、private 或者默认可见性的方法上使用 @Transactional 注解，这将被忽略，也不会抛出任何异常。</p>
+<p>　　默认情况下，只有来自外部的方法调用才会被AOP代理捕获，也就是，类内部方法调用本类内部的其他方法并不会引起事务行为，即使被调用方法使用@Transactional注解进行修饰。</p>
+<h1 id="2-数据库事务中的隔离级别和锁"><a href="#2-数据库事务中的隔离级别和锁" class="headerlink" title="2. 数据库事务中的隔离级别和锁"></a>2. 数据库事务中的隔离级别和锁</h1><p>数据库事务在后端开发中占非常重要的地位，如何确保数据读取的正确性、安全性也是我们需要研究的问题。</p>
+<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><p>首先总结一下数据库事务正确执行的四个要素（ACID）：</p>
+<p>原子性（Atomicity）：即事务是不可分割的最小工作单元，事务内的操作要么全做，要么全不做，不能只做一部分；<br>一致性（Consistency）：在事务执行前数据库的数据处于正确的状态，而事务执行完成后数据库的数据还是处于正确的状态，即数据完整性约束没有被破坏；比如我们做银行转账的相关业务，A转账给B，要求A转的钱B一定要收到。如果A转了钱而B没有收到，那么数据库数据的一致性就得不到保障，在做高并发业务时要注意合理的设计。<br>隔离性（Isolation）：并发事务执行之间无影响，在一个事务内部的操作对其他事务是不产生影响，这需要事务隔离级别来指定隔离性；<br>持久性（Durability）：事务一旦执行成功，它对数据库的数据的改变必须是永久的，不会因各种异常导致数据不一致或丢失。<br>事务隔离级别<br>大部分数据库事务操作都是并发执行的，这就可能遇到下面的几种问题：</p>
+<p>丢失更新：两个事务同时更新一行数据，最后一个事务的更新会覆盖掉第一个事务的更新，从而导致第一个事务更新的数据丢失，后果比较严重。一般是由于没加锁的原因造成的。<br>脏读（Dirty reads）：一个事务A读取到了另一个事务B还没有提交的数据，并在此基础上进行操作。如果B事务rollback，那么A事务所读取到的数据就是不正确的，会带来问题。<br>不可重复读（Non-repeatable reads）：在同一事务范围内读取两次相同的数据，所返回的结果不同。比如事务B第一次读数据后，事务A更新数据并commit，那么事务B第二次读取的数据就与第一次是不一样的。<br>幻读（Phantom reads）：一个事务A读取到了另一个事务B新提交的数据。比如，事务A对一个表中所有行的数据按照某规则进行修改（整表操作），同时，事务B向表中插入了一行原始数据，那么后面事务A再对表进行操作时，会发现表中居然还有一行数据没有被修改，就像发生了幻觉，飘飘欲仙一样。<br>注意：不可重复读和幻读的区别是，不可重复读对应的表的操作是更改(UPDATE)，而幻读对应的表的操作是插入(INSERT)，两种的应对策略不一样。对于不可重复读，只需要采用行级锁防止该记录被更新即可，而对于幻读必须加个表级锁，防止在表中插入数据。有关锁的问题，下面会讨论。</p>
+<p>为了处理这几种问题，SQL定义了下面的4个等级的事务隔离级别：</p>
+<p>未提交读（READ UNCOMMITTED ）：最低隔离级别，一个事务能读取到别的事务未提交的更新数据，很不安全，可能出现丢失更新、脏读、不可重复读、幻读；<br>提交读（READ COMMITTED）：一个事务能读取到别的事务提交的更新数据，不能看到未提交的更新数据，不会出现丢失更新、脏读，但可能出现不可重复读、幻读；<br>可重复读（REPEATABLE READ）：保证同一事务中先后执行的多次查询将返回同一结果，不受其他事务影响，不可能出现丢失更新、脏读、不可重复读，但可能出现幻读；<br>序列化（SERIALIZABLE）：最高隔离级别，不允许事务并发执行，而必须串行化执行，最安全，不可能出现更新、脏读、不可重复读、幻读，但是效率最低。<br>隔离级别越高，数据库事务并发执行性能越差，能处理的操作越少。所以一般地，推荐使用REPEATABLE READ级别保证数据的读一致性。对于幻读的问题，可以通过加锁来防止。<br>MySQL支持这四种事务等级，默认事务隔离级别是REPEATABLE READ。Oracle数据库支持READ COMMITTED 和 SERIALIZABLE这两种事务隔离级别，所以Oracle数据库不支持脏读。Oracle数据库默认的事务隔离级别是READ COMMITTED。</p>
+<h2 id="各种锁"><a href="#各种锁" class="headerlink" title="各种锁"></a>各种锁</h2><p>下面总结一下MySQL中的锁，有好几种分类。其它RDBMS也差不多是这样。</p>
+<h3 id="首先最重要的分类就是乐观锁-Optimistic-Lock-和悲观锁-Pessimistic-Lock-，这实际上是两种锁策略。"><a href="#首先最重要的分类就是乐观锁-Optimistic-Lock-和悲观锁-Pessimistic-Lock-，这实际上是两种锁策略。" class="headerlink" title="首先最重要的分类就是乐观锁(Optimistic Lock)和悲观锁(Pessimistic Lock)，这实际上是两种锁策略。"></a>首先最重要的分类就是乐观锁(Optimistic Lock)和悲观锁(Pessimistic Lock)，这实际上是两种锁策略。</h3><p>乐观锁，顾名思义就是非常乐观，非常相信真善美，每次去读数据都认为其它事务没有在写数据，所以就不上锁，快乐的读取数据，而只在提交数据的时候判断其它事务是否搞过这个数据了，如果搞过就rollback。乐观锁相当于一种检测冲突的手段，可通过为记录添加版本或添加时间戳来实现。</p>
+<p>悲观锁，对其它事务抱有保守的态度，每次去读数据都认为其它事务想要作祟，所以每次读数据的时候都会上锁，直到取出数据。悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性，但随之而来的是各种开销。悲观锁相当于一种避免冲突的手段。<br>选择标准：如果并发量不大，或数据冲突的后果不严重，则可以使用乐观锁；而如果并发量大或数据冲突后果比较严重（对用户不友好），那么就使用悲观锁。</p>
+<h3 id="从读写角度，分共享锁（S锁，Shared-Lock）和排他锁（X锁，Exclusive-Lock），也叫读锁（Read-Lock）和写锁（Write-Lock）。"><a href="#从读写角度，分共享锁（S锁，Shared-Lock）和排他锁（X锁，Exclusive-Lock），也叫读锁（Read-Lock）和写锁（Write-Lock）。" class="headerlink" title="从读写角度，分共享锁（S锁，Shared Lock）和排他锁（X锁，Exclusive Lock），也叫读锁（Read Lock）和写锁（Write Lock）。"></a>从读写角度，分共享锁（S锁，Shared Lock）和排他锁（X锁，Exclusive Lock），也叫读锁（Read Lock）和写锁（Write Lock）。</h3><p>理解：</p>
+<p>持有S锁的事务只读不可写。如果事务A对数据D加上S锁后，其它事务只能对D加上S锁而不能加X锁。<br>持有X锁的事务可读可写。如果事务A对数据D加上X锁后，其它事务不能再对D加锁，直到A对D的锁解除。<br>从锁的粒度角度，主要分为表级锁（Table Lock）和行级锁（Row Lock）。<br>表级锁将整个表加锁，性能开销最小。用户可以同时进行读操作。当一个用户对表进行写操作时，用户可以获得一个写锁，写锁禁止其他的用户读写操作。写锁比读锁的优先级更高，即使有读操作已排在队列中，一个被申请的写锁仍可以排在所队列的前列。<br>行级锁仅对指定的记录进行加锁，这样其它进程可以对同一个表中的其它记录进行读写操作。行级锁粒度最小，开销大，能够支持高并发，可能会出现死锁。</p>
+<h3 id="MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。"><a href="#MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。" class="headerlink" title="MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。"></a>MySQL的MyISAM引擎使用表级锁，而InnoDB支持表级锁和行级锁，默认是行级锁。</h3><p>还有BDB引擎使用页级锁，即一次锁定一组记录，并发性介于行级锁和表级锁之间。</p>
+<h3 id="三级锁协议"><a href="#三级锁协议" class="headerlink" title="三级锁协议"></a>三级锁协议</h3><p>三级加锁协议是为了保证正确的事务并发操作，事务在读、写数据库对象是需要遵循的加锁规则。</p>
+<p>一级封锁协议：事务T在修改数据R之前必须对它加X锁，直到事务结束方可释放。而若事务T只是读数据，不进行修改，则不需加锁，因此一级加锁协议下可能会出现脏读和不可重复读。<br>二级加锁协议：在一级加锁协议的基础上，加上这样一条规则——事务T在读取数据R之前必须对它加S锁，直到读取完毕以后释放。二级加锁协议下可能会出现不可重复读。<br>三级加锁协议：在一级加锁协议的基础上，加上这样一条规则——事务T在读取数据R之前必须对它加X锁，直到事务结束方可释放。三级加锁协议避免了脏读和不可重复读的问题。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-spring事务-Transactional的注意点&quot;&gt;&lt;a href=&quot;#1-spring事务-Transactional的注意点&quot; class=&quot;headerlink&quot; title=&quot;1. spring事务@Transactional的注意点&quot;&gt;&lt;/a&gt;1
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://localhost:4000/tags/java/"/>
+    
+      <category term="spring事务" scheme="http://localhost:4000/tags/spring%E4%BA%8B%E5%8A%A1/"/>
+    
+      <category term="Transactional" scheme="http://localhost:4000/tags/Transactional/"/>
+    
+      <category term="数据库事务" scheme="http://localhost:4000/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/"/>
+    
+      <category term="锁" scheme="http://localhost:4000/tags/%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://localhost:4000/2018/02/07/hello-world/"/>
+    <id>http://localhost:4000/2018/02/07/hello-world/</id>
+    <published>2018-02-07T08:54:40.651Z</published>
+    <updated>2018-02-07T08:54:40.652Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;http://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;http://hexo.io
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>java并发学习(一)</title>
     <link href="http://localhost:4000/2017/09/06/java%E5%B9%B6%E5%8F%91%E5%AD%A6%E4%B9%A0-%E4%B8%80/"/>
     <id>http://localhost:4000/2017/09/06/java并发学习-一/</id>
     <published>2017-09-06T15:33:27.000Z</published>
-    <updated>2017-09-06T15:41:11.628Z</updated>
+    <updated>2018-02-07T08:54:40.653Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-进程和线程"><a href="#1-进程和线程" class="headerlink" title="1. 进程和线程"></a>1. 进程和线程</h1><p>进程，是运行在自己地址空间内的自包容程序。</p>
 <p>而java并发系统，会共享内存和IO这样的资源，因此需要协调不同线程驱动的任务之间对资源的使用。</p>
@@ -171,7 +245,7 @@
     <link href="http://localhost:4000/2017/03/29/microservices-01-Spring-boot%E5%BC%80%E5%8F%91%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     <id>http://localhost:4000/2017/03/29/microservices-01-Spring-boot开发微服务/</id>
     <published>2017-03-29T13:33:23.000Z</published>
-    <updated>2017-03-29T13:43:43.110Z</updated>
+    <updated>2018-02-07T08:54:40.659Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Spring-boot开发微服务"><a href="#Spring-boot开发微服务" class="headerlink" title="Spring boot开发微服务"></a>Spring boot开发微服务</h1><ul>
 <li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
@@ -210,7 +284,7 @@
     <link href="http://localhost:4000/2017/03/29/microservices-06-Jenkins%E6%89%A7%E8%A1%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E6%9E%84%E5%BB%BA/"/>
     <id>http://localhost:4000/2017/03/29/microservices-06-Jenkins执行自动化的构建/</id>
     <published>2017-03-29T13:01:58.000Z</published>
-    <updated>2017-03-29T13:44:18.611Z</updated>
+    <updated>2018-02-07T08:54:40.660Z</updated>
     
     <content type="html"><![CDATA[<h1 id="microservices-06-Jenkins执行自动化的构建"><a href="#microservices-06-Jenkins执行自动化的构建" class="headerlink" title="[microservices]06-Jenkins执行自动化的构建"></a>[microservices]06-Jenkins执行自动化的构建</h1><ul>
 <li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
@@ -277,7 +351,7 @@
     <link href="http://localhost:4000/2017/03/29/microservices-05-Gitlab%E4%BD%9C%E4%B8%BA%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/"/>
     <id>http://localhost:4000/2017/03/29/microservices-05-Gitlab作为代码仓库/</id>
     <published>2017-03-29T13:01:26.000Z</published>
-    <updated>2017-03-29T13:44:11.015Z</updated>
+    <updated>2018-02-07T08:54:40.660Z</updated>
     
     <content type="html"><![CDATA[<h1 id="microservices-05-Gitlab作为代码仓库"><a href="#microservices-05-Gitlab作为代码仓库" class="headerlink" title="[microservices]05-Gitlab作为代码仓库"></a>[microservices]05-Gitlab作为代码仓库</h1><ul>
 <li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
@@ -318,7 +392,7 @@
     <link href="http://localhost:4000/2017/03/29/microservices-04-Docker%E4%BD%9C%E4%B8%BA%E6%9C%8D%E5%8A%A1%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8/"/>
     <id>http://localhost:4000/2017/03/29/microservices-04-Docker作为服务运行容器/</id>
     <published>2017-03-29T13:01:01.000Z</published>
-    <updated>2017-03-29T13:44:06.957Z</updated>
+    <updated>2018-02-07T08:54:40.660Z</updated>
     
     <content type="html"><![CDATA[<h1 id="microservices-04-Docker作为服务运行容器"><a href="#microservices-04-Docker作为服务运行容器" class="headerlink" title="[microservices]04-Docker作为服务运行容器"></a>[microservices]04-Docker作为服务运行容器</h1><ul>
 <li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
@@ -441,7 +515,7 @@
     <link href="http://localhost:4000/2017/03/29/microservices-03-Zookeeper%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E6%9C%8D%E5%8A%A1/"/>
     <id>http://localhost:4000/2017/03/29/microservices-03-Zookeeper注册发现服务/</id>
     <published>2017-03-29T13:00:37.000Z</published>
-    <updated>2017-03-29T13:44:00.364Z</updated>
+    <updated>2018-02-07T08:54:40.660Z</updated>
     
     <content type="html"><![CDATA[<h1 id="microservices-03-Zookeeper注册发现服务"><a href="#microservices-03-Zookeeper注册发现服务" class="headerlink" title="[microservices]03-Zookeeper注册发现服务"></a>[microservices]03-Zookeeper注册发现服务</h1><ul>
 <li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
@@ -496,7 +570,7 @@
     <link href="http://localhost:4000/2017/03/29/microservices-02-Nodejs-Express%E4%BD%9C%E4%B8%BA%E5%BE%AE%E6%9C%8D%E5%8A%A1api%E7%BD%91%E5%85%B3/"/>
     <id>http://localhost:4000/2017/03/29/microservices-02-Nodejs-Express作为微服务api网关/</id>
     <published>2017-03-29T12:54:07.000Z</published>
-    <updated>2017-03-29T13:43:52.072Z</updated>
+    <updated>2018-02-07T08:54:40.659Z</updated>
     
     <content type="html"><![CDATA[<h1 id="microservices-02-Nodejs-amp-Express作为微服务api网关"><a href="#microservices-02-Nodejs-amp-Express作为微服务api网关" class="headerlink" title="[microservices]02-Nodejs&amp;Express作为微服务api网关"></a>[microservices]02-Nodejs&amp;Express作为微服务api网关</h1><ul>
 <li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
@@ -522,11 +596,11 @@
     
       <category term="microservices" scheme="http://localhost:4000/tags/microservices/"/>
     
+      <category term="微服务" scheme="http://localhost:4000/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
       <category term="Node.js" scheme="http://localhost:4000/tags/Node-js/"/>
     
       <category term="Express" scheme="http://localhost:4000/tags/Express/"/>
-    
-      <category term="微服务" scheme="http://localhost:4000/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
       <category term="api网关" scheme="http://localhost:4000/tags/api%E7%BD%91%E5%85%B3/"/>
     
@@ -539,7 +613,7 @@
     <link href="http://localhost:4000/2017/03/11/shell-%E4%BB%8Esvn%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81maven%E6%89%93%E5%8C%85%E5%90%8E%E9%83%A8%E7%BD%B2%E7%9A%84%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E8%84%9A%E6%9C%AC/"/>
     <id>http://localhost:4000/2017/03/11/shell-从svn更新代码maven打包后部署的一个简单脚本/</id>
     <published>2017-03-11T07:48:45.000Z</published>
-    <updated>2017-03-11T07:54:42.480Z</updated>
+    <updated>2018-02-07T08:54:40.661Z</updated>
     
     <content type="html"><![CDATA[<p>shell是个好东西，服务器上面的操作做多了，就需要想想办法把手工做的事情让脚本帮我们处理。以下是一个针对spring boot项目从svn更新出最新代码，然后maven打包，最后启动发布的一个脚本例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#build icms app</span><br><span class="line">path_src=/home/src/trunk/icms</span><br><span class="line">path_target=$&#123;path_src&#125;/target</span><br><span class="line">path_app=/home/app</span><br><span class="line">path_log=/data/logs/icms</span><br><span class="line">file_app=icms-1.4.1.RELEASE.jar</span><br><span class="line">url_app=localhost:8091</span><br><span class="line"></span><br><span class="line">cd /home/src/trunk/icms</span><br><span class="line">svn update</span><br><span class="line">mvn clean package -P pro -Dmaven.test.skip=true</span><br><span class="line"></span><br><span class="line">if [ -f $&#123;path_target&#125;/$&#123;file_app&#125; ]; then</span><br><span class="line">        echo &quot;build success, now begin to deploy...&quot;</span><br><span class="line">        curl -X POST $&#123;url_app&#125;/shutdown</span><br><span class="line">        yes | cp -rf $&#123;path_target&#125;/$&#123;file_app&#125; $&#123;path_app&#125;/</span><br><span class="line">        chmod +x $&#123;path_app&#125;/$&#123;file_app&#125;</span><br><span class="line">        nohup java -jar $&#123;path_app&#125;/$&#123;file_app&#125; &lt; /dev/null &gt; $&#123;path_log&#125;/icms.log 2&gt;&amp;1 &amp;</span><br><span class="line">else</span><br><span class="line">        echo &quot;build failed!&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;build process finish.&quot;</span><br></pre></td></tr></table></figure>
@@ -572,7 +646,7 @@
     <link href="http://localhost:4000/2017/03/11/git%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-%E8%AE%B0%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://localhost:4000/2017/03/11/git如何使用-记一些常用的git使用方法/</id>
     <published>2017-03-11T07:47:31.000Z</published>
-    <updated>2017-03-11T07:49:37.872Z</updated>
+    <updated>2018-02-07T08:54:40.651Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><p>git如何提交修改到远程仓库？</p>
@@ -638,7 +712,7 @@
     <link href="http://localhost:4000/2017/03/10/%E4%BD%BF%E7%94%A8Nginx%E4%BD%9C%E4%B8%BA%E7%AE%80%E5%8D%95%E7%9A%84%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     <id>http://localhost:4000/2017/03/10/使用Nginx作为简单的图片服务器/</id>
     <published>2017-03-10T15:59:19.000Z</published>
-    <updated>2017-03-10T16:11:13.863Z</updated>
+    <updated>2018-02-07T08:54:40.666Z</updated>
     
     <content type="html"><![CDATA[<h2 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h2><ul>
 <li>为什么要用Nginx代理静态图片？</li>
@@ -673,7 +747,7 @@
     <link href="http://localhost:4000/2017/03/10/%E4%BD%BF%E7%94%A8java%E6%94%B6%E9%9B%86github-trending%E9%A1%B5%E9%9D%A2%E4%B8%AD%E6%84%9F%E5%85%B4%E8%B6%A3%E7%9A%84%E8%AF%AD%E8%A8%80%E7%9A%84%E6%96%B0%E5%8A%A8%E6%80%81%E5%B9%B6%E5%BD%92%E6%A1%A3%E5%88%B0%E8%87%AA%E5%B7%B1%E7%9A%84repository/"/>
     <id>http://localhost:4000/2017/03/10/使用java收集github-trending页面中感兴趣的语言的新动态并归档到自己的repository/</id>
     <published>2017-03-10T14:00:02.000Z</published>
-    <updated>2017-03-10T14:49:43.170Z</updated>
+    <updated>2018-02-07T08:54:40.666Z</updated>
     
     <content type="html"><![CDATA[<h1 id="java-github-trending"><a href="#java-github-trending" class="headerlink" title="java-github-trending"></a>java-github-trending</h1><h2 id="what-is-this"><a href="#what-is-this" class="headerlink" title="what is this?"></a>what is this?</h2><p><a href="https://github.com/trending" target="_blank" rel="external">github-trending</a> 展示了每天趋势较好的一些github项目。<br>java-github-trending项目的目的就是每天定时拉取github-trending页面中感兴趣的语言的流行项目，并以日期为分组归档到markdown文件里面，最后提交到github的repository。</p>
 <ul>
@@ -713,7 +787,7 @@
     <link href="http://localhost:4000/2016/12/18/%E5%8A%A8%E6%80%81%E6%8A%A5%E8%A1%A8%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1/"/>
     <id>http://localhost:4000/2016/12/18/动态报表模块设计/</id>
     <published>2016-12-18T07:49:16.000Z</published>
-    <updated>2016-12-18T07:50:16.673Z</updated>
+    <updated>2018-02-07T08:54:40.668Z</updated>
     
     <content type="html"><![CDATA[<h1 id="动态报表模块设计"><a href="#动态报表模块设计" class="headerlink" title="动态报表模块设计"></a>动态报表模块设计</h1><h2 id="1-需求概述"><a href="#1-需求概述" class="headerlink" title="1.需求概述"></a>1.需求概述</h2><ul>
 <li>实现根据dba提供的sql语句，动态生成业务部门需要的报表展示页面</li>
@@ -769,38 +843,11 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://localhost:4000/2016/12/08/hello-world/"/>
-    <id>http://localhost:4000/2016/12/08/hello-world/</id>
-    <published>2016-12-08T15:46:29.737Z</published>
-    <updated>2016-02-20T04:02:04.711Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;http://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;http://hexo.io
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>ELK+Kafka企业日志收集平台搭建总结</title>
     <link href="http://localhost:4000/2016/09/09/ELK-Kafka%E4%BC%81%E4%B8%9A%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
     <id>http://localhost:4000/2016/09/09/ELK-Kafka企业日志收集平台搭建总结/</id>
     <published>2016-09-08T17:31:02.000Z</published>
-    <updated>2016-12-18T05:14:10.660Z</updated>
+    <updated>2018-02-07T08:54:40.646Z</updated>
     
     <content type="html"><![CDATA[<h1 id="3-ELK-Kafka-企业日志收集平台搭建总结"><a href="#3-ELK-Kafka-企业日志收集平台搭建总结" class="headerlink" title="3.ELK+Kafka 企业日志收集平台搭建总结"></a>3.ELK+Kafka 企业日志收集平台搭建总结</h1><h3 id="平台架构："><a href="#平台架构：" class="headerlink" title="平台架构："></a>平台架构：</h3><ul>
 <li>1台生产应用服务器：192.168.1.119</li>
@@ -987,7 +1034,7 @@
     <link href="http://localhost:4000/2016/09/06/dev-collect-2016-08-collect-of-dev/"/>
     <id>http://localhost:4000/2016/09/06/dev-collect-2016-08-collect-of-dev/</id>
     <published>2016-09-06T15:51:04.000Z</published>
-    <updated>2016-09-06T15:52:13.802Z</updated>
+    <updated>2018-02-07T08:54:40.651Z</updated>
     
     <content type="html"><![CDATA[<h2 id="2016-08"><a href="#2016-08" class="headerlink" title="2016-08"></a>2016-08</h2><h3 id="2016-08-26"><a href="#2016-08-26" class="headerlink" title="2016-08-26"></a>2016-08-26</h3><ul>
 <li><p>RabbitMQ Configuration<br><a href="https://www.rabbitmq.com/configure.html" target="_blank" rel="external">https://www.rabbitmq.com/configure.html</a></p>
@@ -1148,9 +1195,9 @@
     
       <category term="android" scheme="http://localhost:4000/tags/android/"/>
     
-      <category term="dev" scheme="http://localhost:4000/tags/dev/"/>
-    
       <category term="collect" scheme="http://localhost:4000/tags/collect/"/>
+    
+      <category term="dev" scheme="http://localhost:4000/tags/dev/"/>
     
       <category term="collect-of-dev" scheme="http://localhost:4000/tags/collect-of-dev/"/>
     
@@ -1161,7 +1208,7 @@
     <link href="http://localhost:4000/2016/08/18/spring%E4%BA%8B%E5%8A%A1%E7%94%A8%E6%B3%95%E6%BC%94%E8%BF%9B/"/>
     <id>http://localhost:4000/2016/08/18/spring事务用法演进/</id>
     <published>2016-08-18T04:13:57.000Z</published>
-    <updated>2016-09-06T15:49:04.673Z</updated>
+    <updated>2018-02-07T08:54:40.664Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Spring事务用法演进"><a href="#Spring事务用法演进" class="headerlink" title="Spring事务用法演进"></a>Spring事务用法演进</h1><ul>
 <li>内容</li>
@@ -1393,7 +1440,7 @@
     <link href="http://localhost:4000/2016/08/12/java%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%95%B4%E7%90%86/"/>
     <id>http://localhost:4000/2016/08/12/java自动化测试整理/</id>
     <published>2016-08-12T05:14:27.000Z</published>
-    <updated>2016-08-19T16:19:05.891Z</updated>
+    <updated>2018-02-07T08:54:40.653Z</updated>
     
     <content type="html"><![CDATA[<h2 id="java自动化测试整理"><a href="#java自动化测试整理" class="headerlink" title="java自动化测试整理"></a>java自动化测试整理</h2><h2 id="1-自动化测试的4个关键部分"><a href="#1-自动化测试的4个关键部分" class="headerlink" title="1. 自动化测试的4个关键部分"></a>1. 自动化测试的4个关键部分</h2><p><img src="/images/test-001.png" alt=""></p>
 <ul>
@@ -1438,7 +1485,7 @@
     <link href="http://localhost:4000/2016/08/10/%E3%80%90%E8%BD%AC%E3%80%91-%E6%94%AF%E4%BB%98%E5%AE%9D%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%8A%80%E6%9C%AF/"/>
     <id>http://localhost:4000/2016/08/10/【转】-支付宝架构与技术/</id>
     <published>2016-08-10T03:07:13.000Z</published>
-    <updated>2016-08-10T15:18:20.132Z</updated>
+    <updated>2018-02-07T08:54:40.665Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/images/frame-zhifubao-001.png" alt=""></p>
 <p><img src="/images/frame-zhifubao-002.png" alt=""></p>
@@ -1494,7 +1541,7 @@
     <link href="http://localhost:4000/2016/08/10/%E7%B3%BB%E7%BB%9F%E5%88%86%E5%B8%83%E5%BC%8F%E6%83%85%E5%86%B5%E4%B8%8B%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E6%96%B9%E6%A1%88%E6%A2%B3%E7%90%86/"/>
     <id>http://localhost:4000/2016/08/10/系统分布式情况下最终一致性方案梳理/</id>
     <published>2016-08-10T02:14:29.000Z</published>
-    <updated>2016-08-10T15:15:57.211Z</updated>
+    <updated>2018-02-07T08:54:40.670Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>目前的应用系统，不管是企业级应用还是互联网应用，最终数据的一致性是每个应用系统都要面临的问题，随着分布式的逐渐普及，数据一致性更加艰难，但是也很难有银弹的解决方案，也并不是引入特定的中间件或者特定的开源框架能够解决的，更多的还是看业务场景，根据场景来给出解决方案。根据笔者最近几年的了解，总结了几个点，更多的应用系统在编码的时候，更加关注数据的一致性，这样系统才是健壮的。</p>
 <h2 id="基础理论相关"><a href="#基础理论相关" class="headerlink" title="基础理论相关"></a>基础理论相关</h2><p>说起事务，目前的几个理论，ACID事务特性，CAP分布式理论，以及BASE等，ACID在数据库事务中体现，CAP和BASE则是分布式事务的理论，结合业务系统，例如订单管理，例如仓储管理等，可以借鉴这些理论，从而解决问题。</p>
@@ -1538,35 +1585,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>SOA分布式事务解决方案</title>
-    <link href="http://localhost:4000/2016/08/10/SOA%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
-    <id>http://localhost:4000/2016/08/10/SOA分布式事务解决方案/</id>
-    <published>2016-08-10T01:48:30.000Z</published>
-    <updated>2016-08-10T15:15:57.203Z</updated>
-    
-    <content type="html"><![CDATA[<p>这里是转的一段摘录：</p>
-<p>传统分布式系统与当代的面向SOA的分布式系统有一定区别，论概念上来讲SOA是以服务为中心，既然以服务为中心就会有很多面向服务的设计原则。而传统的分布式系统没有服务的概念，也没有所谓的一切皆是服务的原则。而当代SOA则首要原则就要以服务为中心，针对服务的设计又有了很多服务设计原则。<br>SOA对服务还进行了类型的划分，按照服务的应用层次来分类：业务服务、组合服务、应用服务，包装服务等。再按照管理与运维的层面来分类：控制服务、调度服务、监控服务等等。传统的分布式系统是没有这些的，我们谈论的是当代SOA的分布式系统，所以我们强调的是以服务为中心，以服务设计原则为架构设计的指导要求，当代SOA是对传统分布式系统的一个迭代进化，不是一个时代的产物，SOA更加强调了以服务为首要原则，已经提升到了另外一个更加高级的层面。<br>本节我们交流一下在当代SOA分布式系统中的数据一致性问题，在SOA中这主要涉及两个层面来考虑，一个是服务层面、一个数据持久化层面。再按照一致性的基本要求，可以分为：读一致性、写一致性、会话一致性、最终一致性、实时一致性等几个维度，当然还有其他几个维度的一致性要求。<br>我们这里重点讨论在企业应用中实施SOA时遇到的一些比较棘手的数据一致性问题和解决方案，对于刚才提到的几个维度的一致性要求均具有重要的参考价值。<br>1.分布式事务（基于DTC的分布式事务）<br>以往包括目前很多项目还是倾向于使用DTC来处理分布式事务，这个方案多数适用于一般的企业应用，业务、访问量、数据量要求都不是很高的情况下。用DTC很方便，事务的自动传播、事务的自动感知、事务的自动回滚和提交，这都是中央DTC帮我们管理好了。<br>由于有中央DTC的统一协调，看似好像帮我们解决了很多我们需要考虑的问题，但是它也是整个平台的致命的瓶颈，一旦DTC由于某个问题出现错误，而且这种错误都是系统层面的错误，很多问题我们是无能为力的。如果出现问题，整个应用平台都无法完成任何一个跨服务的业务流程，这其实很危险，你不无法控制系统的稳定性。<br>这里总结，DTC用于一般的小型企业应用，不建议用在中等规模的企业应用中，不是说这个东西不好，而是无法控制它。<br>2.事务补偿（提供正向或反向的操作来让数据在业务上是一致的）<br>世界级SOA专家所编写的书籍里都提到了使用“补偿”操作来完成数据的不一致性，当我们编写了一个服务方法A，就需要一个服务方法A1的补偿接口来完成A服务的补偿操作。但是真实的业务情况下很难实施这种看起来好像很优美很柔性的设计。没有实践就没有发言权，我们公司的技术团队就实施过这种方案，但是很不理想，这跟技术本身及技术团队没关系，只是我们的平台业务太复杂，很难去“补偿”一个已经做过的操作。<br>这当然也要看你所面对的项目情况，量变引起质变，如果你的各种量都上去了，这个“补偿”方案不实际，而且很难在数据层面进行“补偿“。总之，这不是一个中长期的方案。<br>3.异步EDA（基于异步事件流来实现柔性的分布式事务）<br>EDA简称”事件驱动架构“。多个系统之间通过传播”事件“来驱动整个业务的运转。系统之间没有紧耦合的同步调用的操作，都是通过发出异步的“事件”来通知下一个业务环节。<br>可能你会有一个疑问，异步操作，是不是系统之间延迟会很长，其实不是，现在有很多成熟的消息中间件在内网内几乎是毫秒级别的延迟，至于跨机房就看物理上的距离了。<br>异步操作有很多好处，这里我就不浪费大家时间重复那些好处。使用EDA实现系统之间的一个松散的事务关系，要把控好项目的质量，对系统的非功能需求、BUG数等等可能会影响业务操作中断的地方都要建立起适当的机制，让这些问题尽早的在线下解决。比如可以实施UnitTest、持续集成等一些敏捷的方法论。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这里是转的一段摘录：&lt;/p&gt;
-&lt;p&gt;传统分布式系统与当代的面向SOA的分布式系统有一定区别，论概念上来讲SOA是以服务为中心，既然以服务为中心就会有很多面向服务的设计原则。而传统的分布式系统没有服务的概念，也没有所谓的一切皆是服务的原则。而当代SOA则首要原则就要以服务为中
-    
-    </summary>
-    
-    
-      <category term="SOA" scheme="http://localhost:4000/tags/SOA/"/>
-    
-      <category term="分布式事务" scheme="http://localhost:4000/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
-    
-      <category term="柔性事务" scheme="http://localhost:4000/tags/%E6%9F%94%E6%80%A7%E4%BA%8B%E5%8A%A1/"/>
-    
-      <category term="消息事务" scheme="http://localhost:4000/tags/%E6%B6%88%E6%81%AF%E4%BA%8B%E5%8A%A1/"/>
     
   </entry>
   
