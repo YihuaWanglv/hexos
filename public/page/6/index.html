@@ -202,6 +202,95 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/09/spring-boot-springboot实践之在项目中使用spring-cache和redis实现缓存/" itemprop="url">
+                  [spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-09T10:43:01+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="1-首先需要准备一个redis服务端作为缓存"><a href="#1-首先需要准备一个redis服务端作为缓存" class="headerlink" title="1.首先需要准备一个redis服务端作为缓存"></a>1.首先需要准备一个redis服务端作为缓存</h2><p>redis下载安装启动，比较简单，请google之。</p>
+<h2 id="2-项目依赖"><a href="#2-项目依赖" class="headerlink" title="2.项目依赖"></a>2.项目依赖</h2><p>使用spring boot和spring cache，需要springboot依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>连接redis，需要spring data redis和jedis包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-程序配置实现与使用"><a href="#3-程序配置实现与使用" class="headerlink" title="3.程序配置实现与使用"></a>3.程序配置实现与使用</h2><p>不同于spring使用xml配置文件来配置bean，spring boot使用java bean直接在java类中配置需要用到的Bean。</p>
+<h3 id="添加redis-cache相关的config类，如下："><a href="#添加redis-cache相关的config类，如下：" class="headerlink" title="添加redis cache相关的config类，如下："></a>添加redis cache相关的config类，如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.cache.CacheManager;</span><br><span class="line">import org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line">import org.springframework.cache.annotation.EnableCaching;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.data.redis.cache.RedisCacheManager;</span><br><span class="line">import org.springframework.data.redis.connection.RedisConnectionFactory;</span><br><span class="line">import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;</span><br><span class="line">import org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableCaching</span><br><span class="line">public class RedisCacheConfig extends CachingConfigurerSupport &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public JedisConnectionFactory redisConnectionFactory() &#123;</span><br><span class="line">        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();</span><br><span class="line">        redisConnectionFactory.setHostName(&quot;127.0.0.1&quot;);</span><br><span class="line">        redisConnectionFactory.setPort(6379);</span><br><span class="line">        return redisConnectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public RedisTemplate&lt;String, String&gt; redisTemplate(RedisConnectionFactory cf) &#123;</span><br><span class="line">        RedisTemplate&lt;String, String&gt; redisTemplate = new RedisTemplate&lt;String, String&gt;();</span><br><span class="line">        redisTemplate.setConnectionFactory(cf);</span><br><span class="line">        return redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;redisCacheManager&quot;)</span><br><span class="line">    public CacheManager cacheManager(RedisTemplate redisTemplate) &#123;</span><br><span class="line">        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);</span><br><span class="line">        cacheManager.setDefaultExpiration(300);</span><br><span class="line">        return cacheManager;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@Configuration标记此java类为spring boot的配置类<br>@EnableCaching标记为项目启用缓存<br>@Bean，每个被此注解标记的方法都会配置一个bean，等同于xml配置中的<bean><br>从以上代码可以看到，使用spring cache和redis缓存，我们需要一个JedisConnectionFactory，一个RedisTemplate和一个CacheManager。<br>其中JedisConnectionFactory配置了redis服务的ip和端口，为了方便这里直接写在了程序里，可以移出去放到配置文件中读取。</bean></p>
+<h3 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h3><p>使用非常简单，只需要在我们想要缓存的方法前加一个@Cacheable注解即可<br>下面是一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Cacheable(value = &quot;find&quot;)</span><br><span class="line">public List&lt;Object&gt; find(Long id) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">@CacheEvict(value = &quot;find&quot;, allEntries = true)</span><br><span class="line">public Object saveProject(Object object) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">@CacheEvict(value = &quot;find&quot; , allEntries = true)</span><br><span class="line">public void deleteProject(Long id) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里@Cacheable标记的方法在首次调用后，将会将读取到的内容缓存到redis中，以后每次只要缓存中存在该缓存，读取都会从缓存中读取。<br>但如果实际数据改变了怎么办？<br>我查看spring cache的api后，没有适用的动态更新缓存的方法，所以这里适用了一种不怎么优雅的解决方案：<br>每次会对模型数据改变的方法，都清除一次缓存。清除后的第一次，查询会读取数据库，之后再缓存。<br>@CacheEvict标记的方法，表示将会清除缓存，value属性中配置了“find”，表示清除key为“find”的缓存数据。</p>
+<p>这个方案不是很优雅，就是用起来简单，如果想更优雅的方案，应该要自己再实现一套自己可控的缓存程序。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/07/为你的项目做合理的版本控制管理/" itemprop="url">
                   为你的项目做合理的版本控制管理
                 </a>
@@ -1040,91 +1129,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/31/使用hexo-deploy直接发布到github/" itemprop="url">
-                  使用hexo-deploy直接发布到github
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-31T17:08:52+08:00" content="2015-12-31">
-              2015-12-31
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>本文说明如何使用hexo deploy直接提交到github发布文章。</p>
-<h3 id="1-npm安装需要的东西"><a href="#1-npm安装需要的东西" class="headerlink" title="1.npm安装需要的东西"></a>1.npm安装需要的东西</h3><p>$ npm install hexo-deployer-git –save<br>$ npm install hexo-deployer-heroku –save<br>$ npm install hexo-deployer-rsync –save<br>$ npm install hexo-deployer-openshift –save<br>$ npm install hexo-deployer-ftpsync –save</p>
-<h3 id="2-修改配置文件-config-yml"><a href="#2-修改配置文件-config-yml" class="headerlink" title="2.修改配置文件_config.yml"></a>2.修改配置文件_config.yml</h3><p>deploy:<br>  type: git<br>  repository: <a href="https://github.com/YihuaWanglv/yihuawanglv.github.io.git" target="_blank" rel="external">https://github.com/YihuaWanglv/yihuawanglv.github.io.git</a><br>  branch: master</p>
-<h3 id="3-执行命令提交发布"><a href="#3-执行命令提交发布" class="headerlink" title="3.执行命令提交发布"></a>3.执行命令提交发布</h3><p>$ hexo clean<br>$ hexo generate<br>$ hexo deploy</p>
-<p>over.</p>
-<h3 id="参考：https-hexo-io-zh-cn-docs-deployment-html"><a href="#参考：https-hexo-io-zh-cn-docs-deployment-html" class="headerlink" title="参考：https://hexo.io/zh-cn/docs/deployment.html"></a>参考：<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></h3>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1171,7 +1175,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1185,7 +1189,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">147</span>
+              <span class="site-state-item-count">150</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

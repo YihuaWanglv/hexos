@@ -202,6 +202,111 @@
             
               
                 
+                <a class="post-title-link" href="/2018/02/25/mosquitto使用记录与服务器调试/" itemprop="url">
+                  mosquitto使用记录与服务器调试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2018-02-25T11:14:27+08:00" content="2018-02-25">
+              2018-02-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="mosquitto使用记录："><a href="#mosquitto使用记录：" class="headerlink" title="mosquitto使用记录："></a>mosquitto使用记录：</h1><h2 id="mqtt："><a href="#mqtt：" class="headerlink" title="mqtt："></a>mqtt：</h2><h3 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mosquitto -c /etc/mosquitto/mosquitto.conf</span><br></pre></td></tr></table></figure>
+<h3 id="加-d表示后台运行："><a href="#加-d表示后台运行：" class="headerlink" title="加-d表示后台运行："></a>加-d表示后台运行：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mosquitto -c /etc/mosquitto/mosquitto.conf -d</span><br></pre></td></tr></table></figure>
+<h3 id="sub一个主题："><a href="#sub一个主题：" class="headerlink" title="sub一个主题："></a>sub一个主题：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mosquitto_sub -h localhost -t test -d</span><br></pre></td></tr></table></figure>
+<h3 id="pub一个消息到主题："><a href="#pub一个消息到主题：" class="headerlink" title="pub一个消息到主题："></a>pub一个消息到主题：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mosquitto_pub -h localhost -m &quot;中文 的mqtt&quot; -t test -d</span><br></pre></td></tr></table></figure>
+<h3 id="重启：找到线程，kill"><a href="#重启：找到线程，kill" class="headerlink" title="重启：找到线程，kill"></a>重启：找到线程，kill</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -A | grep mosquitto</span><br><span class="line">kill -9 xxx</span><br></pre></td></tr></table></figure>
+<h2 id="linux最大连接数设置"><a href="#linux最大连接数设置" class="headerlink" title="linux最大连接数设置"></a>linux最大连接数设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ulimit -n20000 -s512</span><br><span class="line"></span><br><span class="line">ulimit -f unlimited</span><br><span class="line">ulimit -t unlimited</span><br><span class="line">ulimit -v unlimited</span><br><span class="line">ulimit -n 1048576</span><br><span class="line">ulimit -m unlimited</span><br><span class="line">ulimit -u 1048576</span><br></pre></td></tr></table></figure>
+<p>Till now I have achieved 74K concurrent connections on a broker. I have configured the ulimit of broker server by editing sysctl.conf and limit.conf file.</p>
+<ul>
+<li>vi /etc/sysctl.conf</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fs.file-max = 10000000 </span><br><span class="line">fs.nr_open = 10000000</span><br><span class="line">net.ipv4.tcp_mem = 786432 1697152 1945728</span><br><span class="line">net.ipv4.tcp_rmem = 4096 4096 16777216</span><br><span class="line">net.ipv4.tcp_wmem = 4096 4096 16777216</span><br><span class="line">net.ipv4.ip_local_port_range = 1000 65535</span><br></pre></td></tr></table></figure>
+<ul>
+<li>vi /etc/security/limits.conf</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* soft nofile 10000000</span><br><span class="line">* hard nofile 10000000</span><br><span class="line">root soft nofile 10000000</span><br><span class="line">root hard nofile 10000000</span><br></pre></td></tr></table></figure>
+<p>After this reboot your system.</p>
+<h2 id="mqtt启动后，需要开放对应端口的，则处理如下"><a href="#mqtt启动后，需要开放对应端口的，则处理如下" class="headerlink" title="mqtt启动后，需要开放对应端口的，则处理如下"></a>mqtt启动后，需要开放对应端口的，则处理如下</h2><p>CentOS 7.0默认使用的是firewall作为防火墙，使用iptables必须重新设置一下</p>
+<p>1、直接关闭防火墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service #停止firewall</span><br><span class="line"></span><br><span class="line">systemctl disable firewalld.service #禁止firewall开机启动</span><br></pre></td></tr></table></figure>
+<p>2、设置 iptables service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install iptables-services</span><br></pre></td></tr></table></figure>
+<p>如果要修改防火墙配置，如增加防火墙端口3306<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure></p>
+<p>增加规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>保存退出后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart iptables.service #重启防火墙使配置生效</span><br><span class="line"></span><br><span class="line">systemctl enable iptables.service #设置防火墙开机启动</span><br></pre></td></tr></table></figure></p>
+<p>最后重启系统使设置生效即可。</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/02/25/事务管理-spring事务使用注意点、数据库事务的隔离级别与锁/" itemprop="url">
                   事务管理-spring事务使用注意点、数据库事务的隔离级别与锁
                 </a>
@@ -1254,90 +1359,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/11/shell-从svn更新代码maven打包后部署的一个简单脚本/" itemprop="url">
-                  shell-从svn更新代码maven打包后部署的一个简单脚本
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2017-03-11T15:48:45+08:00" content="2017-03-11">
-              2017-03-11
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>shell是个好东西，服务器上面的操作做多了，就需要想想办法把手工做的事情让脚本帮我们处理。以下是一个针对spring boot项目从svn更新出最新代码，然后maven打包，最后启动发布的一个脚本例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#build icms app</span><br><span class="line">path_src=/home/src/trunk/icms</span><br><span class="line">path_target=$&#123;path_src&#125;/target</span><br><span class="line">path_app=/home/app</span><br><span class="line">path_log=/data/logs/icms</span><br><span class="line">file_app=icms-1.4.1.RELEASE.jar</span><br><span class="line">url_app=localhost:8091</span><br><span class="line"></span><br><span class="line">cd /home/src/trunk/icms</span><br><span class="line">svn update</span><br><span class="line">mvn clean package -P pro -Dmaven.test.skip=true</span><br><span class="line"></span><br><span class="line">if [ -f $&#123;path_target&#125;/$&#123;file_app&#125; ]; then</span><br><span class="line">        echo &quot;build success, now begin to deploy...&quot;</span><br><span class="line">        curl -X POST $&#123;url_app&#125;/shutdown</span><br><span class="line">        yes | cp -rf $&#123;path_target&#125;/$&#123;file_app&#125; $&#123;path_app&#125;/</span><br><span class="line">        chmod +x $&#123;path_app&#125;/$&#123;file_app&#125;</span><br><span class="line">        nohup java -jar $&#123;path_app&#125;/$&#123;file_app&#125; &lt; /dev/null &gt; $&#123;path_log&#125;/icms.log 2&gt;&amp;1 &amp;</span><br><span class="line">else</span><br><span class="line">        echo &quot;build failed!&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;build process finish.&quot;</span><br></pre></td></tr></table></figure>
-<p>脚本中的“curl -X POST ${url_app}/shutdown”这里是因为使用了spring boot的优雅关闭应用，需要在应用添加maven依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
-<p>然后在配置文件中添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">endpoints.shutdown.enabled=true</span><br><span class="line">endpoints.shutdown.sensitive=false</span><br></pre></td></tr></table></figure></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1384,7 +1405,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1398,7 +1419,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">147</span>
+              <span class="site-state-item-count">150</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
