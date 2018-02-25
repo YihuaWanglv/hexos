@@ -202,6 +202,92 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/22/关于java项目中如何读取配置文件/" itemprop="url">
+                  关于java项目中如何读取配置文件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-22T09:27:32+08:00" content="2016-07-22">
+              2016-07-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="关于java项目中如何读取配置文件"><a href="#关于java项目中如何读取配置文件" class="headerlink" title="关于java项目中如何读取配置文件"></a>关于java项目中如何读取配置文件</h1><h2 id="Using-multiple-property-files-via-PropertyPlaceholderConfigurer-in-multiple-projects-modules"><a href="#Using-multiple-property-files-via-PropertyPlaceholderConfigurer-in-multiple-projects-modules" class="headerlink" title="- Using multiple property files (via PropertyPlaceholderConfigurer) in multiple projects/modules"></a>- Using multiple property files (via PropertyPlaceholderConfigurer) in multiple projects/modules</h2><p>If you ensure that every place holder, in each of the contexts involved, is ignoring unresolvable keys then both of these approaches work. For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:property-placeholder</span><br><span class="line">location=&quot;classpath:dao.properties,</span><br><span class="line">          classpath:services.properties,</span><br><span class="line">          classpath:user.properties&quot;</span><br><span class="line">ignore-unresolvable=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;propertyConfigurer&quot; class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;locations&quot;&gt;</span><br><span class="line">        &lt;list&gt;</span><br><span class="line">            &lt;value&gt;classpath:dao.properties&lt;/value&gt;</span><br><span class="line">            &lt;value&gt;classpath:services.properties&lt;/value&gt;</span><br><span class="line">            &lt;value&gt;classpath:user.properties&lt;/value&gt;</span><br><span class="line">        &lt;/list&gt;</span><br><span class="line">    &lt;/property&gt; </span><br><span class="line">    &lt;property name=&quot;ignoreUnresolvablePlaceholders&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Spring-MVC-read-file-from-src-main-resources"><a href="#Spring-MVC-read-file-from-src-main-resources" class="headerlink" title="- Spring MVC : read file from src/main/resources"></a>- Spring MVC : read file from src/main/resources</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Resource resource = new ClassPathResource(fileLocationInClasspath);</span><br><span class="line">InputStream resourceInputStream = resource.getInputStream();</span><br></pre></td></tr></table></figure>
+<h2 id="How-do-I-load-a-resource-and-use-its-contents-as-a-string-in-Spring"><a href="#How-do-I-load-a-resource-and-use-its-contents-as-a-string-in-Spring" class="headerlink" title="- How do I load a resource and use its contents as a string in Spring"></a>- How do I load a resource and use its contents as a string in Spring</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;contents&quot; class=&quot;org.apache.commons.io.IOUtils&quot; factory-method=&quot;toString&quot;&gt;</span><br><span class="line">    &lt;constructor-arg value=&quot;classpath:path/to/resource.txt&quot; type=&quot;java.io.InputStream&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<p>This solution requires Apache Commons IO.</p>
+<p>Another solution, suggested by @Parvez, without Apache Commons IO dependency is<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;contents&quot; class=&quot;java.lang.String&quot;&gt;</span><br><span class="line">    &lt;constructor-arg&gt;</span><br><span class="line">        &lt;bean class=&quot;org.springframework.util.FileCopyUtils&quot; factory-method=&quot;copyToByteArray&quot;&gt;</span><br><span class="line">            &lt;constructor-arg value=&quot;classpath:path/to/resource.txt&quot; type=&quot;java.io.InputStream&quot; /&gt;</span><br><span class="line">        &lt;/bean&gt;     </span><br><span class="line">    &lt;/constructor-arg&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/11/使用spring-boot-spring-cloud一步步搭建微服务架构-一-开始一个spring-boot应用/" itemprop="url">
                   [使用spring-boot+spring-cloud一步步搭建微服务架构]一-开始一个spring-boot应用
                 </a>
@@ -1169,104 +1255,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/01/Jenkins自动化部署实践-Jenkins多环境部署git托管的springboot项目/" itemprop="url">
-                  [Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-06-01T18:56:42+08:00" content="2016-06-01">
-              2016-06-01
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目</p>
-<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>Jenkins部署在服务器192.168.1.119:8080.<br>有一个在git托管的springboot构建的web项目，项目有n个依赖的父模块，现在想要把这个项目部署到服务器192.168.1.134上.<br>现在，我们需要使用Jenkins自动化部署实现这个目标.</p>
-<h4 id="为什么是springboot？"><a href="#为什么是springboot？" class="headerlink" title="为什么是springboot？"></a>为什么是springboot？</h4><p>Sprinboot允许项目使用内嵌的tomcat像启动普通java程序一样启动一个web项目.由于有了这个特性，项目不再需要打war包部署到tomcat，而是打成jar包，直接使用java -jar命令启动.</p>
-<h4 id="如何实现？"><a href="#如何实现？" class="headerlink" title="如何实现？"></a>如何实现？</h4><p>1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。<br>2-建立目标项目的maven打包项目。build。<br>3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。</p>
-<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p>下面是具体操作</p>
-<h4 id="1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。"><a href="#1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。" class="headerlink" title="1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。"></a>1-需要在jenkins上建立n个maven项目打包任务，项目有多少个依赖的父模块，就建多少个。build。</h4><p>由于要区分不同的部署环境，所以这里先建一个dev环境的项目组<br><img src="/images/jenkins-maven-001.png" alt=""></p>
-<p>建立maven打包任务，为项目所依赖的父模块建立编译打包任务<br>主要填好项目任务名称和项目git地址即可<br><img src="/images/jenkins-maven-002.png" alt=""></p>
-<h4 id="2-建立目标项目的maven打包项目。build。"><a href="#2-建立目标项目的maven打包项目。build。" class="headerlink" title="2-建立目标项目的maven打包项目。build。"></a>2-建立目标项目的maven打包项目。build。</h4><p><img src="/images/jenkins-maven-003.png" alt=""></p>
-<p>由于我们要实现不同部署环境区分不同配置，所以我们需要对项目做些额外的工作<br>首先在maven pom中添加profiles设置。我这里添加了3个环境local，dev和prod<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;profiles&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">      &lt;id&gt;local&lt;/id&gt;</span><br><span class="line">      &lt;activation&gt;</span><br><span class="line">        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">      &lt;/activation&gt;</span><br><span class="line">      &lt;properties&gt;</span><br><span class="line">        &lt;env&gt;local&lt;/env&gt;</span><br><span class="line">      &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">      &lt;id&gt;dev&lt;/id&gt;</span><br><span class="line">      &lt;properties&gt;</span><br><span class="line">        &lt;env&gt;dev&lt;/env&gt;</span><br><span class="line">      &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">    &lt;profile&gt;</span><br><span class="line">      &lt;id&gt;prod&lt;/id&gt;</span><br><span class="line">      &lt;properties&gt;</span><br><span class="line">        &lt;env&gt;prod&lt;/env&gt;</span><br><span class="line">      &lt;/properties&gt;</span><br><span class="line">    &lt;/profile&gt;</span><br><span class="line">  &lt;/profiles&gt;</span><br></pre></td></tr></table></figure></p>
-<p>然后，添加maven-resources-plugin插件，这个插件会为我们复制生成三个环境的配置文件目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">        &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;executions&gt;</span><br><span class="line">          &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;copy-prod-resources&lt;/id&gt;</span><br><span class="line">            &lt;phase&gt;process-resources&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">              &lt;goal&gt;copy-resources&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">              &lt;!-- this is important --&gt;</span><br><span class="line">              &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">              &lt;sourceDirectory&gt;$&#123;basedir&#125;/src/main/java&lt;/sourceDirectory&gt;</span><br><span class="line">              &lt;outputDirectory&gt;target/classes&lt;/outputDirectory&gt;</span><br><span class="line">              &lt;resources&gt;</span><br><span class="line">                &lt;resource&gt;</span><br><span class="line">                  &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">                  &lt;includes&gt;</span><br><span class="line">                    &lt;include&gt;*.properties&lt;/include&gt;</span><br><span class="line">                    &lt;include&gt;*.xml&lt;/include&gt;</span><br><span class="line">                  &lt;/includes&gt;</span><br><span class="line">                &lt;/resource&gt;</span><br><span class="line">                &lt;resource&gt;</span><br><span class="line">                  &lt;directory&gt;src/main/resources/$&#123;env&#125;&lt;/directory&gt;</span><br><span class="line">                  &lt;targetPath&gt;&lt;/targetPath&gt;</span><br><span class="line">                &lt;/resource&gt;</span><br><span class="line">              &lt;/resources&gt;</span><br><span class="line">              &lt;testSourceDirectory&gt;$&#123;basedir&#125;/src/test/java&lt;/testSourceDirectory&gt;</span><br><span class="line">              &lt;testOutputDirectory&gt;target/test-classes&lt;/testOutputDirectory&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">          &lt;/execution&gt;</span><br><span class="line">        &lt;/executions&gt;</span><br><span class="line">      &lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
-<p>这样就会在resources目录下生成三个不同环境的目录和配置文件<br><img src="/images/jenkins-maven-007.png" alt=""></p>
-<p>如果是cli命令行下，我们就可以使用mvn install -P$env命令打包不同环境的配置<br>如dev环境就是mvn install -Pdev</p>
-<p>但是我们现在不是命令行，而是使用Jenkins做编译打包。<br>于是，添加的Jenkins任务，除了任务名称和git地址外，还需要额外多一个配置。<br>在“Build”标签下，填写“goals and options”字段，值为“clean install -Pdev”。<br>-Pdev表示我们要打的正是dev环境的配置<br><img src="/images/jenkins-maven-004.png" alt=""></p>
-<h4 id="3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192-168-1-134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。"><a href="#3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192-168-1-134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。" class="headerlink" title="3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。"></a>3-建立一个自由软件风格任务，作用是使用shell脚本，登录到目标服务器192.168.1.134，执行134上的shell脚本，从Jenkins所在的服务器cp目标jar包，拉取打包好的jar到134，然后启动jar。</h4><p>由于我们需要执行远程服务器上的shell脚本，所以我们必须要让Jenkins知道远程服务器的ssh登录方法。<br>要让Jenkins能登录服务器做远程任务，我们需要在全局配置中配置好“SSH remote host”。<br><img src="/images/jenkins-maven-006.png" alt=""></p>
-<p>然后配置一个执行远程shell脚本的任务，如下图。<br><img src="/images/jenkins-maven-005.png" alt=""></p>
-<p>这个脚本很简单，只是设置好要登录的服务器，在shell中进入shell脚本所在目录，直接执行目标脚本。<br>而拉取jar包并更新启动springboot项目的任务则有远程脚本所承包了。</p>
-<p>任务脚本例子：<br>这个shell脚本主要做了几件事：<br>1）使用sshpass和scp从119服务器远程复制打包好的jar包回来134，备份，再复制到项目定好的目标路径<br>2）kill关闭原java进程<br>3）使用nohup java -jar ${target_path}/${target_jar} &lt; /dev/null &gt; ${target_bak_path}/${now}/itime-${now}.log 2&gt;&amp;1 &amp;<br>启动java程序，并把日志输出到指定的log文件。<br>4）检查java程序是否启动成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># script to update and restart project itimes</span><br><span class="line">remote_source_path=/root/.jenkins/workspace/dev-timeitem-itimes/target</span><br><span class="line">target_jar=itimes-1.0.0-SNAPSHOT.jar</span><br><span class="line">target_path=/usr/local/itimes</span><br><span class="line">target_bak_path=/usr/local/itimes_bak</span><br><span class="line"></span><br><span class="line">now=$(date &apos;+%Y%m%d%H%M%S&apos;)</span><br><span class="line">echo &quot;update and restart project itimes start...&quot;</span><br><span class="line">echo &quot;now time: $&#123;now&#125;&quot;</span><br><span class="line"></span><br><span class="line">mkdir -p $&#123;target_bak_path&#125;/$&#123;now&#125;</span><br><span class="line">/usr/bin/sshpass -p &quot;root&quot; scp root@192.168.1.119:$&#123;remote_source_path&#125;/itimes-1.0.0-SNAPSHOT.jar $&#123;target_bak_path</span><br><span class="line">&#125;/$&#123;now&#125;</span><br><span class="line"></span><br><span class="line">cd $target_bak_path/$now</span><br><span class="line">if [ -f $&#123;target_jar&#125; ]; then</span><br><span class="line">  pkill -f &apos;java.*itimes&apos;</span><br><span class="line">  sleep 3</span><br><span class="line">  temppid=$(ps aux | grep java| grep &quot;$&#123;target_jar&#125;&quot; | grep -v grep | awk &apos;&#123; print $2&#125;&apos;)</span><br><span class="line">  if [[ &quot;$temppid&quot; != &quot;&quot; ]]; then</span><br><span class="line">    echo &quot;temppid is $&#123;temppid&#125;&quot;</span><br><span class="line">    ps -ef | grep $&#123;target_jar&#125; | grep -v grep | awk &apos;&#123;print $2&#125;&apos; | xargs kill</span><br><span class="line">  fi</span><br><span class="line">  echo &quot;kill $&#123;target_jar&#125; done..&quot;</span><br><span class="line">  cd $target_path</span><br><span class="line">  if [ -f $&#123;target_jar&#125; ]; then</span><br><span class="line">    rm -f $&#123;target_jar&#125;</span><br><span class="line">    echo &quot;target_jar deleted..&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$&#123;target_jar&#125; not exist, go on to copy..&quot;</span><br><span class="line">  fi</span><br><span class="line">  cp $&#123;target_bak_path&#125;/$&#123;now&#125;/$&#123;target_jar&#125; $&#123;target_path&#125;</span><br><span class="line">  echo &quot;cp done!&quot;</span><br><span class="line">  chmod 755 $&#123;target_jar&#125;</span><br><span class="line">  nohup java -jar $&#123;target_path&#125;/$&#123;target_jar&#125; &lt; /dev/null &gt; $&#123;target_bak_path&#125;/$&#123;now&#125;/itime-$&#123;now&#125;.log 2&gt;&amp;1 &amp;</span><br><span class="line">  echo &quot;app startting..&quot;</span><br><span class="line">  for i in 2 4 6 10; do</span><br><span class="line">    sleep $i</span><br><span class="line">    echo &quot;wait and check app starting up...&quot;</span><br><span class="line">    APP_PID=`ps aux | grep java| grep &quot;$&#123;target_jar&#125;&quot; | grep -v grep | awk &apos;&#123; print $2&#125;&apos;`</span><br><span class="line">    if [ $APP_PID &gt; 0 ]; then</span><br><span class="line">        break;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;app is still starting up...&quot;</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  pid=$(ps aux | grep java| grep &quot;$&#123;target_jar&#125;&quot; | grep -v grep | awk &apos;&#123; print $2&#125;&apos;)</span><br><span class="line">  echo &quot;app id is: $&#123;pid&#125;&quot;</span><br><span class="line">  if [ $pid ]; then</span><br><span class="line">    echo &quot;$&#123;target_jar&#125; is running now!&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$&#123;target_jar&#125; is not running! $&#123;target_jar&#125; startup failed!&quot;</span><br><span class="line">  fi</span><br><span class="line">  success_flag=&quot;false&quot;</span><br><span class="line">  for i in 2 4 6 8 10 12; do</span><br><span class="line">    echo &quot;checking app startup status...&quot;</span><br><span class="line">    success_target_tag=`cat $&#123;target_bak_path&#125;/$&#123;now&#125;/itime-$&#123;now&#125;.log | grep &quot;Started App in&quot;`</span><br><span class="line">    if [[ &quot;&quot; != &quot;$success_target_tag&quot; ]]; then</span><br><span class="line">      echo &quot;Found success target tag, app startup successfully..&quot;</span><br><span class="line">      success_flag=&quot;true&quot;</span><br><span class="line">      break;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;app is still starting up...&quot;</span><br><span class="line">        sleep $i</span><br><span class="line">        echo &quot;sleep $i ...&quot;</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">  if [[ &quot;true&quot; != &quot;$success_flag&quot;  ]]; then</span><br><span class="line">    echo &quot;Not found success target tag, app startup failed...&quot;</span><br><span class="line">  fi</span><br><span class="line">else</span><br><span class="line">  echo &quot;Target jar not exist! Update not complete!&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo &quot;update done!&quot;</span><br></pre></td></tr></table></figure></p>
-<p>done.</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1313,7 +1301,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1327,7 +1315,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">150</span>
+              <span class="site-state-item-count">152</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

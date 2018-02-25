@@ -202,6 +202,118 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/10/【转】-支付宝架构与技术/" itemprop="url">
+                  【转】-支付宝架构与技术
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-08-10T11:07:13+08:00" content="2016-08-10">
+              2016-08-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p><img src="/images/frame-zhifubao-001.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-002.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-003.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-004.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-005.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-006.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-007.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-008.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-009.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-010.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-011.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-012.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-013.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-014.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-015.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-016.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-017.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-018.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-019.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-020.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-021.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-022.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-023.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-024.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-025.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-026.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-027.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-028.png" alt=""></p>
+<p><img src="/images/frame-zhifubao-029.png" alt=""></p>
+<p>支付宝的开源分布式消息中间件–Metamorphosis(MetaQ)<br>　　Metamorphosis (MetaQ) 是一个高性能、高可用、可扩展的分布式消息中间件，类似于LinkedIn的Kafka，具有消息存储顺序写、吞吐量大和支持本地和XA事务等特性，适用于大吞吐量、顺序消息、广播和日志数据传输等场景，在淘宝和支付宝有着广泛的应用，现已开源。<br>　　Metamorphosis是淘宝开源的一个Java消息中间件。关于消息中间件，你应该听说过JMS规范，以及一些开源实现，如ActiveMQ和HornetQ等。Metamorphosis也是其中之一。<br>　　Metamorphosis的起源是我从对linkedin的开源MQ–现在转移到apache的kafka的学习开始的，这是一个设计很独特的MQ系统，它采用pull机制，而不是一般MQ的push模型，它大量利用了zookeeper做服务发现和offset存储，它的设计理念我非常欣赏并赞同，强烈建议你阅读一下它的设计文档，总体上说metamorphosis的设计跟它是完全一致的。但是为什么还需要meta呢？<br>　　简单概括下我重新写出meta的原因：<br>　　Kafka是scala写，我对scala不熟悉，并且kafka整个社区的发展太缓慢了。<br>　　有一些功能是kakfa没有实现，但是我们却需要：事务、多种offset存储、高可用方案(HA)等<br>　　Meta相对于kafka特有的一些功能：<br>　　文本协议设计，非常透明，支持类似memcached stats的协议来监控broker<br>　　纯Java实现，从通讯到存储，从client到server都是重新实现。<br>　　提供事务支持，包括本地事务和XA分布式事务<br>　　支持HA复制，包括异步复制和同步复制，保证消息的可靠性<br>　　支持异步发送消息<br>　　消费消息失败，支持本地恢复<br>　　多种offset存储支持，数据库、磁盘、zookeeper，可自定义实现<br>　　支持group commit，提升数据可靠性和吞吐量。<br>　　支持消息广播模式<br>　　一系列配套项目：python客户端、twitter storm的spout、tail4j等。<br>　　因此meta相比于kafka的提升是巨大的。meta在淘宝和支付宝都得到了广泛应用，现在每天支付宝每天经由meta路由的消息达到120亿，淘宝也有每天也有上亿的消息量。<br>　　Meta适合的应用：<br>　　日志传输，高吞吐量的日志传输本来就是kafka的强项<br>　　消息广播功能，如广播缓存配置失效。<br>　　数据的顺序同步功能，如mysql binlog复制<br>　　分布式环境下（broker,producer,consumer都为集群）的消息路由，对顺序和可靠性有极高要求的场景。<br>　　作为一般MQ来使用的其他功能</p>
+<p>总体结构：<br><img src="/images/frame-zhifubao-030.jpeg" alt=""></p>
+<p>内部结构：<br><img src="/images/frame-zhifubao-031.jpeg" alt=""></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/10/系统分布式情况下最终一致性方案梳理/" itemprop="url">
                   系统分布式情况下最终一致性方案梳理
                 </a>
@@ -1157,92 +1269,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/22/关于java项目中如何读取配置文件/" itemprop="url">
-                  关于java项目中如何读取配置文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-07-22T09:27:32+08:00" content="2016-07-22">
-              2016-07-22
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="关于java项目中如何读取配置文件"><a href="#关于java项目中如何读取配置文件" class="headerlink" title="关于java项目中如何读取配置文件"></a>关于java项目中如何读取配置文件</h1><h2 id="Using-multiple-property-files-via-PropertyPlaceholderConfigurer-in-multiple-projects-modules"><a href="#Using-multiple-property-files-via-PropertyPlaceholderConfigurer-in-multiple-projects-modules" class="headerlink" title="- Using multiple property files (via PropertyPlaceholderConfigurer) in multiple projects/modules"></a>- Using multiple property files (via PropertyPlaceholderConfigurer) in multiple projects/modules</h2><p>If you ensure that every place holder, in each of the contexts involved, is ignoring unresolvable keys then both of these approaches work. For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:property-placeholder</span><br><span class="line">location=&quot;classpath:dao.properties,</span><br><span class="line">          classpath:services.properties,</span><br><span class="line">          classpath:user.properties&quot;</span><br><span class="line">ignore-unresolvable=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
-<p>or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;propertyConfigurer&quot; class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;locations&quot;&gt;</span><br><span class="line">        &lt;list&gt;</span><br><span class="line">            &lt;value&gt;classpath:dao.properties&lt;/value&gt;</span><br><span class="line">            &lt;value&gt;classpath:services.properties&lt;/value&gt;</span><br><span class="line">            &lt;value&gt;classpath:user.properties&lt;/value&gt;</span><br><span class="line">        &lt;/list&gt;</span><br><span class="line">    &lt;/property&gt; </span><br><span class="line">    &lt;property name=&quot;ignoreUnresolvablePlaceholders&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Spring-MVC-read-file-from-src-main-resources"><a href="#Spring-MVC-read-file-from-src-main-resources" class="headerlink" title="- Spring MVC : read file from src/main/resources"></a>- Spring MVC : read file from src/main/resources</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Resource resource = new ClassPathResource(fileLocationInClasspath);</span><br><span class="line">InputStream resourceInputStream = resource.getInputStream();</span><br></pre></td></tr></table></figure>
-<h2 id="How-do-I-load-a-resource-and-use-its-contents-as-a-string-in-Spring"><a href="#How-do-I-load-a-resource-and-use-its-contents-as-a-string-in-Spring" class="headerlink" title="- How do I load a resource and use its contents as a string in Spring"></a>- How do I load a resource and use its contents as a string in Spring</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;contents&quot; class=&quot;org.apache.commons.io.IOUtils&quot; factory-method=&quot;toString&quot;&gt;</span><br><span class="line">    &lt;constructor-arg value=&quot;classpath:path/to/resource.txt&quot; type=&quot;java.io.InputStream&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-<p>This solution requires Apache Commons IO.</p>
-<p>Another solution, suggested by @Parvez, without Apache Commons IO dependency is<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;contents&quot; class=&quot;java.lang.String&quot;&gt;</span><br><span class="line">    &lt;constructor-arg&gt;</span><br><span class="line">        &lt;bean class=&quot;org.springframework.util.FileCopyUtils&quot; factory-method=&quot;copyToByteArray&quot;&gt;</span><br><span class="line">            &lt;constructor-arg value=&quot;classpath:path/to/resource.txt&quot; type=&quot;java.io.InputStream&quot; /&gt;</span><br><span class="line">        &lt;/bean&gt;     </span><br><span class="line">    &lt;/constructor-arg&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1289,7 +1315,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1303,7 +1329,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">150</span>
+              <span class="site-state-item-count">152</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

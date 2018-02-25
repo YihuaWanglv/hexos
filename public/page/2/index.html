@@ -202,6 +202,97 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/29/microservices-02-Nodejs-Express作为微服务api网关/" itemprop="url">
+                  [microservices]02-Nodejs&Express作为微服务api网关
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2017-03-29T20:54:07+08:00" content="2017-03-29">
+              2017-03-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="microservices-02-Nodejs-amp-Express作为微服务api网关"><a href="#microservices-02-Nodejs-amp-Express作为微服务api网关" class="headerlink" title="[microservices]02-Nodejs&amp;Express作为微服务api网关"></a>[microservices]02-Nodejs&amp;Express作为微服务api网关</h1><ul>
+<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
+</ul>
+<h2 id="1-安装Node、NPM和Express"><a href="#1-安装Node、NPM和Express" class="headerlink" title="1. 安装Node、NPM和Express"></a>1. 安装Node、NPM和Express</h2><p>安装Nodejs后，npm会一起安装，然后npm install express安装Express.</p>
+<h2 id="2-使用Express框架开发web应用"><a href="#2-使用Express框架开发web应用" class="headerlink" title="2. 使用Express框架开发web应用"></a>2. 使用Express框架开发web应用</h2><p>express使用例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var port = 1234;</span><br><span class="line">var app = express();</span><br><span class="line">app.use(express.static(&apos;.&apos;));</span><br><span class="line">app.listen(port, function()&#123;</span><br><span class="line">    console.log(&apos;server is running at %d&apos;, port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>express进行简易路由：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/hello&apos;, function(req, res)&#123;</span><br><span class="line">    res.send(&apos;Hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-搭建Nodejs集群环境"><a href="#3-搭建Nodejs集群环境" class="headerlink" title="3. 搭建Nodejs集群环境"></a>3. 搭建Nodejs集群环境</h2><p>利用服务器的多核CPU，让每个CPU都运行一个Node.js进程，例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var cluster = require(&apos;cluster&apos;);  </span><br><span class="line">var express = require(&apos;express&apos;);  </span><br><span class="line">var numCPUs = require(&apos;os&apos;).cpus().length;</span><br><span class="line"></span><br><span class="line">if (cluster.isMaster) &#123;  </span><br><span class="line">    for (var i = 0; i &lt; numCPUs; i++) &#123;</span><br><span class="line">        // Create a worker</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    // Workers share the TCP connection in this server</span><br><span class="line">    var app = express();</span><br><span class="line"></span><br><span class="line">    app.get(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">        res.send(&apos;Hello World!&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // All workers use this port</span><br><span class="line">    app.listen(8080);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-使用Node-js实现反向代理，作为统一服务网关"><a href="#4-使用Node-js实现反向代理，作为统一服务网关" class="headerlink" title="4. 使用Node.js实现反向代理，作为统一服务网关"></a>4. 使用Node.js实现反向代理，作为统一服务网关</h2><p>使用Node作为api网关，原理是利用Node的http-proxy模块来启动代理服务器，实现反向代理。<br>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&apos;http&apos;);</span><br><span class="line">var httpProxy = require(&apos;http-proxy&apos;);</span><br><span class="line">var PORT = 3000;</span><br><span class="line"></span><br><span class="line">var proxy = httpProxy.createProxyServer();</span><br><span class="line">proxy.on(&apos;error&apos;, function(err, req, res)&#123;</span><br><span class="line">    res.end();//当代理的请求发生错误时，输出空白的相应数据</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var app = http.createServer(function(req, res) &#123;</span><br><span class="line">    proxy.web(req, res, &#123;</span><br><span class="line">        target: &apos;http://localhost:8080&apos; //代理的目标地址</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(PORT, function()&#123;</span><br><span class="line">    console.log(&apos;server is running at %d&apos;, port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>下一步，就是服务的注册和发现，Nodejs网关将需要增加服务发现的功能</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/03/11/shell-从svn更新代码maven打包后部署的一个简单脚本/" itemprop="url">
                   shell-从svn更新代码maven打包后部署的一个简单脚本
                 </a>
@@ -1522,118 +1613,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/10/【转】-支付宝架构与技术/" itemprop="url">
-                  【转】-支付宝架构与技术
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-08-10T11:07:13+08:00" content="2016-08-10">
-              2016-08-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p><img src="/images/frame-zhifubao-001.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-002.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-003.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-004.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-005.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-006.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-007.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-008.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-009.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-010.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-011.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-012.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-013.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-014.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-015.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-016.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-017.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-018.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-019.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-020.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-021.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-022.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-023.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-024.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-025.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-026.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-027.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-028.png" alt=""></p>
-<p><img src="/images/frame-zhifubao-029.png" alt=""></p>
-<p>支付宝的开源分布式消息中间件–Metamorphosis(MetaQ)<br>　　Metamorphosis (MetaQ) 是一个高性能、高可用、可扩展的分布式消息中间件，类似于LinkedIn的Kafka，具有消息存储顺序写、吞吐量大和支持本地和XA事务等特性，适用于大吞吐量、顺序消息、广播和日志数据传输等场景，在淘宝和支付宝有着广泛的应用，现已开源。<br>　　Metamorphosis是淘宝开源的一个Java消息中间件。关于消息中间件，你应该听说过JMS规范，以及一些开源实现，如ActiveMQ和HornetQ等。Metamorphosis也是其中之一。<br>　　Metamorphosis的起源是我从对linkedin的开源MQ–现在转移到apache的kafka的学习开始的，这是一个设计很独特的MQ系统，它采用pull机制，而不是一般MQ的push模型，它大量利用了zookeeper做服务发现和offset存储，它的设计理念我非常欣赏并赞同，强烈建议你阅读一下它的设计文档，总体上说metamorphosis的设计跟它是完全一致的。但是为什么还需要meta呢？<br>　　简单概括下我重新写出meta的原因：<br>　　Kafka是scala写，我对scala不熟悉，并且kafka整个社区的发展太缓慢了。<br>　　有一些功能是kakfa没有实现，但是我们却需要：事务、多种offset存储、高可用方案(HA)等<br>　　Meta相对于kafka特有的一些功能：<br>　　文本协议设计，非常透明，支持类似memcached stats的协议来监控broker<br>　　纯Java实现，从通讯到存储，从client到server都是重新实现。<br>　　提供事务支持，包括本地事务和XA分布式事务<br>　　支持HA复制，包括异步复制和同步复制，保证消息的可靠性<br>　　支持异步发送消息<br>　　消费消息失败，支持本地恢复<br>　　多种offset存储支持，数据库、磁盘、zookeeper，可自定义实现<br>　　支持group commit，提升数据可靠性和吞吐量。<br>　　支持消息广播模式<br>　　一系列配套项目：python客户端、twitter storm的spout、tail4j等。<br>　　因此meta相比于kafka的提升是巨大的。meta在淘宝和支付宝都得到了广泛应用，现在每天支付宝每天经由meta路由的消息达到120亿，淘宝也有每天也有上亿的消息量。<br>　　Meta适合的应用：<br>　　日志传输，高吞吐量的日志传输本来就是kafka的强项<br>　　消息广播功能，如广播缓存配置失效。<br>　　数据的顺序同步功能，如mysql binlog复制<br>　　分布式环境下（broker,producer,consumer都为集群）的消息路由，对顺序和可靠性有极高要求的场景。<br>　　作为一般MQ来使用的其他功能</p>
-<p>总体结构：<br><img src="/images/frame-zhifubao-030.jpeg" alt=""></p>
-<p>内部结构：<br><img src="/images/frame-zhifubao-031.jpeg" alt=""></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1680,7 +1659,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1694,7 +1673,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">150</span>
+              <span class="site-state-item-count">152</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

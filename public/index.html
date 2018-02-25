@@ -202,6 +202,95 @@
             
               
                 
+                <a class="post-title-link" href="/2018/02/25/JavaError-The-temporary-upload-location-tmp-tomcat-7104877156386249310-8070-work-Tomcat-localhost-ROOT-is-not-valid/" itemprop="url">
+                  JavaError-The-temporary-upload-location-[/tmp/tomcat.7104877156386249310.8070/work/Tomcat/localhost/ROOT]-is-not-valid
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2018-02-25T14:13:44+08:00" content="2018-02-25">
+              2018-02-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="SpringBoot内置Tomcat缓存文件目录被意外删除导致异常"><a href="#SpringBoot内置Tomcat缓存文件目录被意外删除导致异常" class="headerlink" title="SpringBoot内置Tomcat缓存文件目录被意外删除导致异常"></a>SpringBoot内置Tomcat缓存文件目录被意外删除导致异常</h1><p>在项目中，一般会将文件临时保存到缓存目录</p>
+<p>当时使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File.createTempFile(&quot;tmp&quot;, ext,</span><br><span class="line">                        (File) request.getServletContext().getAttribute(ServletContext.TEMPDIR))</span><br></pre></td></tr></table></figure></p>
+<p>创建临时文件时，项目一直运行正常，然而有一次报异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.web.multipart.MultipartException: Could not parse multipart servlet request; nested exception is java.io.IOException: </span><br><span class="line">    The temporary upload location [/tmp/tomcat.7104877156386249310.8070/work/Tomcat/localhost/ROOT] is not valid</span><br></pre></td></tr></table></figure>
+<p>检查文件目录，文件确实不在，检查代码，也未发现问题。实在不知道原因，只有重启了服务器，问题也就不再出现。</p>
+<p>今天偶然查看官方文档，发现问题所在，也提供了解决方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    If you choose to use Tomcat on CentOS be aware that, by default, a temporary directory is</span><br><span class="line">used to store compiled JSPs, file uploads etc. This directory may be deleted by tmpwatch</span><br><span class="line">while your application is running leading to failures. To avoid this, you may want to customize </span><br><span class="line">your tmpwatch configuration so that tomcat.* directories are not deleted, or configure</span><br><span class="line">server.tomcat.basedir so that embedded Tomcat uses a different location</span><br></pre></td></tr></table></figure></p>
+<p>前往目录 /etc/cron.daily/ 中，修改 tmpwatch 文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/sh</span><br><span class="line">flags=-umc</span><br><span class="line">/usr/sbin/tmpwatch &quot;$flags&quot; -x /tmp/.X11-unix -x /tmp/.XIM-unix \</span><br><span class="line">        -x /tmp/.font-unix -x /tmp/.ICE-unix -x /tmp/.Test-unix \</span><br><span class="line">        -X &apos;/tmp/hsperfdata_*&apos; 10d /tmp \</span><br><span class="line">        -X &apos;/tmp/tomcat.*&apos; 10d /tmp</span><br><span class="line">/usr/sbin/tmpwatch &quot;$flags&quot; 30d /var/tmp</span><br><span class="line">for d in /var/&#123;cache/man,catman&#125;/&#123;cat?,X11R6/cat?,local/cat?&#125;; do</span><br><span class="line">    if [ -d &quot;$d&quot; ]; then</span><br><span class="line">        /usr/sbin/tmpwatch &quot;$flags&quot; -f 30d &quot;$d&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>可以看到添加了一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-X &apos;/tmp/tomcat.*&apos; 10d /tmp</span><br></pre></td></tr></table></figure></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/02/25/mosquitto使用记录与服务器调试/" itemprop="url">
                   mosquitto使用记录与服务器调试
                 </a>
@@ -1268,97 +1357,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/29/microservices-02-Nodejs-Express作为微服务api网关/" itemprop="url">
-                  [microservices]02-Nodejs&Express作为微服务api网关
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2017-03-29T20:54:07+08:00" content="2017-03-29">
-              2017-03-29
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="microservices-02-Nodejs-amp-Express作为微服务api网关"><a href="#microservices-02-Nodejs-amp-Express作为微服务api网关" class="headerlink" title="[microservices]02-Nodejs&amp;Express作为微服务api网关"></a>[microservices]02-Nodejs&amp;Express作为微服务api网关</h1><ul>
-<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
-</ul>
-<h2 id="1-安装Node、NPM和Express"><a href="#1-安装Node、NPM和Express" class="headerlink" title="1. 安装Node、NPM和Express"></a>1. 安装Node、NPM和Express</h2><p>安装Nodejs后，npm会一起安装，然后npm install express安装Express.</p>
-<h2 id="2-使用Express框架开发web应用"><a href="#2-使用Express框架开发web应用" class="headerlink" title="2. 使用Express框架开发web应用"></a>2. 使用Express框架开发web应用</h2><p>express使用例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var port = 1234;</span><br><span class="line">var app = express();</span><br><span class="line">app.use(express.static(&apos;.&apos;));</span><br><span class="line">app.listen(port, function()&#123;</span><br><span class="line">    console.log(&apos;server is running at %d&apos;, port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>express进行简易路由：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/hello&apos;, function(req, res)&#123;</span><br><span class="line">    res.send(&apos;Hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="3-搭建Nodejs集群环境"><a href="#3-搭建Nodejs集群环境" class="headerlink" title="3. 搭建Nodejs集群环境"></a>3. 搭建Nodejs集群环境</h2><p>利用服务器的多核CPU，让每个CPU都运行一个Node.js进程，例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var cluster = require(&apos;cluster&apos;);  </span><br><span class="line">var express = require(&apos;express&apos;);  </span><br><span class="line">var numCPUs = require(&apos;os&apos;).cpus().length;</span><br><span class="line"></span><br><span class="line">if (cluster.isMaster) &#123;  </span><br><span class="line">    for (var i = 0; i &lt; numCPUs; i++) &#123;</span><br><span class="line">        // Create a worker</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    // Workers share the TCP connection in this server</span><br><span class="line">    var app = express();</span><br><span class="line"></span><br><span class="line">    app.get(&apos;/&apos;, function (req, res) &#123;</span><br><span class="line">        res.send(&apos;Hello World!&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // All workers use this port</span><br><span class="line">    app.listen(8080);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="4-使用Node-js实现反向代理，作为统一服务网关"><a href="#4-使用Node-js实现反向代理，作为统一服务网关" class="headerlink" title="4. 使用Node.js实现反向代理，作为统一服务网关"></a>4. 使用Node.js实现反向代理，作为统一服务网关</h2><p>使用Node作为api网关，原理是利用Node的http-proxy模块来启动代理服务器，实现反向代理。<br>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&apos;http&apos;);</span><br><span class="line">var httpProxy = require(&apos;http-proxy&apos;);</span><br><span class="line">var PORT = 3000;</span><br><span class="line"></span><br><span class="line">var proxy = httpProxy.createProxyServer();</span><br><span class="line">proxy.on(&apos;error&apos;, function(err, req, res)&#123;</span><br><span class="line">    res.end();//当代理的请求发生错误时，输出空白的相应数据</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var app = http.createServer(function(req, res) &#123;</span><br><span class="line">    proxy.web(req, res, &#123;</span><br><span class="line">        target: &apos;http://localhost:8080&apos; //代理的目标地址</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(PORT, function()&#123;</span><br><span class="line">    console.log(&apos;server is running at %d&apos;, port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>下一步，就是服务的注册和发现，Nodejs网关将需要增加服务发现的功能</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1405,7 +1403,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1419,7 +1417,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">150</span>
+              <span class="site-state-item-count">152</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
