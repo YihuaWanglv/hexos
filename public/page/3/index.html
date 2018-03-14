@@ -202,6 +202,105 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/12/java自动化测试整理/" itemprop="url">
+                  java自动化测试整理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-08-12T13:14:27+08:00" content="2016-08-12">
+              2016-08-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="java自动化测试整理"><a href="#java自动化测试整理" class="headerlink" title="java自动化测试整理"></a>java自动化测试整理</h2><h2 id="1-自动化测试的4个关键部分"><a href="#1-自动化测试的4个关键部分" class="headerlink" title="1. 自动化测试的4个关键部分"></a>1. 自动化测试的4个关键部分</h2><p><img src="/images/test-001.png" alt=""></p>
+<ul>
+<li>使用svn/git作为代码版本管理</li>
+<li>使用maven构建项目，依赖和目录统一</li>
+<li>使用junit/testng+mockito写单元测试</li>
+<li>使用jenkins执行项目构建和测试任务</li>
+<li>使用Sonar作为自动化单元测试反馈报告统一展现平台</li>
+</ul>
+<h2 id="2-web自动化测试管理工具"><a href="#2-web自动化测试管理工具" class="headerlink" title="2. web自动化测试管理工具"></a>2. web自动化测试管理工具</h2><ul>
+<li>使用 Selenium 实现基于 Web 的自动化测试</li>
+<li>使用 Rest-Assured 测试 REST API</li>
+<li>api测试，从手工到平台的演变：运用web+httpclient实现，测试的可配置</li>
+</ul>
+<h2 id="3-restapi的自动化测试之路"><a href="#3-restapi的自动化测试之路" class="headerlink" title="3. restapi的自动化测试之路"></a>3. restapi的自动化测试之路</h2><ul>
+<li>Rest-Assured或其他工具，编写针对api的单元测试；</li>
+<li>新代码提交，自动触发构建，成功部署服务器；</li>
+<li>自动运行使用 Rest-Assured 编写的单元测试，对 REST API 进行测试</li>
+</ul>
+<h2 id="4-自动化测试工具脑图"><a href="#4-自动化测试工具脑图" class="headerlink" title="4. 自动化测试工具脑图"></a>4. 自动化测试工具脑图</h2><p><img src="/images/test-002.png" alt=""></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/10/【转】-支付宝架构与技术/" itemprop="url">
                   【转】-支付宝架构与技术
                 </a>
@@ -1187,88 +1286,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/23/Springboot应用中如何针对springmvc的controller写单元测试/" itemprop="url">
-                  Springboot应用中如何针对springmvc的controller写单元测试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-07-23T12:54:56+08:00" content="2016-07-23">
-              2016-07-23
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="An-example-test-for-your-controller-can-be-something-as-simple-as"><a href="#An-example-test-for-your-controller-can-be-something-as-simple-as" class="headerlink" title="An example test for your controller can be something as simple as"></a>An example test for your controller can be something as simple as</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class DemoApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">    final String BASE_URL = &quot;http://localhost:8080/&quot;;</span><br><span class="line">    private MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    public void setup() &#123;</span><br><span class="line">        this.mockMvc = standaloneSetup(new HelloWorld()).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testSayHelloWorld() throws Exception &#123;</span><br><span class="line">        this.mockMvc.perform(get(&quot;/&quot;).accept(MediaType.parseMediaType(&quot;application/json;charset=UTF-8&quot;)))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().contentType(&quot;application/json&quot;));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="The-new-testing-improvements-that-debuted-in-Spring-Boot-1-4-M2-can-help-reduce-the-amount-of-code-you-need-to-write-situation-such-as-these"><a href="#The-new-testing-improvements-that-debuted-in-Spring-Boot-1-4-M2-can-help-reduce-the-amount-of-code-you-need-to-write-situation-such-as-these" class="headerlink" title="The new testing improvements that debuted in Spring Boot 1.4.M2 can help reduce the amount of code you need to write situation such as these."></a>The new testing improvements that debuted in Spring Boot 1.4.M2 can help reduce the amount of code you need to write situation such as these.</h2><p>The test would look like so:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@WebMvcTest(HelloWorld.class)</span><br><span class="line">public class UserVehicleControllerTests &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testSayHelloWorld() throws Exception &#123;</span><br><span class="line">        this.mockMvc.perform(get(&quot;/&quot;).accept(MediaType.parseMediaType(&quot;application/json;charset=UTF-8&quot;)))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().contentType(&quot;application/json&quot;));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="还有一种方式是使用TestRestTemplate"><a href="#还有一种方式是使用TestRestTemplate" class="headerlink" title="还有一种方式是使用TestRestTemplate"></a>还有一种方式是使用TestRestTemplate</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">package controller;</span><br><span class="line"></span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.boot.test.SpringApplicationConfiguration;</span><br><span class="line">import org.springframework.boot.test.TestRestTemplate;</span><br><span class="line">import org.springframework.boot.test.WebIntegrationTest;</span><br><span class="line">import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</span><br><span class="line">import org.springframework.web.client.RestTemplate;</span><br><span class="line"></span><br><span class="line">import ipicture.service.post.AppServicePost;</span><br><span class="line">import ipicture.service.post.model.JsonObject;</span><br><span class="line">import ipicture.service.post.model.Subject;</span><br><span class="line"></span><br><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@SpringApplicationConfiguration(classes = AppServicePost.class)</span><br><span class="line">@WebIntegrationTest(&quot;server.port:8083&quot;)// 使用0表示端口号随机，也可以具体指定如8888这样的固定端口</span><br><span class="line">public class SubjectControllerTest &#123;</span><br><span class="line"></span><br><span class="line">    private RestTemplate template = new TestRestTemplate();</span><br><span class="line">    @Value(&quot;$&#123;server.port&#125;&quot;)// 注入端口号</span><br><span class="line">    private int port;</span><br><span class="line">    </span><br><span class="line">    private String getBaseUrl() &#123;</span><br><span class="line">        return &quot;http://localhost:&quot; + port;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Test </span><br><span class="line">    public void test() &#123;</span><br><span class="line">        Subject s = new Subject();</span><br><span class="line">        s.setCreator(1l);</span><br><span class="line">        s.setCreated(new Date());</span><br><span class="line">        s.setSubjectName(&quot;test5&quot;);</span><br><span class="line">        s.setDescr(&quot;test subject&quot;);</span><br><span class="line">        s.setDeleted(0);</span><br><span class="line">        s.setParent_id(0);</span><br><span class="line">        s.setStatus(0);</span><br><span class="line">        s.setType(0);</span><br><span class="line">        String url = getBaseUrl() + &quot;/subject/save&quot;;</span><br><span class="line">        String result = template.postForObject(url, s, String.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1315,7 +1332,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1329,7 +1346,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-count">156</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -202,6 +202,95 @@
             
               
                 
+                <a class="post-title-link" href="/2018/03/14/文档写作与部署工具docsify/" itemprop="url">
+                  文档写作与部署工具docsify
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2018-03-14T18:01:27+08:00" content="2018-03-14">
+              2018-03-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="docsify：一个文档展示与部署的工具"><a href="#docsify：一个文档展示与部署的工具" class="headerlink" title="docsify：一个文档展示与部署的工具"></a>docsify：一个文档展示与部署的工具</h1><p>基于md文档的写作，构建一个好看的文档展示样式，并启动服务提供访问。</p>
+<h2 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h2><p><a href="https://docsify.js.org" target="_blank" rel="external">https://docsify.js.org</a></p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><p>推荐安装 docsify-cli 工具，可以方便创建及本地预览文档网站。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i docsify-cli -g</span><br></pre></td></tr></table></figure></p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><p>如果想在项目的 ./docs 目录里写文档，直接通过 init 初始化项目。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docsify init ./docs</span><br></pre></td></tr></table></figure></p>
+<h2 id="开始写文档"><a href="#开始写文档" class="headerlink" title="开始写文档"></a>开始写文档</h2><p>初始化成功后，可以看到 ./docs 目录下创建的几个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">index.html 入口文件</span><br><span class="line">README.md 会做为主页内容渲染</span><br><span class="line">.nojekyll 用于阻止 GitHub Pages 会忽略掉下划线开头的文件</span><br><span class="line">直接编辑 docs/README.md 就能更新网站内容，当然也可以写多个页面。</span><br></pre></td></tr></table></figure></p>
+<h2 id="本地预览网站"><a href="#本地预览网站" class="headerlink" title="本地预览网站"></a>本地预览网站</h2><p>运行一个本地服务器通过 docsify serve 可以方便的预览效果，而且提供 LiveReload 功能，可以让实时的预览。默认访问 <a href="http://localhost:3000">http://localhost:3000</a> 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docsify serve docs</span><br></pre></td></tr></table></figure></p>
+<h2 id="多页文档"><a href="#多页文档" class="headerlink" title="多页文档"></a>多页文档</h2><p>如果需要创建多个页面，或者需要多级路由的网站，在 docsify 里也能很容易的实现。例如创建一个 guide.md 文件，那么对应的路由就是 /#/guide。</p>
+<p>假设你的目录结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-| docs/</span><br><span class="line">  -| README.md</span><br><span class="line">  -| guide.md</span><br><span class="line">  -| zh-cn/</span><br><span class="line">    -| README.md</span><br><span class="line">    -| guide.md</span><br></pre></td></tr></table></figure></p>
+<p>那么对应的访问页面将是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docs/README.md        =&gt; http://domain.com</span><br><span class="line">docs/guide.md         =&gt; http://domain.com/guide</span><br><span class="line">docs/zh-cn/README.md  =&gt; http://domain.com/zh-cn/</span><br><span class="line">docs/zh-cn/guide.md   =&gt; http://domain.com/zh-cn/guide</span><br></pre></td></tr></table></figure></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/02/25/JavaError-The-temporary-upload-location-tmp-tomcat-7104877156386249310-8070-work-Tomcat-localhost-ROOT-is-not-valid/" itemprop="url">
                   JavaError-The-temporary-upload-location-[/tmp/tomcat.7104877156386249310.8070/work/Tomcat/localhost/ROOT]-is-not-valid
                 </a>
@@ -1250,113 +1339,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/29/microservices-03-Zookeeper注册发现服务/" itemprop="url">
-                  [microservices]03-Zookeeper注册发现服务
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2017-03-29T21:00:37+08:00" content="2017-03-29">
-              2017-03-29
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="microservices-03-Zookeeper注册发现服务"><a href="#microservices-03-Zookeeper注册发现服务" class="headerlink" title="[microservices]03-Zookeeper注册发现服务"></a>[microservices]03-Zookeeper注册发现服务</h1><ul>
-<li>github项目地址： <a href="https://github.com/YihuaWanglv/microservices" target="_blank" rel="external">microservices</a></li>
-</ul>
-<h2 id="1-zookeeper原理介绍"><a href="#1-zookeeper原理介绍" class="headerlink" title="1. zookeeper原理介绍"></a>1. zookeeper原理介绍</h2><ul>
-<li><a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/" target="_blank" rel="external">分布式服务框架 Zookeeper – 管理分布式环境中的数据</a></li>
-</ul>
-<h2 id="2-基础微服务简单架构与demo说明"><a href="#2-基础微服务简单架构与demo说明" class="headerlink" title="2. 基础微服务简单架构与demo说明"></a>2. 基础微服务简单架构与demo说明</h2><p><img src="/images/framework-microservices.png" alt=""></p>
-<ul>
-<li>api-gateway实例：dispatcher(/microservices/api-gateway/dispatcher)</li>
-<li>web-client实例：web-client(/microservices/apps/web-client)</li>
-<li><p>api-service实例：api-demo(/microservices/services/api-demo)</p>
-</li>
-<li><p>zookeeper：注册中心</p>
-</li>
-<li>spring boot应用api-demo，作为一个service微服务实例，依赖一个服务注册组件service-registry(/microservices/services/service-registry)，实现服务向zookeeper注册。启动api-demo即可向外提供服务并注册到zookeeper。</li>
-<li>Nodejs应用dispatcher，作为api网关，它使用一个node-zookeeper-client组件，连接zookeeper，根据client传递过来的service名称，发现服务，并转发请求到目标服务中。</li>
-<li>web-client，即是前端web客户端，它只向api网关dispatcher发送请求，并且在请求的header中传递Service-Name字段，指明要请求的服务名称.</li>
-</ul>
-<h2 id="3-运行demo"><a href="#3-运行demo" class="headerlink" title="3. 运行demo"></a>3. 运行demo</h2><h3 id="3-1-bin-zkServer-sh-start启动zookeeper"><a href="#3-1-bin-zkServer-sh-start启动zookeeper" class="headerlink" title="3.1 bin/zkServer.sh start启动zookeeper"></a>3.1 bin/zkServer.sh start启动zookeeper</h3><p>没有zookeeper请先下载：<a href="http://zookeeper.apache.org/releases.html" target="_blank" rel="external">http://zookeeper.apache.org/releases.html</a></p>
-<h3 id="3-2-打包运行api-demo"><a href="#3-2-打包运行api-demo" class="headerlink" title="3.2 打包运行api-demo"></a>3.2 打包运行api-demo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ../microservices/services/api-demo</span><br><span class="line">mvn clean package</span><br><span class="line">java -jar api-demo-1.0.0.jar</span><br></pre></td></tr></table></figure>
-<p>或者直接导入项目，运行ApiDemoApplication启动.</p>
-<h3 id="3-3-运行api网关dispatcher"><a href="#3-3-运行api网关dispatcher" class="headerlink" title="3.3 运行api网关dispatcher"></a>3.3 运行api网关dispatcher</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ../microservices/api-gateway/dispatcher</span><br><span class="line">node app.js</span><br></pre></td></tr></table></figure>
-<p>如果想每次更改代码后即刻生效，可使用supervisor模块启动应用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install supervisor -g</span><br><span class="line">supervisor app.js</span><br></pre></td></tr></table></figure></p>
-<p>如果需要Node应用在发生异常停止时能够重新启动，可使用forever模块启动应用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install forever -g</span><br><span class="line">forever app.js</span><br></pre></td></tr></table></figure></p>
-<p>forever app.js表示在前台启动，想要后台启动，使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forever start app.js</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-4-运行web-client，访问首页，进行服务请求"><a href="#3-4-运行web-client，访问首页，进行服务请求" class="headerlink" title="3.4 运行web-client，访问首页，进行服务请求."></a>3.4 运行web-client，访问首页，进行服务请求.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ../microservices/api-gateway/dispatcher</span><br><span class="line">node app.js</span><br></pre></td></tr></table></figure>
-<p>访问：<a href="http://localhost:9001/">http://localhost:9001/</a></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1403,7 +1385,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1417,7 +1399,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-count">156</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

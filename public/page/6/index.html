@@ -202,6 +202,104 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/09/springboot-shiro-redis-rediscluster-sso-在springboot项目中接入shiro/" itemprop="url">
+                  [springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-09T12:52:53+08:00" content="2016-04-09">
+              2016-04-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。</p>
+<p>现在开始是第一篇：在springboot项目中接入shiro</p>
+<h2 id="引入shiro的maven依赖"><a href="#引入shiro的maven依赖" class="headerlink" title="引入shiro的maven依赖"></a>引入shiro的maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;shiro-ehcache&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="程序具体实现"><a href="#程序具体实现" class="headerlink" title="程序具体实现"></a>程序具体实现</h2><h3 id="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml"><a href="#首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application-yml" class="headerlink" title="首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml"></a>首先，需要一个shiro的配置文件，这里使用的是ymal配置。配置文件：application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shiro:</span><br><span class="line">  realm: com.xxx.xxx.config.security.MyRealm</span><br><span class="line">  loginUrl: /view/sign-in.html</span><br><span class="line">  successUrl: /item.html</span><br><span class="line">  unauthorizedUrl: /forbidden.html</span><br><span class="line">  filterChainDefinitions:</span><br><span class="line">    &quot;/login&quot;: anon</span><br><span class="line">    &quot;/static/**&quot;: anon</span><br><span class="line">    &quot;/bower_components/**&quot;: anon</span><br><span class="line">    &quot;/logout&quot;: logout</span><br><span class="line">    &quot;/**&quot;: authc</span><br></pre></td></tr></table></figure>
+<p>说明：<br>realm: com.xxx.xxx.config.security.MyRealm<br>Realm，在shiro中相当于数据源，shiro的其他核心组件需要获取用户和认证数据，就是从Realm获取。<br>为了获得更好的自定义功能，通常我们会自己实现一个Realm.<br>所以这里使用realm: com.xxx.xxx.config.security.MyRealm配置了一个自定义的Realm。<br>loginUrl，定义了需要认证用户时，跳转到的登录页面<br>successUrl，定义登录成功后跳转的页面。通常也可以在自己登录认证方法里redirect到需要的页面。<br>unauthorizedUrl，定义未认证时显示的页面。<br>filterChainDefinitions，定义哪些路径应该做何种过滤策略。<br>anon，logout，authc这些都是shiro默认实现的过滤器filter。<br>anon表示可以匿名访问的路径，authc表示需要登录认证的路径</p>
+<p>过滤器链使用最先匹配返回策略，所以我们需要把不需要认证即可访问的路径放在前面。</p>
+<h3 id="下面是自己实现的自定义Realm：MyRealm"><a href="#下面是自己实现的自定义Realm：MyRealm" class="headerlink" title="下面是自己实现的自定义Realm：MyRealm"></a>下面是自己实现的自定义Realm：MyRealm</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationToken;</span><br><span class="line">import org.apache.shiro.authc.SimpleAuthenticationInfo;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.authz.AuthorizationInfo;</span><br><span class="line">import org.apache.shiro.authz.SimpleAuthorizationInfo;</span><br><span class="line">import org.apache.shiro.realm.AuthorizingRealm;</span><br><span class="line">import org.apache.shiro.subject.PrincipalCollection;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"></span><br><span class="line">import com.xxx.model.base.UserDTO;</span><br><span class="line">import com.xxx.remote.base.UserRemote;</span><br><span class="line"></span><br><span class="line">public class MyRealm extends AuthorizingRealm &#123;</span><br><span class="line">    @Autowired UserRemote userService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) &#123;</span><br><span class="line">        UserDTO user = (UserDTO) principals.getPrimaryPrincipal();</span><br><span class="line">        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();</span><br><span class="line">        List&lt;String&gt; roles = userService.findByUserId(user.getId());</span><br><span class="line">        info.addRoles(roles);</span><br><span class="line">        return info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException &#123;</span><br><span class="line">        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;</span><br><span class="line">        String username = usernamePasswordToken.getUsername();</span><br><span class="line">        UserDTO user = userService.findUserByName(username);</span><br><span class="line">        if (null != user) &#123;</span><br><span class="line">            CredentialsInfoHolder cih = new CredentialsInfoHolder(user.getPassword(), user.getSalt());</span><br><span class="line">            return new SimpleAuthenticationInfo(user, cih, getName());</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>MyRealm集成AuthorizingRealm，需要重写AuthorizingRealm的两个方法：doGetAuthorizationInfo，doGetAuthenticationInfo。<br>AuthorizationInfo represents a single Subject’s stored authorization data (roles, permissions, etc) used during authorization (access control) checks only. </p>
+<p>doGetAuthorizationInfo方法返回一个AuthorizationInfo，AuthorizationInfo对象是一个单一的Subject对象，存储着用户的授权数据，只用于授权检查时使用。<br>doGetAuthenticationInfo方法，针对给定的用户，获取对应用户的认证数据，提供给认证用户身份时使用。</p>
+<p>例子中UserRemote userService是提供用户数据的具体service服务。</p>
+<h3 id="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"><a href="#有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器" class="headerlink" title="有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器"></a>有了数据源realm和shiro配置文件，现在开始接入shiro配置到spring容器</h3><h4 id="springboot-shiro配置类：ShiroAutoConfig-java"><a href="#springboot-shiro配置类：ShiroAutoConfig-java" class="headerlink" title="springboot shiro配置类：ShiroAutoConfig.java"></a>springboot shiro配置类：ShiroAutoConfig.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.realm.Realm;</span><br><span class="line">import org.apache.shiro.spring.web.ShiroFilterFactoryBean;</span><br><span class="line">import org.springframework.beans.BeanUtils;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.boot.context.properties.EnableConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line">import org.springframework.context.annotation.Import;</span><br><span class="line"></span><br><span class="line">import com.xxx.xxx.config.security.MyRealm;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">@EnableConfigurationProperties(ShiroProperties.class)</span><br><span class="line">@Import(ShiroManager.class)</span><br><span class="line">public class ShiroAutoConfig &#123;</span><br><span class="line">    @Autowired private ShiroProperties properties;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;realm&quot;)</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public MyRealm realm() &#123;</span><br><span class="line">        Class&lt;?&gt; relmClass = properties.getRealm();</span><br><span class="line">        MyRealm r = (MyRealm) BeanUtils.instantiate(relmClass);</span><br><span class="line">        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();</span><br><span class="line">        credentialsMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);</span><br><span class="line">        r.setCredentialsMatcher(credentialsMatcher);</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;shiroFilter&quot;)</span><br><span class="line">    @DependsOn(&quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultSecurityManager securityManager, Realm realm) &#123;</span><br><span class="line">        MyRealm myRealm = (MyRealm) realm;</span><br><span class="line">        securityManager.setRealm(myRealm);</span><br><span class="line">        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();</span><br><span class="line">        shiroFilter.setSecurityManager(securityManager);</span><br><span class="line">        shiroFilter.setLoginUrl(properties.getLoginUrl());</span><br><span class="line">        shiroFilter.setSuccessUrl(properties.getSuccessUrl());</span><br><span class="line">        shiroFilter.setUnauthorizedUrl(properties.getUnauthorizedUrl());</span><br><span class="line">        shiroFilter.setFilterChainDefinitionMap(properties.getFilterChainDefinitions());</span><br><span class="line">        return shiroFilter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里例子里说明，我们需要提供realm和shiroFilter两个bean配置给spring容器。<br>getShiroFilterFactoryBean方法返回ShiroFilterFactoryBean，将会把yml里面的配置读取到ShiroFilterFactoryBean中，然后把realm设置进securityManager。<br>yml配置有ShiroProperties类持有并提供给ShiroFilterFactoryBean。<br>当然，还需要配置几个其他配置，都在ShiroManager配置好了。</p>
+<h4 id="ShiroProperties："><a href="#ShiroProperties：" class="headerlink" title="ShiroProperties："></a>ShiroProperties：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Map;</span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">/**</span><br><span class="line"> * Configuration properties for Shiro.</span><br><span class="line"> */</span><br><span class="line">@ConfigurationProperties(prefix = &quot;shiro&quot;)</span><br><span class="line">public class ShiroProperties &#123;</span><br><span class="line">    private Class&lt;?&gt; realm;</span><br><span class="line">    private String loginUrl;</span><br><span class="line">    private String successUrl;</span><br><span class="line">    private String unauthorizedUrl;</span><br><span class="line">    private Map&lt;String, String&gt; filterChainDefinitions;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ShiroManager："><a href="#ShiroManager：" class="headerlink" title="ShiroManager："></a>ShiroManager：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.shiro.cache.CacheManager;</span><br><span class="line">import org.apache.shiro.mgt.DefaultSecurityManager;</span><br><span class="line">import org.apache.shiro.session.mgt.SessionManager;</span><br><span class="line">import org.apache.shiro.session.mgt.eis.SessionDAO;</span><br><span class="line">import org.apache.shiro.spring.LifecycleBeanPostProcessor;</span><br><span class="line">import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;</span><br><span class="line">import org.apache.shiro.web.mgt.DefaultWebSecurityManager;</span><br><span class="line">import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;</span><br><span class="line">import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;</span><br><span class="line">import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.DependsOn;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Shiro Config Manager.</span><br><span class="line"> */</span><br><span class="line">public class ShiroManager &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 保证实现了Shiro内部lifecycle函数的bean执行</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() &#123;</span><br><span class="line">        return new LifecycleBeanPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;defaultAdvisorAutoProxyCreator&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    @DependsOn(&quot;lifecycleBeanPostProcessor&quot;)</span><br><span class="line">    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() &#123;</span><br><span class="line">        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();</span><br><span class="line">        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);</span><br><span class="line">        return defaultAdvisorAutoProxyCreator;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 用户授权信息Cache</span><br><span class="line">     */</span><br><span class="line">    @Bean(name = &quot;cacheManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public CacheManager cacheManager() &#123;</span><br><span class="line">        return new MemoryConstrainedCacheManager();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;securityManager&quot;)</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public DefaultSecurityManager securityManager(CacheManager cacheManager) &#123;</span><br><span class="line">        DefaultSecurityManager sm = new DefaultWebSecurityManager();</span><br><span class="line">        sm.setCacheManager(cacheManager);</span><br><span class="line">        return sm;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultSecurityManager securityManager) &#123;</span><br><span class="line">        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">        aasa.setSecurityManager(securityManager);</span><br><span class="line">        return new AuthorizationAttributeSourceAdvisor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CacheManager负责缓存，这里简单的使用默认的内存缓存管理MemoryConstrainedCacheManager。<br>如果需要ehcache，或者使用redis作为缓存，则只需要实现自己的CacheManager和SessionManager即可。</p>
+<p>至此，springboot中引入shiro就完成了，其他更多具体使用方法，根据具体而定。</p>
+<h3 id="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"><a href="#这里简单的提供一下在mvc的controller中做登录和登出怎么做。" class="headerlink" title="这里简单的提供一下在mvc的controller中做登录和登出怎么做。"></a>这里简单的提供一下在mvc的controller中做登录和登出怎么做。</h3><p>LoginController：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">import org.apache.shiro.SecurityUtils;</span><br><span class="line">import org.apache.shiro.authc.AuthenticationException;</span><br><span class="line">import org.apache.shiro.authc.IncorrectCredentialsException;</span><br><span class="line">import org.apache.shiro.authc.UnknownAccountException;</span><br><span class="line">import org.apache.shiro.authc.UsernamePasswordToken;</span><br><span class="line">import org.apache.shiro.subject.Subject;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">@Controller</span><br><span class="line">public class LoginController &#123;</span><br><span class="line">    @RequestMapping(&quot;/login&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void login(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException &#123;</span><br><span class="line">        Subject subject = SecurityUtils.getSubject();</span><br><span class="line">        String error = null;</span><br><span class="line">        UsernamePasswordToken token = new UsernamePasswordToken(username, password);</span><br><span class="line">        try &#123;</span><br><span class="line">            subject.login(token);</span><br><span class="line">        &#125; catch (UnknownAccountException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (IncorrectCredentialsException e) &#123;</span><br><span class="line">            error = &quot;用户名/密码错误&quot;;</span><br><span class="line">        &#125; catch (AuthenticationException e) &#123;</span><br><span class="line">            // 其他错误，比如锁定，如果想单独处理请单独catch处理</span><br><span class="line">            error = &quot;其他错误：&quot; + e.getMessage();</span><br><span class="line">        &#125;</span><br><span class="line">        if (error != null) &#123;// 出错了，返回登录页面</span><br><span class="line">            req.setAttribute(&quot;error&quot;, error);</span><br><span class="line">            resp.sendRedirect(&quot;/forbidden.html&quot;);</span><br><span class="line">        &#125; else &#123;// 登录成功</span><br><span class="line">            resp.sendRedirect(&quot;/index.html&quot;);// 设置跳转的页面</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @RequestMapping(value = &quot;/logout&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        Subject currentUser = SecurityUtils.getSubject();</span><br><span class="line">        currentUser.logout();</span><br><span class="line">        resp.sendRedirect(&quot;/index.html&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>done!</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/09/springboot-在spring项目中连接数据库以及spring-datajpa和mybatis的使用/" itemprop="url">
                   [springboot]在spring项目中连接数据库以及spring-datajpa和mybatis的使用
                 </a>
@@ -1031,119 +1129,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/04/jquery-validate常用用法总结/" itemprop="url">
-                  jquery-validate常用用法总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-04T17:05:28+08:00" content="2016-01-04">
-              2016-01-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <ol>
-<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。<br> 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//通过监听form的submit事件，对form进行ajax提交。</span><br><span class="line"> $(&apos;#formId&apos;).submit(function() &#123;</span><br><span class="line">     if (!$(&quot;#formId&quot;).valid()) </span><br><span class="line">         return false;</span><br><span class="line">     $(this).omAjaxSubmit(&#123;&#125;);</span><br><span class="line">     return false; //此处必须返回false，阻止常规的form提交</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>juqry validate中，如何对校验错误的提示信息位置和样式进行更改？<br> 1）js代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;  </span><br><span class="line">    $(&quot;#form1&quot;).validate(&#123;  </span><br><span class="line">        errorPlacement: function (error, element) &#123;  </span><br><span class="line">            error.appendTo(element.parent(&quot;td&quot;));  </span><br><span class="line">        &#125;,  </span><br><span class="line">        rules:&#123;              </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    $(&quot;[name$=&apos;.sign&apos;]&quot;).each(function()&#123;  </span><br><span class="line">        $(this).rules(&quot;add&quot;,&#123;required:true,messages:&#123;required:&quot;至少选择一个选项&quot;&#125;&#125;);  </span><br><span class="line">    &#125;);  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p> 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;  </span><br><span class="line">label.error &#123;   </span><br><span class="line">    color:Red;   </span><br><span class="line">    font-size:13px;   </span><br><span class="line">    margin-left:5px;   </span><br><span class="line">    padding-left:16px;   </span><br><span class="line">&#125;   </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<p> 3) 校验时机，可以自定义在js中想要的时候去校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;.selector&apos;).click(function() &#123;</span><br><span class="line">    if ($(&quot;selector of you form&quot;).valid()) &#123;</span><br><span class="line">        alert(&apos;in&apos;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        alert(&apos;out&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">$(&quot;selector of you form&quot;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        receiveDayFrom: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p> 4) 例子：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#form&quot;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    messages: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: &quot;Enter name&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: &quot;Enter firstname&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    errorPlacement: function ($error, $element) &#123;</span><br><span class="line">        var name = $element.attr(&quot;name&quot;);</span><br><span class="line">        $(&quot;#error&quot; + name).append($error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<pre><code>or:
-</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#form&quot;).validate(&#123;</span><br><span class="line">    errorLabelContainer: &quot;#errors&quot;,</span><br><span class="line">    rules: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    messages: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: &quot;Enter name&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: &quot;Enter firstname&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如何添加自定义的校验？</p>
-</li>
-</ol>
-<ul>
-<li><p>添加一个方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 字符验证，只能包含英文、数字、下划线等字符。    </span><br><span class="line">jQuery.validator.addMethod(&quot;nameStringCheck&quot;, function(value, element) &#123;   </span><br><span class="line">     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); </span><br><span class="line">&#125;, &quot;只能包含英文、数字、下划线等字符&quot;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在validate配置中使用新加的方法</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#form selector&apos;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        username: &#123;</span><br><span class="line">            required: true,</span><br><span class="line">            nameStringCheck: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li><p>如何使用ajax请求进行远程校验</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery.validator.addMethod(&quot;checkUnique&quot;, function(value, element) &#123;</span><br><span class="line">    return validateUsernameByAjax(value, element.name, &apos;ajax请求地址&apos;);</span><br><span class="line">&#125;, &quot;此输入的值不可用&quot;);</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 同步做用户名或邮箱的请求，检查到不可用，则返回false，否则返回true</span><br><span class="line"> */</span><br><span class="line">function validateUsernameByAjax(value, fieldname, url) &#123;</span><br><span class="line">    var _request = url + &quot;?&quot;+fieldname+&quot;=&quot;+value;</span><br><span class="line">    var deferred = $.Deferred();//创建一个延迟对象</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url:_request,</span><br><span class="line">        async:false,//要指定不能异步,必须等待后台服务校验完成再执行后续代码</span><br><span class="line">        dataType:&quot;json&quot;,</span><br><span class="line">        success:function(data) &#123;</span><br><span class="line">            if (data.status === &quot;error&quot; || data.status === &quot;fail&quot;) &#123;</span><br><span class="line">                deferred.reject();</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                deferred.resolve();  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    //deferred.state()有3个状态:pending:还未结束,rejected:失败,resolved:成功</span><br><span class="line">    return deferred.state() == &quot;resolved&quot; ? true : false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#form selector&apos;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        username: &#123;</span><br><span class="line">            checkUnique: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1190,7 +1175,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1204,7 +1189,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-count">156</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

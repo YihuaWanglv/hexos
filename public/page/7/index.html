@@ -202,6 +202,119 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/04/jquery-validate常用用法总结/" itemprop="url">
+                  jquery-validate常用用法总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-04T17:05:28+08:00" content="2016-01-04">
+              2016-01-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <ol>
+<li><p>juqry validate中，如何对使用ajax提交的方式进行校验？<br>有两种方式<br> 1)使用submitHandler属性配置ajax提交，submithandler：当表单全部校验通过之后会回调配置的代码，此处也就是当校验通过之后调用ajax提交。<br> 2)使用valid方法，监听form的submit事件，当$(‘#form’).valid()返回true的时候再提交。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//通过监听form的submit事件，对form进行ajax提交。</span><br><span class="line"> $(&apos;#formId&apos;).submit(function() &#123;</span><br><span class="line">     if (!$(&quot;#formId&quot;).valid()) </span><br><span class="line">         return false;</span><br><span class="line">     $(this).omAjaxSubmit(&#123;&#125;);</span><br><span class="line">     return false; //此处必须返回false，阻止常规的form提交</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>juqry validate中，如何对校验错误的提示信息位置和样式进行更改？<br> 1）js代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;  </span><br><span class="line">    $(&quot;#form1&quot;).validate(&#123;  </span><br><span class="line">        errorPlacement: function (error, element) &#123;  </span><br><span class="line">            error.appendTo(element.parent(&quot;td&quot;));  </span><br><span class="line">        &#125;,  </span><br><span class="line">        rules:&#123;              </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    $(&quot;[name$=&apos;.sign&apos;]&quot;).each(function()&#123;  </span><br><span class="line">        $(this).rules(&quot;add&quot;,&#123;required:true,messages:&#123;required:&quot;至少选择一个选项&quot;&#125;&#125;);  </span><br><span class="line">    &#125;);  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 2）validate会默认追加一个label，样式默认是error，所以我们做的就是写一个class为error的css就可以了</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;  </span><br><span class="line">label.error &#123;   </span><br><span class="line">    color:Red;   </span><br><span class="line">    font-size:13px;   </span><br><span class="line">    margin-left:5px;   </span><br><span class="line">    padding-left:16px;   </span><br><span class="line">&#125;   </span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p> 3) 校验时机，可以自定义在js中想要的时候去校验</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;.selector&apos;).click(function() &#123;</span><br><span class="line">    if ($(&quot;selector of you form&quot;).valid()) &#123;</span><br><span class="line">        alert(&apos;in&apos;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        alert(&apos;out&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">$(&quot;selector of you form&quot;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        receiveDayFrom: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> 4) 例子：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#form&quot;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    messages: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: &quot;Enter name&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: &quot;Enter firstname&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    errorPlacement: function ($error, $element) &#123;</span><br><span class="line">        var name = $element.attr(&quot;name&quot;);</span><br><span class="line">        $(&quot;#error&quot; + name).append($error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code>or:
+</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#form&quot;).validate(&#123;</span><br><span class="line">    errorLabelContainer: &quot;#errors&quot;,</span><br><span class="line">    rules: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    messages: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            required: &quot;Enter name&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        firstname: &#123;</span><br><span class="line">            required: &quot;Enter firstname&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何添加自定义的校验？</p>
+</li>
+</ol>
+<ul>
+<li><p>添加一个方法</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 字符验证，只能包含英文、数字、下划线等字符。    </span><br><span class="line">jQuery.validator.addMethod(&quot;nameStringCheck&quot;, function(value, element) &#123;   </span><br><span class="line">     return this.optional(element) || /^[a-zA-Z0-9-_]+$/.test(value); </span><br><span class="line">&#125;, &quot;只能包含英文、数字、下划线等字符&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在validate配置中使用新加的方法</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#form selector&apos;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        username: &#123;</span><br><span class="line">            required: true,</span><br><span class="line">            nameStringCheck: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>如何使用ajax请求进行远程校验</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery.validator.addMethod(&quot;checkUnique&quot;, function(value, element) &#123;</span><br><span class="line">    return validateUsernameByAjax(value, element.name, &apos;ajax请求地址&apos;);</span><br><span class="line">&#125;, &quot;此输入的值不可用&quot;);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 同步做用户名或邮箱的请求，检查到不可用，则返回false，否则返回true</span><br><span class="line"> */</span><br><span class="line">function validateUsernameByAjax(value, fieldname, url) &#123;</span><br><span class="line">    var _request = url + &quot;?&quot;+fieldname+&quot;=&quot;+value;</span><br><span class="line">    var deferred = $.Deferred();//创建一个延迟对象</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url:_request,</span><br><span class="line">        async:false,//要指定不能异步,必须等待后台服务校验完成再执行后续代码</span><br><span class="line">        dataType:&quot;json&quot;,</span><br><span class="line">        success:function(data) &#123;</span><br><span class="line">            if (data.status === &quot;error&quot; || data.status === &quot;fail&quot;) &#123;</span><br><span class="line">                deferred.reject();</span><br><span class="line">            &#125; else&#123;</span><br><span class="line">                deferred.resolve();  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    //deferred.state()有3个状态:pending:还未结束,rejected:失败,resolved:成功</span><br><span class="line">    return deferred.state() == &quot;resolved&quot; ? true : false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#form selector&apos;).validate(&#123;</span><br><span class="line">    rules: &#123;</span><br><span class="line">        username: &#123;</span><br><span class="line">            checkUnique: true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/31/git-git常用-把本地项目提交到github/" itemprop="url">
                   [git]git常用-把本地项目提交到github
                 </a>
@@ -527,7 +640,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -541,7 +654,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">152</span>
+              <span class="site-state-item-count">156</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
