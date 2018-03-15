@@ -202,6 +202,100 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/23/Transform-objects-with-guava-使用Guava库转换对象/" itemprop="url">
+                  Transform objects with guava(使用Guava库转换对象)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-23T13:03:29+08:00" content="2016-07-23">
+              2016-07-23
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="Transform-objects-with-guava"><a href="#Transform-objects-with-guava" class="headerlink" title="Transform objects with guava"></a>Transform objects with guava</h1><p>All the function is a specific type of class that has an apply method that can be overridden. In the example, the apply method accepts a string as a parameter and returns an integer or the length of the string. Scrolling a bit further in the documentation, the most common use of functions is transforming collections.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String, Integer&gt; lengthFunction = new Function&lt;String, Integer&gt;() &#123;</span><br><span class="line">  public Integer apply(String string) &#123;</span><br><span class="line">    return string.length();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-string-to-Enum"><a href="#Convert-string-to-Enum" class="headerlink" title="Convert string to Enum"></a>Convert string to Enum</h2><p>I have seeded some data so we can get right to the examples and you don’t have to watch me type. The first example to show is transforming a string to Enum. Enums are quite popular and you may want to transform as it might be stored as a string in a database or some value.</p>
+<p>Taking a look at the Day enum we created, it is a simple class that represents the days of the week:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public enum Day &#123;</span><br><span class="line"></span><br><span class="line">    SUNDAY, MONDAY, TUESDAY, WEDNESDAY,</span><br><span class="line">    THURSDAY, FRIDAY, SATURDAY;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>We may have a list of strings with various strings representing days, Wednesday, Sunday, Monday… What we want to do is convert the list of strings to enums. There is a function in the Enum utility class in guava valueOfFunction that allows you to pass in the enum you want to convert to. In our case, Day.Class. Since we just upgraded to Guava 16.0, the valueOfFunction has been deprecated in preference of stringConverter. The stringConverter will return a function that converts a string to an Enum. Now we have a function that can be passed to guava utilities, in this case Iterables utility class by calling the transform method which will convert each string of list to a day enum.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void transform_string_to_enum () &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;String&gt; days = Lists.newArrayList(</span><br><span class="line">            &quot;WEDNESDAY&quot;, </span><br><span class="line">            &quot;SUNDAY&quot;, </span><br><span class="line">            &quot;MONDAY&quot;, </span><br><span class="line">            &quot;WEDNESDAY&quot;);</span><br><span class="line">    </span><br><span class="line">    Function&lt;String, Day&gt; stringToDayEnum = Enums.stringConverter(Day.class);</span><br><span class="line">    </span><br><span class="line">    Iterable&lt;Day&gt; daysAsEnum = Iterables.transform(days, stringToDayEnum);</span><br><span class="line">    </span><br><span class="line">    for (Day day : daysAsEnum) &#123;</span><br><span class="line">        System.out.println(day);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WEDNESDAY</span><br><span class="line">SUNDAY</span><br><span class="line">MONDAY</span><br><span class="line">WEDNESDAY</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-from-one-object-to-another"><a href="#Convert-from-one-object-to-another" class="headerlink" title="Convert from one object to another"></a>Convert from one object to another</h2><p>The next example will look at is how to convert one object to another. Quite often we need to go to a legacy system to get data and populate a new set of domains for our new system. Or we may get data from a web service or whatever it may be. For this example, I created two objects. ETradeInvestment and TdAmeritradeInvestment which contain similar attributes of different types.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class ETradeInvestment &#123;</span><br><span class="line">    </span><br><span class="line">    private String key;</span><br><span class="line">    private String name;</span><br><span class="line">    private BigDecimal price;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TdAmeritradeInvestment &#123;</span><br><span class="line">    </span><br><span class="line">    private int investmentKey;</span><br><span class="line">    private String investmentName;</span><br><span class="line">    private double investmentPrice;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>There is a number of other utilities such as BeanUtils.copyProperties in apache commons or written your own if statements and have made it work that way. If we don’t have a list of objects, we can call a method on function that will return a just a single object. We want to create the function that will map the TdAmeritradeInvestment to ETradeInvestment. If you ever get lost, you can use code assist or just remember the <f, t=""> just means from object, to object. For each iteration of the list, a new ETradeInvestment object will be created while mapping the TdAmeritradeInvestment to it. For the key, we will use the Ints.stringConverter which allows us to convert from a string to an int.</f,></p>
+<p>If we want to get some reuse out of this function, we could extract it outside this method or we can just use it inline. We will use the Lists utility to transform the list, above we use Iterables and there is also FluentIterables and Collections2. There is a lot of different ways which guava provides to use a function. If we run this code, we have EtradeInvestment object with the key, name and price. As a disclosure, I don’t own any of these investments and were pulled from Google home page under the trending section. That did it, we converted from the TdAmeritradeInvestment to ETradeInvestment.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void convert_tdinvestment_etradeinvestment () &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;TdAmeritradeInvestment&gt; tdInvestments = Lists.newArrayList();</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(555, &quot;Facebook Inc&quot;, 57.51));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(123, &quot;Micron Technology, Inc.&quot;, 21.29));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(456, &quot;Ford Motor Company&quot;, 15.31));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(236, &quot;Sirius XM Holdings Inc&quot;, 3.60));</span><br><span class="line">    </span><br><span class="line">    // convert a list of objects</span><br><span class="line">    Function&lt;TdAmeritradeInvestment, ETradeInvestment&gt; tdToEtradeFunction = new Function&lt;TdAmeritradeInvestment, ETradeInvestment&gt;() &#123;</span><br><span class="line"></span><br><span class="line">        public ETradeInvestment apply(TdAmeritradeInvestment input) &#123;</span><br><span class="line">            ETradeInvestment investment = new ETradeInvestment();</span><br><span class="line">            investment.setKey(Ints.stringConverter().reverse()</span><br><span class="line">                    .convert(input.getInvestmentKey()));</span><br><span class="line">            investment.setName(input.getInvestmentName());</span><br><span class="line">            investment.setPrice(new BigDecimal(input.getInvestmentPrice()));</span><br><span class="line">            return investment;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    List&lt;ETradeInvestment&gt; etradeInvestments = Lists.transform(tdInvestments, tdToEtradeFunction);</span><br><span class="line">    </span><br><span class="line">    System.out.println(etradeInvestments);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">ETradeInvestment&#123;key=555, name=Facebook Inc, price=57.50&#125;,</span><br><span class="line">ETradeInvestment&#123;key=123, name=Micron Technology, Inc., price=21.28&#125;, </span><br><span class="line">ETradeInvestment&#123;key=456, name=Ford Motor Company, price=15.31&#125;, </span><br><span class="line">ETradeInvestment&#123;key=236, name=Sirius XM Holdings Inc, price=3.60&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-an-object"><a href="#Convert-an-object" class="headerlink" title="Convert an object"></a>Convert an object</h2><p>If you have one single investment or object you want to convert, you can call the apply method directly on the function that will do the conversion.</p>
+<p>ETradeInvestment faceBookInvestment = tdToEtradeFunction<br>                .apply(new TdAmeritradeInvestment(555, “Facebook Inc”, 57.51));<br>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETradeInvestment&#123;key=555, name=Facebook Inc, price=57.50&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Convert-list-to-map"><a href="#Convert-list-to-map" class="headerlink" title="Convert list to map"></a>Convert list to map</h2><p>One other really neat way to use function convert a list to a map. You may want to look up an object based on some object property. In this example, we want to create a map of TdAmeritradeInvestment based on the investment key. Taking a look we can use the Maps utility calling the uniqueIndex method which accepts a list and a function. The function, or the keyfunction, is used to produce the key for each value in the iterable. In this instance, the function will map from a TdAmeritradeInvestment and return an integer which will represent the key in the map.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void transform_list_to_map () &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;TdAmeritradeInvestment&gt; tdInvestments = Lists.newArrayList();</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(555, &quot;Facebook Inc&quot;, 57.51));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(123, &quot;Micron Technology, Inc.&quot;, 21.29));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(456, &quot;Ford Motor Company&quot;, 15.31));</span><br><span class="line">    tdInvestments.add(new TdAmeritradeInvestment(236, &quot;Sirius XM Holdings Inc&quot;, 3.60));</span><br><span class="line">    </span><br><span class="line">    ImmutableMap&lt;Integer, TdAmeritradeInvestment&gt; investmentMap = Maps</span><br><span class="line">            .uniqueIndex(tdInvestments,</span><br><span class="line">                    new Function&lt;TdAmeritradeInvestment, Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">                        public Integer apply(TdAmeritradeInvestment input) &#123;</span><br><span class="line">                            return new Integer(input.getInvestmentKey());</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">    </span><br><span class="line">    System.out.println(investmentMap);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<p>Output<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">555=TdAmeritradeInvestment&#123;key=555, name=Facebook Inc, price=57.51&#125;, </span><br><span class="line">123=TdAmeritradeInvestment&#123;key=123, name=Micron Technology, Inc., price=21.29&#125;, </span><br><span class="line">456=TdAmeritradeInvestment&#123;key=456, name=Ford Motor Company, price=15.31&#125;, </span><br><span class="line">236=TdAmeritradeInvestment&#123;key=236, name=Sirius XM Holdings Inc, price=3.6&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>原地址：<a href="http://www.leveluplunch.com/java/tutorials/002-transform-objects-with-guava/" target="_blank" rel="external">http://www.leveluplunch.com/java/tutorials/002-transform-objects-with-guava/</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/23/Springboot应用中如何针对springmvc的controller写单元测试/" itemprop="url">
                   Springboot应用中如何针对springmvc的controller写单元测试
                 </a>
@@ -1161,88 +1255,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/06/git-git分支使用和管理/" itemprop="url">
-                  [git]git分支使用和管理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-06-06T17:37:36+08:00" content="2016-06-06">
-              2016-06-06
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="git分支常用命令"><a href="#git分支常用命令" class="headerlink" title="git分支常用命令"></a>git分支常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">从master创建dev分支，并checkout dev分支：</span><br><span class="line">git checkout -b dev</span><br><span class="line">此命令相当于：</span><br><span class="line">git branch dev</span><br><span class="line">git checkout dev</span><br><span class="line"></span><br><span class="line">回到master，合并dev的更改到master：</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br><span class="line">合并后删除dev分支：</span><br><span class="line">git branch -d dev</span><br><span class="line"></span><br><span class="line">如果直接用git merge dev合并分支，git使用的是fast forward的模式，并不会留下commit历史，如果想要留下commit历史，就要加上--no-ff参数，并使用-m添加commit描述</span><br><span class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev</span><br></pre></td></tr></table></figure>
-<h2 id="保存临时状态"><a href="#保存临时状态" class="headerlink" title="保存临时状态"></a>保存临时状态</h2><p>当你正在dev分支进行开发，还没有开发完成能提交，此时突然有一个线上版本的bug要紧急修复，这个时候你就需要用到git stash功能，保存正在开发的dev分支的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">保存当前开发状态：</span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line">查看当前已保存的stash列表：</span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line">取出之前保存的stash状态：</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
-<h2 id="多人协作的工作模式"><a href="#多人协作的工作模式" class="headerlink" title="多人协作的工作模式"></a>多人协作的工作模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">多人协作的工作模式通常是这样：</span><br><span class="line"></span><br><span class="line">首先，可以试图用git push origin branch-name推送自己的修改；</span><br><span class="line"></span><br><span class="line">如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</span><br><span class="line"></span><br><span class="line">如果合并有冲突，则解决冲突，并在本地提交；</span><br><span class="line"></span><br><span class="line">没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！</span><br><span class="line"></span><br><span class="line">如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。</span><br><span class="line"></span><br><span class="line">这就是多人协作的工作模式，一旦熟悉了，就非常简单。</span><br><span class="line"></span><br><span class="line">小结</span><br><span class="line"></span><br><span class="line">查看远程库信息，使用git remote -v；</span><br><span class="line"></span><br><span class="line">本地新建的分支如果不推送到远程，对其他人就是不可见的；</span><br><span class="line"></span><br><span class="line">从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；</span><br><span class="line"></span><br><span class="line">在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；</span><br><span class="line"></span><br><span class="line">建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；</span><br><span class="line"></span><br><span class="line">从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。</span><br></pre></td></tr></table></figure>
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1289,7 +1301,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">64</span>
+              <span class="site-state-item-count">65</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1303,7 +1315,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">156</span>
+              <span class="site-state-item-count">161</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
