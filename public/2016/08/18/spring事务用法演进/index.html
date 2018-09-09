@@ -1,0 +1,877 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,分布式事务,spring,transaction,事务," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="iyihua" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="Spring事务用法演进
+内容
+
+
+
+事务用法演进
+
+
+编程式事务管理基于底层 API 的编程式事务管理
+配置
+123456789&amp;lt;bean id=&amp;quot;bankService&amp;quot; class=&amp;quot;footmark.spring.core.tx.programmatic.origin.BankServiceImpl&amp;quot;&amp;gt;    &amp;lt;property n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring事务用法演进">
+<meta property="og:url" content="http://localhost:4000/2016/08/18/spring事务用法演进/index.html">
+<meta property="og:site_name" content="iyihua">
+<meta property="og:description" content="Spring事务用法演进
+内容
+
+
+
+事务用法演进
+
+
+编程式事务管理基于底层 API 的编程式事务管理
+配置
+123456789&amp;lt;bean id=&amp;quot;bankService&amp;quot; class=&amp;quot;footmark.spring.core.tx.programmatic.origin.BankServiceImpl&amp;quot;&amp;gt;    &amp;lt;property n">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-001.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-002.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-003.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-004.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-005.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-006.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-007.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-008.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-009.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-010.png">
+<meta property="og:image" content="http://localhost:4000/images/spring-transaction-011.png">
+<meta property="og:updated_time" content="2016-09-06T15:49:04.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring事务用法演进">
+<meta name="twitter:description" content="Spring事务用法演进
+内容
+
+
+
+事务用法演进
+
+
+编程式事务管理基于底层 API 的编程式事务管理
+配置
+123456789&amp;lt;bean id=&amp;quot;bankService&amp;quot; class=&amp;quot;footmark.spring.core.tx.programmatic.origin.BankServiceImpl&amp;quot;&amp;gt;    &amp;lt;property n">
+<meta name="twitter:image" content="http://localhost:4000/images/spring-transaction-001.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> spring事务用法演进 | iyihua </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">iyihua</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                spring事务用法演进
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-08-18T12:13:57+08:00" content="2016-08-18">
+              2016-08-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="Spring事务用法演进"><a href="#Spring事务用法演进" class="headerlink" title="Spring事务用法演进"></a>Spring事务用法演进</h1><ul>
+<li>内容</li>
+</ul>
+<p><img src="/images/spring-transaction-001.png" alt=""></p>
+<ul>
+<li>事务用法演进</li>
+</ul>
+<p><img src="/images/spring-transaction-002.png" alt=""></p>
+<h2 id="编程式事务管理"><a href="#编程式事务管理" class="headerlink" title="编程式事务管理"></a>编程式事务管理</h2><h3 id="基于底层-API-的编程式事务管理"><a href="#基于底层-API-的编程式事务管理" class="headerlink" title="基于底层 API 的编程式事务管理"></a>基于底层 API 的编程式事务管理</h3><ul>
+<li><p>配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;bankService&quot; class=&quot;footmark.spring.core.tx.programmatic.origin.BankServiceImpl&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;bankDao&quot; ref=&quot;bankDao&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;txManager&quot; ref=&quot;transactionManager&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;txDefinition&quot;&gt;</span><br><span class="line">        &lt;bean class=&quot;org.springframework.transaction.support.DefaultTransactionDefinition&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;propagationBehaviorName&quot; value=&quot;PROPAGATION_REQUIRED&quot;/&gt;</span><br><span class="line">        &lt;/bean&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>TransactionDefinition 类型的属性，它用于定义一个事务</p>
+</li>
+<li><p>PlatformTransactionManager 类型的属性，用于执行事务管理操作</p>
+</li>
+<li><p>程序代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class BankServiceImpl implements BankService &#123;</span><br><span class="line">    private BankDao bankDao;</span><br><span class="line">    private TransactionDefinition txDefinition;</span><br><span class="line">    private PlatformTransactionManager txManager;</span><br><span class="line">    ......</span><br><span class="line">    public boolean transfer(Long fromId， Long toId， double amount) &#123;</span><br><span class="line">        TransactionStatus txStatus = txManager.getTransaction(txDefinition);</span><br><span class="line">        boolean result = false;</span><br><span class="line">        try &#123;</span><br><span class="line">            result = bankDao.transfer(fromId， toId， amount);</span><br><span class="line">            txManager.commit(txStatus);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            result = false;</span><br><span class="line">            txManager.rollback(txStatus);</span><br><span class="line">            System.out.println(&quot;Transfer Error!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事务管理的代码散落在业务逻辑代码中，破坏了原有代码的条理性，并且每一个业务方法都包含了类似的启动事务、提交/回滚事务的样板代码。</p>
+</li>
+</ul>
+<h3 id="基于TransactionTemplate的编程式事务管理"><a href="#基于TransactionTemplate的编程式事务管理" class="headerlink" title="基于TransactionTemplate的编程式事务管理"></a>基于TransactionTemplate的编程式事务管理</h3><ul>
+<li><p>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;bankService&quot;</span><br><span class="line">class=&quot;footmark.spring.core.tx.programmatic.template.BankServiceImpl&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;bankDao&quot; ref=&quot;bankDao&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;transactionTemplate&quot; ref=&quot;transactionTemplate&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>程序示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class BankServiceImpl implements BankService &#123;</span><br><span class="line">    private BankDao bankDao;</span><br><span class="line">    private TransactionTemplate transactionTemplate;</span><br><span class="line">    ......</span><br><span class="line">    public boolean transfer(final Long fromId， final Long toId， final double amount) &#123;</span><br><span class="line">        return (Boolean) transactionTemplate.execute(new TransactionCallback()&#123;</span><br><span class="line">            public Object doInTransaction(TransactionStatus status) &#123;</span><br><span class="line">                Object result;</span><br><span class="line">                try &#123;</span><br><span class="line">                    result = bankDao.transfer(fromId， toId， amount);</span><br><span class="line">                &#125; catch (Exception e) &#123;</span><br><span class="line">                    status.setRollbackOnly();</span><br><span class="line">                    result = false;</span><br><span class="line">                    System.out.println(&quot;Transfer Error!&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                return result;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在数据访问层非常常见的模板回调模式</p>
+</li>
+<li>以匿名内部类的方式实现 TransactionCallback 接口，并在其 doInTransaction() 方法中书写业务逻辑代码</li>
+</ul>
+<h2 id="声明式事务管理"><a href="#声明式事务管理" class="headerlink" title="声明式事务管理"></a>声明式事务管理</h2><ul>
+<li>不需要在业务逻辑代码中掺杂事务管理的代码，只需在配置文件中做相关的事务规则声明（或通过等价的基于标注的方式）</li>
+<li>声明式事务管理由Spring AOP实现</li>
+</ul>
+<h3 id="基于TransactionInterceptor的声明式事务管理"><a href="#基于TransactionInterceptor的声明式事务管理" class="headerlink" title="基于TransactionInterceptor的声明式事务管理"></a>基于TransactionInterceptor的声明式事务管理</h3><ul>
+<li><p>示例配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans...&gt;</span><br><span class="line">    ......</span><br><span class="line">    &lt;bean id=&quot;transactionInterceptor&quot;</span><br><span class="line">    class=&quot;org.springframework.transaction.interceptor.TransactionInterceptor&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;transactionManager&quot; ref=&quot;transactionManager&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;transactionAttributes&quot;&gt;</span><br><span class="line">            &lt;props&gt;</span><br><span class="line">                &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED&lt;/prop&gt;</span><br><span class="line">            &lt;/props&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;bankServiceTarget&quot; class=&quot;footmark.spring.core.tx.declare.origin.BankServiceImpl&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;bankDao&quot; ref=&quot;bankDao&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;bankService&quot;</span><br><span class="line">    class=&quot;org.springframework.aop.framework.ProxyFactoryBean&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;target&quot; ref=&quot;bankServiceTarget&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;interceptorNames&quot;&gt;</span><br><span class="line">            &lt;list&gt;</span><br><span class="line">                &lt;idref bean=&quot;transactionInterceptor&quot;/&gt;</span><br><span class="line">            &lt;/list&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    ......</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>TransactionInterceptor定义相关的事务规则，有两个主要的属性：transactionManager和transactionAttributes</p>
+</li>
+<li>transactionManager，用来指定一个事务管理器，并将具体事务相关的操作委托给它；</li>
+<li>transactionAttributes，Properties 类型，主要用来定义事务规则，该属性的每一个键值对中，键指定的是方法名，方法名可以使用通配符，而值就表示相应方法的所应用的事务属性。</li>
+<li>ProxyFactoryBean, 组装 target 和advice. 通过 ProxyFactoryBean 生成的代理类就是织入了事务管理逻辑后的目标类。</li>
+</ul>
+<h4 id="事务属性取值的书写规则："><a href="#事务属性取值的书写规则：" class="headerlink" title="事务属性取值的书写规则："></a>事务属性取值的书写规则：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">传播行为 [，隔离级别] [，只读属性] [，超时属性] [不影响提交的异常] [，导致回滚的异常]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>传播行为是唯一必须设置的属性，其他都可以忽略，Spring为我们提供了合理的默认值</li>
+<li>传播行为的取值必须以“PROPAGATION_”开头，具体包括：PROPAGATION_MANDATORY、PROPAGATION_NESTED、PROPAGATION_NEVER、PROPAGATION_NOT_SUPPORTED、PROPAGATION_REQUIRED、PROPAGATION_REQUIRES_NEW、PROPAGATION_SUPPORTS，共七种取值。</li>
+<li>隔离级别的取值必须以“ISOLATION_”开头，具体包括：ISOLATION_DEFAULT、ISOLATION_READ_COMMITTED、ISOLATION_READ_UNCOMMITTED、ISOLATION_REPEATABLE_READ、ISOLATION_SERIALIZABLE，共五种取值。</li>
+<li>如果事务是只读的，那么我们可以指定只读属性，使用“readOnly”指定。否则我们不需要设置该属性。</li>
+<li>超时属性的取值必须以“TIMEOUT_”开头，后面跟一个int类型的值，表示超时时间，单位是秒。</li>
+<li>不影响提交的异常是指，即使事务中抛出了这些类型的异常，事务任然正常提交。必须在每一个异常的名字前面加上“+”。异常的名字可以是类名的一部分。比如“+RuntimeException”、“+tion”等等。</li>
+<li>导致回滚的异常是指，当事务中抛出这些类型的异常时，事务将回滚。必须在每一个异常的名字前面加上“-”。异常的名字可以是类名的全部或者部分，比如“-RuntimeException”、“-tion”等等。</li>
+<li>两个示例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;*Service&quot;&gt;</span><br><span class="line">    PROPAGATION_REQUIRED，ISOLATION_READ_COMMITTED，TIMEOUT_20，+AbcException，+DefException，-HijException</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>针对所有方法名以 Service 结尾的方法，使用 PROPAGATION_REQUIRED 事务传播行为，事务的隔离级别是 ISOLATION_READ_COMMITTED，超时时间为20秒，当事务抛出 AbcException 或者 DefException 类型的异常，则仍然提交，当抛出 HijException 类型的异常时必须回滚事务。这里没有指定”readOnly”，表示事务不是只读的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=&quot;test&quot;&gt;PROPAGATION_REQUIRED，readOnly&lt;/property&gt;</span><br></pre></td></tr></table></figure></p>
+<p>针对所有方法名为 test 的方法，使用 PROPAGATION_REQUIRED 事务传播行为，并且该事务是只读的。</p>
+<h3 id="基于TransactionProxyFactoryBean的声明式事务管理"><a href="#基于TransactionProxyFactoryBean的声明式事务管理" class="headerlink" title="基于TransactionProxyFactoryBean的声明式事务管理"></a>基于TransactionProxyFactoryBean的声明式事务管理</h3><ul>
+<li><p>示例配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans......&gt;</span><br><span class="line">    ......</span><br><span class="line">    &lt;bean id=&quot;bankServiceTarget&quot;</span><br><span class="line">    class=&quot;footmark.spring.core.tx.declare.classic.BankServiceImpl&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;bankDao&quot; ref=&quot;bankDao&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;bankService&quot;</span><br><span class="line">    class=&quot;org.springframework.transaction.interceptor.TransactionProxyFactoryBean&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;target&quot; ref=&quot;bankServiceTarget&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;transactionManager&quot; ref=&quot;transactionManager&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;transactionAttributes&quot;&gt;</span><br><span class="line">            &lt;props&gt;</span><br><span class="line">                &lt;prop key=&quot;transfer&quot;&gt;PROPAGATION_REQUIRED&lt;/prop&gt;</span><br><span class="line">            &lt;/props&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    ......</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显式为每一个业务类配置一个TransactionProxyFactoryBean的做法将使得代码显得过于刻板</p>
+</li>
+</ul>
+<h3 id="基于命名空间的声明式事务管理"><a href="#基于命名空间的声明式事务管理" class="headerlink" title="基于命名空间的声明式事务管理"></a>基于<tx>命名空间的声明式事务管理</tx></h3><ul>
+<li><p>示例配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans......&gt;</span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">    &lt;tx:advice id=&quot;bankAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;</span><br><span class="line">        &lt;tx:attributes&gt;</span><br><span class="line">            &lt;tx:method name=&quot;transfer&quot; propagation=&quot;REQUIRED&quot;/&gt;</span><br><span class="line">        &lt;/tx:attributes&gt;</span><br><span class="line">    &lt;/tx:advice&gt;</span><br><span class="line"></span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line">        &lt;aop:pointcut id=&quot;bankPointcut&quot; expression=&quot;execution(* *.transfer(..))&quot;/&gt;</span><br><span class="line">        &lt;aop:advisor advice-ref=&quot;bankAdvice&quot; pointcut-ref=&quot;bankPointcut&quot;/&gt;</span><br><span class="line">    &lt;/aop:config&gt;</span><br><span class="line">    ......</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果默认的事务属性就能满足要求，那么代码简化为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans......&gt;</span><br><span class="line">    ......</span><br><span class="line">    &lt;tx:advice id=&quot;bankAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line">        &lt;aop:pointcut id=&quot;bankPointcut&quot; expression=&quot;execution(**.transfer(..))&quot;/&gt;</span><br><span class="line">        &lt;aop:advisor advice-ref=&quot;bankAdvice&quot; pointcut-ref=&quot;bankPointcut&quot;/&gt;</span><br><span class="line">    &lt;/aop:config&gt;</span><br><span class="line">    ......</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用切点表达式，就不需要针对每一个业务类创建一个代理对象.</p>
+</li>
+</ul>
+<h3 id="基于注解-Transactional的声明式事务管理"><a href="#基于注解-Transactional的声明式事务管理" class="headerlink" title="基于注解@Transactional的声明式事务管理"></a>基于注解@Transactional的声明式事务管理</h3><ul>
+<li>@Transactional 可以作用于接口、接口方法、类以及类方法上</li>
+<li><p>当作用于类上时，该类的所有 public 方法将都具有该类型的事务属性，同时，我们也可以在方法级别使用该标注来覆盖类级别的定义。</p>
+</li>
+<li><p>示例配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置事务管理器 --&gt;</span><br><span class="line">&lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span><br><span class="line">        p:dataSource-ref=&quot;dataSource&quot;&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- enables scanning for @Transactional annotations --&gt;</span><br><span class="line">&lt;tx:annotation-driven transaction-manager=&quot;txManager&quot; /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Transactional(propagation = Propagation.REQUIRED)</span><br><span class="line">public boolean transfer(Long fromId, Long toId, double amount) &#123;</span><br><span class="line">    return bankDao.transfer(fromId, toId, amount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建议不要在接口或者接口方法上使用该注解，因为这只有在使用基于接口的代理时它才会生效。</p>
+</li>
+<li>@Transactional 注解应该只被应用到 public 方法上. 在protected、private或者默认可见性的方法上使用@Transactional 注解，将被忽略，也不会抛出任何异常。</li>
+</ul>
+<h2 id="事务属性"><a href="#事务属性" class="headerlink" title="事务属性"></a>事务属性</h2><h3 id="Required（需要）"><a href="#Required（需要）" class="headerlink" title="Required（需要）"></a>Required（需要）</h3><ul>
+<li>若事务上下文已存在，则使用，如果不存在，则为此方法开启一个新事务</li>
+</ul>
+<h3 id="Mandatory（强制必须）"><a href="#Mandatory（强制必须）" class="headerlink" title="Mandatory（强制必须）"></a>Mandatory（强制必须）</h3><ul>
+<li>强制事务上下文必须存在，若不存在，则抛出TransactionRequiredException异常</li>
+</ul>
+<h3 id="RequiresNew（需要新的）"><a href="#RequiresNew（需要新的）" class="headerlink" title="RequiresNew（需要新的）"></a>RequiresNew（需要新的）</h3><ul>
+<li>总是开启新事务，前一个事务若存在则会被挂起</li>
+<li>此属性在此场景是很有用：一个事务如果需要与其外围包裹事务相独立，不受其执行结果的影响，自行完成提交(比如记录日志)</li>
+</ul>
+<h3 id="Supports（支持）"><a href="#Supports（支持）" class="headerlink" title="Supports（支持）"></a>Supports（支持）</h3><ul>
+<li>告知容器，对象方法并不需要一个事务上下文，但当调用到这个方法而事务上下文恰巧存在时，则该方法会使用它</li>
+<li>可用于查询的方法当中，如果此查询是在一个正在进行的事务中完成的，对目标方法应用Supports属性会让容器使用当前事务上下文，参考数据库操作记录，从而将事务中作出的各种修改液包括到查询结果中</li>
+</ul>
+<h3 id="NotSupported（不支持）"><a href="#NotSupported（不支持）" class="headerlink" title="NotSupported（不支持）"></a>NotSupported（不支持）</h3><ul>
+<li>告知容器此方法不使用事务</li>
+<li>若一个事务已存在，容器会将事务暂停直至此方法结束</li>
+<li>此属性在方法逻辑中有排斥事务上下文代码存在时很有用，可以暂时屏蔽一些不需要或不能用事务的逻辑</li>
+</ul>
+<h3 id="Never（不用）"><a href="#Never（不用）" class="headerlink" title="Never（不用）"></a>Never（不用）</h3><ul>
+<li>告知容器不允许有事务上下文存在。若调用方法前事务存在，则抛出异常</li>
+</ul>
+<h3 id="PROPAGATION-NESTED"><a href="#PROPAGATION-NESTED" class="headerlink" title="PROPAGATION_NESTED"></a>PROPAGATION_NESTED</h3><ul>
+<li>告知spring进行事务嵌套，并采用Required属性</li>
+</ul>
+<h2 id="事务传播级别"><a href="#事务传播级别" class="headerlink" title="事务传播级别"></a>事务传播级别</h2><ul>
+<li>这些事务隔离级别设置需要依赖于底层数据库。底层数据库支持，这些设置才会生效</li>
+</ul>
+<p><img src="/images/spring-transaction-003.png" alt=""></p>
+<h3 id="TransactionReadUncommitted"><a href="#TransactionReadUncommitted" class="headerlink" title="TransactionReadUncommitted"></a>TransactionReadUncommitted</h3><ul>
+<li>允许事务读取其他事务在提交到数据库之前产生的未提交更改。</li>
+</ul>
+<p><img src="/images/spring-transaction-004.png" alt=""></p>
+<h3 id="TransactionReadCommitted"><a href="#TransactionReadCommitted" class="headerlink" title="TransactionReadCommitted"></a>TransactionReadCommitted</h3><ul>
+<li>允许多个事务访问同一份数据，但将未提交的数据对其他事务隐藏，直至数据提交</li>
+</ul>
+<p><img src="/images/spring-transaction-005.png" alt=""></p>
+<h3 id="TransactionRepeatableRead"><a href="#TransactionRepeatableRead" class="headerlink" title="TransactionRepeatableRead"></a>TransactionRepeatableRead</h3><ul>
+<li>保持了事务彼此隔绝。</li>
+<li>保证一旦在某一事务中服务了数据库的一个值集，在后续的每次查询操作中都读到同样的值（除非此事务拿到这些数据的读写锁，并自行更改了数据）</li>
+<li>在此级别下，一个事务如果要更改数据，而这一数据被其他事务读取时，此事务需要等待占用数据事务提交的操作（或直接返回失败）</li>
+</ul>
+<p><img src="/images/spring-transaction-006.png" alt=""></p>
+<h3 id="TransactionSerializable"><a href="#TransactionSerializable" class="headerlink" title="TransactionSerializable"></a>TransactionSerializable</h3><ul>
+<li>java支持的最高的事务隔离级别</li>
+<li>交错发生的事务被“堆迭”起来，以致同一时间点仅仅有一个事务具备访问目标数据的权力</li>
+<li>性能会受到很大影响，而数据一致性将会极大提高</li>
+</ul>
+<p><img src="/images/spring-transaction-007.png" alt=""></p>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><h3 id="JTA和JTS"><a href="#JTA和JTS" class="headerlink" title="JTA和JTS"></a>JTA和JTS</h3><h4 id="jta：java-transaction-api"><a href="#jta：java-transaction-api" class="headerlink" title="jta：java transaction api"></a>jta：java transaction api</h4><ul>
+<li>开发人员用于事务管理的接口</li>
+<li><p>UserTransaction接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin();</span><br><span class="line">commit();</span><br><span class="line">rollback();</span><br><span class="line">getStatus();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>TransactionManager接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">suspend();</span><br><span class="line">resume();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="jts：java-transaction-service"><a href="#jts：java-transaction-service" class="headerlink" title="jts：java transaction service"></a>jts：java transaction service</h4><ul>
+<li>开源或商用的实现了jta的底层事务服务</li>
+</ul>
+<p><img src="/images/spring-transaction-008.png" alt=""></p>
+<h4 id="要进行事务管理，我们需要两个东西：事务管理器和资源管理器"><a href="#要进行事务管理，我们需要两个东西：事务管理器和资源管理器" class="headerlink" title="要进行事务管理，我们需要两个东西：事务管理器和资源管理器"></a>要进行事务管理，我们需要两个东西：事务管理器和资源管理器</h4><ul>
+<li>资源管理器（Resource Manager），对于数据库，就是数据源</li>
+<li>事务管理器（Transaction Manager）<br><em>控制JTA事务，管理事务生命周期，并协调资源</em><br><em>在JTA中，事务管理器抽象为TransactionManager，并通过底层事务服务（JTS）实现</em><br><em>负责控制和管理实际资源（数据库或JMS队列）</em></li>
+</ul>
+<h3 id="分布式事务-XA事务"><a href="#分布式事务-XA事务" class="headerlink" title="分布式事务/XA事务"></a>分布式事务/XA事务</h3><ul>
+<li>分布式事务和单机事务的区别就是，单机事务是事务管理器管理一个资源，而分布式事务则是事务管理器管理多个数据资源.</li>
+</ul>
+<h4 id="XA环境"><a href="#XA环境" class="headerlink" title="XA环境"></a>XA环境</h4><p>在同一个处理单元中，需要协调多个数据资源完成逻辑，并保证ACID准备，则需要XA事务保证</p>
+<h4 id="XA接口"><a href="#XA接口" class="headerlink" title="XA接口"></a>XA接口</h4><p><img src="/images/spring-transaction-009.png" alt=""></p>
+<ul>
+<li>XA支持两阶段提交协议</li>
+</ul>
+<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><ul>
+<li>使用spring boot + jta + atomikos实现分布式事务管理的代码例子</li>
+<li>资金在库（atomikos_one），红包在库（atomikos_two）. 资金账号1转10元到资金账号2；红包账号2转10元到红包账号1</li>
+</ul>
+<h4 id="表数据"><a href="#表数据" class="headerlink" title="表数据"></a>表数据</h4><ul>
+<li>capital_account</li>
+</ul>
+<p><img src="/images/spring-transaction-010.png" alt=""></p>
+<ul>
+<li>red_packet_account</li>
+</ul>
+<p><img src="/images/spring-transaction-011.png" alt=""></p>
+<h4 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h4><ul>
+<li>配置2个数据源<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">order.datasource.url=jdbc:mysql://localhost:3306/atomikos_two</span><br><span class="line">order.datasource.username=root</span><br><span class="line">order.datasource.password=root</span><br><span class="line"></span><br><span class="line">customer.datasource.url=jdbc:mysql://localhost:3306/atomikos_one</span><br><span class="line">customer.datasource.username=root</span><br><span class="line">customer.datasource.password=root</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>atomikos的maven依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.atomikos&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;transactions&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.9.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.atomikos&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;transactions-jta&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.9.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.atomikos&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;transactions-hibernate3&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.9.3&lt;/version&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;artifactId&gt;hibernate&lt;/artifactId&gt;</span><br><span class="line">            &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>AtomikosJtaPlatform这个类指明了，Atomikos需要我们提供UserTransaction和TransactionManager的实现</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class AtomikosJtaPlatform extends AbstractJtaPlatform &#123;</span><br><span class="line">    private static final long serialVersionUID = 1L;</span><br><span class="line">    static TransactionManager transactionManager;</span><br><span class="line">    static UserTransaction transaction;</span><br><span class="line">    @Override</span><br><span class="line">    protected TransactionManager locateTransactionManager() &#123;</span><br><span class="line">        return transactionManager;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    protected UserTransaction locateUserTransaction() &#123;</span><br><span class="line">        return transaction;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>transactionManager等配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan</span><br><span class="line">@EnableTransactionManagement</span><br><span class="line">public class MainConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() &#123;</span><br><span class="line">        return new PropertySourcesPlaceholderConfigurer();</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public JpaVendorAdapter jpaVendorAdapter() &#123;</span><br><span class="line">        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();</span><br><span class="line">        hibernateJpaVendorAdapter.setShowSql(true);</span><br><span class="line">        hibernateJpaVendorAdapter.setGenerateDdl(true);</span><br><span class="line">        hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);</span><br><span class="line">        return hibernateJpaVendorAdapter;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;userTransaction&quot;)</span><br><span class="line">    public UserTransaction userTransaction() throws Throwable &#123;</span><br><span class="line">        UserTransactionImp userTransactionImp = new UserTransactionImp();</span><br><span class="line">        userTransactionImp.setTransactionTimeout(10000);</span><br><span class="line">        return userTransactionImp;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;atomikosTransactionManager&quot;, initMethod = &quot;init&quot;</span><br><span class="line">    , destroyMethod = &quot;close&quot;)</span><br><span class="line">    public TransactionManager atomikosTransactionManager() throws Throwable &#123;</span><br><span class="line">        UserTransactionManager userTransactionManager = new UserTransactionManager();</span><br><span class="line">        userTransactionManager.setForceShutdown(false);</span><br><span class="line">        AtomikosJtaPlatform.transactionManager = userTransactionManager;</span><br><span class="line">        return userTransactionManager;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(name = &quot;transactionManager&quot;)</span><br><span class="line">    @DependsOn(&#123; &quot;userTransaction&quot;, &quot;atomikosTransactionManager&quot; &#125;)</span><br><span class="line">    public PlatformTransactionManager transactionManager() throws Throwable &#123;</span><br><span class="line">        UserTransaction userTransaction = userTransaction();</span><br><span class="line">        AtomikosJtaPlatform.transaction = userTransaction;</span><br><span class="line">        TransactionManager atomikosTransactionManager = atomikosTransactionManager();</span><br><span class="line">        return new JtaTransactionManager(userTransaction, atomikosTransactionManager);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>数据库1的数据源配置CustomerConfig<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@DependsOn(&quot;transactionManager&quot;)</span><br><span class="line">@EnableJpaRepositories(basePackages = &quot;com.iyihua.sample.repository.customer&quot;</span><br><span class="line">, entityManagerFactoryRef = &quot;customerEntityManager&quot;, transactionManagerRef = &quot;transactionManager&quot;)</span><br><span class="line">@EnableConfigurationProperties(CustomerDatasourceProperties.class)</span><br><span class="line">public class CustomerConfig &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private JpaVendorAdapter jpaVendorAdapter;</span><br><span class="line">    @Autowired</span><br><span class="line">    private CustomerDatasourceProperties customerDatasourceProperties;</span><br><span class="line"></span><br><span class="line">    @Primary</span><br><span class="line">    @Bean(name = &quot;customerDataSource&quot;, initMethod = &quot;init&quot;, destroyMethod = &quot;close&quot;)</span><br><span class="line">    public DataSource customerDataSource() &#123;</span><br><span class="line">        MysqlXADataSource mysqlXaDataSource = new MysqlXADataSource();</span><br><span class="line">        mysqlXaDataSource.setUrl(customerDatasourceProperties.getUrl());</span><br><span class="line">        mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(true);</span><br><span class="line">        mysqlXaDataSource.setPassword(customerDatasourceProperties.getPassword());</span><br><span class="line">        mysqlXaDataSource.setUser(customerDatasourceProperties.getUsername());</span><br><span class="line">        mysqlXaDataSource.setPinGlobalTxToPhysicalConnection(true);</span><br><span class="line">        AtomikosDataSourceBean xaDataSource = new AtomikosDataSourceBean();</span><br><span class="line">        xaDataSource.setXaDataSource(mysqlXaDataSource);</span><br><span class="line">        xaDataSource.setUniqueResourceName(&quot;xads1&quot;);</span><br><span class="line">        return xaDataSource;</span><br><span class="line">    &#125;</span><br><span class="line">    @Primary</span><br><span class="line">    @Bean(name = &quot;customerEntityManager&quot;)</span><br><span class="line">    @DependsOn(&quot;transactionManager&quot;)</span><br><span class="line">    public LocalContainerEntityManagerFactoryBean customerEntityManager() throws Throwable &#123;</span><br><span class="line">        HashMap&lt;String, Object&gt; properties = new HashMap&lt;String, Object&gt;();</span><br><span class="line">        properties.put(&quot;hibernate.transaction.jta.platform&quot;, AtomikosJtaPlatform.class.getName());</span><br><span class="line">        properties.put(&quot;javax.persistence.transactionType&quot;, &quot;JTA&quot;);</span><br><span class="line">        LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();</span><br><span class="line">        entityManager.setJtaDataSource(customerDataSource());</span><br><span class="line">        entityManager.setJpaVendorAdapter(jpaVendorAdapter);</span><br><span class="line">        entityManager.setPackagesToScan(&quot;com.iyihua.sample.domain.customer&quot;);</span><br><span class="line">        entityManager.setPersistenceUnitName(&quot;customerPersistenceUnit&quot;);</span><br><span class="line">        entityManager.setJpaPropertyMap(properties);</span><br><span class="line">        return entityManager;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>数据库2的数据源配置OrderConfig<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@DependsOn(&quot;transactionManager&quot;)</span><br><span class="line">@EnableJpaRepositories(basePackages = &quot;com.iyihua.sample.repository.order&quot;</span><br><span class="line">, entityManagerFactoryRef = &quot;orderEntityManager&quot;, transactionManagerRef = &quot;transactionManager&quot;)</span><br><span class="line">@EnableConfigurationProperties(OrderDatasourceProperties.class)</span><br><span class="line">public class OrderConfig &#123;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>业务方法:资金在库（atomikos_one），红包在库（atomikos_two）资金账号1转10元到资金账号2；红包账号2转10元到红包账号1**<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class StoreServiceImpl implements StoreService &#123;</span><br><span class="line">@Transactional()</span><br><span class="line">    public void transfer() &#123;</span><br><span class="line">        CapitalAccount ca1 = capitalAccountRepository.findOne(1l);</span><br><span class="line">        CapitalAccount ca2 = capitalAccountRepository.findOne(2l);</span><br><span class="line">        RedPacketAccount rp1 = redPacketAccountRepository.findOne(1l);</span><br><span class="line">        RedPacketAccount rp2 = redPacketAccountRepository.findOne(2l);</span><br><span class="line">        BigDecimal capital = BigDecimal.TEN;</span><br><span class="line">        BigDecimal red = BigDecimal.TEN;</span><br><span class="line">        ca1.transferFrom(capital);</span><br><span class="line">        ca2.transferTo(capital);</span><br><span class="line">        capitalAccountRepository.save(ca1);</span><br><span class="line">        capitalAccountRepository.save(ca2);</span><br><span class="line">        rp2.transferFrom(red);</span><br><span class="line">        rp1.transferTo(red);</span><br><span class="line">        redPacketAccountRepository.save(rp1);</span><br><span class="line">        redPacketAccountRepository.save(rp2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="get-and-run-demo："><a href="#get-and-run-demo：" class="headerlink" title="get and run demo："></a>get and run demo：</h3><p><a href="https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample" target="_blank" rel="external">https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample</a></p>
+<ul>
+<li>git clone <a href="https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git" target="_blank" rel="external">https://github.com/YihuaWanglv/spring-boot-jta-atomikos-sample.git</a></li>
+<li>import db script in folder “docs”</li>
+<li>import project into ide and run App.java or build project and run the jar</li>
+<li>visit utl:<a href="http://localhost:8082/save">http://localhost:8082/save</a> to see saveTest</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/分布式事务/" rel="tag">#分布式事务</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+            <a href="/tags/transaction/" rel="tag">#transaction</a>
+          
+            <a href="/tags/事务/" rel="tag">#事务</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/12/java自动化测试整理/" rel="next" title="java自动化测试整理">
+                <i class="fa fa-chevron-left"></i> java自动化测试整理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/06/dev-collect-2016-08-collect-of-dev/" rel="prev" title="[dev][collect][2016-08]collect-of-dev">
+                [dev][collect][2016-08]collect-of-dev <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Wanglv Yihua" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Wanglv Yihua</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">167</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring事务用法演进"><span class="nav-number">1.</span> <span class="nav-text">Spring事务用法演进</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程式事务管理"><span class="nav-number">1.1.</span> <span class="nav-text">编程式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于底层-API-的编程式事务管理"><span class="nav-number">1.1.1.</span> <span class="nav-text">基于底层 API 的编程式事务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于TransactionTemplate的编程式事务管理"><span class="nav-number">1.1.2.</span> <span class="nav-text">基于TransactionTemplate的编程式事务管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明式事务管理"><span class="nav-number">1.2.</span> <span class="nav-text">声明式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于TransactionInterceptor的声明式事务管理"><span class="nav-number">1.2.1.</span> <span class="nav-text">基于TransactionInterceptor的声明式事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务属性取值的书写规则："><span class="nav-number">1.2.1.1.</span> <span class="nav-text">事务属性取值的书写规则：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于TransactionProxyFactoryBean的声明式事务管理"><span class="nav-number">1.2.2.</span> <span class="nav-text">基于TransactionProxyFactoryBean的声明式事务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于命名空间的声明式事务管理"><span class="nav-number">1.2.3.</span> <span class="nav-text">基于命名空间的声明式事务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于注解-Transactional的声明式事务管理"><span class="nav-number">1.2.4.</span> <span class="nav-text">基于注解@Transactional的声明式事务管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务属性"><span class="nav-number">1.3.</span> <span class="nav-text">事务属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Required（需要）"><span class="nav-number">1.3.1.</span> <span class="nav-text">Required（需要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mandatory（强制必须）"><span class="nav-number">1.3.2.</span> <span class="nav-text">Mandatory（强制必须）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RequiresNew（需要新的）"><span class="nav-number">1.3.3.</span> <span class="nav-text">RequiresNew（需要新的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Supports（支持）"><span class="nav-number">1.3.4.</span> <span class="nav-text">Supports（支持）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NotSupported（不支持）"><span class="nav-number">1.3.5.</span> <span class="nav-text">NotSupported（不支持）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Never（不用）"><span class="nav-number">1.3.6.</span> <span class="nav-text">Never（不用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PROPAGATION-NESTED"><span class="nav-number">1.3.7.</span> <span class="nav-text">PROPAGATION_NESTED</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务传播级别"><span class="nav-number">1.4.</span> <span class="nav-text">事务传播级别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionReadUncommitted"><span class="nav-number">1.4.1.</span> <span class="nav-text">TransactionReadUncommitted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionReadCommitted"><span class="nav-number">1.4.2.</span> <span class="nav-text">TransactionReadCommitted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionRepeatableRead"><span class="nav-number">1.4.3.</span> <span class="nav-text">TransactionRepeatableRead</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransactionSerializable"><span class="nav-number">1.4.4.</span> <span class="nav-text">TransactionSerializable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式事务"><span class="nav-number">1.5.</span> <span class="nav-text">分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JTA和JTS"><span class="nav-number">1.5.1.</span> <span class="nav-text">JTA和JTS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jta：java-transaction-api"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">jta：java transaction api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jts：java-transaction-service"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">jts：java transaction service</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要进行事务管理，我们需要两个东西：事务管理器和资源管理器"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">要进行事务管理，我们需要两个东西：事务管理器和资源管理器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务-XA事务"><span class="nav-number">1.5.2.</span> <span class="nav-text">分布式事务/XA事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XA环境"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">XA环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XA接口"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">XA接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例："><span class="nav-number">1.5.3.</span> <span class="nav-text">实例：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表数据"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">表数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#程序代码"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">程序代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-and-run-demo："><span class="nav-number">1.5.4.</span> <span class="nav-text">get and run demo：</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wanglv Yihua</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
