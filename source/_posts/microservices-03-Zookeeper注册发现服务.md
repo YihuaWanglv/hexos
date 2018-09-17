@@ -2,6 +2,7 @@
 title: '[microservices]03-Zookeeper注册发现服务'
 date: 2017-03-29 21:00:37
 tags: [microservices,zookeeper,微服务,服务注册,服务发现]
+categories: microservices
 ---
 
 # [microservices]03-Zookeeper注册发现服务

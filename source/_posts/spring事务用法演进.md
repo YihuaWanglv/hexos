@@ -2,6 +2,7 @@
 title: spring事务用法演进
 date: 2016-08-18 12:13:57
 tags: [spring, java, transaction, 事务, 分布式事务]
+categories: java-spring
 ---
 # Spring事务用法演进
 

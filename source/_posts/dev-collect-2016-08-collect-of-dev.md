@@ -2,6 +2,7 @@
 title: '[dev][collect][2016-08]collect-of-dev'
 date: 2016-09-06 23:51:04
 tags: [collect, dev, java, android, collect-of-dev]
+categories: collect
 ---
 
 

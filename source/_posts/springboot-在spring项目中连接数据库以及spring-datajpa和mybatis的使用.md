@@ -2,6 +2,7 @@
 title: '[springboot]在spring项目中连接数据库以及spring-datajpa和mybatis的使用'
 date: 2016-04-09 11:37:07
 tags: [spring boot,mysql,数据库,spring data jpa,mybatis]
+categories: java-spring
 ---
 
 ## 1.在项目中添加数据库配置（添加数据源等配置）

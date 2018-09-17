@@ -2,6 +2,7 @@
 title: 使用Nginx作为简单的图片服务器
 date: 2017-03-10 23:59:19
 tags: [ngnix, picture, server]
+categories: deploy
 ---
 
 ## 说明：

@@ -2,6 +2,7 @@
 title: 事务管理-spring事务使用注意点、数据库事务的隔离级别与锁
 date: 2018-02-25 10:43:01
 tags: [java,spring事务,Transactional,数据库事务,锁]
+categories: java
 ---
 
 # 1. spring事务@Transactional的注意点

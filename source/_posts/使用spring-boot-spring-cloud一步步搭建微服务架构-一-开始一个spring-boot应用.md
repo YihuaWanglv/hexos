@@ -2,6 +2,7 @@
 title: '[使用spring-boot+spring-cloud一步步搭建微服务架构]一-开始一个spring-boot应用'
 date: 2016-07-11 20:24:25
 tags: [java, spring boot, spring cloud, 微服务, 使用spring-boot+spring-cloud一步步搭建微服务架构]
+categories: java-spring
 ---
 
 ## 一. 目标愿景

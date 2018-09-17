@@ -2,6 +2,7 @@
 title: centos6环境下配置mysql主从同步
 date: 2016-04-25 21:22:51
 tags: [mysql,database,数据库,主从同步,master-slave]
+categories: deploy
 ---
 
 ## 1、主从服务器分别作以下操作：

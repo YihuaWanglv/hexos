@@ -2,6 +2,7 @@
 title: '[api_version]4种在springmvc中进行api版本控制的处理方法'
 date: 2016-06-28 15:31:54
 tags: [java, api_verion, spring mvc]
+categories: version
 ---
 
 https://github.com/mindhaq/restapi-versioning-spring.git

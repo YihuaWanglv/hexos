@@ -2,6 +2,7 @@
 title: '[microservices]06-Jenkins执行自动化的构建'
 date: 2017-03-29 21:01:58
 tags: [microservices,jenkins,java,自动化,构建,docker]
+categories: microservices
 ---
 
 # [microservices]06-Jenkins执行自动化的构建

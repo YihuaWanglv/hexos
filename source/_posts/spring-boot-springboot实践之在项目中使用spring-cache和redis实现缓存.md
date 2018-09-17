@@ -2,6 +2,7 @@
 title: '[spring-boot]springboot实践之在项目中使用spring-cache和redis实现缓存'
 date: 2016-04-09 10:43:01
 tags: [spring boot,spring cache,redis,注解]
+categories: java-spring
 ---
 
 ## 1.首先需要准备一个redis服务端作为缓存

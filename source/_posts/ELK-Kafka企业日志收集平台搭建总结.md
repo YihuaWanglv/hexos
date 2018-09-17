@@ -2,6 +2,7 @@
 title: ELK+Kafka企业日志收集平台搭建总结
 date: 2016-09-09 01:31:02
 tags: [ELK, elasticsearch, es, kafka, zookeeper, kibana, logstash, nginx, log]
+categories: architecture
 ---
 
 # 3.ELK+Kafka 企业日志收集平台搭建总结

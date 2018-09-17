@@ -2,6 +2,7 @@
 title: '[microservices]02-Nodejs&Express作为微服务api网关'
 date: 2017-03-29 20:54:07
 tags: [microservices,Node.js,Express,微服务,api网关,api-gateway,zookeeper]
+categories: microservices
 ---
 
 # [microservices]02-Nodejs&Express作为微服务api网关

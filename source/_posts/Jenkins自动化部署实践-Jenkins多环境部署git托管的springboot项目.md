@@ -1,7 +1,8 @@
 ---
 title: '[Jenkins自动化部署实践]Jenkins多环境部署git托管的springboot项目'
 date: 2016-06-01 18:56:42
-tags:
+tags: [Jenkins, 自动化部署, 部署, 多环境部署]
+categories: deploy
 ---
 
 

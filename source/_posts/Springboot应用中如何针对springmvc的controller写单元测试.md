@@ -2,6 +2,7 @@
 title: Springboot应用中如何针对springmvc的controller写单元测试
 date: 2016-07-23 12:54:56
 tags: [spring boot, java, junit, 测试， spring mvc, Springboot应用中如何针对springmvc的controller写单元测试]
+categories: java-spring
 ---
 
 

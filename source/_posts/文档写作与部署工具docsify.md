@@ -2,6 +2,7 @@
 title: 文档写作与部署工具docsify
 date: 2018-03-14 18:01:27
 tags: [doc, docs, markdown, docsify]
+categories: tools
 ---
 
 # docsify：一个文档展示与部署的工具

@@ -2,6 +2,7 @@
 title: 使用RAP作为接口管理和调试的工具
 date: 2016-07-08 14:06:27
 tags: [接口文档, RAP, mock]
+categories: tools
 ---
 
 ## 一、为什么使用RAP？

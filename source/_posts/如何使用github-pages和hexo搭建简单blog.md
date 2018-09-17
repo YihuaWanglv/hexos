@@ -2,6 +2,7 @@
 title: 如何使用github-pages和hexo搭建简单blog
 date: 2015-12-31 15:41:30
 tags: [git,github pages,hexo,blog]
+categories: deploy
 ---
 
 前言

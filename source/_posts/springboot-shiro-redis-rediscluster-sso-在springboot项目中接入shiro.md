@@ -2,6 +2,7 @@
 title: '[springboot+shiro+redis+rediscluster+sso]在springboot项目中接入shiro'
 date: 2016-04-09 12:52:53
 tags: [spring boot,shiro,java]
+categories: java-spring
 ---
 
 在之前的文章中，分别介绍了springboot启动，在springboot中使用redis作为缓存，在springboot中使用jpa和mybatis，现在将开始一个更大的综合工程：一步步介绍在springboot中使用shiro+redis-cluster+cookie实现一个跨域单点登录的方案。

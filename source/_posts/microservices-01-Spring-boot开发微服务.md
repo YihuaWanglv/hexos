@@ -2,6 +2,7 @@
 title: '[microservices]01-Spring boot开发微服务'
 date: 2017-03-29 21:33:23
 tags: [microservices,java,spring boot]
+categories: microservices
 ---
 
 # Spring boot开发微服务

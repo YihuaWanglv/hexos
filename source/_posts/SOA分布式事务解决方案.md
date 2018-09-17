@@ -2,6 +2,7 @@
 title: SOA分布式事务解决方案
 date: 2016-08-10 09:48:30
 tags: [SOA, 分布式事务, 柔性事务, 消息事务]
+categories: architecture
 ---
 
 这里是转的一段摘录：

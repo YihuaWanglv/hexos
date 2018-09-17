@@ -2,6 +2,7 @@
 title: 在linux下部署spring boot项目过程记录
 date: 2016-03-21 17:52:34
 tags: [linux,centos,java,spring boot,部署]
+categories: deploy
 ---
 
 

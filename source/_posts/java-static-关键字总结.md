@@ -2,6 +2,7 @@
 title: java static 关键字总结
 date: 2016-05-09 00:11:19
 tags: [java, static关键字]
+categories: java
 ---
 
 

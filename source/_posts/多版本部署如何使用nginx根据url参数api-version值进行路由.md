@@ -2,6 +2,7 @@
 title: 多版本部署如何使用nginx根据url参数api_version值进行路由
 date: 2016-07-26 18:53:07
 tags: [冗余部署, nginx, api_version, 路由]
+categories: deploy
 ---
 
 

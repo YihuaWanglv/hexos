@@ -2,6 +2,7 @@
 title: '[java][enum]典型用法'
 date: 2016-05-08 23:57:31
 tags: [java, enum]
+categories: java
 ---
 
 

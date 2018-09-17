@@ -1,7 +1,8 @@
 ---
 title: 我的Emacs-spacemacs使用配置记录
 date: 2018-09-13 23:55:55
-tags:
+tags: [emacs, spacemacs]
+categories: emacs
 ---
 
 

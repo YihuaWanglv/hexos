@@ -2,6 +2,7 @@
 title: '[microservices]05-Gitlab作为代码仓库'
 date: 2017-03-29 21:01:26
 tags: [microservices,gitlab,git,代码仓库,docker]
+categories: microservices
 ---
 
 # [microservices]05-Gitlab作为代码仓库

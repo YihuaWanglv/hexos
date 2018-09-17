@@ -2,6 +2,7 @@
 title: 在单服务器上安装部署FastDFS+Nginx
 date: 2016-07-07 10:54:21
 tags: [linux, centos, FastDFS, Nginx, 图片服务器]
+categories: deploy
 ---
 
 # 在单服务器上安装部署FastDFS+Nginx

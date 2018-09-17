@@ -2,6 +2,7 @@
 title: Emacs快速指南
 date: 2018-09-09 01:09:59
 tags: [Emacs, 指南, 编辑器]
+categories: emacs
 ---
 
 

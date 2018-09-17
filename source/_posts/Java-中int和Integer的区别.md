@@ -2,6 +2,7 @@
 title: Java 中int和Integer的区别
 date: 2016-08-04 11:41:57
 tags: [java, int, Integer, j2se]
+categories: java
 ---
 
 # Java中int和Integer的区别

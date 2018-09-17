@@ -2,6 +2,7 @@
 title: mosquitto使用记录与服务器调试
 date: 2018-02-25 11:14:27
 tags: [mosquitto,mqtt,linux,服务器配置]
+categories: mqtt
 ---
 
 # mosquitto使用记录：

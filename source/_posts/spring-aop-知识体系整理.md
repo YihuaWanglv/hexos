@@ -2,6 +2,7 @@
 title: spring aop 知识体系整理
 date: 2016-02-20 12:48:30
 tags: [java,spring,aop,思维导图]
+categories: java-spring
 ---
 
 spring aop 整理

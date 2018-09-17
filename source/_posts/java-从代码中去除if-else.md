@@ -2,6 +2,7 @@
 title: '[java]从代码中去除if-else'
 date: 2016-02-02 16:09:30
 tags: [java,patten,coding]
+categories: java
 ---
 
 有时候代码中会遇到大段的if else语句，灰常的不优雅，就算没有强迫症的人，也必定除之而后快。在java中，都有哪些方式能去除那些if else呢？

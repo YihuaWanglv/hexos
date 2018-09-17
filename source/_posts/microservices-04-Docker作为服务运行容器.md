@@ -2,6 +2,7 @@
 title: '[microservices]04-Docker作为服务运行容器'
 date: 2017-03-29 21:01:01
 tags: [microservices,docker,java,centos7]
+categories: microservices
 ---
 
 # [microservices]04-Docker作为服务运行容器

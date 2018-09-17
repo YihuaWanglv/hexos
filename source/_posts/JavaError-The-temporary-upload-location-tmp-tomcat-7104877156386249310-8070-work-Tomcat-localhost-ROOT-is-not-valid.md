@@ -3,6 +3,7 @@ title: >-
   JavaError-The-temporary-upload-location-[/tmp/tomcat.7104877156386249310.8070/work/Tomcat/localhost/ROOT]-is-not-valid
 date: 2018-02-25 14:13:44
 tags: [java,error,tomcat,spring boot]
+categories: java
 ---
 
 # SpringBoot内置Tomcat缓存文件目录被意外删除导致异常

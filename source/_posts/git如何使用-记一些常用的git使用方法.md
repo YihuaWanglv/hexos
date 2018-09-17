@@ -2,6 +2,7 @@
 title: git如何使用-记一些常用的git使用方法
 date: 2017-03-11 15:47:31
 tags: [git, github, 使用方法]
+categories: git
 ---
 
 1. git如何提交修改到远程仓库？

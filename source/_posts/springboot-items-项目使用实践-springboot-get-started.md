@@ -2,6 +2,7 @@
 title: '[springboot][items][项目使用实践]springboot get started'
 date: 2016-02-01 17:10:18
 tags: [springboot,itime]
+categories: java-spring
 ---
 
 往后将通过一个时间记录web app项目，实践并记录spring boot的使用

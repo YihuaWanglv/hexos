@@ -2,6 +2,7 @@
 title: jquery-validate常用用法总结
 date: 2016-01-04 17:05:28
 tags: [jquery,validate]
+categories: javascript
 ---
 
 

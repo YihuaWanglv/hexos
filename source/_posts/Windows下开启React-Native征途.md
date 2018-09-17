@@ -2,6 +2,7 @@
 title: Windows下开启React-Native征途
 date: 2016-06-04 09:55:48
 tags: [react, react-native, nodejs, android, windows]
+categories: javascript
 ---
 
 我们的目标是星辰大海（说白了就是同一个东西咱不想Android做一份，iOS又做一份），现在我们要开启React-Native的征途（在Windows下）。

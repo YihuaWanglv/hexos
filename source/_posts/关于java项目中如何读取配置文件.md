@@ -2,6 +2,7 @@
 title: 关于java项目中如何读取配置文件
 date: 2016-07-22 09:27:32
 tags: [java, spring, spring mvc, 读取配置文件, property file]
+categories: java
 ---
 
 # 关于java项目中如何读取配置文件

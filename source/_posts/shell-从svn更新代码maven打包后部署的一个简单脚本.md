@@ -2,6 +2,7 @@
 title: shell-从svn更新代码maven打包后部署的一个简单脚本
 date: 2017-03-11 15:48:45
 tags: [shell, sh, spring boot, java, linux]
+categories: deploy
 ---
 
 shell是个好东西，服务器上面的操作做多了，就需要想想办法把手工做的事情让脚本帮我们处理。以下是一个针对spring boot项目从svn更新出最新代码，然后maven打包，最后启动发布的一个脚本例子：

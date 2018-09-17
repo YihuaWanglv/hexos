@@ -2,6 +2,7 @@
 title: 使用java收集github-trending页面中感兴趣的语言的新动态并归档到自己的repository
 date: 2017-03-10 22:00:02
 tags: [java,spring boot,github-trending,Runtime,github-repository]
+categories: project
 ---
 
 

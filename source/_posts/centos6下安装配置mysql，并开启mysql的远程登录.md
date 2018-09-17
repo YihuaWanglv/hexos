@@ -2,6 +2,7 @@
 title: centos6下安装配置mysql，并开启mysql的远程登录
 date: 2016-04-25 21:00:38
 tags: [mysql, install, database]
+categories: deploy
 ---
 
 

@@ -2,6 +2,7 @@
 title: How to synchronize ArrayList in java with example
 date: 2016-07-28 13:21:15
 tags: [java, synchronize, ArrayList]
+categories: java
 ---
 
 

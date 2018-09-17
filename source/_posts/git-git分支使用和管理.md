@@ -2,6 +2,7 @@
 title: '[git]git分支使用和管理'
 date: 2016-06-06 17:37:36
 tags: [git, branch, 版本控制, 分支管理]
+categories: git
 ---
 
 ## git分支常用命令

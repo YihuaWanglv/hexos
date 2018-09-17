@@ -2,6 +2,7 @@
 title: '[java][design-pattern]java设计模式之Builder模式'
 date: 2016-05-08 16:58:38
 tags: [java, 设计模式, Builder, design pattern]
+categories: java
 ---
 
 

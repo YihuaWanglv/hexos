@@ -2,6 +2,7 @@
 title: ReactJS静态网站生成器-Gatsby
 date: 2018-03-15 17:50:43
 tags: [html, reactjs, node, npm, 静态网站]
+categories: tools
 ---
 
 # ReactJS静态网站生成器-Gatsby

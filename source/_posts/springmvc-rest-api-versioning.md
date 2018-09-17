@@ -2,6 +2,7 @@
 title: springmvc rest api versioning
 date: 2016-05-03 23:34:35
 tags: [rest,api,versioning,springmvc,java]
+categories: java-spring
 ---
 
 https://github.com/mindhaq/restapi-versioning-spring.git

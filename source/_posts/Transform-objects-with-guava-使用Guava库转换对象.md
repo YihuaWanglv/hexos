@@ -2,6 +2,7 @@
 title: Transform objects with guava(使用Guava库转换对象)
 date: 2016-07-23 13:03:29
 tags: [java, guava, transform objects, convert, 对象转换]
+categories: java
 ---
 
 # Transform objects with guava

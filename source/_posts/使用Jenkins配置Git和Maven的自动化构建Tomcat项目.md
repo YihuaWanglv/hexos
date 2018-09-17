@@ -2,6 +2,7 @@
 title: 使用Jenkins配置Git和Maven的自动化构建Tomcat项目
 date: 2016-05-30 22:50:38
 tags: [java, jenkins, 持续集成, git, 自动化构建]
+categories: deploy
 ---
 
 

@@ -2,6 +2,7 @@
 title: java自动化测试整理
 date: 2016-08-12 13:14:27
 tags: [Test, 测试, 单元测试, 自动化测试]
+categories: java
 ---
 
 

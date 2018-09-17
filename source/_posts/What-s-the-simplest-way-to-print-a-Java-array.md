@@ -2,6 +2,7 @@
 title: What's the simplest way to print a Java array?
 date: 2016-08-08 18:24:43
 tags: [java, array, print, j2se]
+categories: java
 ---
 
 
