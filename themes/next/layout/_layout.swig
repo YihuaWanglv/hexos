@@ -1,71 +1,121 @@
-<!doctype html>
-<html class="theme-next {% if theme.use_motion %}  use-motion {% endif %}">
+<!DOCTYPE html>
+
+{# NexT version #}
+{% set version = next_env('version') %}
+
+{# Language & Config #}
+{% set title = __('title') !== 'title' && __('title') || config.title %}
+{% set subtitle = __('subtitle') !== 'subtitle' && __('subtitle') || config.subtitle %}
+{% set author = __('author') !== 'author' && __('author') || config.author %}
+{% set description = __('description') !== 'description' && __('description') || config.description %}
+
+{% set html_class = 'theme-next ' + theme.scheme %}
+{% if theme.motion.enable %}
+  {% set html_class = html_class + ' use-motion' %}
+{% endif %}
+
+<html class="{{ html_class | lower }}" lang="{{ config.language }}">
 <head>
-  {% include '_partials/head.swig' %}
+  {{ partial('_partials/head/head.swig', {}, {cache: theme.cache.enable}) }}
+  {% include '_partials/head/head-unique.swig' %}
   <title>{% block title %}{% endblock %}</title>
+  {% include '_third-party/analytics/index.swig' %}
+  {{ partial('_scripts/noscript.swig', {}, {cache: theme.cache.enable}) }}
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="{{ config.language }}">
+<body itemscope itemtype="http://schema.org/WebPage" lang="{{ page.lang || page.language || config.language }}">
 
-  {% include '_partials/old-browsers.swig' %}
-  {% include '_scripts/analytics.swig' %}
+  {% set container_class = "container " %}
+  {% if theme.sidebar.position %}
+    {% set container_class = container_class + 'sidebar-position-' + theme.sidebar.position %}
+  {% endif %}
 
-  <div class="container one-column {% block page_class %}{% endblock %}">
+  <div class="{{ container_class }} {% block page_class %}{% endblock %}">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> {%- include '_partials/header.swig' %} </div>
+      <div class="header-inner">{% include '_partials/header/index.swig' %}</div>
     </header>
+
+    {{ partial('_third-party/github-banner.swig', {}, {cache: theme.cache.enable}) }}
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          {% block content %}{% endblock %}
+        <div class="content-wrap">
+          {% if theme.scheme === 'Pisces' || theme.scheme === 'Gemini' %}
+            {% include '_partials/header/sub-menu.swig' %}
+          {% endif %}
+          <div id="content" class="content">
+            {% block content %}{% endblock %}
+          </div>
+          {% include '_partials/comments.swig' %}
         </div>
-
-        {% include '_partials/duoshuo-hot-articles.swig' %}
-        {% include '_partials/comments.swig' %}
+        {% if theme.sidebar.display !== 'remove' %}
+          {% block sidebar %}{% endblock %}
+        {% endif %}
       </div>
-
-      {% if theme.sidebar !== 'remove' %}
-        {% block sidebar %}{% endblock %}
-      {% endif %}
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        {% include '_partials/footer.swig' %}
+        {{ partial('_partials/footer.swig', {}, {cache: theme.cache.enable}) }}
+        {% include '_third-party/analytics/analytics-with-widget.swig' %}
+        {% block footer %}{% endblock %}
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    {% if not theme.sidebar.b2t %}
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        {% if theme.sidebar.scrollpercent %}
+          <span id="scrollpercent"><span>0</span>%</span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if theme.needmoreshare2.enable and theme.needmoreshare2.float.enable %}
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    {% endif %}
+	
+    {% if theme.baidushare and theme.baidushare.type === "slide" %}
+      <div>
+        {% include '_partials/share/baidushare.swig' %}
+      </div>
+    {% endif %}
+
+    {% if theme.add_this_id %}
+      <div>
+        {% include '_partials/share/add-this.swig' %}
+      </div>
+    {% endif %}
   </div>
 
-  <script type="text/javascript" src="{{ url_for(theme.vendors) }}/jquery/index.js?v=2.1.3"></script>
+  {% include '_scripts/vendors.swig' %}
+  {% include '_scripts/commons.swig' %}
 
-  {# This block is used to set options before any other scripts run #}
-  {% block script_extra_before %}{% endblock %}
-
-  {% block comment_system %}
-    {% include '_scripts/comments/duoshuo.swig' %}
-    {% include '_scripts/comments/disqus.swig' %}
-  {% endblock %}
-
-  {% include '_scripts/fancy-box.swig' %}
-  {% include '_scripts/helpers.swig' %}
-  {% include '_scripts/motion.swig' %}
-
-  <script type="text/javascript" src="{{ url_for(theme.vendors) }}/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="{{ url_for(theme.vendors) }}/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  {% set scheme_script = '_scripts/schemes/' + theme.scheme | lower + '.swig' %}
+  {% include scheme_script %}
 
   {% block script_extra %}{% endblock %}
 
-  <script type="text/javascript" src="{{ url_for(theme.js) }}/bootstrap.js"></script>
+  {% include '_scripts/boostrap.swig' %}
 
-  {% include '_scripts/tinysou.swig' %}
-  {% include '_scripts/mathjax.swig' %}
-  {% block comment_system %}{% endblock %}
-  {% include '_scripts/baidushare.swig' %}
-
+  {% include '_third-party/comments/index.swig' %}
+  {% include '_third-party/search/index.swig' %}
+  {% include '_third-party/analytics/lean-analytics.swig' %}
+  {% include '_third-party/analytics/firestore.swig' %}
+  {% include '_third-party/seo/baidu-push.swig' %}
+  {% include '_third-party/math/index.swig' %}
+  {% include '_third-party/needsharebutton.swig' %}
+  {% include '_third-party/rating.swig' %}
+  {% include '_third-party/pangu.swig' %}
+  {% include '_third-party/scroll-cookie.swig' %}
+  {% include '_third-party/exturl.swig' %}
+  {% include '_third-party/bookmark.swig' %}
+  {% include '_third-party/copy-code.swig' %}
 </body>
 </html>
