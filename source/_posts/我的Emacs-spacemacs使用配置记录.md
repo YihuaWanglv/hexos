@@ -154,4 +154,17 @@ To load a theme add the following to your init.el
 (global-set-key [f9] 'toggle-menu-bar-mode-from-frame)
 ```
 
+- 解决在windows下在有中文的时候特别卡顿的问题
+
+```
+
+(when 
+  (eq system-type 'windows-nt)
+  (setq gc-cons-threshold (* 512 1024 1024))
+  (setq gc-cons-percentage 0.5)
+  (run-with-idle-timer 5 t #'garbage-collect)
+  (setq garbage-collection-messages t))
+
+```
+
 # 2. spacemacs
